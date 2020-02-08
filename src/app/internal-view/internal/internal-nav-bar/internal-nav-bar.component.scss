@@ -1,0 +1,64 @@
+.internal-left-nav-bar {
+  float: left;
+  color: white;
+  font-weight: 600;
+  background-color: #163a9a;
+  /* border-right: solid 1px #163A9A; */
+  width: 210px;
+  height: 965px;
+}
+.internal-left-nav-bar-header {
+  padding-top: 60px;
+  padding-left: 20px;
+  padding-bottom: 25px;
+  font-weight: 600;
+  border-bottom: solid 1px white;
+}
+.internal-left-nav-bar-header-name {
+  padding-top: 5px;
+}
+.internal-left-nav-bar-header-role {
+  padding-top: 20px;
+}
+.internal-left-nav-bar-list {
+  height: 50px;
+  background-color: white;
+  color: #163a9a;
+  overflow: hidden;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.internal-left-nav-bar-list-selected {
+  height: 100%;
+  background-color: white;
+  color: #163a9a;
+}
+
+.internal-left-nav-bar-main-button {
+  height: 40px;
+  padding-left: 30px;
+  padding-top: 12px;
+  border-right: solid 1px #163a9a;
+  border-bottom: solid 1px #163a9a;
+}
+.internal-left-nav-bar-button {
+  height: 40px;
+  border-bottom: solid 0.5px white;
+  padding-left: 45px;
+  color: white;
+  background-color: #163a9a;
+}
+.internal-left-nav-bar-button-selected {
+  height: 40px;
+  border-bottom: solid 1px #163a9a;
+  padding-left: 45px;
+  color: #163a9a;
+  background-color: white;
+}
+
+.internal-left-nav-bar-button:hover {
+  border-bottom: solid 1px #163a9a;
+  color: #163a9a;
+  background-color: white;
+}

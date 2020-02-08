@@ -1,0 +1,9 @@
+.main {
+  display: flex;
+  .internal {
+    // width: 100%;
+  }
+}
+::ng-deep ng-component {
+  width: 100%;
+}

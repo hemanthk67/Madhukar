@@ -1,0 +1,31 @@
+<div class="internal-left-nav-bar">
+  <div class="internal-left-nav-bar-header">
+    Hi,
+    <div class="internal-left-nav-bar-header-name">Madhukar Thota</div>
+    <div class="internal-left-nav-bar-header-role">Technical Lead</div>
+  </div>
+  <div class="internal-left-nav-bar-body">
+    <div
+      [ngClass]="{
+        'internal-left-nav-bar-list': !flags.mainBarTenderSelected,
+        'internal-left-nav-bar-list-selected': flags.mainBarTenderSelected
+      }"
+    >
+      <div
+        [ngClass]="{
+          'internal-left-nav-bar-main-button': !flags.mainBarTenderFormSelected,
+          'internal-left-nav-bar-main-button-selected':
+            flags.mainBarTenderFormSelected
+        }"
+        (click)="mainBarTender()"
+      >
+        Tenders
+      </div>
+      <div class="internal-left-nav-bar-button">P.O Form</div>
+      <div class="internal-left-nav-bar-button">P.O's</div>
+    </div>
+    <div class="internal-left-nav-bar-finance-list" *ngIf="false">
+      Technical Lead
+    </div>
+  </div>
+</div>

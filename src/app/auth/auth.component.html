@@ -1,0 +1,77 @@
+<div class="login-page">
+  <div class="login-div">
+    <div class="login-logo">
+      <img src="./assets/tcc-logo.png" id="header_logo" class="header_logo" />
+    </div>
+    <div class="login-head">Login</div>
+    <div class="login-username">
+      <input
+        class="login-page-input"
+        type="text"
+        placeholder="Enter Username"
+      />
+    </div>
+    <div class="login-password">
+      <input
+        class="login-page-input"
+        type="password"
+        placeholder="Enter Password"
+      />
+    </div>
+    <div class="login-submitbutton">
+      <input class="login-page-button" type="button" value="Submit" />
+    </div>
+    <div class="login-google">
+      <input
+        class="login-page-google-button"
+        type="button"
+        value="EmailLogin"
+        (click)="googleLogin()"
+      />
+    </div>
+  </div>
+  <div class="content-div">
+    <div class="icon-poles-div">
+      <mat-icon
+        class="icon-poles"
+        svgIcon="poles"
+        aria-hidden="false"
+        aria-label="Example thumbs up SVG icon"
+      ></mat-icon>
+    </div>
+    <div class="icon-trans-div">
+      <mat-icon
+        class="icon-trans"
+        svgIcon="trans"
+        aria-hidden="false"
+        aria-label="Example thumbs up SVG icon"
+      ></mat-icon>
+    </div>
+  </div>
+</div>
+
+<div class="over-lay" *ngIf="existingUser">
+  <div class="user-already-logged">
+    <div class="user-login-feedback-container">
+      <span class="user-name"
+        >Do you Want to login as {{ existingUser.displayName }}</span
+      ><br />
+      <br />
+      <span class="user-email">Email: {{ existingUser.email }}</span>
+      <div class="user-login-feedback">
+        <input
+          type="button"
+          class="user-login-feedback-button"
+          value="Yes"
+          (click)="existingLogin()"
+        />
+        <input
+          type="button"
+          class="user-login-feedback-button"
+          value="No"
+          (click)="otherUser()"
+        />
+      </div>
+    </div>
+  </div>
+</div>
