@@ -13,7 +13,7 @@ export class InternalNavBarComponent implements OnInit {
       { flag: false, subcategories: [false, false] }
     ]
   };
-  categories = [
+  superCategories = [
     {
       title: "Tender",
       role: "admin",
@@ -29,7 +29,9 @@ export class InternalNavBarComponent implements OnInit {
       ]
     }
   ];
+  categories: any;
   constructor(private RoutingServices: RoutingService) {
+    this.categories = this.superCategories;
     for (let i = 0; i < this.categories.length; i++) {
       this.flags.categorySelected[i].flag = false;
       for (let j = 0; j < this.categories[i].subcategories.length; j++) {

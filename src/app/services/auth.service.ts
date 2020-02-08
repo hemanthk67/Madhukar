@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, NgZone } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { auth } from "firebase/app";
@@ -36,7 +36,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private zone: NgZone
   ) {
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -78,9 +79,11 @@ export class AuthService {
       .then(
         function(doc) {
           if (doc.exists) {
-            this.router.navigate([
-              { outlets: { primary: "Internal", approved: "Tender" } }
-            ]);
+            this.zone.run(() => {
+              this.router.navigate([
+                { outlets: { primary: "Internal", approved: "Tender" } }
+              ]);
+            });
           } else {
             this.updateUserData(user);
           }
