@@ -65,19 +65,37 @@ export class AuthService {
 
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider).then(credential => {
-      this.updateUserData(credential.user);
+      this.login(credential.user);
     });
   }
 
-  private updateUserData(user) {
-    // Sets user data to firestore on login
+  login(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
+    userRef.ref
+      .get()
+      .then(
+        function(doc) {
+          if (doc.exists) {
+            this.router.navigate([
+              { outlets: { primary: "Internal", approved: "Tender" } }
+            ]);
+          } else {
+            this.updateUserData(user);
+          }
+        }.bind(this)
+      )
+      .catch(function(error) {
+        console.log(error);
+        alert("Error: Please Login Again");
+      });
+  }
+
+  private updateUserData(user) {
     const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
       `newuser/${user.uid}`
     );
-    console.log(user);
     const data: User = {
       uid: user.uid,
       email: user.email,
@@ -85,32 +103,13 @@ export class AuthService {
       photoURL: user.photoURL,
       role: { admin: false, finance: false, technical: false }
     };
-    userRef.ref
-      .get()
-      .then(function(doc) {
-        if (doc.exists) {
-          console.log("Document data:", doc.data());
-        } else {
-          newUserRef.set(data, { merge: true });
-          console.log("No such document!");
-        }
-      })
-      .catch(function(error) {
-        console.log("Error getting document:", error);
-      });
+    newUserRef.set(data, { merge: true });
+    alert("Not a Authorized User - Please contact the administration");
   }
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
       this.router.navigate(["/login"]);
     });
-  }
-
-  testing(flag: any) {
-    if (flag) {
-      this.router.navigate([{ outlets: { approved: "Tender/newtender" } }]);
-    } else {
-      this.router.navigate([{ outlets: { approved: "Tender" } }]);
-    }
   }
 }

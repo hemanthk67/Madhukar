@@ -5,24 +5,39 @@
     <div class="internal-left-nav-bar-header-role">Technical Lead</div>
   </div>
   <div class="internal-left-nav-bar-body">
-    <div
-      [ngClass]="{
-        'internal-left-nav-bar-list': !flags.mainBarTenderSelected,
-        'internal-left-nav-bar-list-selected': flags.mainBarTenderSelected
-      }"
-    >
+    <div *ngFor="let category of categories; let i = index">
       <div
         [ngClass]="{
-          'internal-left-nav-bar-main-button': !flags.mainBarTenderFormSelected,
-          'internal-left-nav-bar-main-button-selected':
-            flags.mainBarTenderFormSelected
+          'internal-left-nav-bar-list': !flags.categorySelected[i].flag,
+          'internal-left-nav-bar-list-selected': flags.categorySelected[i].flag
         }"
-        (click)="mainBarTender()"
       >
-        Tenders
+        <div
+          [ngClass]="{
+            'internal-left-nav-bar-main-button': !flags.categorySelected[i]
+              .flag,
+            'internal-left-nav-bar-main-button-selected':
+              flags.categorySelected[i].flag
+          }"
+          (click)="categoryrSelected(i)"
+        >
+          <!-- <div (click)="categoryrSelected(i)"> -->
+          {{ category.title }}
+        </div>
+        <div *ngFor="let subcategory of category.subcategories; let j = index">
+          <div
+            [ngClass]="{
+              'internal-left-nav-bar-button-selected':
+                flags.categorySelected[i].subcategories[j],
+              'internal-left-nav-bar-button': !flags.categorySelected[i]
+                .subcategories[j]
+            }"
+            (click)="subCategoryrSelected(i, j)"
+          >
+            {{ subcategory.title }}
+          </div>
+        </div>
       </div>
-      <div class="internal-left-nav-bar-button">P.O Form</div>
-      <div class="internal-left-nav-bar-button">P.O's</div>
     </div>
     <div class="internal-left-nav-bar-finance-list" *ngIf="false">
       Technical Lead

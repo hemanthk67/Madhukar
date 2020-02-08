@@ -6,7 +6,7 @@ import { NewTenderComponent } from "./new-tender/new-tender.component";
 
 const routes: Routes = [
   { path: "", component: TenderComponent },
-  { path: "newtender", component: NewTenderComponent }
+  { path: "NewTender", component: NewTenderComponent }
 ];
 
 @NgModule({
