@@ -9,8 +9,7 @@ const routes: Routes = [
   },
   {
     path: "Auth",
-    loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule),
-    outlet: "approved"
+    loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule)
   },
   {
     path: "Internal",

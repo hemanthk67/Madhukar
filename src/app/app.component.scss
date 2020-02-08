@@ -1,8 +1,15 @@
 .main {
   display: flex;
+  width: 100%;
+  .main-page {
+    // width: 100%;
+  }
   .internal {
     // width: 100%;
   }
+}
+::ng-deep app-auth {
+  width: 100%;
 }
 ::ng-deep ng-component {
   width: 100%;
