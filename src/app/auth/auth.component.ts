@@ -29,7 +29,7 @@ export class AuthComponent implements OnInit {
       "trans",
       sanitizer.bypassSecurityTrustResourceUrl("assets/icons/trans_logo.svg")
     );
-    // this.Auth.user.subscribe(value => this.userExist(value));
+    this.Auth.user.subscribe(value => this.userExist(value));
   }
 
   ngOnInit() {
@@ -51,11 +51,11 @@ export class AuthComponent implements OnInit {
   userExist(value: any) {
     if (value) {
       this.existingUser = value;
-      this.router.navigate(["/internal"]);
+      this.router.navigate(["/Internal"]);
     }
   }
   existingLogin() {
-    this.router.navigate(["/internal"]);
+    this.router.navigate(["/Internal"]);
   }
   otherUser() {
     this.existingUser = null;

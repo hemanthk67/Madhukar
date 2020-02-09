@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
 import { RoutingService } from "../../../services/routing.service";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-internal-nav-bar",
@@ -27,6 +28,10 @@ export class InternalNavBarComponent implements OnInit {
         {
           title: "New Tender",
           path: "Tender/NewTender"
+        },
+        {
+          title: "Tender Documents",
+          path: "Tender/TenderDocuments"
         }
       ]
     },
@@ -43,6 +48,7 @@ export class InternalNavBarComponent implements OnInit {
   ];
   categories: any;
   constructor(
+    public Auth: AuthService,
     private RoutingServices: RoutingService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer

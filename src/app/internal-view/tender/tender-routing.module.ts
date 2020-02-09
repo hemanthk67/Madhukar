@@ -3,10 +3,12 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { TenderComponent } from "./tender.component";
 import { NewTenderComponent } from "./new-tender/new-tender.component";
+import { TenderDocumentsComponent } from "./tender-documents/tender-documents.component";
 
 const routes: Routes = [
   { path: "", component: TenderComponent },
-  { path: "NewTender", component: NewTenderComponent }
+  { path: "NewTender", component: NewTenderComponent },
+  { path: "TenderDocuments", component: TenderDocumentsComponent }
 ];
 
 @NgModule({

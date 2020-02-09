@@ -23,6 +23,14 @@ const routes: Routes = [
     loadChildren: () =>
       import("./internal-view/tender/tender.module").then(m => m.TenderModule),
     outlet: "approved"
+  },
+  {
+    path: "production",
+    loadChildren: () =>
+      import("./internal-view/production/production.module").then(
+        m => m.ProductionModule
+      ),
+    outlet: "approved"
   }
 ];
 
