@@ -23,6 +23,9 @@
         >
           <!-- <div (click)="categoryrSelected(i)"> -->
           {{ category.title }}
+          <span class="svg-arrow">
+            <mat-icon class="icon-poles" svgIcon="arrow"></mat-icon
+          ></span>
         </div>
         <div *ngFor="let subcategory of category.subcategories; let j = index">
           <div

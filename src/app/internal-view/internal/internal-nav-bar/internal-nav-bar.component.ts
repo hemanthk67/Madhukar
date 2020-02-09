@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
 import { RoutingService } from "../../../services/routing.service";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: "app-internal-nav-bar",
@@ -27,10 +29,24 @@ export class InternalNavBarComponent implements OnInit {
           path: "Tender/NewTender"
         }
       ]
+    },
+    {
+      title: "Production",
+      role: "production",
+      subcategories: [
+        {
+          title: "Raise P.O",
+          path: "Production/Po"
+        }
+      ]
     }
   ];
   categories: any;
-  constructor(private RoutingServices: RoutingService) {
+  constructor(
+    private RoutingServices: RoutingService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer
+  ) {
     this.categories = this.superCategories;
     for (let i = 0; i < this.categories.length; i++) {
       this.flags.categorySelected[i].flag = false;
@@ -38,6 +54,14 @@ export class InternalNavBarComponent implements OnInit {
         this.flags.categorySelected[i].subcategories[j] = false;
       }
     }
+    iconRegistry.addSvgIcon(
+      "arrow",
+      sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-arrow.svg")
+    );
+    // iconRegistry.addSvgIcon(
+    //   "trans",
+    //   sanitizer.bypassSecurityTrustResourceUrl("assets/icons/trans_logo.svg")
+    // );
   }
 
   ngOnInit() {}
@@ -49,6 +73,11 @@ export class InternalNavBarComponent implements OnInit {
   }
   subCategoryrSelected(valuei, valuej) {
     for (let i = 0; i < this.flags.categorySelected.length; i++) {
+      if (i === valuei) {
+        this.flags.categorySelected[i].flag = true;
+      } else {
+        this.flags.categorySelected[i].flag = false;
+      }
       for (
         let j = 0;
         j < this.flags.categorySelected[i].subcategories.length;
