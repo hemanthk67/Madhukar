@@ -13,6 +13,7 @@ export class InternalNavBarComponent implements OnInit {
   flags = {
     categorySelected: [
       { flag: false, subcategories: [false, false] },
+      { flag: false, subcategories: [false, false] },
       { flag: false, subcategories: [false, false] }
     ]
   };
@@ -22,16 +23,26 @@ export class InternalNavBarComponent implements OnInit {
       role: "admin",
       subcategories: [
         {
-          title: "Tenders",
+          title: "Tender List",
           path: "Tender"
         },
         {
-          title: "New Tender",
+          title: "New Tender Form",
           path: "Tender/NewTender"
         },
         {
           title: "Tender Documents",
           path: "Tender/TenderDocuments"
+        }
+      ]
+    },
+    {
+      title: "Purchase",
+      role: "purchase",
+      subcategories: [
+        {
+          title: "Raise P.O",
+          path: "Production/Po"
         }
       ]
     },

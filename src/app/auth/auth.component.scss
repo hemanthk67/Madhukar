@@ -22,8 +22,8 @@
   width: 100%;
 }
 .login-logo {
-  padding-bottom: 50px;
-  padding-left: 3px;
+  // padding-bottom: 50px;
+  // padding-left: 3px;
 }
 .header_logo {
   height: 100px;
@@ -86,8 +86,8 @@
   text-align: center;
   width: 400px;
   padding-top: 50px;
-  margin-bottom: 200px;
-  border-top: solid 1px #163a9a;
+  // margin-bottom: 200px;
+  border-bottom: solid 1px #163a9a;
 }
 .login-google :hover {
   color: #163a9a;
@@ -172,4 +172,16 @@
 .user-login-feedback-button:hover {
   background-color: #163a9a;
   color: white;
+}
+.icon-logo {
+  fill: #163a9a;
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+  svg {
+    // overflow: visible;
+  }
+}
+#Group {
+  fill: #163a9a;
 }

@@ -1,4 +1,14 @@
 <div class="main">
-  <div class="tender-documents">a</div>
-  <app-pdf-view class="pdf-view"></app-pdf-view>
+  <input type="file" (change)="detectFile($event)" />
+  <div class="tender-documents">
+    <input type="text" [(ngModel)]="name" (click)="aku()" id="name-input" />
+  </div>
+  <!-- <app-pdf-view
+    class="pdf-view"
+    (click)="uploadFile($event)"
+  ></app-pdf-view> -->
 </div>
+<app-pdf-preview
+  *ngIf="pdfPreviewFlag"
+  (backFlag)="pdfPreviewHander($event)"
+></app-pdf-preview>

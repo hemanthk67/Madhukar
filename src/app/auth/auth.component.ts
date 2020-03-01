@@ -1,15 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
+import * as d3 from "d3";
 
 @Component({
   selector: "app-auth",
   templateUrl: "./auth.component.html",
   styleUrls: ["./auth.component.scss"]
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, AfterViewInit {
   public test: any;
   ordersService: any;
   coffeeOrders: any;
@@ -44,6 +45,7 @@ export class AuthComponent implements OnInit {
       }
     );
   }
+  ngAfterViewInit() {}
   googleLogin() {
     this.Auth.googleLogin().then(function() {});
   }
@@ -51,7 +53,7 @@ export class AuthComponent implements OnInit {
   userExist(value: any) {
     if (value) {
       this.existingUser = value;
-      this.router.navigate(["/Internal"]);
+      // this.router.navigate(["/Internal"]);
     }
   }
   existingLogin() {
@@ -59,5 +61,6 @@ export class AuthComponent implements OnInit {
   }
   otherUser() {
     this.existingUser = null;
+    this.Auth.signOut();
   }
 }

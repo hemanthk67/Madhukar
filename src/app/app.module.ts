@@ -12,7 +12,7 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { environment } from "./../environments/environment";
-import { CommonComponentsModule } from './common-components/common-components.module';
+import { CommonComponentsModule } from "./common-components/common-components.module";
 
 @NgModule({
   declarations: [AppComponent],

@@ -1,0 +1,79 @@
+[
+  {
+    "coveringLetter": {
+      "tenderNo": "TCC/T-103/BHEL/1417",
+      "date": "02/02/2020",
+      "toAddress": "To,BHEL,Electronics Division,PB No.2606 Mysore Road,Bangalore-560026, India.",
+      "subject": "Supply of 2.7MVA outdoor hermetically sealed oil type inverter duty transformer (With Natural Ester oil)",
+      "reference": "Tender  No: RAJBOS0047 dated 12.12.2019",
+      "materials": [
+        {
+          "sNo": "1",
+          "name": "Supply and Comm support of 2.7 MVA HERMETICALLY SEALED INVERTER TRANSFORMERS- WITH NATURAL  ESTER OIL",
+          "qty": "40",
+          "uom": "Set&AU"
+        },
+        {
+          "sNo": "2",
+          "name": "Supply of Spares and S.C Test, Temperature Rise Test for 2.7 MVA  HERMETICALLY SEALED INVERTER TRANSFORMERS- WITH NATURAL  ESTER OIL ",
+          "qty": "1",
+          "uom": "Set&AU"
+        },
+        {
+          "sNo": "3",
+          "name": "Supply of Spares and S.C Test, Temperature Rise Test for 2.7 MVA  HERMETICALLY SEALED INVERTER TRANSFORMERS- WITH NATURAL  ESTER OIL ",
+          "qty": "2",
+          "uom": "Set&AU"
+        },
+        {
+          "sNo": "4",
+          "name": "Supply of Spares and S.C Test, Temperature Rise Test for 2.7 MVA  HERMETICALLY SEALED INVERTER TRANSFORMERS- WITH NATURAL  ESTER OIL ",
+          "qty": "2",
+          "uom": "Set&AU"
+        }
+      ],
+      "commonPoints": [
+        {
+          "head": "PART-A :  EMD  & Cost of documents :",
+          "content": "We are exempted  from paying EMD &Cost of documents  being an MSME Registered company and attached herewith the MSME  UDYOG AADHAAR MEMOROANDUM UAN NO TS20A0007730. AND NSIC for your kind consideration"
+        },
+        {
+          "head": "PART -B : TECHNO COMMERCIAL BID: ",
+          "content": "We attach here with  the following doc-Performance certificates, P. O’s. Agreement, Inspection Reports, Delivery Challans Etc."
+        },
+        {
+          "head": "PART – C :PRICE BID  : ",
+          "content": "The prices are mentioned in bid, Our Prices are Firm and free at destination stores by inland road transport as per Tender Specification."
+        },
+        {
+          "head": "TAXES AND DUTIES :",
+          "content": "At present as per Goods and Services Tax Act, 2016, GST applicable for Transformers is 18%(IGST)."
+        },
+        {
+          "head": "DELIVARY : ",
+          "content": "We agree to your delivery terms as per Schedule of Requirements."
+        },
+        {
+          "head": "PAYMENT : ",
+          "content": "We agree to your terms of Payment."
+        },
+        {
+          "head": "PERFORMANCE SECURITY : ",
+          "content": "We agree to your Performance Security Clause."
+        },
+        {
+          "head": "WARRANT : ",
+          "content": "We agree to your warrant clause. "
+        },
+        {
+          "head": "GST No : ",
+          "content": "Our GST Registration No. 36BEEPT6531G1ZC."
+        },
+        {
+          "head": "VALIDATY : ",
+          "content": "Our offer is valid for a period of 180 days from the date of online bid "
+        }
+      ]
+    }
+  }
+]

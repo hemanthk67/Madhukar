@@ -5,7 +5,10 @@
   background-color: #163a9a;
   /* border-right: solid 1px #163A9A; */
   width: 210px;
-  height: 965px;
+  // height: 965px;
+  .internal-left-nav-bar-fixed {
+    min-height: 100vh;
+  }
 
   .internal-left-nav-bar-header {
     padding-top: 60px;
@@ -66,7 +69,7 @@
       height: 30px;
       border-bottom: solid 0.5px white;
       padding-top: 15px;
-      padding-left: 45px;
+      padding-left: 15px;
       color: white;
       background-color: #163a9a;
       cursor: pointer;
@@ -75,7 +78,7 @@
       height: 30px;
       border-bottom: solid 0.5px #163a9a;
       padding-top: 15px;
-      padding-left: 45px;
+      padding-left: 15px;
       color: #163a9a;
       background-color: white;
       cursor: pointer;
@@ -95,7 +98,7 @@
     height: 30px;
     border-bottom: solid 0.5px white;
     padding-top: 15px;
-    padding-left: 45px;
+    padding-left: 30px;
     color: white;
     background-color: #163a9a;
     cursor: pointer;

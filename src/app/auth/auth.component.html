@@ -1,9 +1,19 @@
 <div class="login-page">
   <div class="login-div">
     <div class="login-logo">
-      <img src="./assets/tcc-logo.png" id="header_logo" class="header_logo" />
+      <app-logo [type]="'auth-page'"></app-logo>
+      <!-- <mat-icon class="icon-logo" svgIcon="logo"></mat-icon> -->
+      <!-- <img src="./assets/tcc-logo.png" id="header_logo" class="header_logo" /> -->
     </div>
-    <div class="login-head">Login</div>
+    <div class="login-google">
+      <input
+        class="login-page-google-button"
+        type="button"
+        value="EmailLogin"
+        (click)="googleLogin()"
+      />
+    </div>
+    <!-- <div class="login-head">Login</div>
     <div class="login-username">
       <input
         class="login-page-input"
@@ -20,15 +30,7 @@
     </div>
     <div class="login-submitbutton">
       <input class="login-page-button" type="button" value="Submit" />
-    </div>
-    <div class="login-google">
-      <input
-        class="login-page-google-button"
-        type="button"
-        value="EmailLogin"
-        (click)="googleLogin()"
-      />
-    </div>
+    </div> -->
   </div>
   <div class="content-div">
     <div class="icon-poles-div">

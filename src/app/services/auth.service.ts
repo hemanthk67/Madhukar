@@ -112,7 +112,8 @@ export class AuthService {
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(["/Auth"]);
+      this.router.navigate([{ outlets: { primary: "Auth", approved: null } }]);
+      // this.router.navigate(["/Auth"]);
     });
   }
 }

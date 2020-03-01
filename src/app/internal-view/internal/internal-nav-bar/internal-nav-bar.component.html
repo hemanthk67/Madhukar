@@ -1,53 +1,58 @@
 <div class="internal-left-nav-bar">
-  <div class="internal-left-nav-bar-header">
-    Hi,
-    <div class="internal-left-nav-bar-header-name">Madhukar Thota</div>
-    <div class="internal-left-nav-bar-header-role">Technical Lead</div>
-  </div>
-  <div class="internal-left-nav-bar-body">
-    <div *ngFor="let category of categories; let i = index">
-      <div
-        [ngClass]="{
-          'internal-left-nav-bar-list': !flags.categorySelected[i].flag,
-          'internal-left-nav-bar-list-selected': flags.categorySelected[i].flag
-        }"
-      >
+  <div class="internal-left-nav-bar-fixed">
+    <div class="internal-left-nav-bar-header">
+      Hi,
+      <div class="internal-left-nav-bar-header-name">Madhukar Thota</div>
+      <div class="internal-left-nav-bar-header-role">Technical Lead</div>
+    </div>
+    <div class="internal-left-nav-bar-body">
+      <div *ngFor="let category of categories; let i = index">
         <div
           [ngClass]="{
-            'internal-left-nav-bar-main-button': !flags.categorySelected[i]
-              .flag,
-            'internal-left-nav-bar-main-button-selected':
+            'internal-left-nav-bar-list': !flags.categorySelected[i].flag,
+            'internal-left-nav-bar-list-selected':
               flags.categorySelected[i].flag
           }"
-          (click)="categoryrSelected(i)"
         >
-          <!-- <div (click)="categoryrSelected(i)"> -->
-          {{ category.title }}
-          <span class="svg-arrow">
-            <mat-icon class="icon-poles" svgIcon="arrow"></mat-icon
-          ></span>
-        </div>
-        <div *ngFor="let subcategory of category.subcategories; let j = index">
           <div
             [ngClass]="{
-              'internal-left-nav-bar-button-selected':
-                flags.categorySelected[i].subcategories[j],
-              'internal-left-nav-bar-button': !flags.categorySelected[i]
-                .subcategories[j]
+              'internal-left-nav-bar-main-button': !flags.categorySelected[i]
+                .flag,
+              'internal-left-nav-bar-main-button-selected':
+                flags.categorySelected[i].flag
             }"
-            (click)="subCategoryrSelected(i, j)"
+            (click)="categoryrSelected(i)"
           >
-            {{ subcategory.title }}
+            <!-- <div (click)="categoryrSelected(i)"> -->
+            {{ category.title }}
+            <span class="svg-arrow">
+              <mat-icon class="icon-poles" svgIcon="arrow"></mat-icon
+            ></span>
+          </div>
+          <div
+            *ngFor="let subcategory of category.subcategories; let j = index"
+          >
+            <div
+              [ngClass]="{
+                'internal-left-nav-bar-button-selected':
+                  flags.categorySelected[i].subcategories[j],
+                'internal-left-nav-bar-button': !flags.categorySelected[i]
+                  .subcategories[j]
+              }"
+              (click)="subCategoryrSelected(i, j)"
+            >
+              {{ subcategory.title }}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="internal-left-nav-bar-signout" (click)="Auth.signOut()">
-      Sign Out
-    </div>
+      <div class="internal-left-nav-bar-signout" (click)="Auth.signOut()">
+        Sign Out
+      </div>
 
-    <div class="internal-left-nav-bar-finance-list" *ngIf="false">
-      Technical Lead
+      <div class="internal-left-nav-bar-finance-list" *ngIf="false">
+        Technical Lead
+      </div>
     </div>
   </div>
 </div>

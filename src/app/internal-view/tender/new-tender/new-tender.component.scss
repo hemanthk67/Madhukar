@@ -1,0 +1,23 @@
+.main {
+  padding-top: 50px;
+  padding-left: 50px;
+  .header {
+    .header-text {
+      font-size: 24px;
+      font-weight: 600;
+      color: #163a9a;
+    }
+  }
+  .body {
+    .info-div {
+      .info-header {
+        width: 60%;
+        font-size: 20px;
+        font-weight: 600;
+        color: #163a9a;
+        border-bottom: solid 1px #163a9a;
+        padding-top: 30px;
+      }
+    }
+  }
+}
