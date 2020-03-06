@@ -4,16 +4,341 @@
   </div>
   <div class="body">
     <div class="info-div">
-      <div class="info-header">Information</div>
+      <div class="info-header">
+        <div class="header">Information</div>
+        <div class="tender-mode">
+          <div
+            [ngClass]="{
+              'tender-mode-button-selected': tender.tenderMode === 'online',
+              'tender-mode-button-not-selected': tender.tenderMode != 'online'
+            }"
+            (click)="tenderModeSelection('online')"
+          >
+            Online
+          </div>
+          <div
+            [ngClass]="{
+              'tender-mode-button-selected': tender.tenderMode === 'offline',
+              'tender-mode-button-not-selected': tender.tenderMode != 'offline'
+            }"
+            (click)="tenderModeSelection('offline')"
+          >
+            Offline
+          </div>
+        </div>
+      </div>
       <div class="info-body">
-        <div class="org-div">
-          <div class="org-input">
-            <select id="orgName" name="orgName">
-              <option value="BHEL">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="fiat">Fiat</option>
-              <option value="audi">Audi</option>
-            </select>
+        <div class="flex">
+          <div class="org-div">
+            <div class="org-label sub-header">Organization Name :</div>
+            <div class="org-input">
+              <select
+                class="org-name"
+                name="orgName"
+                [(ngModel)]="tender.organization"
+              >
+                <option value="BHEL - Bharat Heavy Electricals Limited"
+                  >BHEL - Bharat Heavy Electricals Limited</option
+                >
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="tender-number">
+            <div class="tender-number-label sub-header">Tender Number:</div>
+            <Input
+              type="text"
+              class="tender-number-input"
+              [(ngModel)]="tender.tenderNumber"
+              ngDefaultControl
+            />
+          </div>
+          <div class="e-tender-number">
+            <div class="e-tender-number-label sub-header">E-Tender Number:</div>
+            <Input
+              type="text"
+              class="e-tender-number-input"
+              [(ngModel)]="tender.eTenderNumber"
+              ngDefaultControl
+            />
+          </div>
+        </div>
+        <div class="tender-date-div flex">
+          <div class="tender-date">
+            <div class="tender-date-label">Issued Date:</div>
+            <Input
+              type="text"
+              class="tender-date-input"
+              [(ngModel)]="tender.issueDate"
+              ngDefaultControl
+            />
+            <span class="calander"
+              ><button>
+                <mat-icon class="calander-button" svgIcon="calander"></mat-icon>
+              </button>
+            </span>
+          </div>
+          <div class="tender-date">
+            <div class="tender-date-label">Start Date:</div>
+            <Input
+              type="text"
+              class="tender-date-input"
+              [(ngModel)]="tender.startDate"
+              ngDefaultControl
+            />
+            <span class="calander"
+              ><button>
+                <mat-icon class="calander-button" svgIcon="calander"></mat-icon>
+              </button>
+            </span>
+          </div>
+          <div class="tender-date">
+            <div class="tender-date-label">Due Date:</div>
+            <Input
+              type="text"
+              class="tender-date-input"
+              [(ngModel)]="tender.dueDate"
+              ngDefaultControl
+            />
+            <span class="calander"
+              ><button>
+                <mat-icon class="calander-button" svgIcon="calander"></mat-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tender-fee">
+      <div class="fee-header">
+        <div class="header">Tender: Fee</div>
+      </div>
+      <div class="fee-body flex">
+        <div class="emd width-33">
+          <div class="fee-sub-head">
+            <span class="fee-sub-head-lable">Earnest Money Deposit(EMD)</span>
+          </div>
+          <div class="emd-exemption flex">
+            <div
+              [ngClass]="{
+                'fee-lables-selected': tender.emd.exemption,
+                'fee-lables-not-selected': !tender.emd.exemption
+              }"
+              (click)="feeExcemption('emd', true)"
+            >
+              Exempted
+            </div>
+            <div
+              [ngClass]="{
+                'fee-lables-selected': !tender.emd.exemption,
+                'fee-lables-not-selected': tender.emd.exemption
+              }"
+              (click)="feeExcemption('emd', false)"
+            >
+              Not-Exempted
+            </div>
+          </div>
+          <div class="emd-amount flex">
+            <div class="amount" *ngIf="!tender.emd.percentage">Amount:</div>
+            <div class="amount" *ngIf="tender.emd.percentage">Perrcentage:</div>
+            <Input
+              type="number"
+              class="amount-input"
+              [(ngModel)]="tender.emd.amount"
+              ngDefaultControl
+            />
+            <span
+              [ngClass]="{
+                'percentage-selected': tender.emd.percentage,
+                'percentage-not-selected': !tender.emd.percentage
+              }"
+              (click)="percentageChange('emd')"
+              >%</span
+            >
+          </div>
+        </div>
+        <div class="trans width-33">
+          <div class="fee-sub-head">
+            <span class="fee-sub-head-lable">Transaction Fee</span>
+          </div>
+          <div class="trans-exemption flex">
+            <div
+              [ngClass]="{
+                'fee-lables-selected': tender.transationFee.exemption,
+                'fee-lables-not-selected': !tender.transationFee.exemption
+              }"
+              (click)="feeExcemption('transationFee', true)"
+            >
+              Exempted
+            </div>
+            <div
+              [ngClass]="{
+                'fee-lables-selected': !tender.transationFee.exemption,
+                'fee-lables-not-selected': tender.transationFee.exemption
+              }"
+              (click)="feeExcemption('transationFee', false)"
+            >
+              Not-Exempted
+            </div>
+          </div>
+          <div class="trans-amount flex">
+            <div class="amount" *ngIf="!tender.transationFee.percentage">
+              Amount:
+            </div>
+            <div class="amount" *ngIf="tender.transationFee.percentage">
+              Percentage:
+            </div>
+            <Input
+              type="text"
+              class="amount-input"
+              [(ngModel)]="tender.transationFee.amount"
+              ngDefaultControl
+            />
+            <span
+              [ngClass]="{
+                'percentage-selected': tender.transationFee.percentage,
+                'percentage-not-selected': !tender.transationFee.percentage
+              }"
+              (click)="percentageChange('transationFee')"
+              >%</span
+            >
+          </div>
+        </div>
+        <div class="document-cost width-33">
+          <div class="fee-sub-head">
+            <span class="fee-sub-head-lable">Document Cost</span>
+          </div>
+          <div class="document-cost-exemption flex">
+            <div
+              [ngClass]="{
+                'fee-lables-selected': tender.documentCost.exemption,
+                'fee-lables-not-selected': !tender.documentCost.exemption
+              }"
+              (click)="feeExcemption('documentCost', true)"
+            >
+              Exempted
+            </div>
+            <div
+              [ngClass]="{
+                'fee-lables-selected': !tender.documentCost.exemption,
+                'fee-lables-not-selected': tender.documentCost.exemption
+              }"
+              (click)="feeExcemption('documentCost', false)"
+            >
+              Not-Exempted
+            </div>
+          </div>
+          <div class="document-cost-amount flex">
+            <div class="amount" *ngIf="!tender.documentCost.percentage">
+              Amount:
+            </div>
+            <div class="amount" *ngIf="tender.documentCost.percentage">
+              Percentage:
+            </div>
+            <Input
+              type="text"
+              class="amount-input"
+              [(ngModel)]="tender.documentCost.amount"
+              ngDefaultControl
+            />
+            <span
+              [ngClass]="{
+                'percentage-selected': tender.documentCost.percentage,
+                'percentage-not-selected': !tender.documentCost.percentage
+              }"
+              (click)="percentageChange('documentCost')"
+              >%</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tender-equipment">
+      <div class="equipment-header">
+        <div class="header">Tender: Items</div>
+      </div>
+      <div class="equipment-body flex">
+        <div class="equipment-table">
+          <div class="table-head flex">
+            <div
+              *ngFor="let header of tableHeaderTest"
+              [style.width]="header.width"
+            >
+              {{ header.name }}
+            </div>
+          </div>
+          <div class="table-cell-div">
+            <div
+              class="table-cell flex"
+              *ngFor="let item of items; let i = index"
+            >
+              <div *ngIf="!item.special" class="flex">
+                <div class="table-cell-discription">
+                  <input type="text" [(ngModel)]="item.discription" />
+                </div>
+                <div class="table-cell-kva">
+                  <input type="text" [(ngModel)]="item.kva" />
+                </div>
+                <div class="table-cell-class flex">
+                  <input type="text" [(ngModel)]="item.class.hv" />/
+                  <input type="text" [(ngModel)]="item.class.lv" />KV
+                </div>
+                <div class="table-cell-type">
+                  <select [(ngModel)]="item.type">
+                    <option>ONAN</option>
+                    <option>Dry</option>
+                    <option>Inverter Duty ONAN</option>
+                    <option>custom</option>
+                  </select>
+                </div>
+                <div class="table-cell-qty">
+                  <input type="text" [(ngModel)]="item.qty" />
+                </div>
+                <div class="table-cell-standard">
+                  <select [(ngModel)]="item.standard">
+                    <option>2026</option>
+                    <option>1180 - 1</option>
+                    <option>1180 - 2</option>
+                    <option>1180 - 3</option>
+                    <option>custom</option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="item.special" class="flex">
+                Works/Items
+
+                <div class="table-cell-discription-special">
+                  <input type="text" [(ngModel)]="item.discription" />
+                </div>
+              </div>
+              <div class="table-cell-destination">
+                <input type="text" [(ngModel)]="item.destination" />
+              </div>
+              <div class="table-cell-distance">
+                <input type="text" [(ngModel)]="item.distance" />Km
+              </div>
+              <div class="delete-item" *ngIf="i != 0" (click)="removeItems(i)">
+                <mat-icon class="delete-button" svgIcon="trash"></mat-icon>
+              </div>
+              <div class="table-cell-special-item">
+                <div
+                  class="table-cell-special-item-button"
+                  [ngClass]="{
+                    'table-cell-special-item-button-selected': items[i].special
+                  }"
+                  (click)="specialItems(i)"
+                >
+                  SP
+                </div>
+              </div>
+            </div>
+            <div class="add-items-div" (click)="addItems()">
+              <div class="add-items">Add</div>
+            </div>
           </div>
         </div>
       </div>

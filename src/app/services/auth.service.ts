@@ -50,11 +50,9 @@ export class AuthService {
     );
   }
   getOrganizations() {
-    console.log("test");
     this.OrganizationCollectionRef = this.afs.doc<Organization>(
-      "organizations/All"
+      "Info/Organization"
     );
-    console.log("test");
     this.Organization = this.OrganizationCollectionRef.valueChanges();
     return this.Organization;
   }

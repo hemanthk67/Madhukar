@@ -30,6 +30,7 @@ $TCC-theme: mat-light-theme($TCC-primary, $TCC-accent, $TCC-warn);
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 body {
   /* overflow: hidden; */
