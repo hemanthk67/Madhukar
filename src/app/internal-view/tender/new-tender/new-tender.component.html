@@ -343,5 +343,35 @@
         </div>
       </div>
     </div>
+    <div class="tender-completion">
+      <div class="upload-div">
+        <div class="upload-input-div">
+          <span class="upload-input-lable">Drop Files to Upload</span>
+          <input
+            class="upload-input"
+            type="file"
+            (change)="detectFile($event)"
+            multiple
+          />
+        </div>
+        <div class="files-div">
+          <div
+            class="files"
+            *ngFor="let file of allFiles; let i = index"
+            (click)="deleteFile(i)"
+          >
+            <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+            <mat-icon
+              class="cloud-cross-icon"
+              svgIcon="cloud-cross-icon"
+            ></mat-icon>
+            <p>{{ file.name }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="submission-div">
+        <div class="submit-button" (click)="submit()">Submit For Approval</div>
+      </div>
+    </div>
   </div>
 </div>

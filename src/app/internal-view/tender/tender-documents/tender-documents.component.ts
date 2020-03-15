@@ -42,7 +42,7 @@ export class TenderDocumentsComponent implements OnInit {
 
   ngOnInit() {
     this.coveringLetter = this.JsonData[0].coveringLetter;
-    this.pdfPreviewFlag = true;
+    this.pdfPreviewFlag = true; // for the pdfPreview
     d3.select("#pdf-preview")
       .selectAll("*")
       .remove();
@@ -291,7 +291,8 @@ export class TenderDocumentsComponent implements OnInit {
 
   detectFile(event) {
     this.testFile = event.target.files;
-    this.uploadFile();
+    console.log(this.testFile);
+    // this.uploadFile();
   }
   public uploadFile() {
     let file = this.testFile.item(0);

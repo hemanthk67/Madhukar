@@ -1,6 +1,19 @@
 import { Component, OnInit } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
+import { pdfFileService } from "src/app/services/pdfFile.service";
+
+class Upload {
+  $key: string;
+  file: File;
+  name: string;
+  url: string;
+  progress: number;
+  createdAt: Date = new Date();
+  constructor(file: File) {
+    this.file = file;
+  }
+}
 
 @Component({
   selector: "app-new-tender",
@@ -8,6 +21,9 @@ import { DomSanitizer } from "@angular/platform-browser";
   styleUrls: ["./new-tender.component.scss"]
 })
 export class NewTenderComponent implements OnInit {
+  testFile: FileList;
+  allFiles: any;
+  currentFile: Upload;
   tender = {
     organization: "",
     tenderMode: "online",
@@ -58,7 +74,11 @@ export class NewTenderComponent implements OnInit {
       special: false
     }
   ];
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer,
+    public pdfService: pdfFileService
+  ) {
     iconRegistry.addSvgIcon(
       "calander",
       sanitizer.bypassSecurityTrustResourceUrl("assets/icons/calander.svg")
@@ -66,6 +86,16 @@ export class NewTenderComponent implements OnInit {
     iconRegistry.addSvgIcon(
       "trash",
       sanitizer.bypassSecurityTrustResourceUrl("assets/icons/trash-icon.svg")
+    );
+    iconRegistry.addSvgIcon(
+      "pdf-icon",
+      sanitizer.bypassSecurityTrustResourceUrl("assets/icons/pdf-icon.svg")
+    );
+    iconRegistry.addSvgIcon(
+      "cloud-cross-icon",
+      sanitizer.bypassSecurityTrustResourceUrl(
+        "assets/icons/cloud-cross-icon.svg"
+      )
     );
   }
 
@@ -114,5 +144,32 @@ export class NewTenderComponent implements OnInit {
   }
   specialItems(value: any) {
     this.items[value].special = !this.items[value].special;
+  }
+
+  detectFile(event) {
+    this.testFile = event.target.files;
+    if (this.allFiles) {
+      for (let i = 0; i < this.testFile.length; i++) {
+        this.allFiles[this.allFiles.length] = this.testFile[i];
+      }
+    } else {
+      this.allFiles = Array.from(this.testFile);
+    }
+  }
+
+  deleteFile(value: any) {
+    this.allFiles.splice(value, 1);
+  }
+  public uploadFile() {
+    for (let i = 0; i < this.allFiles.length; i++) {
+      let file = this.allFiles[i];
+      this.currentFile = new Upload(file);
+
+      this.pdfService.pushUpload(this.currentFile);
+    }
+  }
+
+  submit() {
+    // this.uploadFile();
   }
 }

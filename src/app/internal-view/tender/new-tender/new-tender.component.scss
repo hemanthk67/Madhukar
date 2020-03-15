@@ -248,7 +248,7 @@
       }
       .equipment-body {
         color: #163a9a;
-        padding: 20px 0px;
+        padding: 18px 0px;
         .equipment-table {
           background-color: #f2f2f2;
           .table-head {
@@ -380,6 +380,81 @@
               }
             }
           }
+        }
+      }
+    }
+    .tender-completion {
+      display: flex;
+      .upload-div {
+        display: flex;
+        .upload-input-div {
+          border: dotted 3px grey;
+          .upload-input-lable {
+            word-break: keep-all;
+            width: 0;
+            margin-left: 150px;
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            color: grey;
+          }
+          .upload-input {
+            opacity: 0;
+            padding: 70px;
+          }
+          .upload-input-lable {
+            position: absolute;
+          }
+        }
+        .files-div {
+          display: flex;
+          width: 350px;
+          flex-wrap: wrap;
+          .files {
+            width: 68px;
+            height: 68px;
+            overflow: hidden;
+            padding: 10px;
+            cursor: pointer;
+            .pdf-icon {
+              // margin: auto;
+              height: 50px;
+              width: 50px;
+              color: #163a9a;
+            }
+            .cloud-cross-icon {
+              height: 0px;
+              width: 0px;
+            }
+            p {
+              margin: 0;
+              color: #163a9a;
+              font-size: 11px;
+            }
+          }
+          .files:hover {
+            .cloud-cross-icon {
+              position: absolute;
+              height: 16px;
+              width: 16px;
+              color: #163a9a;
+            }
+          }
+        }
+      }
+      .submission-div {
+        .submit-button {
+          margin-top: 50px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          color: white;
+          background-color: #163a9a;
+          border: solid 1px #163a9a;
+          cursor: pointer;
+        }
+        .submit-button:hover {
+          color: #163a9a;
+          background-color: white;
         }
       }
     }
