@@ -24,6 +24,11 @@ export class NewTenderComponent implements OnInit {
   testFile: FileList;
   allFiles: any;
   currentFile: Upload;
+  calanderFlag = {
+    issueDate: false,
+    startDate: false,
+    dueDate: false
+  };
   tender = {
     organization: "",
     tenderMode: "online",
@@ -47,7 +52,10 @@ export class NewTenderComponent implements OnInit {
       percentage: true,
       amount: "123"
     },
-    items: []
+    items: [],
+    files: [{
+       name:null,
+    }]
   };
   tableHeaderTest = [
     { name: "Discription", width: "180px" },
@@ -170,6 +178,42 @@ export class NewTenderComponent implements OnInit {
   }
 
   submit() {
+    this.tender.items = this.items;
+    console.log(this.tender);
     // this.uploadFile();
+  }
+
+  displayCounter(value) {
+    if(value) {
+if(this.calanderFlag.issueDate) {
+this.tender.issueDate = value;
+this.calanderFlag.issueDate = false;
+} else if(this.calanderFlag.startDate) {
+  this.tender.startDate = value;
+  this.calanderFlag.startDate = false;
+} else if(this.calanderFlag.dueDate) {
+  this.tender.dueDate = value;
+  this.calanderFlag.dueDate = false;
+}
+    } else {
+      this.calanderFlag.dueDate = false;
+      this.calanderFlag.startDate = false;
+this.calanderFlag.issueDate = false;
+    }
+  }
+  calanderOpen(value) {
+    if(value == 'dueDate') {
+    this.calanderFlag.dueDate = !this.calanderFlag.dueDate;
+    this.calanderFlag.startDate = false;
+    this.calanderFlag.issueDate = false;
+  } else if(value == 'startDate') {
+    this.calanderFlag.dueDate = false;
+    this.calanderFlag.startDate = !this.calanderFlag.startDate;
+    this.calanderFlag.issueDate = false;
+      } else if(value == 'issueDate') {
+        this.calanderFlag.dueDate = false;
+        this.calanderFlag.startDate = false;
+        this.calanderFlag.issueDate = !this.calanderFlag.issueDate;
+            } 
   }
 }

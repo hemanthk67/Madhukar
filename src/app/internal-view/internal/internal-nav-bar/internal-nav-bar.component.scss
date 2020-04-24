@@ -66,19 +66,21 @@
       }
     }
     .internal-left-nav-bar-button {
-      height: 30px;
+      height: 22px;
+      font-size: 13px;
       border-bottom: solid 0.5px white;
-      padding-top: 15px;
-      padding-left: 15px;
+      padding-top: 10px;
+      padding-left: 40px;
       color: white;
       background-color: #163a9a;
       cursor: pointer;
     }
     .internal-left-nav-bar-button-selected {
-      height: 30px;
+      height: 22px;
+      font-size: 13px;
       border-bottom: solid 0.5px #163a9a;
-      padding-top: 15px;
-      padding-left: 15px;
+      padding-top: 10px;
+      padding-left: 40px;
       color: #163a9a;
       background-color: white;
       cursor: pointer;

@@ -73,7 +73,7 @@ export class InternalNavBarComponent implements OnInit {
     }
     iconRegistry.addSvgIcon(
       "arrow",
-      sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-arrow.svg")
+      sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-spiral.svg")
     );
     // iconRegistry.addSvgIcon(
     //   "trans",

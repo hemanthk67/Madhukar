@@ -1,12 +1,74 @@
 .calender {
+  color: #163a9a;
   margin-top: 10px;
   height: 200px;
   width: 300px;
   border: solid 1px #163a9a;
-  .calender-head {
+  background-color: white;
+  .calander-header {
     width: 100%;
-
-    height: 40px;
+    display: flex;
+    height: 30px;
+    font-weight: 600;
     border-bottom: solid 1px #163a9a;
+    .back-button {
+      width: 40px;
+      height: 31px;
+      cursor: pointer;
+      .back-button-calander {
+        margin-left: 10px;
+        fill: #163a9a;
+      }
+    }
+    .back-button:hover {
+      background-color: #163a9a;
+      .back-button-calander {
+        fill: white;
+      }
+    }
+    .calander-month {
+      width: 60%;
+      text-align: center;
+      padding-top: 5px;
+    }
+    .calander-year {
+      flex-grow: 1;
+      text-align: center;
+      padding-top: 5px;
+    }
+  }
+  .calander-body-div {
+    .calander-body {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2px;
+      .calander-month{
+        width: 29%;
+        padding: 1%;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin: 1%;
+        text-align: center;
+        cursor: pointer;
+      }
+      .calander-month:hover {
+        background-color: #163a9a;
+        color: white;
+        border-radius: 3px;
+      }
+      .calander-date {
+        width: 25px;
+        height: 25px;
+        padding: 3px;
+        margin: 3px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .calander-date:hover {
+        background-color: #163a9a;
+        color: white;
+        border-radius: 3px;
+      }
+    }
   }
 }

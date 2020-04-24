@@ -75,13 +75,15 @@
               class="tender-date-input"
               [(ngModel)]="tender.issueDate"
               ngDefaultControl
+              disabled
+              placeholder="dd/mm/yyyy"
             />
             <span class="calander"
               ><button>
-                <mat-icon class="calander-button" svgIcon="calander"></mat-icon>
+                <mat-icon class="calander-button" svgIcon="calander" (click)="calanderOpen('issueDate')"></mat-icon>
               </button>
             </span>
-            <app-calender></app-calender>
+            <app-calender class="app-calander" *ngIf="calanderFlag.issueDate" (dateEmit)='displayCounter($event)'></app-calender>
           </div>
           <div class="tender-date">
             <div class="tender-date-label">Start Date:</div>
@@ -90,13 +92,15 @@
               class="tender-date-input"
               [(ngModel)]="tender.startDate"
               ngDefaultControl
+              disabled
+              placeholder="dd/mm/yyyy"
             />
             <span class="calander"
               ><button>
-                <mat-icon class="calander-button" svgIcon="calander"></mat-icon>
+                <mat-icon class="calander-button" svgIcon="calander" (click)="calanderOpen('startDate')"></mat-icon>
               </button>
             </span>
-            <app-calender></app-calender>
+            <app-calender class="app-calander" *ngIf="calanderFlag.startDate" (dateEmit)='displayCounter($event)'></app-calender>
           </div>
           <div class="tender-date">
             <div class="tender-date-label">Due Date:</div>
@@ -105,13 +109,15 @@
               class="tender-date-input"
               [(ngModel)]="tender.dueDate"
               ngDefaultControl
+              disabled
+              placeholder="dd/mm/yyyy"
             />
             <span class="calander"
               ><button>
-                <mat-icon class="calander-button" svgIcon="calander"></mat-icon>
+                <mat-icon class="calander-button" svgIcon="calander" (click)="calanderOpen('dueDate')"></mat-icon>
               </button>
             </span>
-            <app-calender></app-calender>
+            <app-calender class="app-calander" *ngIf="calanderFlag.dueDate" (dateEmit)='displayCounter($event)'></app-calender>
           </div>
         </div>
       </div>

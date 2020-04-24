@@ -1,5 +1,5 @@
 .main {
-  padding-top: 50px;
+  padding-top: 8vh;
   padding-left: 50px;
   .header {
     .header-text {
@@ -9,8 +9,8 @@
     }
   }
   .body {
-    height: 90vh;
-    width: 75%;
+    height: 85vh;
+    width: 80%;
     overflow-y: scroll;
     overflow-x: hidden;
     .info-div {
@@ -94,12 +94,20 @@
           .tender-date {
             display: flex;
             flex-wrap: wrap;
+            height: 40px;
+            width: 33%;
             .tender-date-label {
               font-size: 16px;
+              padding-top: 5px;
             }
             .tender-date-input {
               border: solid 1px;
               border-radius: 5px;
+              width: 120px;
+              height: 25px;
+              margin-left: 5px;
+              font-size: 18px;
+              text-align: right;
             }
             .calander {
               margin-right: 20px;
@@ -435,10 +443,12 @@
           }
           .files:hover {
             .cloud-cross-icon {
-              position: absolute;
               height: 16px;
               width: 16px;
               color: #163a9a;
+              position: relative;
+              top: -40px;
+              left: -10px;
             }
           }
         }
@@ -497,3 +507,10 @@
   background: #163a9a;
 }
 //end of scroll bar css
+.app-calander {
+  // position: absolute;
+  z-index: 1;
+}
+button {
+  outline: none;
+}
