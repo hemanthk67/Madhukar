@@ -4,6 +4,9 @@ import { style, selectAll } from "d3";
 import { pdfFileService } from "src/app/services/pdfFile.service";
 import * as jsonData from "./tender-document.json";
 
+
+import { TenderService } from "../../../services/internal/tender/tender.service";
+
 class Upload {
   $key: string;
   file: File;
@@ -31,7 +34,8 @@ export class TenderDocumentsComponent implements OnInit {
   name: any;
   pdfPreviewFlag: any;
   coveringLetter: any;
-  constructor(public pdfService: pdfFileService) {
+  constructor(public pdfService: pdfFileService,
+    tenderService: TenderService) {
     d3.select("input").on(
       "mouseover",
       function() {
@@ -298,6 +302,6 @@ export class TenderDocumentsComponent implements OnInit {
     let file = this.testFile.item(0);
     this.currentFile = new Upload(file);
 
-    this.pdfService.pushUpload(this.currentFile);
+    // this.pdfService.pushUpload(this.currentFile, 'test');
   }
 }

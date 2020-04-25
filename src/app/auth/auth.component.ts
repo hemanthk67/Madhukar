@@ -3,7 +3,6 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
-import * as d3 from "d3";
 
 @Component({
   selector: "app-auth",
@@ -34,16 +33,6 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log("test");
-    this.Auth.getOrganizations().subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        console.log("error");
-        console.log(err.message);
-      }
-    );
   }
   ngAfterViewInit() {}
   googleLogin() {
@@ -53,7 +42,6 @@ export class AuthComponent implements OnInit, AfterViewInit {
   userExist(value: any) {
     if (value) {
       this.existingUser = value;
-      // this.router.navigate(["/Internal"]);
     }
   }
   existingLogin() {

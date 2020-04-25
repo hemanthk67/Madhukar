@@ -75,13 +75,19 @@ export class InternalNavBarComponent implements OnInit {
       "arrow",
       sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-spiral.svg")
     );
-    // iconRegistry.addSvgIcon(
-    //   "trans",
-    //   sanitizer.bypassSecurityTrustResourceUrl("assets/icons/trans_logo.svg")
-    // );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.Auth.getOrganizations().subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log("error");
+        console.log(err.message);
+      }
+    );
+  }
 
   categoryrSelected(i) {
     console.log(i);

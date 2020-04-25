@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
-import { pdfFileService } from "src/app/services/pdfFile.service";
+import { TenderService } from "../../../services/internal/tender/tender.service";
 
 class Upload {
   $key: string;
@@ -30,6 +30,7 @@ export class NewTenderComponent implements OnInit {
     dueDate: false
   };
   tender = {
+    TenderNo: null,
     organization: "",
     tenderMode: "online",
     tenderNumber: "",
@@ -53,9 +54,7 @@ export class NewTenderComponent implements OnInit {
       amount: "123"
     },
     items: [],
-    files: [{
-       name:null,
-    }]
+    files: []
   };
   tableHeaderTest = [
     { name: "Discription", width: "180px" },
@@ -85,7 +84,7 @@ export class NewTenderComponent implements OnInit {
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    public pdfService: pdfFileService
+    public tenderService: TenderService
   ) {
     iconRegistry.addSvgIcon(
       "calander",
@@ -168,19 +167,23 @@ export class NewTenderComponent implements OnInit {
   deleteFile(value: any) {
     this.allFiles.splice(value, 1);
   }
-  public uploadFile() {
-    for (let i = 0; i < this.allFiles.length; i++) {
-      let file = this.allFiles[i];
-      this.currentFile = new Upload(file);
-
-      this.pdfService.pushUpload(this.currentFile);
-    }
-  }
+//   public uploadFile() {
+//     if(this.allFiles) {
+//     for (let i = 0; i < this.allFiles.length; i++) {
+//       let file = this.allFiles[i];
+//       this.currentFile = new Upload(file);
+// this.tender.files[i].name = file.name;
+// this.tender.files[i].path = 'tender/' + file.name
+//       // this.pdfService.pushUpload(this.currentFile);
+//     }
+//   }
+//     console.log(this.tender);
+//     console.log(this.allFiles)
+//   }
 
   submit() {
     this.tender.items = this.items;
-    console.log(this.tender);
-    // this.uploadFile();
+    this.tenderService.pushTenderData(this.tender,this.allFiles);
   }
 
   displayCounter(value) {

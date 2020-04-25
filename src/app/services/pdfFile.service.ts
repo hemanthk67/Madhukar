@@ -23,14 +23,12 @@ class Upload {
 })
 export class pdfFileService {
   constructor(af: AngularFirestore) {}
-
-  private basePath: string = "/uploads";
   private uploadTask: firebase.storage.UploadTask;
 
-  pushUpload(upload: Upload) {
+  pushUpload(upload: Upload, path: any) {
     let storageRef = firebase.storage().ref();
     this.uploadTask = storageRef
-      .child(this.basePath + "/" + upload.file.name)
+      .child(path)
       .put(upload.file);
     this.uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED,
@@ -49,7 +47,7 @@ export class pdfFileService {
     const filePath = Date.now().toString();
     let storageRef = firebase.storage().ref();
     this.uploadTask = storageRef
-      .child(this.basePath + "/" + "test.pdf")
+      .child('test' + "/" + "test.pdf") // change to test to appropriate
       .put(file);
     this.uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED,
