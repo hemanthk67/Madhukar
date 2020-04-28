@@ -170,49 +170,49 @@
             >
           </div>
         </div>
-        <div class="trans width-33">
+        <div class="trans width-33" >
           <div class="fee-sub-head">
             <span class="fee-sub-head-lable">Transaction Fee</span>
           </div>
-          <div class="trans-exemption flex">
+          <div class="trans-exemption flex" >
             <div
               [ngClass]="{
-                'fee-lables-selected': tender.transationFee.exemption,
-                'fee-lables-not-selected': !tender.transationFee.exemption
+                'fee-lables-selected': tender.transactionFee.exemption,
+                'fee-lables-not-selected': !tender.transactionFee.exemption
               }"
-              (click)="feeExcemption('transationFee', true)"
+              (click)="feeExcemption('transactionFee', true)"
             >
               Exempted
             </div>
             <div
               [ngClass]="{
-                'fee-lables-selected': !tender.transationFee.exemption,
-                'fee-lables-not-selected': tender.transationFee.exemption
+                'fee-lables-selected': !tender.transactionFee.exemption,
+                'fee-lables-not-selected': tender.transactionFee.exemption
               }"
-              (click)="feeExcemption('transationFee', false)"
+              (click)="feeExcemption('transactionFee', false)"
             >
               Not-Exempted
             </div>
           </div>
           <div class="trans-amount flex">
-            <div class="amount" *ngIf="!tender.transationFee.percentage">
+            <div class="amount" *ngIf="!tender.transactionFee.percentage">
               Amount:
             </div>
-            <div class="amount" *ngIf="tender.transationFee.percentage">
+            <div class="amount" *ngIf="tender.transactionFee.percentage">
               Percentage:
             </div>
             <Input
               type="text"
               class="amount-input"
-              [(ngModel)]="tender.transationFee.amount"
+              [(ngModel)]="tender.transactionFee.amount"
               ngDefaultControl
             />
             <span
               [ngClass]="{
-                'percentage-selected': tender.transationFee.percentage,
-                'percentage-not-selected': !tender.transationFee.percentage
+                'percentage-selected': tender.transactionFee.percentage,
+                'percentage-not-selected': !tender.transactionFee.percentage
               }"
-              (click)="percentageChange('transationFee')"
+              (click)="percentageChange('transactionFee')"
               >%</span
             >
           </div>

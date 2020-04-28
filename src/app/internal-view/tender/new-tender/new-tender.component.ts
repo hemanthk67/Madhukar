@@ -29,33 +29,7 @@ export class NewTenderComponent implements OnInit {
     startDate: false,
     dueDate: false
   };
-  tender = {
-    TenderNo: null,
-    organization: "",
-    tenderMode: "online",
-    tenderNumber: "",
-    eTenderNumber: "",
-    issueDate: "",
-    startDate: "",
-    dueDate: "",
-    emd: {
-      exemption: true,
-      percentage: true,
-      amount: "12"
-    },
-    transationFee: {
-      exemption: true,
-      percentage: true,
-      amount: "122"
-    },
-    documentCost: {
-      exemption: true,
-      percentage: true,
-      amount: "123"
-    },
-    items: [],
-    files: []
-  };
+ tender:any;
   tableHeaderTest = [
     { name: "Discription", width: "180px" },
     { name: "KVA", width: "70px" },
@@ -106,15 +80,17 @@ export class NewTenderComponent implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tender = this.tenderService.tender;
+  }
   tenderModeSelection(value: any) {
     this.tender.tenderMode = value;
   }
   feeExcemption(value: any, key: boolean) {
     if (value == "emd") {
       this.tender.emd.exemption = key;
-    } else if (value == "transationFee") {
-      this.tender.transationFee.exemption = key;
+    } else if (value == "transactionFee") {
+      this.tender.transactionFee.exemption = key;
     } else if (value == "documentCost") {
       this.tender.documentCost.exemption = key;
     }
@@ -122,8 +98,8 @@ export class NewTenderComponent implements OnInit {
   percentageChange(value: any) {
     if (value == "emd") {
       this.tender.emd.percentage = !this.tender.emd.percentage;
-    } else if (value == "transationFee") {
-      this.tender.transationFee.percentage = !this.tender.transationFee
+    } else if (value == "transactionFee") {
+      this.tender.transactionFee.percentage = !this.tender.transactionFee
         .percentage;
     } else if (value == "documentCost") {
       this.tender.documentCost.percentage = !this.tender.documentCost

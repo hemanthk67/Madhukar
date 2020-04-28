@@ -43,6 +43,12 @@ export class pdfFileService {
       }
     );
   }
+  downloadPdf( path) {
+    const images = firebase.storage().ref();
+  const image = images.child(path);
+  image.getDownloadURL().then((url) => { 
+    window.open(url);});
+  }
   savePdf(file: File) {
     const filePath = Date.now().toString();
     let storageRef = firebase.storage().ref();
@@ -61,17 +67,5 @@ export class pdfFileService {
         console.log(this.uploadTask.snapshot.metadata.fullPath);
       }
     );
-    // const task = this.storage.upload('/test/' + filePath+'.pdf', file);
-    // this.uploadPercent = task.percentageChanges();
-    // task.snapshotChanges().pipe(
-    // finalize(() => {
-    // this.downloadURL = fileRef.getDownloadURL();
-    // this.downloadURL.subscribe(url => this.url = url
-    // )
-    // }))
-    // .subscribe();
-    // });
-    // }
-    // }
   }
 }

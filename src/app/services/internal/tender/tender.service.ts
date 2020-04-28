@@ -23,7 +23,39 @@ class Upload {
   providedIn: 'root'
 })
 export class TenderService {
+  public tender = {
+    TenderNo: null,
+    organization: "",
+    tenderMode: "online",
+    tenderNumber: "",
+    eTenderNumber: "",
+    issueDate: "",
+    startDate: "",
+    dueDate: "",
+    status:"New Tender",
+    emd: {
+      exemption: true,
+      percentage: true,
+      amount: "12"
+    },
+    transactionFee: {
+      exemption: true,
+      percentage: true,
+      amount: "122"
+    },
+    documentCost: {
+      exemption: true,
+      percentage: true,
+      amount: "123"
+    },
+    items: [],
+    files: {
+      tenderDocuments:[],
+uploadedDocuments:[]
+    }
+  };
 public data;
+public originalData = [];
 public currentTenderNo = 0;
 
 private pathBase = 'test';  // change to Tender once done with testing and ready for production
@@ -35,48 +67,71 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
     });
    }
   async getMarkers() {
-    const markers = [];
+    var markers = [];
+    if(!this.data) {
     await firebase.firestore().collection(this.pathBase).get()
       .then(querySnapshot => {
         querySnapshot.docs.forEach(doc => {
           if(doc.data().TenderNo > this.currentTenderNo) {
             this.currentTenderNo = doc.data().TenderNo;
           }
+        this.originalData.push(doc.data());
         markers.push(doc.data());
+        markers[markers.length - 1].startDateFormatted = this.dateFormatting(doc.data().startDate);
+        markers[markers.length - 1].dueDateFormatted = this.dateFormatting(doc.data().dueDate);
+        markers[markers.length - 1].issueDateFormatted = this.dateFormatting(doc.data().issueDate);
+        markers[markers.length - 1].flag = true;
       });
     });
+  } else {
+    markers = this.data;
+  }
     return markers;
   }
   pushTenderData(data, files) {
     data.TenderNo = this.currentTenderNo + 1;
-    console.log(files);
     data = this.uploadFile(files ,data);
-        const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
+  this.setTenderData(data);
+    this.currentTenderNo = data.TenderNo;
+    this.originalData.push(data);
+    data.startDateFormatted = this.dateFormatting(data.startDate);
+    data.dueDateFormatted = this.dateFormatting(data.dueDate);
+    data.issueDateFormatted = this.dateFormatting(data.issueDate);
+    data.flag = true;
+    this.data.push(data);
+  
+  }
+  setTenderData(data) {
+    const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
       `${this.pathBase}/${data.TenderNo}`
     );
     newUserRef.set(data, { merge: true });
-    this.currentTenderNo = data.TenderNo;
-  
   }
   
   public uploadFile(allFiles ,tender) {
     if(allFiles) {
-      const TenderFileArray = [];
+      var TenderFileArray = [];
+    for (let i = 0; i < allFiles.length; i++) {
+      let file = allFiles[i];
       const TenderFile = {
         name:null,
         path:null
-     }
-    for (let i = 0; i < allFiles.length; i++) {
-      let file = allFiles[i];
-      console.log(file);
+     };
       const currentFile = new Upload(file);
    TenderFile.name = file.name;
    TenderFile.path = this.pathBase + '/' + tender.TenderNo + '/' + file.name;
    TenderFileArray.push(TenderFile);
       this.pdfService.pushUpload(currentFile, TenderFile.path);
     }
-    tender.files = TenderFileArray; 
+    tender.files.tenderDocuments = TenderFileArray; 
   }
   return tender;
   } 
+
+  //Date Formating got the teder list page 
+  dateFormatting(date) {
+const dates = date.split('/');
+var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+return dates[0] + ' ' + month[dates[1] - 1] + ' ' + dates[2];
+  }
 }

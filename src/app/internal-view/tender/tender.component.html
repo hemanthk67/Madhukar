@@ -1,1 +1,100 @@
-<p>tender works!</p>
+<div class="tender-list-div">
+    <div class="tender-list-head"> Tender-list</div>
+    <div class="tender-list-body">
+<span *ngIf="tenderService.data">
+<div class="tender-list-card" *ngFor="let tender of tenderService.data.slice().reverse(); let i = index">
+    <div class="tender-list-card-small"  *ngIf="tender.flag">
+    <div class="tender-list-card-head">
+        <div class="org-head">{{ tender.organization }}<span class="grey" *ngIf="tender.tenderMode == 'offline'">({{ tender.tenderMode }})</span></div>
+        <span class="item-div"><div class="item-head"*ngFor="let item of tender.items| slice:0:5;let i=index "><span *ngIf="!item.special"><span *ngIf="i>0">,</span> {{ item.kva }} KVA </span></div> </span>
+    </div>
+    <div class="tender-list-card-body">
+        <div class="items">
+        <div class="start-date"><span class="blue-bold">Start Date:</span> {{ tender.startDateFormatted }}</div>
+        <div class="due-date" ><span class="blue-bold"> Due Date : </span>{{ tender.dueDateFormatted }}</div>
+        <div class="tender-number blue-bold">
+            <span class="tender-status" [ngClass]="{'grey': tender.status == 'Completed', 'orange': tender.status == 'On-Going', 'green': tender.status == 'Successful', 'red': tender.status == 'Un-Successful' || tender.status == 'Not-Participated' }">
+                {{ tender.status }}</span>
+            {{ tender.TenderNo }}</div>
+        </div>
+        <div class="down-arrow" (click)="read(i)">
+            <span>Read More</span>
+            
+            <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon>
+        </div>
+    </div>
+    </div>
+    <div class="tender-list-card-large" *ngIf="!tender.flag">
+        <div class="tender-list-card-head">
+        <div class="org-head">{{ tender.organization }}<span class="grey" *ngIf="tender.tenderMode == 'offline'">({{ tender.tenderMode }})</span></div>
+        <span class="tender-status" [ngClass]="{'grey': tender.status == 'Completed', 'orange': tender.status == 'On-Going', 'green': tender.status == 'Successful', 'red': tender.status == 'Un-Successful' || tender.status == 'Not-Participated' }">
+            {{ tender.status }}</span>
+    </div>
+    <div class="tender-list-card-sub-head">TCC/T-{{ tender.TenderNo }}/BHEL</div>
+    <div class="tender-list-card-body">
+        <div class="date-items">
+        <div class="start-date"><span class="blue-bold">Start Date:</span> {{ tender.startDateFormatted }}</div>
+        <div class="due-date" ><span class="blue-bold"> Due Date : </span>{{ tender.dueDateFormatted }}</div>
+        <div class="issue-date" ><span class="blue-bold"> Issue Date : </span>{{ tender.issueDateFormatted }}</div>
+        </div>
+        <div class="tender-number-items">
+            <div class="tender-number"><span class="blue-bold">TenderNo:</span> {{ tender.tenderNumber }}</div>
+            <div class="e-tender-number"><span class="blue-bold">e-TenderNo:</span> {{ tender.eTenderNumber }}</div>
+        </div>
+        <div class="items-doc-body">
+            <div class="items-div">
+                <div class="item" *ngFor="let item of tender.items;let i=index">
+                    <div class="item-info" *ngIf="!item.special">
+                        <div class="item-tender-rating"> <span class="blue-bold">Item:</span> {{ item.kva }}KVA - {{ item.class.hv }}/{{ item.class.lv }}KV - {{ item.type }}</div>
+                        <div class="item-tender-quantity"> <span class="blue-bold">Quantity:</span> {{ item.qty }}</div>
+                        <div class="item-tender-standard"> <span class="blue-bold">Standard:</span> {{ item.standard }}</div>
+                    </div>
+                    <div class="item-discription"> <span class="blue-bold">Discription:</span> {{ item.discription }}</div>
+                    <div class="item-destination">
+                    <div class="item-place"> <span class="blue-bold">Destination:</span> {{ item.destination }}</div>
+                    <div class="item-distance"> <span class="blue-bold">Distance:</span> {{ item.distance }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="doc-div">
+                <div class="tender-documents" *ngIf="!tender.files.length && tender.files.length != 0">
+                    <div class="document-lable blue-bold">Tender Documents:</div>
+                    <div class="document-files" *ngFor="let file of tender.files.tenderDocuments" (click)="downloadFile(file.path)">
+                        
+            <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+                        <div class="file-name"> {{ file.name }} </div>
+                    </div>
+                </div>
+                <div class="tender-documents" *ngIf="!tender.files.length && tender.files.length != 0 && tender.files.uploadedDocuments.length">
+                    <div class="document-lable blue-bold">Uploaded Documents:</div>
+                    <div class="document-files" *ngFor="let file of tender.files.uploadedDocuments" (click)="downloadFile(file.path)">
+                        
+            <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+                        <div class="file-name"> {{ file.name }} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fee-items">
+            <div class="emd-fee"><span class="blue-bold">EMD:</span> {{ tender.emd.amount }}</div>
+            <div class="transaction-cost-fee"><span class="blue-bold">Transaction-Fee:</span> {{ tender.eTenderNumber }}</div>
+            <div class="document-cost-fee"><span class="blue-bold">Document-Cost:</span> {{ tender.eTenderNumber }}</div>
+        </div>
+        <div class="final-content">
+            <div class="approval-div">
+                <div class="div" *ngIf="tender.status == 'New Tender'">
+                <div class="approval" (click)="approval('On-Going', i)"> Approve </div>
+                <div class="decline" (click)="approval('Not-Participated', i)"> Decline </div>
+                </div>
+            </div>
+        <div class="down-arrow" (click)="read(i)">
+            <span>Read Less</span>
+            <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+</span>
+    </div>
+</div>
