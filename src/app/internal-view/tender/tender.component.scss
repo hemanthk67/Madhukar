@@ -82,12 +82,9 @@ font-size: 24px;
                 font-size:18px;
             }
             .tender-list-card-body {
-                // display: flex;
-                // height: 25px;
                 .date-items{
                     display: flex;
                     justify-content: space-between;
-                    // width: 90%;
             }
             .tender-number-items {
                 display: flex;
@@ -129,7 +126,6 @@ font-size: 24px;
                 .doc-div {
                     font-size: 12px;
                     width: 49%;
-                    // height: 100%;
                     .tender-documents {
                         display: flex;
                          flex-wrap: wrap;
@@ -175,8 +171,11 @@ font-size: 24px;
             }
             .final-content {
                 display: flex;
+                .edit-div {
+                    width: 10%;
+                }
                 .approval-div {
-                    width: 90%;
+                    width: 80%;
                     display: flex;
                     justify-content: space-around;
                     color: #F2F2F2;
@@ -193,6 +192,7 @@ font-size: 24px;
                         
                         background: green;
                     }
+
                     .decline {
                         padding: 5px;
                         background: darkred;
@@ -203,6 +203,18 @@ font-size: 24px;
                         
                         background: red;
                     }
+                    .document-prepare {
+                            background-color: #163a9a;
+                            padding: 5px;
+                            border-radius: 5px;
+                            
+                        border: solid 1px #163a9a;
+                            cursor: pointer;
+                    }
+                    .document-prepare:hover {
+                        background-color: white;
+                        color: #163a9a;
+                }
                 }
                 }
             .down-arrow {

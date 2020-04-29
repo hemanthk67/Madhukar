@@ -45,8 +45,10 @@ export class TenderDocumentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.pdfPreviewFlag = false; // for the pdfPreview
+  }
+  coveringLetterInit() {
     this.coveringLetter = this.JsonData[0].coveringLetter;
-    this.pdfPreviewFlag = true; // for the pdfPreview
     d3.select("#pdf-preview")
       .selectAll("*")
       .remove();

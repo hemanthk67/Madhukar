@@ -81,11 +81,17 @@
             <div class="document-cost-fee"><span class="blue-bold">Document-Cost:</span> {{ tender.eTenderNumber }}</div>
         </div>
         <div class="final-content">
+            <div class="edit-div">
+
+            </div>
             <div class="approval-div">
                 <div class="div" *ngIf="tender.status == 'New Tender'">
                 <div class="approval" (click)="approval('On-Going', i)"> Approve </div>
                 <div class="decline" (click)="approval('Not-Participated', i)"> Decline </div>
                 </div>
+                <div class="div" *ngIf="tender.status == 'On-Going'">
+                    <div class="document-prepare" (click)="documentprep(i)"> Prepare Documents </div>
+                    </div>
             </div>
         <div class="down-arrow" (click)="read(i)">
             <span>Read Less</span>

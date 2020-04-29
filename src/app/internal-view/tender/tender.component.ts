@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { CommonComponentsModule } from "src/app/common-components/common-components.module";
 
 import { MatIconRegistry } from "@angular/material/icon";
@@ -18,6 +19,7 @@ export class TenderComponent implements OnInit {
     private pdf:pdfFileService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
+    private router: Router,
     public tenderService: TenderService) {
       iconRegistry.addSvgIcon(
         "down-spiral",
@@ -46,5 +48,11 @@ export class TenderComponent implements OnInit {
    this.tenderService.originalData[this.tenderService.originalData.length - index - 1].status = value;
    this.tenderService.setTenderData(this.tenderService.originalData[this.tenderService.originalData.length - index - 1]);
    this.tenderService.data[this.tenderService.originalData.length - index - 1].status = value;
+  }
+  documentprep(index) {
+    this.tenderService.tender = this.tenderService.originalData[this.tenderService.originalData.length - index - 1];
+    this.router.navigate([
+      { outlets: { primary: "Internal", approved: "Tender/TenderDocuments" } }
+    ]);
   }
 }
