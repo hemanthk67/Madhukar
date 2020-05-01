@@ -6,6 +6,8 @@ import * as jsonData from "./tender-document.json";
 
 
 import { TenderService } from "../../../services/internal/tender/tender.service";
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 class Upload {
   $key: string;
@@ -26,6 +28,30 @@ class Upload {
 export class TenderDocumentsComponent implements OnInit {
   @Output() testing: any;
   JsonData: any = (jsonData as any).default;
+  allFiles: any;
+  test: any;
+  tabs = [{name:'Upload'},
+  {name:'Create Documents',
+   sub:['Covering Letter', 'No-Ban Declaration'],
+   Flag: false
+  },
+   {name:'Complete Tender'}];
+   commonDocuemnts = [
+     {name:'GST'},
+     {name:'PAN'},
+     {name:'MSME'},
+     {name:'NSIC'},
+     {name:'8 MVA CPRI'},
+     {name:'5 MVA CPRI'},
+     {name:'ISO'}];
+     experianceDocuemnts = [
+      {name:'BHEL-EDN - 5MVA - 33/11KV'},
+      {name:'NMDC-DOM - 5MVA - 33/11KV'},
+      {name:'NMDC-KIR - 3MVA - 33/11KV'},
+      {name:'BHEL-R&D - 1MVA - 33/11KV'},
+      {name:'APTRANSCO - 1MVA - 33/11KV'},
+      {name:'APGENCO - 2MVA - 66/11KV'},
+      {name:'PUSHPA - 5MVA - 33/11KV'}];
   testFile: FileList;
   currentFile: Upload;
   // pdfView: any;
@@ -35,7 +61,23 @@ export class TenderDocumentsComponent implements OnInit {
   pdfPreviewFlag: any;
   coveringLetter: any;
   constructor(public pdfService: pdfFileService,
-    tenderService: TenderService) {
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer,
+    public tenderService: TenderService) {
+      iconRegistry.addSvgIcon(
+        "down-spiral",
+        sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-spiral.svg")
+        );
+        iconRegistry.addSvgIcon(
+          "pdf-icon",
+          sanitizer.bypassSecurityTrustResourceUrl("assets/icons/pdf-icon.svg")
+        );
+        iconRegistry.addSvgIcon(
+          "cloud-cross-icon",
+          sanitizer.bypassSecurityTrustResourceUrl(
+            "assets/icons/cloud-cross-icon.svg"
+          )
+        );
     d3.select("input").on(
       "mouseover",
       function() {
@@ -75,6 +117,8 @@ export class TenderDocumentsComponent implements OnInit {
   pdfForPreview() {
     this.pdfForPreviewCoveringLetterPage1();
   }
+
+  // covering letter starting
   pdfForPreviewCoveringLetterPage1() {
     var toAddress = this.pdfForPreviewFormate();
     d3.select("#pdf-preview").style("font-size", "13px");
@@ -286,6 +330,14 @@ export class TenderDocumentsComponent implements OnInit {
     greetings.append("div").text("Encl: As above");
     greetings.append("div").text("Yours faithfully,");
   }
+  // end of covering letter
+   //tabs function
+   tabSwitch(index) {
+if(this.tabs[index].sub) {
+  this.tabs[index].Flag = !this.tabs[index].Flag;
+}
+   }
+  //start of needed funtion
   pdfForPreviewFormate() {
     var toAdress = this.coveringLetter.toAddress.replace(/,/g, "," + "&#10;");
     return toAdress;
@@ -297,8 +349,21 @@ export class TenderDocumentsComponent implements OnInit {
 
   detectFile(event) {
     this.testFile = event.target.files;
-    console.log(this.testFile);
+       if (this.allFiles) {
+      for (let i = 0; i < this.testFile.length; i++) {
+        this.allFiles[this.allFiles.length] = this.testFile[i];
+      }
+    } else {
+      this.allFiles = Array.from(this.testFile);
+    }
     // this.uploadFile();
+  }
+  deleteFile(value: any) {
+    this.allFiles.splice(value, 1);
+  }
+  onChange() {
+    this.test = !this.test;
+console.log(this.test);
   }
   public uploadFile() {
     let file = this.testFile.item(0);

@@ -1,14 +1,107 @@
-<div class="main">
+<div class="container">
+<div class="tabs">
+  <div class="tender-info"> {{ tenderService.tender.organization }} - {{ tenderService.tender.TenderNo }}
+  </div>
+  <div class="tab-div">
+  <div class="tab" *ngFor="let tab of tabs; let i = index" [ngClass]="{'tab-active': tab.Flag}" >
+    <div class="tab-name" (click)="tabSwitch(i)">{{ tab.name }}<div class="tab-arrow" *ngIf="tab.sub">
+      <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon></div> </div>
+    <div class="tab-sub-div" >
+      <div class="sub-div" *ngIf="tab.Flag">
+      <div class="sub"  *ngFor="let sub of tab.sub">
+{{ sub }}
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="upload-page">
+  <div class="document-upload">
+  <div class="page-sub-header">
+    Upload Documents
+  </div>
+  <div class="upload-documents">
+    <div class="upload-div">
+      <div class="upload-input-lable">Drop Files to Upload</div>
+    <input
+            class="upload-input"
+            type="file"
+            (change)="detectFile($event)"
+            multiple
+          />
+    </div>
+    <div class="files-div">
+      <div
+        class="files"
+        *ngFor="let file of allFiles; let i = index"
+        (click)="deleteFile(i)"
+      >
+        <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+        <mat-icon
+          class="cloud-cross-icon"
+          svgIcon="cloud-cross-icon"
+        ></mat-icon>
+        <p>{{ file.name }}</p>
+      </div>
+    </div>
+    <div class="upload-submission">
+     <div class="upload-button"> Upload Documents</div>
+    </div>
+    </div>
+  </div>
+<div class="document-selection">
+  <div class="page-sub-header"> Attatch Documents </div>
+  <div class="common-attatchments">
+    <div class="common-attatchments-head">
+      <div class="flex">Common Documents:
+<div class="notarize-button selection-button">Notarized</div></div>
+<div class="selection-button"> Add document </div>
+    </div>
+    <div class="common-documents-div">
+      <div class="common-document" *ngFor="let document of commonDocuemnts">
+        <input type="checkbox">
+        <div class="common-document-name">
+        {{ document.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="experiance">
+    <div class="experiance-attatchments-head">
+      <div class="flex">Common Documents:
+<!-- <div class="notarize-button selection-button">Notarized</div> -->
+</div>
+<!-- <div class="selection-button"> Add document </div> -->
+    </div>
+    <div class="experiance-documents-div">
+      <div class="experiance-document" *ngFor="let document of experianceDocuemnts" (click)="onChange()">
+        <input type="checkbox" [(ngModel)]="test" 
+       >
+        <div class="experiance-document-name">
+        {{ document.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="submission">
+  <div class="submission-button"> Attatch Documents</div>
+</div>
+</div>
+<!-- <div class="main">
   <input type="file" (change)="detectFile($event)" />
   <div class="tender-documents">
     <input type="text" [(ngModel)]="name" (click)="aku()" id="name-input" />
   </div>
+</div> -->
+<app-pdf-preview
+  *ngIf="pdfPreviewFlag"
+  (backFlag)="pdfPreviewHander($event)"
+></app-pdf-preview>
+
   <!-- <app-pdf-view
     class="pdf-view"
     (click)="uploadFile($event)"
   ></app-pdf-view> -->
 </div>
-<app-pdf-preview
-  *ngIf="pdfPreviewFlag"
-  (backFlag)="pdfPreviewHander($event)"
-></app-pdf-preview>
