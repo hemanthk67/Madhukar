@@ -78,15 +78,6 @@ export class InternalNavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.Auth.getOrganizations().subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        console.log("error");
-        console.log(err.message);
-      }
-    );
   }
 
   categoryrSelected(i) {

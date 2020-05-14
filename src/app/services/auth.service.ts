@@ -49,13 +49,6 @@ export class AuthService {
       })
     );
   }
-  getOrganizations() {
-    this.OrganizationCollectionRef = this.afs.doc<Organization>(
-      "Info/Organization"
-    );
-    this.Organization = this.OrganizationCollectionRef.valueChanges();
-    return this.Organization;
-  }
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
 

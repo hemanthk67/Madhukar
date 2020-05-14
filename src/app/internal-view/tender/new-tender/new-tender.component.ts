@@ -3,6 +3,8 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { TenderService } from "../../../services/internal/tender/tender.service";
 
+import { InfoService } from "../../../services/internal/info.service";
+
 class Upload {
   $key: string;
   file: File;
@@ -58,7 +60,8 @@ export class NewTenderComponent implements OnInit {
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    public tenderService: TenderService
+    public tenderService: TenderService,
+    public infoService:InfoService
   ) {
     iconRegistry.addSvgIcon(
       "calander",

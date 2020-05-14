@@ -1,77 +1,44 @@
 .container {
-  width: 85%;   
-  margin-left: 30px;
-  padding-left: 20px;
+  width: 80%;   
+  // padding-left: 20px;
   height: 95vh;
   display: flex;
   flex-direction: column;
-.tabs {
-  width: 90%;
-  color: #163a9a;
-  box-shadow: 0px 0px 20px #163a9a;
-  border-radius: 25px;
-  .tender-info {
-    display:flex;
-    justify-content: space-around;
+  .header-div {
+   display: flex;
+   justify-content: space-around;
+    color: #163a9a;
     font-weight: 600;
-    padding: 0px 50px;
-  }
-  .tab-div {
-    display: flex;
-  justify-content: space-around;
- .tab {
-  display: flex;
-   margin: 8px 10px;
-  padding: 6px 15px;
-  border: solid 1px#163a9a;
-  border-radius: 10px;
-  cursor: pointer;
-  .tab-name {
-    display: flex;
-  }
-  .tab-sub-div {
-    width: 0px;
-  .sub-div {
-    position: relative;
-    top: 35px;
-    left: -170px;
-    height: 0;
-    width: 175px;
-    background-color: white;
-    overflow: inherit;
-    .sub {
-      margin-top: 3px;
-      color: white;
+    font-size: 22px;
+    margin-top: 10px;
+    .header {
+      padding: 10px;
+      text-align: center;
+      width: fit-content;
       background-color: #163a9a;
-      padding: 5px;
-      border: solid 1px #163a9a;
+      color: white;
       border-radius: 5px;
-    }
-    .sub:hover {
-      color: #163a9a;
-background-color: white;
+      cursor: pointer;
     }
   }
-}
- }
- .tab:hover {
-   background-color: #163a9a;
-   color: white;
- }
- .tab-active {
-   
-   background-color: #163a9a;
-   color: white;
- }
-}
-}
 .upload-page {
-  width: 90%;
+  width: 100%;
   overflow-y: scroll;
   flex-grow: 1;
   margin-top: 50px;
   padding-left: 10px;
-  .document-upload {
+    .present-document-upload-button {
+      font-size: 14px;
+      border: solid 1px;
+      padding: 2px 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .present-document-upload-button:hover {
+      color: white;
+      background-color: #163a9a;
+    }
+  
 .upload-documents {
   display: flex;
   margin-top: 20px;
@@ -95,18 +62,37 @@ background-color: white;
     opacity: 0;
   }
 }
+.upload-common-documents-div {
+  margin-top: 25px;
+  width: 100px;
+  overflow: hidden;
+  .upload-input-common-documents::-webkit-file-upload-button {
+  color: #163a9a;
+  font-weight: 600;
+  background-color: white;
+  padding: 5px 10px;
+  border: solid 1px #163a9a;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+} 
+.upload-input-common-documents::-webkit-file-upload-button:hover {
+  background-color: #163a9a;
+  color: white;
+}
+}
 .files-div {
   display: flex;
-  width: 350px;
+  // width: 350px;
   flex-wrap: wrap;
   .files {
     width: 68px;
-    height: 68px;
+    word-break: break-all;
     overflow: hidden;
     padding: 10px;
     cursor: pointer;
     .pdf-icon {
-      // margin: auto;
+      margin: auto;
       height: 50px;
       width: 50px;
       color: #163a9a;
@@ -118,7 +104,7 @@ background-color: white;
     p {
       margin: 0;
       color: #163a9a;
-      font-size: 11px;
+      font-size: 11px !important;
     }
   }
   .files:hover {
@@ -149,8 +135,14 @@ background-color: white;
     background-color: white;
   }
 }
+.file-name {
+  width: 75px;
+  overflow: hidden;
+  font-size: 15px !important;
+  font-weight: 600;
 }
-  }
+}
+  
 .document-selection {
   margin-top: 20px;
   .common-attatchments {
@@ -195,6 +187,17 @@ background-color: white;
     }
   }
   }
+  .common-document-upload-head {
+    justify-content: space-between;
+    color: #163a9a;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+padding-right: 20px;
+    .common-document-upload-head-name {
+      margin-top: 8px;
+    }
+  }
   .experiance {
     padding-left: 10px;
     margin-top: 20px;
@@ -238,6 +241,7 @@ background-color: white;
   
   .selection-button {
     font-size: 14px;
+    color: #163a9a;
     margin-left: 30px;
      padding: 5px 10px;
     border: solid 1px #163a9a;
@@ -247,6 +251,14 @@ background-color: white;
   .selection-button:hover {
     color: white;
     background-color: #163a9a;
+  }
+  .selection-button-active {
+    color: white;
+    background-color: #163a9a;
+  }
+  .notarize-button {
+    height: 20px;
+    margin-top: 25px;
   }
 }
 .submission {
@@ -299,10 +311,48 @@ cursor: pointer;
   width: 100%;
   border-bottom: solid 1px #163a9a;
 }
+.page-sub-semi-header {
+  font-size: 15px;
+  font-weight: 600;
+  color: #163a9a;
+  margin-right: 20px;
+    margin-top: 30px;
+    margin-left: 10px;
+}
 .flex {
   display: flex;
 }
-
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.space-between {
+  justify-content: space-between;
+}
+.margin-left-30 {
+  margin-left: 30px;
+}
+.margin-left-10 {
+  margin-left: 10px;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+.margin-top-25 {
+  margin-top: 25px !important;
+}
+.margin-0 {
+  margin: 0 !important;
+}
+.width-auto {
+  width: auto !important;
+}
+.full-border {
+  border: solid 1px #163a9a;
+  border-radius: 10px;
+}
+.height-90 {
+  height: 90px;
+}
 // scroll bar css
 /* width */
 ::-webkit-scrollbar {
@@ -326,3 +376,82 @@ cursor: pointer;
   background: #163a9a;
 }
 //end of scroll bar css
+
+.blue-background {
+  background-color: #163a9a !important;
+  color: white !important;
+}
+
+//display none 
+.display-none {
+  display: none !important;
+}
+
+.tabs {
+   width: 20%;
+  color: #163a9a;
+  display:flex;
+  flex-direction: column;
+  height: 100vh;
+  margin-bottom: 5px;
+  .logo-space {
+    min-height: 175px;
+    width: 100%;
+  }
+  .tab-div {
+    display: flex;
+    flex-grow: 1;
+    overflow: scroll;
+    flex-direction: column;
+  margin: auto;
+ .tab {
+  display: flex;
+  width: 150px;
+    min-height: 100px;
+  border: solid 1px white;
+  background-color: #163a9a;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  .tab-name {
+    display: flex;
+    margin-left: 35px;
+    height: fit-content;
+  }
+  .tab-sub-div {
+    width: 0px;
+  .sub-div {
+    position: relative;
+    top: 35px;
+    left: -170px;
+    height: 0;
+    width: 175px;
+    background-color: white;
+    overflow: inherit;
+    .sub {
+      margin-top: 3px;
+      color: white;
+      background-color: #163a9a;
+      padding: 5px;
+      border: solid 1px #163a9a;
+      border-radius: 5px;
+    }
+    .sub:hover {
+      color: #163a9a;
+background-color: white;
+    }
+  }
+}
+ }
+ .tab:hover {
+   background-color: #163a9a;
+   color: white;
+ }
+ .tab-active {
+   
+   background-color: #163a9a;
+   color: white;
+ }
+}
+}

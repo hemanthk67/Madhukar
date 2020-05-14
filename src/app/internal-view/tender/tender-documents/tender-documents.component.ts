@@ -6,6 +6,9 @@ import * as jsonData from "./tender-document.json";
 
 
 import { TenderService } from "../../../services/internal/tender/tender.service";
+import { InfoService } from "../../../services/internal/info.service";
+import { RoutingService } from 'src/app/services/routing.service';
+
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -36,34 +39,24 @@ export class TenderDocumentsComponent implements OnInit {
    Flag: false
   },
    {name:'Complete Tender'}];
-   commonDocuemnts = [
-     {name:'GST'},
-     {name:'PAN'},
-     {name:'MSME'},
-     {name:'NSIC'},
-     {name:'8 MVA CPRI'},
-     {name:'5 MVA CPRI'},
-     {name:'ISO'}];
-     experianceDocuemnts = [
-      {name:'BHEL-EDN - 5MVA - 33/11KV'},
-      {name:'NMDC-DOM - 5MVA - 33/11KV'},
-      {name:'NMDC-KIR - 3MVA - 33/11KV'},
-      {name:'BHEL-R&D - 1MVA - 33/11KV'},
-      {name:'APTRANSCO - 1MVA - 33/11KV'},
-      {name:'APGENCO - 2MVA - 66/11KV'},
-      {name:'PUSHPA - 5MVA - 33/11KV'}];
-  testFile: FileList;
+   presentDocumentsFlag = true;
+   commonDocumentsFlag = true;
+   commonDocumentType = 'attested';
+  commonFile: Upload;
+   commonDocuments = [];
+   experianceDocuemnts =[];
+   uploadFile: FileList;
   currentFile: Upload;
-  // pdfView: any;
   pdfPreviewPage1: any;
   pdfPreviewPage2;
-  name: any;
   pdfPreviewFlag: any;
   coveringLetter: any;
   constructor(public pdfService: pdfFileService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    public tenderService: TenderService) {
+    public tenderService: TenderService,
+    private routingService: RoutingService,
+    public infoService:InfoService) {
       iconRegistry.addSvgIcon(
         "down-spiral",
         sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-spiral.svg")
@@ -87,6 +80,25 @@ export class TenderDocumentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.commonDocuments = this.infoService.commonDocuments;
+    for( let i =0; i< this.commonDocuments.length; i++) {
+      this.commonDocuments[i].flag  = false;
+      for( let j = 0; j < this.tenderService.tender.files.uploadedDocuments.length; j++) {
+     if( this.tenderService.tender.files.uploadedDocuments[j].name == this.commonDocuments[i].name) {
+      this.commonDocuments[i].flag  = true;
+     }
+      }
+      
+    }
+    this.experianceDocuemnts = this.infoService.experienceDocuments;
+    for( let i =0; i< this.experianceDocuemnts.length; i++) {
+      this.experianceDocuemnts[i].flag  = false;
+       for( let j = 0; j < this.tenderService.tender.files.uploadedDocuments.length; j++) {
+        if( this.tenderService.tender.files.uploadedDocuments[j].name == this.experianceDocuemnts[i].name) {
+         this.experianceDocuemnts[i].flag  = true;
+        }
+         }
+    } 
     this.pdfPreviewFlag = false; // for the pdfPreview
   }
   coveringLetterInit() {
@@ -96,23 +108,10 @@ export class TenderDocumentsComponent implements OnInit {
       .remove();
     setTimeout(
       function() {
-        this.name = "pdfView";
-        this.pdfForView();
         this.pdfForPreview();
       }.bind(this),
       1000
     );
-  }
-  pdfForView() {
-    // d3.select("#pdf-view").style("font-size", "10px");
-    // this.pdfView = d3.select("#pdf-view");
-    // var pdfHeader = this.pdfView
-    //   .append("div")
-    //   .style("display", "flex")
-    //   .style("justify-content", "space-between")
-    //   .style("margin", "0px 45px");
-    // pdfHeader.append("div").text("TCC/T-103/BHEL/1417");
-    // pdfHeader.append("div").text("02/02/2020");
   }
   pdfForPreview() {
     this.pdfForPreviewCoveringLetterPage1();
@@ -348,27 +347,108 @@ if(this.tabs[index].sub) {
   }
 
   detectFile(event) {
-    this.testFile = event.target.files;
+    this.uploadFile = event.target.files;
        if (this.allFiles) {
-      for (let i = 0; i < this.testFile.length; i++) {
-        this.allFiles[this.allFiles.length] = this.testFile[i];
-      }
+        for (let i = 0; i < this.uploadFile.length; i++) {
+          this.allFiles[this.allFiles.length] = this.uploadFile[i];
+        }
     } else {
-      this.allFiles = Array.from(this.testFile);
+      this.allFiles = Array.from(this.uploadFile);
     }
-    // this.uploadFile();
+    for (let i = 0; i < this.allFiles.length; i++) {
+      for( let j = 0; j < this.tenderService.tender.files.uploadedDocuments.length; j++) {
+        if( this.tenderService.tender.files.uploadedDocuments[j].name == this.allFiles[i].name) {
+          alert('File - ' + this.allFiles[i].name + 'already exist')
+         this.allFiles.splice(i,1);
+         i--;
+         j= this.tenderService.tender.files.uploadedDocuments.length - 1;
+        }
+         }
+    }
   }
+
   deleteFile(value: any) {
     this.allFiles.splice(value, 1);
   }
-  onChange() {
-    this.test = !this.test;
-console.log(this.test);
+  uploadDocumentFlag() {
+    this.presentDocumentsFlag = !this.presentDocumentsFlag;
   }
-  public uploadFile() {
-    let file = this.testFile.item(0);
-    this.currentFile = new Upload(file);
-
-    // this.pdfService.pushUpload(this.currentFile, 'test');
+  onCommonChange(i,name) {
+    this.commonDocuments[i].flag = !this.commonDocuments[i].flag;
+    var document = {
+      name: this.commonDocuments[i].name,
+      path: this.commonDocuments[i].path
+    };
+    if(this.tenderService.tender.files.uploadedDocuments.length == 0) {
+      this.tenderService.tender.files.uploadedDocuments.push(document);
+    } else {
+    for( let j = 0; j < this.tenderService.tender.files.uploadedDocuments.length; j++) {
+      if( this.tenderService.tender.files.uploadedDocuments[j].name == name) {
+        this.tenderService.tender.files.uploadedDocuments.splice(j,1);
+        break;
+      } else if ( j+1 == this.tenderService.tender.files.uploadedDocuments.length) {
+        this.tenderService.tender.files.uploadedDocuments.push(document);
+        break;
+      }
+       }
+      }
+       console.log(this.tenderService.tender.files.uploadedDocuments);
+  }
+  detectcommonFile(event) {
+    this.commonFile = event.target.files[0];
+  }
+  deleteCommonFile() {
+    (<HTMLInputElement>document.getElementById("common-document-id")).value = "";
+    this.commonFile = null;
+  }
+  commonDocumentUpload() {
+    for( let i =0; i< this.commonDocuments.length; i++) {
+    if(this.commonFile.name == this.commonDocuments[i].name) {
+alert('Folder Already Exists');
+return 0;
+    }
+    }
+    this.tenderService.uploadCommonFile(this.commonFile, this.tenderService.tender, this.commonDocumentType);
+    this.commonDocumentsFlag = !this.commonDocumentsFlag;
+  }
+  onExperienceChange(i,name) {
+    this.experianceDocuemnts[i].flag = !this.experianceDocuemnts[i].flag;
+    var document = {
+      name: this.experianceDocuemnts[i].name,
+      path: this.experianceDocuemnts[i].path
+    };
+    if(this.tenderService.tender.files.uploadedDocuments.length == 0) {
+      this.tenderService.tender.files.uploadedDocuments.push(document);
+    } else {
+    for( let j = 0; j < this.tenderService.tender.files.uploadedDocuments.length; j++) {
+      if( this.tenderService.tender.files.uploadedDocuments[j].name == name) {
+        this.tenderService.tender.files.uploadedDocuments.splice(j,1);
+        break;
+      } else if ( j+1 == this.tenderService.tender.files.uploadedDocuments.length) {
+        this.tenderService.tender.files.uploadedDocuments.push(document);
+        break;
+      }
+       }
+      }
+       console.log(this.tenderService.tender.files.uploadedDocuments);
+  }
+  attatchDocuments() {
+    this.tenderService.attatchDocuments();
+  }
+  commonAddDocuments() {
+    this.commonDocumentsFlag = !this.commonDocumentsFlag;
+  }
+  commonDocumentTypeChange(type) {
+    if (this.commonDocumentType == type) {
+      this.commonDocumentType = 'attested';
+    } else {
+      this.commonDocumentType = type;
+    }
+  }
+  backToTenderList() {
+this.routingService.tenderList();
+  }
+  public uploadFiles() {
+    this.tenderService.uploadManuualFiles(this.tenderService.tender ,this.allFiles);
   }
 }

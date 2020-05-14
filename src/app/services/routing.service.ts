@@ -9,4 +9,14 @@ export class RoutingService {
   tender(path: any) {
     this.router.navigate([{ outlets: { approved: path } }]);
   }
+  tenderUploadDocuments() {
+    this.router.navigate([
+      { outlets: { primary: "Internal", approved: "Tender/TenderDocuments" } }
+    ]);
+  }
+  tenderList() {
+    this.router.navigate([
+      { outlets: { primary: "Internal", approved: "Tender" } }
+    ]);
+  }
 }

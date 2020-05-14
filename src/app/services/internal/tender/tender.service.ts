@@ -5,7 +5,9 @@ import {
   AngularFirestoreDocument,
   AngularFirestoreCollection
 } from "@angular/fire/firestore";
+
 import { pdfFileService } from '../../pdfFile.service';
+import { InfoService } from "../../../services/internal/info.service";
 
 class Upload {
   $key: string;
@@ -52,7 +54,8 @@ export class TenderService {
     files: {
       tenderDocuments:[],
 uploadedDocuments:[]
-    }
+    },
+    formatedDocuments: []
   };
 public data;
 public originalData = [];
@@ -61,11 +64,14 @@ public currentTenderNo = 0;
 private pathBase = 'test';  // change to Tender once done with testing and ready for production
   constructor(
     private afs: AngularFirestore,
-    public pdfService: pdfFileService) {
+    public pdfService: pdfFileService,
+    public infoService:InfoService) {
     this.getMarkers().then(data => {
       this.data = data;
     });
    }
+
+   // function to et data from the DB
   async getMarkers() {
     var markers = [];
     if(!this.data) {
@@ -88,27 +94,41 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
   }
     return markers;
   }
-  pushTenderData(data, files) {
-    data.TenderNo = this.currentTenderNo + 1;
-    data = this.uploadFile(files ,data);
-  this.setTenderData(data);
-    this.currentTenderNo = data.TenderNo;
-    this.originalData.push(data);
-    data.startDateFormatted = this.dateFormatting(data.startDate);
-    data.dueDateFormatted = this.dateFormatting(data.dueDate);
-    data.issueDateFormatted = this.dateFormatting(data.issueDate);
-    data.flag = true;
-    this.data.push(data);
-  
+  // function to push new tender data
+  pushTenderData(tenderData, files) {
+    tenderData.TenderNo = this.currentTenderNo + 1;
+    tenderData = this.uploadFile(files ,tenderData ,'tender-documents');
+  this.setTenderData(tenderData);
+    this.currentTenderNo = tenderData.TenderNo;
+    this.originalData.push({...tenderData});
+    tenderData.startDateFormatted = this.dateFormatting(tenderData.startDate);
+    tenderData.dueDateFormatted = this.dateFormatting(tenderData.dueDate);
+    tenderData.issueDateFormatted = this.dateFormatting(tenderData.issueDate);
+    tenderData.flag = true;
+    this.data.push({...tenderData});
   }
+  // function for attatching documents
+  attatchDocuments() {
+    this.setTenderData(this.tender);
+    console.log(this.originalData);
+    for(let i =0; i < this.originalData.length; i++) {
+      if(this.originalData[i].TenderNo == this.tender.TenderNo) {
+        this.originalData[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
+        this.data[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
+        break;
+      }
+    }
+    console.log(this.originalData);
+  }
+  // function to set upload new data
   setTenderData(data) {
     const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
       `${this.pathBase}/${data.TenderNo}`
     );
     newUserRef.set(data, { merge: true });
   }
-  
-  public uploadFile(allFiles ,tender) {
+  // common files upload function
+  public uploadFile(allFiles ,tender, type) {
     if(allFiles) {
       var TenderFileArray = [];
     for (let i = 0; i < allFiles.length; i++) {
@@ -119,14 +139,47 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
      };
       const currentFile = new Upload(file);
    TenderFile.name = file.name;
-   TenderFile.path = this.pathBase + '/' + tender.TenderNo + '/' + file.name;
-   TenderFileArray.push(TenderFile);
+   if (type == 'upload-documents') {
+    TenderFile.path = this.pathBase + '/' + tender.TenderNo + '/uploadedFile/' + file.name;
+    TenderFileArray.push(TenderFile);
+    tender.files.uploadedDocuments.push(TenderFile); 
+    } else if (type == 'tender-documents') {
+      TenderFile.path = this.pathBase + '/' + tender.TenderNo + '/' + file.name;
+    TenderFileArray.push(TenderFile);
+      }
       this.pdfService.pushUpload(currentFile, TenderFile.path);
     }
+    if (type == 'tender-documents') {
     tender.files.tenderDocuments = TenderFileArray; 
+    }
   }
   return tender;
   } 
+
+  // funtion for manual uploading of files
+  uploadManuualFiles(tenderData , files) {
+    tenderData = this.uploadFile(files ,tenderData ,'upload-documents');
+    this.setTenderData(tenderData);
+    for(let i =0; i < this.originalData.length; i++) {
+      if(this.originalData[i].TenderNo == this.tender.TenderNo) {
+        this.originalData[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
+        this.data[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
+        break;
+      }
+    }
+  }
+  // funtion for addind new common files
+  uploadCommonFile( file ,tender, type) {
+    const TenderFile = {
+      name:null,
+      path:null
+   };
+    const currentFile = new Upload(file);
+ TenderFile.name = file.name;
+ TenderFile.path = this.pathBase + '/' + tender.TenderNo + '/uploadedFile/' + file.name;
+    this.pdfService.pushUpload(currentFile, TenderFile.path);
+    this.infoService.setCommonDocumentData(file.name, TenderFile.path, type)
+  }
 
   //Date Formating got the teder list page 
   dateFormatting(date) {

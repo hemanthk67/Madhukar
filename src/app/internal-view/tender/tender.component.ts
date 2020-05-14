@@ -50,7 +50,7 @@ export class TenderComponent implements OnInit {
    this.tenderService.data[this.tenderService.originalData.length - index - 1].status = value;
   }
   documentprep(index) {
-    this.tenderService.tender = this.tenderService.originalData[this.tenderService.originalData.length - index - 1];
+    this.tenderService.tender = this.tenderService.originalData[this.tenderService.originalData.length - index - 1]; 
     this.router.navigate([
       { outlets: { primary: "Internal", approved: "Tender/TenderDocuments" } }
     ]);
