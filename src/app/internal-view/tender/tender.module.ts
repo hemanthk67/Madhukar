@@ -8,9 +8,11 @@ import { CommonComponentsModule } from "src/app/common-components/common-compone
 import { TenderDocumentsComponent } from "./tender-documents/tender-documents.component";
 import { FormsModule } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
+import { UploadDocumentsComponent } from './tender-documents/documents/upload-documents/upload-documents.component';
+import { CoveringLetterComponent } from './tender-documents/documents/covering-letter/covering-letter.component';
 
 @NgModule({
-  declarations: [TenderComponent, NewTenderComponent, TenderDocumentsComponent],
+  declarations: [TenderComponent, NewTenderComponent, TenderDocumentsComponent, UploadDocumentsComponent, CoveringLetterComponent],
   imports: [
     CommonModule,
     TenderRoutingModule,
