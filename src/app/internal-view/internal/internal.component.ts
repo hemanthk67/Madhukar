@@ -9,5 +9,7 @@ import { InfoService } from "../../services/internal/info.service";
 export class InternalComponent implements OnInit {
   constructor(public infoService:InfoService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    document.getElementById('internal-active').style.display = 'inherit';
+  }
 }

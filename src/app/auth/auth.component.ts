@@ -33,6 +33,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    document.getElementById('internal-active').style.display = 'contents';
   }
   ngAfterViewInit() {}
   googleLogin() {

@@ -1,4 +1,4 @@
-<div class="flex flex-wrap margin-left-30">
+
 <div class="container">
   <div class="header-div">
   <div class="header" (click)="backToTenderList()">
@@ -149,21 +149,4 @@
     class="pdf-view"
     (click)="uploadFile($event)"
   ></app-pdf-view> -->
-</div>
-<div class="tabs">
-  <div class="logo-space"></div>
-  <div class="tab-div">
-  <div class="tab" *ngFor="let tab of tabs; let i = index" [ngClass]="{'tab-active': tab.Flag}" >
-    <div class="tab-name" (click)="tabSwitch(i)">{{ tab.name }}<div class="tab-arrow" *ngIf="tab.sub">
-      <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon></div> </div>
-    <div class="tab-sub-div" >
-      <div class="sub-div" *ngIf="tab.Flag">
-      <div class="sub"  *ngFor="let sub of tab.sub">
-{{ sub }}
-      </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
 </div>

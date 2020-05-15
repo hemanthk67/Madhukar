@@ -5,7 +5,8 @@
     // width: 100%;
   }
   .internal {
-    // width: 100%;
+    display: contents;
+    margin-left: 230px;
   }
 }
 ::ng-deep app-auth {
@@ -13,4 +14,6 @@
 }
 ::ng-deep ng-component {
   width: 100%;
+  padding-right: 180px;
 }
+

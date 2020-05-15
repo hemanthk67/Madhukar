@@ -1,0 +1,26 @@
+<div class="nav">
+<app-logo class="logo" [type]="'internal-page'"></app-logo>
+<div class="tabs">
+    <div class="tab-div">
+    <div class="tab" *ngFor="let tab of authService.rightTabs; let i = index" [ngClass]="{'tab-active': tab.Flag}" (click)="tabSwitch(i)" >
+      <div class="tab-name"   [ngClass]="{'hide': tab.Flag}">{{ tab.name }}</div>
+        <div class="tab-message"  [ngClass]="{'hide': tab.Flag}">
+          {{ tab.message }}
+        </div>
+
+      <div class="tab-sub-div" >
+        <div class="sub-div" *ngIf="tab.Flag">
+        <div class="sub"  *ngFor="let sub of tab.sub">
+  <div class="sub-small-name">{{ sub.smallName }} </div>
+  <div class="sub-name">{{ sub.name }}</div>
+        </div>
+        <div class="sub"  *ngIf="tab.sub.length > 4">
+          <mat-icon class="right-arrow" svgIcon="right-arrow"></mat-icon>
+          <div class="sub-name">ALL </div>
+                </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

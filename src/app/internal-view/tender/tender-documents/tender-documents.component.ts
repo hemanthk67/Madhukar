@@ -330,12 +330,7 @@ export class TenderDocumentsComponent implements OnInit {
     greetings.append("div").text("Yours faithfully,");
   }
   // end of covering letter
-   //tabs function
-   tabSwitch(index) {
-if(this.tabs[index].sub) {
-  this.tabs[index].Flag = !this.tabs[index].Flag;
-}
-   }
+
   //start of needed funtion
   pdfForPreviewFormate() {
     var toAdress = this.coveringLetter.toAddress.replace(/,/g, "," + "&#10;");
