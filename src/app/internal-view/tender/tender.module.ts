@@ -10,9 +10,10 @@ import { FormsModule } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
 import { UploadDocumentsComponent } from './tender-documents/documents/upload-documents/upload-documents.component';
 import { CoveringLetterComponent } from './tender-documents/documents/covering-letter/covering-letter.component';
+import { CompleteTenderComponent } from './tender-documents/documents/complete-tender/complete-tender.component';
 
 @NgModule({
-  declarations: [TenderComponent, NewTenderComponent, TenderDocumentsComponent, UploadDocumentsComponent, CoveringLetterComponent],
+  declarations: [TenderComponent, NewTenderComponent, TenderDocumentsComponent, UploadDocumentsComponent, CoveringLetterComponent, CompleteTenderComponent],
   imports: [
     CommonModule,
     TenderRoutingModule,

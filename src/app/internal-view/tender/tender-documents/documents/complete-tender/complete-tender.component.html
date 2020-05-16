@@ -1,0 +1,23 @@
+<div class="complete-tender-page">
+<div class="present-document" >
+    <div class="page-sub-header flex space-between" >
+     Attatchments
+    </div>
+    <div class="upload-documents">
+      <div class="files-div">
+        <div
+          class="files"
+          *ngFor="let file of tenderService.tender.files.uploadedDocuments; let i = index"
+        >
+          <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+          <p class="file-name">{{ file.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pricing">
+    <div class="page-sub-header flex space-between" >
+        Pricing
+       </div>
+  </div>
+</div>

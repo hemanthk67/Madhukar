@@ -5,8 +5,9 @@
     {{ tenderService.tender.organization }} - {{ tenderService.tender.TenderNo }}
   </div>
   </div>
-  <app-upload-documents class="app-upload-documents"></app-upload-documents>
+  <app-upload-documents class="app-upload-documents" *ngIf="false"></app-upload-documents>
   <app-covering-letter *ngIf="false"></app-covering-letter>
+  <app-complete-tender></app-complete-tender>
   <!-- <app-pdf-view
     class="pdf-view"
     (click)="uploadFile($event)"
