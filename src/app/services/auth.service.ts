@@ -13,6 +13,8 @@ import {
 import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 
+import { RoutingService } from 'src/app/services/routing.service';
+
 export interface Organization {
   fullname: string;
   name: string;
@@ -31,6 +33,7 @@ interface User {
 export class AuthService {
   rightTabs: any;
   user: Observable<User>;
+ public userData: any;
   OrganizationCollectionRef: AngularFirestoreDocument<Organization>;
   Organization: Observable<Organization>;
 
@@ -38,20 +41,11 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
-    private zone: NgZone
+    private zone: NgZone,
+    private routingService: RoutingService
   ) {
-    this.rightTabs = [{name:'Upload',
-    message: 'Upload and Attatch all documents required for the Tender' },
-    {name:'Create Documents',
-     sub:[
-       {name:'Covering Letter', smallName:'CL'},
-     {name:'No-Ban Declaration', smallName:'NBD'},
-     {name:'No Deviation', smallName:'ND'} ],
-     Flag: false,
-     message: 'Create documents in given formates' 
-    },
-     {name:'Complete Tender',
-     message: 'Upload and Attatch all documents required for the Tender' }];
+    this.RightTabs();
+    
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
@@ -70,23 +64,22 @@ export class AuthService {
 
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider).then(credential => {
-      this.login(credential.user);
+      this.login(credential.user, true);
     });
   }
 
-  login(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+  login(user: any, flag) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc<User>(
       `users/${user.uid}`
     );
     userRef.ref
       .get()
       .then(
         function(doc) {
+                    this.userData = doc.data();
           if (doc.exists) {
             this.zone.run(() => {
-              this.router.navigate([
-                { outlets: { primary: "Internal", approved: "Tender" } }
-              ]);
+            this.routingService.Login(this.userData, flag);
             });
           } else {
             this.updateUserData(user);
@@ -124,5 +117,21 @@ export class AuthService {
       this.router.navigate([{ outlets: { primary: "Auth", approved: null } }]);
       // this.router.navigate(["/Auth"]);
     });
+  }
+
+  // helping functions
+  RightTabs() {
+    this.rightTabs = [{name:'Upload',
+    message: 'Upload and Attatch all documents required for the Tender' },
+    {name:'Create Documents',
+     sub:[
+       {name:'Covering Letter', smallName:'CL'},
+     {name:'No-Ban Declaration', smallName:'NBD'},
+     {name:'No Deviation', smallName:'ND'} ],
+     Flag: false,
+     message: 'Create documents in given formates' 
+    },
+     {name:'Complete Tender',
+     message: 'Upload and Attatch all documents required for the Tender' }];
   }
 }

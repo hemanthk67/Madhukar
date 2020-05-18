@@ -10,53 +10,6 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./internal-nav-bar.component.scss"]
 })
 export class InternalNavBarComponent implements OnInit {
-  flags = {
-    categorySelected: [
-      { flag: false, subcategories: [false, false] },
-      { flag: false, subcategories: [false, false] },
-      { flag: false, subcategories: [false, false] }
-    ]
-  };
-  superCategories = [
-    {
-      title: "Tender",
-      role: "admin",
-      subcategories: [
-        {
-          title: "Tender List",
-          path: "Tender"
-        },
-        {
-          title: "New Tender Form",
-          path: "Tender/NewTender"
-        },
-        {
-          title: "Tender Documents",
-          path: "Tender/TenderDocuments"
-        }
-      ]
-    },
-    {
-      title: "Purchase",
-      role: "purchase",
-      subcategories: [
-        {
-          title: "Raise P.O",
-          path: "Production/Po"
-        }
-      ]
-    },
-    {
-      title: "Production",
-      role: "production",
-      subcategories: [
-        {
-          title: "Raise P.O",
-          path: "Production/Po"
-        }
-      ]
-    }
-  ];
   categories: any;
   constructor(
     public Auth: AuthService,
@@ -64,13 +17,10 @@ export class InternalNavBarComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer
   ) {
-    this.categories = this.superCategories;
-    for (let i = 0; i < this.categories.length; i++) {
-      this.flags.categorySelected[i].flag = false;
-      for (let j = 0; j < this.categories[i].subcategories.length; j++) {
-        this.flags.categorySelected[i].subcategories[j] = false;
-      }
+    if(!this.Auth.userData) {
+      this.Auth.user.subscribe(value => this.Auth.login(value, true));
     }
+    this.categories = this.RoutingServices.leftNavData;
     iconRegistry.addSvgIcon(
       "arrow",
       sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-spiral.svg")
@@ -81,30 +31,10 @@ export class InternalNavBarComponent implements OnInit {
   }
 
   categoryrSelected(i) {
-    console.log(i);
-    this.flags.categorySelected[i].flag = !this.flags.categorySelected[i].flag;
+    this.categories[i].flag = !this.categories[i].flag;
     // this.RoutingServices.tender(this.flags.categorySelected[i]);
   }
   subCategoryrSelected(valuei, valuej) {
-    for (let i = 0; i < this.flags.categorySelected.length; i++) {
-      if (i === valuei) {
-        this.flags.categorySelected[i].flag = true;
-      } else {
-        this.flags.categorySelected[i].flag = false;
-      }
-      for (
-        let j = 0;
-        j < this.flags.categorySelected[i].subcategories.length;
-        j++
-      ) {
-        if (i == valuei && j == valuej) {
-          console.log;
-          this.flags.categorySelected[i].subcategories[j] = true;
-        } else {
-          this.flags.categorySelected[i].subcategories[j] = false;
-        }
-      }
-    }
     this.RoutingServices.tender(
       this.categories[valuei].subcategories[valuej].path
     );

@@ -25,7 +25,7 @@ const routes: Routes = [
     outlet: "approved"
   },
   {
-    path: "production",
+    path: "Production",
     loadChildren: () =>
       import("./internal-view/production/production.module").then(
         m => m.ProductionModule
