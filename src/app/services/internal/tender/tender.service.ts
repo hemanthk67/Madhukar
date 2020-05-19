@@ -55,7 +55,9 @@ export class TenderService {
       tenderDocuments:[],
 uploadedDocuments:[]
     },
-    formatedDocuments: []
+    formatedDocuments: [],
+    itemsPrice:[],
+    itemsTotalPrice:0
   };
 public data;
 public originalData = [];
@@ -110,7 +112,6 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
   // function for attatching documents
   attatchDocuments() {
     this.setTenderData(this.tender);
-    console.log(this.originalData);
     for(let i =0; i < this.originalData.length; i++) {
       if(this.originalData[i].TenderNo == this.tender.TenderNo) {
         this.originalData[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
@@ -118,7 +119,6 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
         break;
       }
     }
-    console.log(this.originalData);
   }
   // function to set upload new data
   setTenderData(data) {

@@ -19,5 +19,53 @@
     <div class="page-sub-header flex space-between" >
         Pricing
        </div>
+       <div class="item-prices-div">
+         <div class="item-prices-table">
+          <div class="item-price-head">
+            <div class="item-discription"> Discription</div>
+            <div class="item-price"> Price per Item</div>
+            <div class="item-frieght-charges"> Frieght Charges</div>
+            <div class="item-other-charges"> Other Charges</div>
+            <div class="gst"> Gst </div>
+            <div class="qty"> Qty </div>
+            <div class="total">Total( Excl Gst )</div>
+            <div class="total-with-gst">Total( Incl Gst )</div>
+          </div>
+           <div class="item-price-div" *ngFor="let item of items;let i=index">
+             <div class="item-discription">{{ items[i].discription }}</div>
+             <div class="item-price">
+               <input type="number" class="item-price-input"  [(ngModel)]="items[i].pricePerItem" (keyup)="addPrice(i)" />
+             </div>
+             <div class="item-frieght-charges">
+              <input type="number" class="frieght-charges-input"  [(ngModel)]="items[i].frieghtCharges" (keyup)="addPrice(i)" />
+             </div>
+             <div class="item-other-charges">
+              <input type="number" class="item-other-charges-input"  [(ngModel)]="items[i].otherCharges" (keyup)="addPrice(i)" />
+             </div>
+             <div class="gst">
+              <input type="number" class="gst-input"  [(ngModel)]="items[i].gst" (keyup)="addPrice(i)"/>
+             </div>
+            <div class="qty"> 
+              <input type="number" class="qty-input"  [(ngModel)]="items[i].quantity" (keyup)="addPrice(i)"/> </div>
+            <div class="total">
+              <input type="number" class="total-input" [(ngModel)]="items[i].total" disabled/>
+            </div>
+            <div class="total-with-gst">
+              <input type="number" class="total-with-gst-input" [(ngModel)]="items[i].totalWithGst" disabled/>
+            </div>
+           </div>
+           <div class="item-price-head margin-top-15">
+            <div class="item-total-text">Total Price</div>
+            <div class="total margin-left-5">
+              <input type="number" class="total-input" [(ngModel)]="subTotal" disabled/>
+            </div>
+            <div class="total-with-gst  margin-left-5">
+              <input type="number" class="total-with-gst-input" [(ngModel)]="subTotalWithGst" disabled/></div>
+          </div>
+         </div>
+       </div>
+  </div>
+  <div class="submission">
+    <div class="submission-submit" (click)="submit()"> Submission </div>
   </div>
 </div>
