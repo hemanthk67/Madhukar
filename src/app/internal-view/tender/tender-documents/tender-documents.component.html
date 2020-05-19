@@ -6,8 +6,8 @@
   </div>
   </div>
   <app-upload-documents class="app-upload-documents" *ngIf="routingService.rightTabs[0].flag"></app-upload-documents>
-  <app-complete-tender *ngIf="routingService.rightTabs[2].flag"></app-complete-tender>
-  <app-covering-letter *ngIf="routingService.rightTabs[1].sub[0].flag"></app-covering-letter>
+  <app-complete-tender *ngIf="routingService.rightTabs[1].flag"></app-complete-tender>
+  <!-- <app-covering-letter *ngIf="routingService.rightTabs[2].sub[0].flag"></app-covering-letter> -->
   <!-- <app-pdf-view
     class="pdf-view"
     (click)="uploadFile($event)"

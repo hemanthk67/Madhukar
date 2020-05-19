@@ -66,20 +66,21 @@ RightTab() {
   this.routingService.rightTabs = [{name:'Upload',
   message: 'Upload and Attatch all documents required for the Tender',
 flag: true },
-  {name:'Create Documents',
-   sub:[
-     {name:'Covering Letter', smallName:'CL',
-     flag: false},
-   {name:'No-Ban Declaration', smallName:'NBD',
-   flag: false},
-   {name:'No Deviation', smallName:'ND',
-   flag: false} ],
-   flag: false,
-   message: 'Create documents in given formates' 
-  },
    {name:'Complete Tender',
    message: 'Upload and Attatch all documents required for the Tender',
-   flag: false }];
+   flag: false }
+  //  ,{name:'Create Documents',
+  //  sub:[
+  //    {name:'Covering Letter', smallName:'CL',
+  //    flag: false},
+  //  {name:'No-Ban Declaration', smallName:'NBD',
+  //  flag: false},
+  //  {name:'No Deviation', smallName:'ND',
+  //  flag: false} ],
+  //  flag: false,
+  //  message: 'Create documents in given formates' 
+  // }
+];
 }
   //start of needed funtion
   backToTenderList() {

@@ -63,7 +63,7 @@ public data;
 public originalData = [];
 public currentTenderNo = 0;
 
-private pathBase = 'test';  // change to Tender once done with testing and ready for production
+private pathBase = 'Tender';  // change to Tender once done with testing and ready for production
   constructor(
     private afs: AngularFirestore,
     public pdfService: pdfFileService,

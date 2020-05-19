@@ -26,12 +26,14 @@ export class RoutingService {
           title: "New Tender Form",
           path: "Tender/NewTender",
           flag: false
-        },
-        {
-          title: "Tender Documents",
-          path: "Tender/TenderDocuments",
-          flag: false
-        }]
+        }
+        // ,
+        // {
+        //   title: "Tender Documents",
+        //   path: "Tender/TenderDocuments",
+        //   flag: false
+        // }
+      ]
       },
        purchase: {
           title: "Purchase",
@@ -61,6 +63,7 @@ export class RoutingService {
   constructor(private router: Router) {
     router.events.subscribe((val) => {
       if(val instanceof NavigationEnd) {
+        this.rightTabs = null;
         this.routAuth(val.url);
       }
     });
