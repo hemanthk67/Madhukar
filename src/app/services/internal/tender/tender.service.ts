@@ -26,7 +26,7 @@ class Upload {
 })
 export class TenderService {
   public tender = {
-    TenderNo: null,
+    number: null,
     organization: "",
     tenderMode: "online",
     tenderNumber: "",
@@ -80,8 +80,8 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
     await firebase.firestore().collection(this.pathBase).get()
       .then(querySnapshot => {
         querySnapshot.docs.forEach(doc => {
-          if(doc.data().TenderNo > this.currentTenderNo) {
-            this.currentTenderNo = doc.data().TenderNo;
+          if(doc.data().number > this.currentTenderNo) {
+            this.currentTenderNo = doc.data().number;
           }
         this.originalData.push(doc.data());
         markers.push(doc.data());
@@ -98,10 +98,10 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
   }
   // function to push new tender data
   pushTenderData(tenderData, files) {
-    tenderData.TenderNo = this.currentTenderNo + 1;
+    tenderData.number = this.currentTenderNo + 1;
     tenderData = this.uploadFile(files ,tenderData ,'tender-documents');
   this.setTenderData(tenderData);
-    this.currentTenderNo = tenderData.TenderNo;
+    this.currentTenderNo = tenderData.number;
     this.originalData.push({...tenderData});
     tenderData.startDateFormatted = this.dateFormatting(tenderData.startDate);
     tenderData.dueDateFormatted = this.dateFormatting(tenderData.dueDate);
@@ -113,7 +113,7 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
   attatchDocuments() {
     this.setTenderData(this.tender);
     for(let i =0; i < this.originalData.length; i++) {
-      if(this.originalData[i].TenderNo == this.tender.TenderNo) {
+      if(this.originalData[i].number == this.tender.number) {
         this.originalData[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
         this.data[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
         break;
@@ -123,7 +123,7 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
   // function to set upload new data
   setTenderData(data) {
     const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `${this.pathBase}/${data.TenderNo}`
+      `${this.pathBase}/${data.number}`
     );
     newUserRef.set(data, { merge: true });
   }
@@ -140,11 +140,11 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
       const currentFile = new Upload(file);
    TenderFile.name = file.name;
    if (type == 'upload-documents') {
-    TenderFile.path = this.pathBase + '/' + tender.TenderNo + '/uploadedFile/' + file.name;
+    TenderFile.path = this.pathBase + '/' + tender.number + '/uploadedFile/' + file.name;
     TenderFileArray.push(TenderFile);
     tender.files.uploadedDocuments.push(TenderFile); 
     } else if (type == 'tender-documents') {
-      TenderFile.path = this.pathBase + '/' + tender.TenderNo + '/' + file.name;
+      TenderFile.path = this.pathBase + '/' + tender.number + '/' + file.name;
     TenderFileArray.push(TenderFile);
       }
       this.pdfService.pushUpload(currentFile, TenderFile.path);
@@ -161,7 +161,7 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
     tenderData = this.uploadFile(files ,tenderData ,'upload-documents');
     this.setTenderData(tenderData);
     for(let i =0; i < this.originalData.length; i++) {
-      if(this.originalData[i].TenderNo == this.tender.TenderNo) {
+      if(this.originalData[i].number == this.tender.number) {
         this.originalData[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
         this.data[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
         break;
@@ -176,7 +176,7 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
    };
     const currentFile = new Upload(file);
  TenderFile.name = file.name;
- TenderFile.path = this.pathBase + '/' + tender.TenderNo + '/uploadedFile/' + file.name;
+ TenderFile.path = this.pathBase + '/' + tender.number + '/uploadedFile/' + file.name;
     this.pdfService.pushUpload(currentFile, TenderFile.path);
     this.infoService.setCommonDocumentData(file.name, TenderFile.path, type)
   }

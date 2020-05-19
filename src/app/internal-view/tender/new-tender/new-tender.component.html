@@ -36,6 +36,9 @@
                 class="org-name"
                 name="orgName"
                 [(ngModel)]="tender.organization"
+                [ngClass]="{
+                  'red-border': !flag.organization
+                }"
               >
                 <option value="BHEL - Bharat Heavy Electricals Limited"
                   >BHEL - Bharat Heavy Electricals Limited</option
@@ -54,6 +57,9 @@
               type="text"
               class="tender-number-input"
               [(ngModel)]="tender.tenderNumber"
+              [ngClass]="{
+                'red-border': !flag.tenderNumber
+              }"
               ngDefaultControl
             />
           </div>
@@ -63,6 +69,9 @@
               type="text"
               class="e-tender-number-input"
               [(ngModel)]="tender.eTenderNumber"
+              [ngClass]="{
+                'red-border': !flag.eTenderNumber
+              }"
               ngDefaultControl
             />
           </div>
@@ -80,7 +89,7 @@
             />
             <span class="calander"
               ><button>
-                <mat-icon class="calander-button" svgIcon="calander" (click)="calanderOpen('issueDate')"></mat-icon>
+                <mat-icon class="calander-button"  [ngClass]="{'red-color': !flag.issueDate}" svgIcon="calander" (click)="calanderOpen('issueDate')"></mat-icon>
               </button>
             </span>
             <app-calender class="app-calander" *ngIf="calanderFlag.issueDate" (dateEmit)='displayCounter($event)'></app-calender>
@@ -97,7 +106,7 @@
             />
             <span class="calander"
               ><button>
-                <mat-icon class="calander-button" svgIcon="calander" (click)="calanderOpen('startDate')"></mat-icon>
+                <mat-icon class="calander-button" [ngClass]="{'red-color': !flag.startDate}" svgIcon="calander" (click)="calanderOpen('startDate')"></mat-icon>
               </button>
             </span>
             <app-calender class="app-calander" *ngIf="calanderFlag.startDate" (dateEmit)='displayCounter($event)'></app-calender>
@@ -114,7 +123,7 @@
             />
             <span class="calander"
               ><button>
-                <mat-icon class="calander-button" svgIcon="calander" (click)="calanderOpen('dueDate')"></mat-icon>
+                <mat-icon class="calander-button" [ngClass]="{'red-color': !flag.dueDate}" svgIcon="calander" (click)="calanderOpen('dueDate')"></mat-icon>
               </button>
             </span>
             <app-calender class="app-calander" *ngIf="calanderFlag.dueDate" (dateEmit)='displayCounter($event)'></app-calender>

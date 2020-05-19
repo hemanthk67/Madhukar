@@ -32,6 +32,14 @@ export class NewTenderComponent implements OnInit {
     dueDate: false
   };
  tender:any;
+ flag = {
+  organization: true,
+  tenderNumber: true,
+  eTenderNumber: true,
+  issueDate: true,
+  startDate: true,
+  dueDate: true,
+ }
   tableHeaderTest = [
     { name: "Discription", width: "180px" },
     { name: "KVA", width: "70px" },
@@ -125,8 +133,6 @@ export class NewTenderComponent implements OnInit {
   }
   removeItems(value: any) {
     this.items.splice(value, 1);
-    // this.tender.items = this.items;
-    // console.log(this.tender);
   }
   specialItems(value: any) {
     this.items[value].special = !this.items[value].special;
@@ -146,23 +152,43 @@ export class NewTenderComponent implements OnInit {
   deleteFile(value: any) {
     this.allFiles.splice(value, 1);
   }
-//   public uploadFile() {
-//     if(this.allFiles) {
-//     for (let i = 0; i < this.allFiles.length; i++) {
-//       let file = this.allFiles[i];
-//       this.currentFile = new Upload(file);
-// this.tender.files[i].name = file.name;
-// this.tender.files[i].path = 'tender/' + file.name
-//       // this.pdfService.pushUpload(this.currentFile);
-//     }
-//   }
-//     console.log(this.tender);
-//     console.log(this.allFiles)
-//   }
 
   submit() {
+
+    if (this.tender.organization == '') {
+this.flag.organization = false;
+    } else {
+      this.flag.organization = true;
+    }
+    if (this.tender.tenderNumber == '') {
+      this.flag.tenderNumber = false;
+    } else {
+      this.flag.tenderNumber = true;
+    }
+    if (this.tender.eTenderNumber == '') {
+      this.flag.eTenderNumber = false;
+    } else {
+      this.flag.eTenderNumber = true;
+    }
+    if (this.tender.issueDate == '') {
+      this.flag.issueDate = false;
+    } else {
+      this.flag.issueDate = true;
+    }
+    if (this.tender.startDate == '') {
+      this.flag.startDate = false;
+    } else {
+      this.flag.startDate = true;
+    }
+    if (this.tender.dueDate == '') {
+      this.flag.dueDate = false;
+    } else {
+      this.flag.dueDate = true;
+    }
     this.tender.items = this.items;
-    this.tenderService.pushTenderData(this.tender,this.allFiles);
+    if(this.flag.organization && this.flag.tenderNumber && this.flag.eTenderNumber && this.flag.issueDate && this.flag.startDate && this.flag.dueDate) {
+      this.tenderService.pushTenderData(this.tender,this.allFiles);
+    }
   }
 
   displayCounter(value) {
