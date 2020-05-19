@@ -31,7 +31,6 @@ interface User {
   providedIn: "root"
 })
 export class AuthService {
-  rightTabs: any;
   user: Observable<User>;
  public userData: any;
   OrganizationCollectionRef: AngularFirestoreDocument<Organization>;
@@ -44,7 +43,6 @@ export class AuthService {
     private zone: NgZone,
     private routingService: RoutingService
   ) {
-    this.RightTabs();
     
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -120,18 +118,5 @@ export class AuthService {
   }
 
   // helping functions
-  RightTabs() {
-    this.rightTabs = [{name:'Upload',
-    message: 'Upload and Attatch all documents required for the Tender' },
-    {name:'Create Documents',
-     sub:[
-       {name:'Covering Letter', smallName:'CL'},
-     {name:'No-Ban Declaration', smallName:'NBD'},
-     {name:'No Deviation', smallName:'ND'} ],
-     Flag: false,
-     message: 'Create documents in given formates' 
-    },
-     {name:'Complete Tender',
-     message: 'Upload and Attatch all documents required for the Tender' }];
-  }
+
 }

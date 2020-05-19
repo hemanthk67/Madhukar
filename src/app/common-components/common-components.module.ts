@@ -5,20 +5,23 @@ import { PdfPreviewComponent } from "./internal/pdf-preview/pdf-preview.componen
 import { MatIconModule } from "@angular/material/icon";
 import { LogoComponent } from "./logo/logo.component";
 import { CalenderComponent } from "./internal/calender/caleander.component";
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 
 @NgModule({
   declarations: [
     PdfViewComponent,
     PdfPreviewComponent,
     LogoComponent,
-    CalenderComponent
+    CalenderComponent,
+    LoadingScreenComponent
   ],
   imports: [CommonModule, MatIconModule],
   exports: [
     PdfViewComponent,
     PdfPreviewComponent,
     LogoComponent,
-    CalenderComponent
+    CalenderComponent,
+    LoadingScreenComponent
   ]
 })
 export class CommonComponentsModule {}

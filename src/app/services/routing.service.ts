@@ -6,8 +6,10 @@ import { Router, NavigationEnd } from "@angular/router";
   providedIn: "root"
 })
 export class RoutingService {
+  rightTabs: any;
   presentPath: any;
   userData: any;
+  loadingFlag = false;
   leftNavData = [];
   routs = {
     tender:{
@@ -92,6 +94,7 @@ export class RoutingService {
     this.router.navigate([{ outlets: { approved: path } }]);
   }
   tenderUploadDocuments() {
+    this.loadingFlag = true;
     this.router.navigate([
       { outlets: { primary: "Internal", approved: "Tender/TenderDocuments" } }
     ]);
@@ -101,7 +104,7 @@ export class RoutingService {
       { outlets: { primary: "Internal", approved: "Tender/TenderList" } }
     ]);
   }
-
+  
   Login(user, Flag) {
     this.userData = user;
     this.sideNavData();

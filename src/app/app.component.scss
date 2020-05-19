@@ -9,6 +9,12 @@
     margin-left: 230px;
   }
 }
+app-loading-screen {
+  position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(257,257,257,.8);
+}
 ::ng-deep app-auth {
   width: 100%;
 }

@@ -22,7 +22,7 @@ class Upload {
   styleUrls: ['./upload-documents.component.scss']
 })
 export class UploadDocumentsComponent implements OnInit {
-
+  onceFlag = true;
   allFiles: any;
   uploadFile: FileList;
   presentDocumentsFlag = true;
@@ -145,6 +145,7 @@ return 0;
   }
   attatchDocuments() {
     this.tenderService.attatchDocuments();
+    this.onceFlag = false;
   }
   commonAddDocuments() {
     this.commonDocumentsFlag = !this.commonDocumentsFlag;

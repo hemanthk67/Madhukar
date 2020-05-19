@@ -26,7 +26,6 @@ class Upload {
 })
 export class TenderDocumentsComponent implements OnInit {
   @Output() testing: any;
-  test: any;
   tabs = [{name:'Upload'},
   {name:'Create Documents',
    sub:['Covering Letter', 'No-Ban Declaration'],
@@ -55,9 +54,33 @@ export class TenderDocumentsComponent implements OnInit {
   }
 
   ngOnInit() {
- 
+    this.RightTab();
+    setTimeout(
+        function() {
+          this.routingService.loadingFlag = false;
+        }.bind(this),
+        200
+      );
   }
-
+RightTab() {
+  this.routingService.rightTabs = [{name:'Upload',
+  message: 'Upload and Attatch all documents required for the Tender',
+flag: true },
+  {name:'Create Documents',
+   sub:[
+     {name:'Covering Letter', smallName:'CL',
+     flag: false},
+   {name:'No-Ban Declaration', smallName:'NBD',
+   flag: false},
+   {name:'No Deviation', smallName:'ND',
+   flag: false} ],
+   flag: false,
+   message: 'Create documents in given formates' 
+  },
+   {name:'Complete Tender',
+   message: 'Upload and Attatch all documents required for the Tender',
+   flag: false }];
+}
   //start of needed funtion
   backToTenderList() {
 this.routingService.tenderList();

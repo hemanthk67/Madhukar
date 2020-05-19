@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { CommonComponentsModule } from "src/app/common-components/common-components.module";
 
 import { MatIconRegistry } from "@angular/material/icon";
@@ -7,6 +6,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 
 import { TenderService } from "../../services/internal/tender/tender.service";
 import { pdfFileService } from "src/app/services/pdfFile.service";
+import { RoutingService } from 'src/app/services/routing.service';
 
 @Component({
   selector: "app-tender",
@@ -19,8 +19,8 @@ export class TenderComponent implements OnInit {
     private pdf:pdfFileService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    private router: Router,
-    public tenderService: TenderService) {
+    public tenderService: TenderService,
+    private routingService: RoutingService) {
       iconRegistry.addSvgIcon(
         "down-spiral",
         sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-spiral.svg")
@@ -51,8 +51,6 @@ export class TenderComponent implements OnInit {
   }
   documentprep(index) {
     this.tenderService.tender = this.tenderService.originalData[this.tenderService.originalData.length - index - 1]; 
-    this.router.navigate([
-      { outlets: { primary: "Internal", approved: "Tender/TenderDocuments" } }
-    ]);
+    this.routingService.tenderUploadDocuments();
   }
 }

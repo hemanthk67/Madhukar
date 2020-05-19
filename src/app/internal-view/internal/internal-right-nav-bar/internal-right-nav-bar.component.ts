@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 
-import { AuthService } from 'src/app/services/auth.service';
+import { RoutingService } from 'src/app/services/routing.service';
 
 @Component({
   selector: 'app-internal-right-nav-bar',
@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class InternalRightNavBarComponent implements OnInit {
 
-  constructor(public authService: AuthService,
+  constructor(public routingService: RoutingService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer) {
       iconRegistry.addSvgIcon(
@@ -24,16 +24,40 @@ export class InternalRightNavBarComponent implements OnInit {
   ngOnInit() {
   }
    //tabs function
-   tabSwitch(index) {
-    if(this.authService.rightTabs[index].sub) {
-      this.authService.rightTabs[index].Flag = !this.authService.rightTabs[index].Flag;
-      setTimeout(
-        function() {
-          this.authService.rightTabs[index].Flag = !this.authService.rightTabs[index].Flag;
-        }.bind(this),
-        6000
-      );
+  tabSwitch(index, subIndex) {
+    if(this.routingService.rightTabs[index].sub) {
+      if(this.routingService.rightTabs[index].flag) {
+       this.setFlag(index, subIndex, true);
+      } else {
+        this.routingService.rightTabs[index].flag = !this.routingService.rightTabs[index].flag;
+      }
+    this.resetFlag(index);
+    } else {
+      this.setFlag(index, subIndex, false);
     }
-
-       }
+  }
+  resetFlag(index) {
+        setTimeout(
+          function() {
+            this.routingService.rightTabs[index].flag = !this.routingService.rightTabs[index].flag;
+          }.bind(this),
+          6000
+        );
+  }
+  setFlag(index , subIndex , subFlag) {
+for(let k = 0; k <this.routingService.rightTabs.length; k++) {
+  this.routingService.rightTabs[k].flag = false;
+  if(this.routingService.rightTabs[k].sub) {
+    for(let l = 0 ; l < this.routingService.rightTabs[k].sub.length; l++) {
+      this.routingService.rightTabs[k].sub[l].flag = false
+    }
+  }
+}
+if(subFlag) {
+this.routingService.rightTabs[index].sub[subIndex].flag = true;
+} else {
+  this.routingService.rightTabs[index].flag = true;
+}
+  }
+      
 }

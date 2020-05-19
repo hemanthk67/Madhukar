@@ -102,7 +102,9 @@
 }
 .hide {
   height: 0px !important;
+  min-height: 0px !important;
   margin: 0 !important;
   padding: 0 !important;
   overflow: hidden;
+  border: none !important;
 }
