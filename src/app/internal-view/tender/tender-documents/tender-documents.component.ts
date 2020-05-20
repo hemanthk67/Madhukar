@@ -36,7 +36,7 @@ export class TenderDocumentsComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public tenderService: TenderService,
-    private routingService: RoutingService) {
+    public routingService: RoutingService) {
       iconRegistry.addSvgIcon(
         "down-spiral",
         sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-spiral.svg")
