@@ -4,6 +4,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { TenderService } from "../../../services/internal/tender/tender.service";
 
 import { InfoService } from "../../../services/internal/info.service";
+import { RoutingService } from 'src/app/services/routing.service';
 
 class Upload {
   $key: string;
@@ -69,7 +70,8 @@ export class NewTenderComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public tenderService: TenderService,
-    public infoService:InfoService
+    public infoService:InfoService,
+    private routingService: RoutingService
   ) {
     iconRegistry.addSvgIcon(
       "calander",
@@ -92,6 +94,40 @@ export class NewTenderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tenderService.tender = {
+      number: null,
+      organization: "",
+      tenderMode: "online",
+      tenderNumber: "",
+      eTenderNumber: "",
+      issueDate: "",
+      startDate: "",
+      dueDate: "",
+      status:"New Tender",
+      emd: {
+        exemption: true,
+        percentage: true,
+        amount: ""
+      },
+      transactionFee: {
+        exemption: true,
+        percentage: true,
+        amount: ""
+      },
+      documentCost: {
+        exemption: true,
+        percentage: true,
+        amount: ""
+      },
+      items: [],
+      files: {
+        tenderDocuments:[],
+  uploadedDocuments:[]
+      },
+      formatedDocuments: [],
+      itemsPrice:[],
+      itemsTotalPrice:0
+    };
     this.tender = this.tenderService.tender;
   }
   tenderModeSelection(value: any) {
@@ -188,6 +224,7 @@ this.flag.organization = false;
     this.tender.items = this.items;
     if(this.flag.organization && this.flag.tenderNumber && this.flag.eTenderNumber && this.flag.issueDate && this.flag.startDate && this.flag.dueDate) {
       this.tenderService.pushTenderData(this.tender,this.allFiles);
+      this.routingService.tenderList();
     }
   }
 

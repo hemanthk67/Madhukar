@@ -120,6 +120,7 @@ return 0;
     }
     }
     this.tenderService.uploadCommonFile(this.commonFile, this.tenderService.tender, this.commonDocumentType);
+    this.commonFile = null;
     this.commonDocumentsFlag = !this.commonDocumentsFlag;
   }
   onExperienceChange(i,name) {
@@ -158,6 +159,9 @@ return 0;
     }
   }
   public uploadFiles() {
+    
+    this.presentDocumentsFlag = !this.presentDocumentsFlag;
     this.tenderService.uploadManuualFiles(this.tenderService.tender ,this.allFiles);
+    this.allFiles = [];
   }
 }

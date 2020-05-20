@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TenderService } from 'src/app/services/internal/tender/tender.service';
+import { RoutingService } from 'src/app/services/routing.service';
 
 @Component({
   selector: 'app-complete-tender',
@@ -10,7 +11,8 @@ export class CompleteTenderComponent implements OnInit {
 items = [];
 subTotal: any;
 subTotalWithGst: any;
-  constructor(public tenderService: TenderService) { }
+  constructor(public tenderService: TenderService,
+    private routingService: RoutingService) { }
 
   ngOnInit() {
     this.subTotal=0;
@@ -63,6 +65,7 @@ if(this.items[index].otherCharges) {
     this.tenderService.tender.itemsTotalPrice =  this.subTotal;
     this.tenderService.tender.status =  'Submitted';
     this.tenderService.setTenderData(this.tenderService.tender);
+    this.routingService.tenderList();
   }
 
 }

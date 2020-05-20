@@ -38,17 +38,17 @@ export class TenderService {
     emd: {
       exemption: true,
       percentage: true,
-      amount: "12"
+      amount: ""
     },
     transactionFee: {
       exemption: true,
       percentage: true,
-      amount: "122"
+      amount: ""
     },
     documentCost: {
       exemption: true,
       percentage: true,
-      amount: "123"
+      amount: ""
     },
     items: [],
     files: {

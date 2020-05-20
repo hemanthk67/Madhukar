@@ -94,18 +94,39 @@ export class RoutingService {
   }
   }
   tender(path: any) {
+    this.loadingFlag = true;
     this.router.navigate([{ outlets: { approved: path } }]);
+    setTimeout(
+      function() {
+        this.loadingFlag = false;
+      }.bind(this),
+      500
+    );
   }
   tenderUploadDocuments() {
     this.loadingFlag = true;
     this.router.navigate([
-      { outlets: { primary: "Internal", approved: "Tender/TenderDocuments" } }
+      { outlets: { approved: "Tender/TenderDocuments" } }
     ]);
+    setTimeout(
+      function() {
+        this.loadingFlag = false;
+      }.bind(this),
+      500
+    );
   }
   tenderList() {
+    
+    this.loadingFlag = true;
     this.router.navigate([
-      { outlets: { primary: "Internal", approved: "Tender/TenderList" } }
+      { outlets: {  approved: "Tender/TenderList" } }
     ]);
+    setTimeout(
+      function() {
+        this.loadingFlag = false;
+      }.bind(this),
+      500
+    );
   }
   
   Login(user, Flag) {
