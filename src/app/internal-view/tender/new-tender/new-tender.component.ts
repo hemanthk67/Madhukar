@@ -79,7 +79,7 @@ export class NewTenderComponent implements OnInit {
     sanitizer: DomSanitizer,
     public tenderService: TenderService,
     public infoService:InfoService,
-    private routingService: RoutingService
+    public routingService: RoutingService
   ) {
     iconRegistry.addSvgIcon(
       "calander",
