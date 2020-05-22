@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 // import { AngularFirestoreModule } from 'angularfire2/firestore';
 // import { AngularFireModule } from 'angularfire2';
@@ -25,7 +26,7 @@ import { CommonComponentsModule } from "./common-components/common-components.mo
     AngularFireAuthModule,
     CommonComponentsModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -44,6 +44,14 @@ setCommonDocumentData( name, path, type) {
   newUserRef.set(this.originalCommonDocuments, { merge: true });
   this.commonDocuments.push(data);
 }
+addOrganizationName(data) {
+  const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
+    `${this.pathBase}/Organization`
+  );
+  this.originalOrganizationData.data.push(data);
+  newUserRef.set(this.originalOrganizationData, { merge: true });
+  this.organization.push({...data});
+}
   async getMarkers() {
     await firebase.firestore().collection(this.pathBase).get()
       .then(querySnapshot => {

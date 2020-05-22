@@ -40,12 +40,9 @@
                   'red-border': !flag.organization
                 }"
               >
-                <option value="BHEL - Bharat Heavy Electricals Limited"
-                  >BHEL-EDN</option
+                <option *ngFor = "let org of infoService.organization" [value]="org.fullName"
+                  >{{ org.fullName}}</option
                 >
-                <option value="saab">Saab</option>
-                <option value="fiat">Fiat</option>
-                <option value="audi">Audi</option>
               </select>
             </div>
           </div>
@@ -391,5 +388,31 @@
         <div class="submit-button" (click)="submit()">Submit For Approval</div>
       </div>
     </div>
+  </div>
+</div>
+<div class="add-organization" *ngIf = "this.routingService.rightTabs[0].flag">
+  <div class="add-organization-div">
+    <div class="add-organization-header">
+      <div class="cross"  (click)="addOrganizationBack()">X</div>
+    </div>
+    <div class="add-organization-body">
+    <div class="add-organization-head">
+      Add Organization
+    </div>
+    <div class="add-organization-inputs">
+      <div class="full-name-div">
+        <div class="lables">Full Name</div>
+        <input class="name-input" type="text" [ngClass]="{'red-border': !addOrganizationFlag.fullName }" [(ngModel)]="newOrganizationName.fullName"/>
+      </div>
+      <div class="add-organization-dash">  &ndash;  </div>
+      <div class="small-name-div">
+        <div class="lables">Short Form</div>
+        <input class="name-input" type="text" [ngClass]="{'red-border': !addOrganizationFlag.name }" [(ngModel)]="newOrganizationName.name"/>
+      </div> 
+    </div>
+    <div class="add-organization-submit">
+      <div class="add-organization-submit-button"  (click)="addOrganization()">Submit</div>
+    </div>
+  </div>
   </div>
 </div>

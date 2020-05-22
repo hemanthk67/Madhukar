@@ -27,6 +27,14 @@ export class NewTenderComponent implements OnInit {
   testFile: FileList;
   allFiles: any;
   currentFile: Upload;
+  newOrganizationName = {
+    fullName: '',
+    name: ''
+  };
+  addOrganizationFlag= {
+    fullName: true,
+    name: true
+  };
   calanderFlag = {
     issueDate: false,
     startDate: false,
@@ -94,6 +102,7 @@ export class NewTenderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.RightTab();
     this.tenderService.tender = {
       number: null,
       organization: "",
@@ -129,6 +138,23 @@ export class NewTenderComponent implements OnInit {
       itemsTotalPrice:0
     };
     this.tender = this.tenderService.tender;
+  }
+  RightTab() {
+    this.routingService.rightTabs = [{name:'Add Organizaion',
+    message: 'Add New Organization to be used in the Tenders',
+  flag: false }
+    //  ,{name:'Create Documents',
+    //  sub:[
+    //    {name:'Covering Letter', smallName:'CL',
+    //    flag: false},
+    //  {name:'No-Ban Declaration', smallName:'NBD',
+    //  flag: false},
+    //  {name:'No Deviation', smallName:'ND',
+    //  flag: false} ],
+    //  flag: false,
+    //  message: 'Create documents in given formates' 
+    // }
+  ];
   }
   tenderModeSelection(value: any) {
     this.tender.tenderMode = value;
@@ -260,5 +286,23 @@ this.calanderFlag.issueDate = false;
         this.calanderFlag.startDate = false;
         this.calanderFlag.issueDate = !this.calanderFlag.issueDate;
             } 
+  }
+  
+  addOrganizationBack() {
+    this.routingService.rightTabs[0].flag = !this.routingService.rightTabs[0].flag;
+  }
+  addOrganization() {
+if(this.newOrganizationName.fullName != '') {
+if(this.newOrganizationName.name != '') {
+  this.infoService.addOrganizationName(this.newOrganizationName);
+  this.newOrganizationName.fullName = '';
+  this.newOrganizationName.name = '';
+  this.routingService.rightTabs[0].flag = !this.routingService.rightTabs[0].flag;
+} else {
+  this.addOrganizationFlag.name = false;
+}
+}  else {
+  this.addOrganizationFlag.fullName = false;
+}
   }
 }
