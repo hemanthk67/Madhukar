@@ -8,6 +8,7 @@ import {
 
 import { pdfFileService } from '../../pdfFile.service';
 import { InfoService } from "../../../services/internal/info.service";
+import { RoutingService } from '../../routing.service';
 
 class Upload {
   $key: string;
@@ -67,7 +68,8 @@ private pathBase = 'Tender';  // change to Tender once done with testing and rea
   constructor(
     private afs: AngularFirestore,
     public pdfService: pdfFileService,
-    public infoService:InfoService) {
+    public infoService:InfoService,
+    private routingService: RoutingService) {
     this.getMarkers().then(data => {
       this.data = data;
     });
@@ -119,6 +121,23 @@ private pathBase = 'Tender';  // change to Tender once done with testing and rea
         break;
       }
     }
+  }
+  // tender submission
+  tenderSubmission() {
+    this.setTenderData(this.tender);
+    for(let i =0; i < this.data.length; i++ ) {
+     if( this.data[i].number == this.tender.number ) {
+      this.data[i] = {...this.tender};
+      this.data[i].startDateFormatted = this.dateFormatting(this.data[i].startDate);
+      this.data[i].dueDateFormatted = this.dateFormatting(this.data[i].dueDate);
+      this.data[i].issueDateFormatted = this.dateFormatting(this.data[i].issueDate);
+     }
+     if( this.originalData[i].number == this.tender.number ) {
+      this.originalData[i] = {...this.tender}; 
+     }
+    }
+    this.routingService.tenderList();
+  
   }
   // function to set upload new data
   setTenderData(data) {
