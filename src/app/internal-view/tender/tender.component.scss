@@ -173,6 +173,13 @@ font-size: 24px;
                 display: flex;
                 .edit-div {
                     width: 10%;
+                    font-size: 14px;
+                            color: #727272;
+                            cursor: pointer;
+                            span {
+                                position: relative;
+                                top: -8px;
+                            }
                 }
                 .approval-div {
                     width: 80%;

@@ -77,12 +77,13 @@
         </div>
         <div class="fee-items">
             <div class="emd-fee"><span class="blue-bold">EMD:</span> {{ tender.emd.amount }}</div>
-            <div class="transaction-cost-fee"><span class="blue-bold">Transaction-Fee:</span> {{ tender.eTenderNumber }}</div>
-            <div class="document-cost-fee"><span class="blue-bold">Document-Cost:</span> {{ tender.eTenderNumber }}</div>
+            <div class="transaction-cost-fee"><span class="blue-bold">Transaction-Fee:</span> {{ tender.transactionFee.amount }}</div>
+            <div class="document-cost-fee"><span class="blue-bold">Document-Cost:</span> {{ tender.documentCost.amount }}</div>
         </div>
         <div class="final-content">
-            <div class="edit-div">
-
+            <div class="edit-div" (click)="edit(i)">
+            <mat-icon class="down-sprial" svgIcon="edit-icon"></mat-icon>
+                <span>Edit</span>
             </div>
             <div class="approval-div">
                 <div class="div" *ngIf="tender.status == 'New Tender'">

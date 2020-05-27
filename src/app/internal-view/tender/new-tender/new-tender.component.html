@@ -159,7 +159,7 @@
           </div>
           <div class="emd-amount flex">
             <div class="amount" *ngIf="!tender.emd.percentage">Amount:</div>
-            <div class="amount" *ngIf="tender.emd.percentage">Perrcentage:</div>
+            <div class="amount" *ngIf="tender.emd.percentage">Percentage:</div>
             <Input
               type="number"
               class="amount-input"
@@ -378,7 +378,7 @@
             <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
             <mat-icon
               class="cloud-cross-icon"
-              svgIcon="cloud-cross-icon"
+              svgIcon="cloud-cross-icon" *ngIf="file.size"
             ></mat-icon>
             <p>{{ file.name }}</p>
           </div>

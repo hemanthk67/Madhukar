@@ -27,6 +27,8 @@ export class NewTenderComponent implements OnInit {
   testFile: FileList;
   allFiles: any;
   currentFile: Upload;
+  editFileRemove: any;
+  editFileAdd: any;
   newOrganizationName = {
     fullName: '',
     name: ''
@@ -103,41 +105,11 @@ export class NewTenderComponent implements OnInit {
 
   ngOnInit() {
     this.RightTab();
-    this.tenderService.tender = {
-      number: null,
-      organization: "",
-      tenderMode: "online",
-      tenderNumber: "",
-      eTenderNumber: "",
-      issueDate: "",
-      startDate: "",
-      dueDate: "",
-      status:"New Tender",
-      emd: {
-        exemption: true,
-        percentage: true,
-        amount: ""
-      },
-      transactionFee: {
-        exemption: true,
-        percentage: true,
-        amount: ""
-      },
-      documentCost: {
-        exemption: true,
-        percentage: true,
-        amount: ""
-      },
-      items: [],
-      files: {
-        tenderDocuments:[],
-  uploadedDocuments:[]
-      },
-      formatedDocuments: [],
-      itemsPrice:[],
-      itemsTotalPrice:0
-    };
-    this.tender = this.tenderService.tender;
+    this.tender = this.tenderService.newTender;
+    if (this.tenderService.editFlag) {
+      this.items = this.tender.items;
+      this.allFiles = this.tender.files.tenderDocuments;
+    }
   }
   RightTab() {
     this.routingService.rightTabs = [{name:'Add Organizaion',
@@ -188,8 +160,8 @@ export class NewTenderComponent implements OnInit {
       type: "",
       qty: "",
       standard: "",
-      destination: "",
-      distance: "",
+      destination: this.items[this.items.length -1 ].destination,
+      distance: this.items[this.items.length -1 ].distance,
       special: false
     });
   }
@@ -201,18 +173,53 @@ export class NewTenderComponent implements OnInit {
   }
 
   detectFile(event) {
+    
     this.testFile = event.target.files;
+    console.log(this.testFile);
     if (this.allFiles) {
       for (let i = 0; i < this.testFile.length; i++) {
         this.allFiles[this.allFiles.length] = this.testFile[i];
-      }
+    if(this.tenderService.editFlag) { 
+      if(this.editFileAdd) { 
+      this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
+      } else {
+      this.editFileAdd = Array.from(this.testFile);
+    }
+    }
+ }
     } else {
       this.allFiles = Array.from(this.testFile);
+      if(this.tenderService.editFlag) {     
+        if(this.editFileAdd) {    
+      for (let i = 0; i < this.testFile.length; i++) {
+        this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
+      }
+        } else {
+        this.editFileAdd = Array.from(this.testFile);
+      }
     }
   }
-
+  }
   deleteFile(value: any) {
+    var editFile = true;
+    if (this.tenderService.editFlag) {
+      if(this.editFileAdd) {
+      for (let i =0; i < this.editFileAdd.length; i++) {
+        if(this.editFileAdd[i].name == this.allFiles[value].name) {
+          this.editFileAdd.splice(i, 1);
+          editFile = false;
+        }
+      }
+    }
+      if(editFile) {
+this.editFileRemove = this.allFiles[value];
+      } else {
     this.allFiles.splice(value, 1);
+      }
+      
+    } else {
+    this.allFiles.splice(value, 1);
+    }
   }
 
   submit() {
@@ -249,7 +256,14 @@ this.flag.organization = false;
     }
     this.tender.items = this.items;
     if(this.flag.organization && this.flag.tenderNumber && this.flag.eTenderNumber && this.flag.issueDate && this.flag.startDate && this.flag.dueDate) {
+      if(this.tenderService.editFlag) {
+        console.log(this.editFileAdd);
+        // console.log(this.allFiles);
+        this.tenderService.pushTenderData(this.tender,this.editFileAdd);
+        // this.tenderService.removeFiles(this.editFileRemove);
+      } else {
       this.tenderService.pushTenderData(this.tender,this.allFiles);
+      }
       this.routingService.tenderList();
     }
   }

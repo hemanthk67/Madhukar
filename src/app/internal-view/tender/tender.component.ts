@@ -29,6 +29,10 @@ export class TenderComponent implements OnInit {
           "pdf-icon",
           sanitizer.bypassSecurityTrustResourceUrl("assets/icons/pdf-icon.svg")
         );
+        iconRegistry.addSvgIcon(
+          "edit-icon",
+          sanitizer.bypassSecurityTrustResourceUrl("assets/icons/edit-icon.svg")
+        );
   }
 
   ngOnInit() {}
@@ -52,5 +56,10 @@ export class TenderComponent implements OnInit {
   documentprep(index) {
     this.tenderService.tender = this.tenderService.originalData[this.tenderService.originalData.length - index - 1]; 
     this.routingService.tenderUploadDocuments();
+  }
+  edit(index) {
+    this.tenderService.newTender = this.tenderService.originalData[this.tenderService.originalData.length - index - 1]; 
+    this.tenderService.editFlag = true;
+    this.routingService.newTender();
   }
 }

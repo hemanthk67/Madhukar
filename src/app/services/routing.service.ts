@@ -128,6 +128,18 @@ export class RoutingService {
       500
     );
   }
+  newTender() {
+    this.loadingFlag = true;
+    this.router.navigate([
+      { outlets: {  approved: "Tender/NewTender" } }
+    ]);
+    setTimeout(
+      function() {
+        this.loadingFlag = false;
+      }.bind(this),
+      500
+    );
+  }
   
   Login(user, Flag) {
     this.userData = user;
