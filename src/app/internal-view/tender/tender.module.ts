@@ -11,9 +11,10 @@ import { MatIconModule } from "@angular/material/icon";
 import { UploadDocumentsComponent } from './tender-documents/documents/upload-documents/upload-documents.component';
 import { CoveringLetterComponent } from './tender-documents/documents/covering-letter/covering-letter.component';
 import { CompleteTenderComponent } from './tender-documents/documents/complete-tender/complete-tender.component';
+import { TenderResultComponent } from './tender-result/tender-result.component';
 
 @NgModule({
-  declarations: [TenderComponent, NewTenderComponent, TenderDocumentsComponent, UploadDocumentsComponent, CoveringLetterComponent, CompleteTenderComponent],
+  declarations: [TenderComponent, NewTenderComponent, TenderDocumentsComponent, UploadDocumentsComponent, CoveringLetterComponent, CompleteTenderComponent, TenderResultComponent],
   imports: [
     CommonModule,
     TenderRoutingModule,

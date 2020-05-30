@@ -66,14 +66,15 @@ public data;
 public originalData = [];
 public currentTenderNo = 0;
 
-private pathBase = 'Tender';  // change to Tender once done with testing and ready for production
+private pathBase = 'test';  // change to Tender once done with testing and ready for production
   constructor(
     private afs: AngularFirestore,
     public pdfService: pdfFileService,
     public infoService:InfoService,
     private routingService: RoutingService) {
     this.getMarkers().then(data => {
-      this.data = data;
+      this.data = data.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
+      this.originalData = this.originalData.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
     });
    }
 
