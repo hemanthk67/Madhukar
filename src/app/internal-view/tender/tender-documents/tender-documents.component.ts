@@ -1,5 +1,4 @@
 import { Component, OnInit, Output } from "@angular/core";
-import { pdfFileService } from "src/app/services/pdfFile.service";
 
 
 import { TenderService } from "../../../services/internal/tender/tender.service";
@@ -32,7 +31,7 @@ export class TenderDocumentsComponent implements OnInit {
    Flag: false
   },
    {name:'Complete Tender'}];
-  constructor(public pdfService: pdfFileService,
+  constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public tenderService: TenderService,

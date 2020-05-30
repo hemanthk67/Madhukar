@@ -108,7 +108,7 @@ export class NewTenderComponent implements OnInit {
     this.tender = this.tenderService.newTender;
     if (this.tenderService.editFlag) {
       this.items = this.tender.items;
-      this.allFiles = this.tender.files.tenderDocuments;
+      this.allFiles = this.tender.files.tenderDocuments.slice();
     }
   }
   RightTab() {
@@ -183,7 +183,8 @@ export class NewTenderComponent implements OnInit {
       if(this.editFileAdd) { 
       this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
       } else {
-      this.editFileAdd = Array.from(this.testFile);
+        this.editFileAdd = [];
+      this.editFileAdd.push(this.testFile[i]);
     }
     }
  }
@@ -257,8 +258,6 @@ this.flag.organization = false;
     this.tender.items = this.items;
     if(this.flag.organization && this.flag.tenderNumber && this.flag.eTenderNumber && this.flag.issueDate && this.flag.startDate && this.flag.dueDate) {
       if(this.tenderService.editFlag) {
-        console.log(this.editFileAdd);
-        // console.log(this.allFiles);
         this.tenderService.pushTenderData(this.tender,this.editFileAdd);
         // this.tenderService.removeFiles(this.editFileRemove);
       } else {

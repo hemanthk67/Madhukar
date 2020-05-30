@@ -1,0 +1,40 @@
+<div class="tender-query">
+    <div class="page-sub-header flex space-between" >
+        Query
+       </div>
+<div class="qeury-input-div">
+    <div class="upload-documents">
+        <div class="flex  space-between">
+        <div class="upload-div">
+          <div class="upload-input-lable">Drop Files to Upload</div>
+        <input
+                class="upload-input"
+                type="file"
+                (change)="detectFile($event)"
+                multiple
+              />
+        </div>
+        <textarea class="query-input"></textarea>
+        </div>
+        <div class="flex  space-between">
+        <div class="files-div">
+          <div
+            class="files"
+            *ngFor="let file of allFiles; let i = index"
+            (click)="deleteFile(i)"
+          >
+            <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+            <mat-icon
+              class="cloud-cross-icon"
+              svgIcon="cloud-cross-icon"
+            ></mat-icon>
+            <p>{{ file.name }}</p>
+          </div>
+        </div>
+        <div class="upload-submission">
+         <div class="upload-button" (click)="submitQuery()"> Submit Query</div>
+        </div>
+        </div>
+        </div>
+</div>
+</div>

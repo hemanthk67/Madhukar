@@ -55,7 +55,8 @@ export class TenderService {
     items: [],
     files: {
       tenderDocuments:[],
-uploadedDocuments:[]
+uploadedDocuments:[],
+queryDocuments:[]
     },
     formatedDocuments: [],
     itemsPrice:[],
@@ -108,9 +109,7 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
   this.setTenderData(tenderData);
   for( let j=0; j < this.originalData.length; j++)
   {
-    console.log('a');
     if(this.originalData[j].number == tenderData.number) {
-      console.log('b');
       this.originalData[j] = {...tenderData};
       tenderData.startDateFormatted = this.dateFormatting(tenderData.startDate);
       tenderData.dueDateFormatted = this.dateFormatting(tenderData.dueDate);
@@ -160,6 +159,20 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
     this.routingService.tenderList();
   
   }
+  //query submission 
+  querySubmission(tenderData , files) {
+    
+    this.setTenderData(this.tender);
+    for(let i =0; i < this.originalData.length; i++) {
+      tenderData = this.uploadFile(files ,tenderData ,'query-documents');
+      this.setTenderData(tenderData);
+      if(this.originalData[i].number == this.tender.number) {
+        this.originalData[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
+        this.data[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
+        break;
+      }
+    }
+  }
   // function to set upload new data
   setTenderData(data) {
     console.log(data);
@@ -188,10 +201,12 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
       TenderFile.path = this.pathBase + '/' + tender.number + '/' + file.name;
     // TenderFileArray.push(TenderFile);
     if(this.editFlag) {
-      tender.files.tenderDocuments[tender.files.tenderDocuments.length - 1] = {...TenderFile};
+      tender.files.tenderDocuments[tender.files.tenderDocuments.length] = {...TenderFile};
     } else {
     tender.files.tenderDocuments.push({...TenderFile}); 
     }
+      } else if(type == 'query-documents') {
+// need to write more
       }
       this.pdfService.pushUpload(currentFile, TenderFile.path);
     }
