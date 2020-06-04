@@ -7,6 +7,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { TenderService } from "../../services/internal/tender/tender.service";
 import { pdfFileService } from "src/app/services/pdfFile.service";
 import { RoutingService } from 'src/app/services/routing.service';
+import { InfoService } from 'src/app/services/internal/info.service';
 
 @Component({
   selector: "app-tender",
@@ -20,7 +21,8 @@ export class TenderComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public tenderService: TenderService,
-    private routingService: RoutingService) {
+    private routingService: RoutingService,
+    public infoService:InfoService) {
       iconRegistry.addSvgIcon(
         "down-spiral",
         sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-spiral.svg")

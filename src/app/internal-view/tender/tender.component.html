@@ -30,7 +30,10 @@
         <span class="tender-status" [ngClass]="{'grey': tender.status == 'Completed', 'orange': tender.status == 'On-Going', 'green': tender.status == 'Successful', 'red': tender.status == 'Un-Successful' || tender.status == 'Not-Participated' }">
             {{ tender.status }}</span>
     </div>
-    <div class="tender-list-card-sub-head">TCC/T-{{ tender.number }}/BHEL</div>
+    <div class="tender-list-card-sub-head">TCC/T-{{ tender.number }}/<span *ngFor = "let org of infoService.organization">
+        <span *ngIf="org.fullName == tender.organization">{{ org.name }}</span>
+    </span>
+    </div>
     <div class="tender-list-card-body">
         <div class="date-items">
         <div class="start-date"><span class="blue-bold">Start Date:</span> {{ tender.startDateFormatted }}</div>
