@@ -23,6 +23,16 @@ export class TenderResultComponent implements OnInit {
     private routingService: RoutingService) { }
 
   ngOnInit() {
+    
+    this.RightTab();
   }
-
+  RightTab() {
+    this.routingService.rightTabs = [{name:'Tender Results',
+    message: 'Submission of the Tender Results',
+  flag: false },
+  {name:'Query',
+    message: 'Enter the Queries and their Replies',
+  flag: true }
+  ];
+  }
 }

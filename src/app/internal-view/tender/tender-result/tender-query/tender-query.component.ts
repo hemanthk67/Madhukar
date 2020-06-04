@@ -12,6 +12,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class TenderQueryComponent implements OnInit {
   allFiles: any;
   uploadFile: FileList;
+  private textareaValueQuery = '';
+  private textareaValueQueryReply = '';
   constructor(    iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public tenderService: TenderService) { 
@@ -44,8 +46,25 @@ export class TenderQueryComponent implements OnInit {
     this.allFiles.splice(value, 1);
   }
 
+  doTextareaValueChange(ev, type) {
+    if(type == 'query') {
+    try {
+      this.textareaValueQuery = ev.target.value;
+    } catch(e) {
+      console.info('could not set textarea-value');
+    }
+  } else if (type == 'reply') {
+    try {
+      this.textareaValueQueryReply = ev.target.value;
+    } catch(e) {
+      console.info('could not set textarea-value');
+    }
+  }
+  }
   public submitQuery() {
-    // this.tenderService.uploadManuualFiles(this.tenderService.tender ,this.allFiles);
+    this.tenderService.querySubmission(this.tenderService.tender ,this.allFiles, this.textareaValueQuery, this.textareaValueQueryReply);
+    this.textareaValueQuery = '';
+    this.textareaValueQueryReply = '';
     this.allFiles = [];
   }
 }

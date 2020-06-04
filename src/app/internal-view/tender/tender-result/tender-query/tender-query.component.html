@@ -1,6 +1,40 @@
 <div class="tender-query">
+    <div class="queries">
+        <div class="page-sub-header flex space-between" >
+            Queries
+           </div>
+           <div class="queries-list" *ngFor="let query of tenderService.tender.files.queryDocuments; let i = index">
+             <div class="query-div">
+               <div class="query-sub-head">{{ i+1 }}. Query</div>
+               <div class="query-message">
+               {{ query.message }}
+               </div>
+               <div class="query-documents" *ngFor="let document of query.data">
+                 {{ document.name }}
+               </div>
+              </div>
+              <div class="reply-div">
+                <div class="reply-present" *ngIf="query.replyData || query.replyMessage">
+               <div class="query-sub-head">{{ i+1 }}. Reply</div>
+                <div class="reply-message">
+                  {{ query.replyMessage }}
+                  </div>
+                  <div class="reply-documents" *ngFor="let document of query.replyData">
+                    {{ document.name }}
+                  </div>
+                </div>
+                <div class="add-reply-div" *ngIf="!query.replyData && !query.replyMessage">
+                  <div class="upload-reply">
+                    
+                  </div>
+                  <div class="reply-button">Reply</div>
+                </div>
+              </div>
+           </div>
+    </div>
+    <div class="new-query-div">
     <div class="page-sub-header flex space-between" >
-        Query
+        New Query
        </div>
 <div class="qeury-input-div">
     <div class="upload-documents">
@@ -14,7 +48,7 @@
                 multiple
               />
         </div>
-        <textarea class="query-input"></textarea>
+        <textarea class="query-input" (change)="doTextareaValueChange($event, 'query')"></textarea>
         </div>
         <div class="flex  space-between">
         <div class="files-div">
@@ -37,4 +71,5 @@
         </div>
         </div>
 </div>
+    </div>
 </div>

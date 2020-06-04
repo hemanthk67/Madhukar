@@ -56,7 +56,10 @@ export class TenderService {
     files: {
       tenderDocuments:[],
 uploadedDocuments:[],
-queryDocuments:[]
+queryDocuments:[{
+  number: '',
+  data:[]
+}]
     },
     formatedDocuments: [],
     itemsPrice:[],
@@ -66,8 +69,10 @@ queryDocuments:[]
 public data;
 public originalData = [];
 public currentTenderNo = 0;
+private queryMessage = null;
+private queryMessageReply = null;
 
-private pathBase = 'test';  // change to Tender once done with testing and ready for production
+private pathBase = 'Tender';  // change to Tender once done with testing and ready for production
   constructor(
     private afs: AngularFirestore,
     public pdfService: pdfFileService,
@@ -160,12 +165,12 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
   
   }
   //query submission 
-  querySubmission(tenderData , files) {
-    
-    this.setTenderData(this.tender);
+  querySubmission(tenderData , files, message, replyMessage) {
+    this.queryMessage = message;
+    this.queryMessageReply = replyMessage;
+    tenderData = this.uploadFile(files ,tenderData ,'query-documents');
+    this.setTenderData(tenderData);
     for(let i =0; i < this.originalData.length; i++) {
-      tenderData = this.uploadFile(files ,tenderData ,'query-documents');
-      this.setTenderData(tenderData);
       if(this.originalData[i].number == this.tender.number) {
         this.originalData[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
         this.data[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
@@ -175,7 +180,6 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
   }
   // function to set upload new data
   setTenderData(data) {
-    console.log(data);
     const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
       `${this.pathBase}/${data.number}`
     );
@@ -191,6 +195,13 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
         name:null,
         path:null
      };
+     var queryDocuments = {
+      number:null,
+      message: this.queryMessage,
+      data:[],
+      replyMessage: this.queryMessageReply,
+      replyData: null
+   };
       const currentFile = new Upload(file);
    TenderFile.name = file.name;
    if (type == 'upload-documents') {
@@ -206,13 +217,24 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
     tender.files.tenderDocuments.push({...TenderFile}); 
     }
       } else if(type == 'query-documents') {
-// need to write more
+      TenderFile.path = this.pathBase + '/' + tender.number + '/' + file.name;
+queryDocuments.data.push({...TenderFile});
       }
       this.pdfService.pushUpload(currentFile, TenderFile.path);
     }
     // if (type == 'tender-documents') {
     // tender.files.tenderDocuments = TenderFileArray; 
     // }
+  }
+  if(type == 'query-documents') {
+  if(tender.files.queryDocuments && tender.files.queryDocuments.length) {
+    queryDocuments.number = tender.files.queryDocuments.length;
+tender.files.queryDocuments[tender.files.queryDocuments.length] = {...queryDocuments};
+  } else {
+    tender.files.queryDocuments = [];
+    queryDocuments.number = 0;
+    tender.files.queryDocuments[0] = {...queryDocuments};
+  }
   }
   return tender;
   } 
