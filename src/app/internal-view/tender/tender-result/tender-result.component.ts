@@ -35,4 +35,7 @@ export class TenderResultComponent implements OnInit {
   flag: true }
   ];
   }
+  backToTenderList () {
+    
+  }
 }
