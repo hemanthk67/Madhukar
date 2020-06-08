@@ -36,6 +36,55 @@
         padding-bottom: 10px;
         font-size: 9px;
       }
+      .add-reply-div {
+        .upload-reply {
+    overflow: hidden;
+    display: flex;
+    height: 50px;
+    .upload-reply-documents {
+      margin-top: 10px;
+    }
+    .upload-reply-documents::-webkit-file-upload-button {
+      color: #163a9a;
+      font-weight: 600;
+      background-color: white;
+      padding: 5px 10px;
+      border: solid 1px #163a9a;
+      border-radius: 10px;
+      cursor: pointer;
+      outline: none;
+    } 
+    .upload-reply-documents::-webkit-file-upload-button:hover {
+      background-color: #163a9a;
+      color: white;
+    }
+    .query-reply-input-div {
+      width:100%;
+      .query-reply-input {
+        width: 90%;
+        height: 40px;
+      }
+    }
+        }
+        .reply-submit-button-div {
+        .reply-submit-button {
+          height: 20px;
+          font-size: 14px;
+          color: #163a9a;
+          padding: 5px 10px;
+    border: 1px solid #163a9a;
+    border-radius: 5px;
+    cursor: pointer;
+    width: fit-content;
+    margin: 10px;
+    float: right;
+        }
+        .reply-submit-button:hover {
+          color: #fff;
+    background-color: #163a9a;
+        }
+      }
+      }
     }
     .query-sub-head {
       color: #163a9a;

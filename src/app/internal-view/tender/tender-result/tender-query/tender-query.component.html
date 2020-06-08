@@ -25,9 +25,12 @@
                 </div>
                 <div class="add-reply-div" *ngIf="!query.replyData && !query.replyMessage">
                   <div class="upload-reply">
-                    
+                    <input  class="upload-reply-documents" id="common-document-id" type="file">
+                    <div class="query-reply-input-div"><textarea class="query-reply-input" (change)="doTextareaValueChange($event, 'reply')"></textarea></div>
                   </div>
-                  <div class="reply-button">Reply</div>
+                  <div class="reply-submit-button-div">
+<div class="reply-submit-button" (click)="submitReply(i)">Submit</div>
+                  </div>
                 </div>
               </div>
            </div>

@@ -30,6 +30,15 @@ export class TenderQueryComponent implements OnInit {
     }
 
   ngOnInit() {
+       setTimeout(
+      function() {
+        this.tenderService.tender = this.tenderService.data[this.tenderService.data.length - 3]
+        console.log(this.tenderService.tender.files);
+      }.bind(this),
+      2000
+    );
+
+    
   }
   detectFile(event) {
     this.uploadFile = event.target.files;
@@ -60,6 +69,9 @@ export class TenderQueryComponent implements OnInit {
       console.info('could not set textarea-value');
     }
   }
+  }
+  public submitReply(index) {
+    console.log(index);
   }
   public submitQuery() {
     this.tenderService.querySubmission(this.tenderService.tender ,this.allFiles, this.textareaValueQuery, this.textareaValueQueryReply);
