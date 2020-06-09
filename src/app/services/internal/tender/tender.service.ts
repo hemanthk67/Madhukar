@@ -70,9 +70,9 @@ public data;
 public originalData = [];
 public currentTenderNo = 0;
 private queryMessage = null;
-private queryMessageReply = null;
+private queryMessageReplyIndex = null;
 
-private pathBase = 'test';  // change to Tender once done with testing and ready for production
+private pathBase = 'Tender';  // change to Tender once done with testing and ready for production
   constructor(
     private afs: AngularFirestore,
     public pdfService: pdfFileService,
@@ -164,16 +164,28 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
     this.routingService.tenderList();
   
   }
+  //query reply submission
+  queryReplySubmission(tenderData , files, index) {
+this.queryMessageReplyIndex = index;
+tenderData = this.uploadFile(files ,tenderData ,'query-reply-documents');
+this.setTenderData(tenderData);
+for(let i =0; i < this.originalData.length; i++) {
+  if(this.originalData[i].number == this.tender.number) {
+    this.originalData[i].files = this.tender.files;
+    this.data[i].files = this.tender.files;
+    break;
+  }
+}
+  }
   //query submission 
-  querySubmission(tenderData , files, message, replyMessage) {
+  querySubmission(tenderData , files, message) {
     this.queryMessage = message;
-    this.queryMessageReply = replyMessage;
     tenderData = this.uploadFile(files ,tenderData ,'query-documents');
     this.setTenderData(tenderData);
     for(let i =0; i < this.originalData.length; i++) {
       if(this.originalData[i].number == this.tender.number) {
-        this.originalData[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
-        this.data[i].files.uploadedDocuments = this.tender.files.uploadedDocuments;
+        this.originalData[i].files = this.tender.files;
+        this.data[i].files = this.tender.files;
         break;
       }
     }
@@ -189,28 +201,26 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
   public uploadFile(allFiles ,tender, type) {
     if(allFiles) {
       // var TenderFileArray = [];
+      var queryDocuments = {
+        number:null,
+        message: this.queryMessage,
+        data:[],
+        replyMessage: null,
+        replyData: []
+     };
     for (let i = 0; i < allFiles.length; i++) {
       let file = allFiles[i];
       const TenderFile = {
         name:null,
         path:null
      };
-     var queryDocuments = {
-      number:null,
-      message: this.queryMessage,
-      data:[],
-      replyMessage: this.queryMessageReply,
-      replyData: null
-   };
       const currentFile = new Upload(file);
    TenderFile.name = file.name;
    if (type == 'upload-documents') {
     TenderFile.path = this.pathBase + '/' + tender.number + '/uploadedFile/' + file.name;
-    // TenderFileArray.push(TenderFile);
     tender.files.uploadedDocuments.push({...TenderFile}); 
     } else if (type == 'tender-documents') {
       TenderFile.path = this.pathBase + '/' + tender.number + '/' + file.name;
-    // TenderFileArray.push(TenderFile);
     if(this.editFlag) {
       tender.files.tenderDocuments[tender.files.tenderDocuments.length] = {...TenderFile};
     } else {
@@ -219,12 +229,16 @@ private pathBase = 'test';  // change to Tender once done with testing and ready
       } else if(type == 'query-documents') {
       TenderFile.path = this.pathBase + '/' + tender.number + '/' + file.name;
 queryDocuments.data.push({...TenderFile});
+      } else if(type == 'query-reply-documents') {
+        TenderFile.path = this.pathBase + '/' + tender.number + '/' + this.queryMessageReplyIndex + '/' + file.name;
+        const replyData = {
+name: file.name,
+path: TenderFile.path
+        };
+        tender.files.queryDocuments[this.queryMessageReplyIndex].replyData.push({...replyData});
       }
       this.pdfService.pushUpload(currentFile, TenderFile.path);
-    }
-    // if (type == 'tender-documents') {
-    // tender.files.tenderDocuments = TenderFileArray; 
-    // }
+    }  
   }
   if(type == 'query-documents') {
   if(tender.files.queryDocuments && tender.files.queryDocuments.length) {

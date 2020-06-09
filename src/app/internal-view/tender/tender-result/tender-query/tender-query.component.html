@@ -9,23 +9,28 @@
                <div class="query-message">
                {{ query.message }}
                </div>
-               <div class="query-documents" *ngFor="let document of query.data">
+               <div class="query-documents-div">
+               <div class="query-documents" *ngFor="let document of query.data" (click)="downloadFile(document.path)">
+                <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
                  {{ document.name }}
+               </div>
                </div>
               </div>
               <div class="reply-div">
-                <div class="reply-present" *ngIf="query.replyData || query.replyMessage">
+                <div class="reply-present" *ngIf="query.replyData.length > 0 || query.replyMessage">
                <div class="query-sub-head">{{ i+1 }}. Reply</div>
                 <div class="reply-message">
                   {{ query.replyMessage }}
                   </div>
-                  <div class="reply-documents" *ngFor="let document of query.replyData">
+                  <div class="reply-documents" *ngFor="let document of query.replyData" (click)="downloadFile(document.path)">
+                    <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
                     {{ document.name }}
                   </div>
                 </div>
-                <div class="add-reply-div" *ngIf="!query.replyData && !query.replyMessage">
+                <div class="add-reply-div" *ngIf="query.replyData.length == 0 && !query.replyMessage">
                   <div class="upload-reply">
-                    <input  class="upload-reply-documents" id="common-document-id" type="file">
+                    <input  class="upload-reply-documents" id="common-document-id" type="file" 
+                    (change)="detectReplyFile($event)">
                     <div class="query-reply-input-div"><textarea class="query-reply-input" (change)="doTextareaValueChange($event, 'reply')"></textarea></div>
                   </div>
                   <div class="reply-submit-button-div">

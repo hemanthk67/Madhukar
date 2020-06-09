@@ -17,11 +17,29 @@
       .query-message {
         padding-left: 17px;
       }
+      .query-documents-div {
+        display: flex;
+        flex-wrap: wrap;
+      }
       .query-documents {
-        padding-left: 17px;
-        padding-top: 5px;
-        padding-bottom: 10px;
+        height: 20px;
+        width: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+        border: solid 1px #163a9a;
+        border-radius: 5px;
+        margin-bottom: 5px;
         font-size: 9px;
+        cursor: pointer;
+        .pdf-icon {
+          height: 10px;
+          width: 10px;
+          color: #163a9a;
+        }
+      }
+      .query-documents:hover {
+        text-decoration: underline;
       }
     }
     .reply-div {
@@ -31,10 +49,25 @@
         padding-left: 17px;
       }
       .reply-documents {
-        padding-left: 17px;
+        height: 20px;
+        width: fit-content;
+        padding-left: 5px;
+        padding-right: 5px;
         padding-top: 5px;
-        padding-bottom: 10px;
+            border: solid 1px #163a9a;
+            border-radius: 5px;
+            margin-bottom:5px;
         font-size: 9px;
+        cursor: pointer;
+
+       .pdf-icon {
+          height: 10px;
+          width: 10px;
+          color: #163a9a;
+        }
+      }
+      .reply-documents:hover {
+        text-decoration: underline;
       }
       .add-reply-div {
         .upload-reply {

@@ -47,7 +47,6 @@ export class TenderComponent implements OnInit {
     }
   }
   downloadFile(path) {
-    alert(path);
     this.pdf.downloadPdf(path);
   }
   approval(value, index) {
