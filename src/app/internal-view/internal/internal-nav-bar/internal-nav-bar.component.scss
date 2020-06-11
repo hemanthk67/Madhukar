@@ -3,7 +3,6 @@
   color: white;
   font-weight: 600;
   margin-left: 20px;
-  margin-top: 38px;
   /* border-right: solid 1px #163A9A; */
   width: 210px;
   .internal-left-nav-bar-fixed {
@@ -13,7 +12,9 @@
   .internal-left-nav-bar-header {
     background-color: #163a9a;
     border-radius: 15px;
-    padding-top: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding-top: 48px;
     padding-bottom: 10px;
     font-weight: 600;
     border-bottom: solid 1px white;

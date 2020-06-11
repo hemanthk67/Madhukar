@@ -180,9 +180,13 @@ margin-top: 10px;
         width: 225px;
         background: white;
         border-radius: 5px;
+        word-break: break-all;
       }
       .item-price {
         padding-left: 5px;
+        display: flex;
+    justify-content: center;
+    align-items: center;
         .item-price-input {
           text-align: center;
           border: none;
@@ -194,6 +198,9 @@ margin-top: 10px;
       }
       .item-frieght-charges {
         padding-left: 5px;
+        display: flex;
+    justify-content: center;
+    align-items: center;
       .frieght-charges-input {
         text-align: center;
         border: none;
@@ -205,6 +212,9 @@ margin-top: 10px;
     }
     .item-other-charges {
       padding-left: 5px;
+      display: flex;
+    justify-content: center;
+    align-items: center;
     .item-other-charges-input {
       text-align: center;
       border: none;
@@ -216,6 +226,9 @@ width: 135px;
   }
   .gst {
     padding-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .gst-input {
     text-align: center;
       border: none;
@@ -227,6 +240,9 @@ width: 50px;
   }
   .qty {
     padding-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .qty-input {      
     text-align: center;
     border: none;
@@ -238,6 +254,9 @@ width: 50px;
   }
   .total {
     padding-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .total-input {      
     text-align: center;
     border-radius: 5px;
@@ -248,6 +267,9 @@ width: 135px;
   }
   .total-with-gst {
     padding-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .total-with-gst-input {      
     text-align: center;
     border-radius: 5px;

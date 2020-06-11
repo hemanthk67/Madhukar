@@ -1,0 +1,62 @@
+<div class="results">
+    <div class="result-cards-div">
+    <div class="result-cards" *ngFor="let card of result"
+    [ngClass]="{
+        'background-color-red': card.color == 'red',
+        'background-color-green': card.color == 'green',
+        'background-color-blue': card.color == 'blue'
+      }">
+       <div class="card-nmae"> {{ card.name }} </div>
+       <div class="card-message"> {{ card.message }}</div>
+    </div>
+    </div>
+
+    <div class="page-sub-header flex space-between" >
+        Prices
+       </div>
+       <div class="item-prices-div">
+        <div class="item-prices-table">
+         <div class="item-price-head">
+           <div class="item-discription"> Discription</div>
+           <div class="item-price"> Price per Item</div>
+           <div class="item-frieght-charges"> Frieght Charges</div>
+           <div class="item-other-charges"> Other Charges</div>
+           <div class="gst"> Gst </div>
+           <div class="qty"> Qty </div>
+           <div class="total">Total( Excl Gst )</div>
+           <div class="total-with-gst">Total( Incl Gst )</div>
+         </div>
+          <div class="item-price-div" *ngFor="let item of items;let i=index">
+            <div class="item-discription">{{ itemdiscription }}</div>
+            <div class="item-price">
+              <input type="number" class="item-price-input"  [(ngModel)]="itempricePerItem" (keyup)="addPrice(i)" />
+            </div>
+            <div class="item-frieght-charges">
+             <input type="number" class="frieght-charges-input"  [(ngModel)]="itemfrieghtCharges" (keyup)="addPrice(i)" />
+            </div>
+            <div class="item-other-charges">
+             <input type="number" class="item-other-charges-input"  [(ngModel)]="itemotherCharges" (keyup)="addPrice(i)" />
+            </div>
+            <div class="gst">
+             <input type="number" class="gst-input"  [(ngModel)]="itemgst" (keyup)="addPrice(i)"/>
+            </div>
+           <div class="qty"> 
+             <input type="number" class="qty-input"  [(ngModel)]="itemquantity" (keyup)="addPrice(i)"/ [disabled]="!peop[attribute.IsWritable]"> </div>
+           <div class="total">
+             <input type="number" class="total-input" [(ngModel)]="itemtotal" disabled/>
+           </div>
+           <div class="total-with-gst">
+             <input type="number" class="total-with-gst-input" [(ngModel)]="itemtotalWithGst" disabled/>
+           </div>
+          </div>
+          <div class="item-price-head margin-top-15">
+           <div class="item-total-text">Total Price</div>
+           <div class="total margin-left-5">
+             <input type="number" class="total-input" [(ngModel)]="subTotal" disabled/>
+           </div>
+           <div class="total-with-gst  margin-left-5">
+             <input type="number" class="total-with-gst-input" [(ngModel)]="subTotalWithGst" disabled/></div>
+         </div>
+        </div>
+      </div>
+</div>

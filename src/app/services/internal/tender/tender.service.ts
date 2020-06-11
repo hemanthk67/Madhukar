@@ -9,6 +9,7 @@ import {
 import { pdfFileService } from '../../pdfFile.service';
 import { InfoService } from "../../../services/internal/info.service";
 import { RoutingService } from '../../routing.service';
+import { environment } from 'src/environments/environment'
 
 class Upload {
   $key: string;
@@ -72,7 +73,7 @@ public currentTenderNo = 0;
 private queryMessage = null;
 private queryMessageReplyIndex = null;
 
-private pathBase = 'Tender';  // change to Tender once done with testing and ready for production
+private pathBase = environment.tenderPath;  // change to Tender once done with testing and ready for production
   constructor(
     private afs: AngularFirestore,
     public pdfService: pdfFileService,

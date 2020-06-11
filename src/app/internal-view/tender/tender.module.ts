@@ -13,9 +13,10 @@ import { CoveringLetterComponent } from './tender-documents/documents/covering-l
 import { CompleteTenderComponent } from './tender-documents/documents/complete-tender/complete-tender.component';
 import { TenderResultComponent } from './tender-result/tender-result.component';
 import { TenderQueryComponent } from './tender-result/tender-query/tender-query.component';
+import { ResultsComponent } from './tender-result/results/results.component';
 
 @NgModule({
-  declarations: [TenderComponent, NewTenderComponent, TenderDocumentsComponent, UploadDocumentsComponent, CoveringLetterComponent, CompleteTenderComponent, TenderResultComponent, TenderQueryComponent],
+  declarations: [TenderComponent, NewTenderComponent, TenderDocumentsComponent, UploadDocumentsComponent, CoveringLetterComponent, CompleteTenderComponent, TenderResultComponent, TenderQueryComponent, ResultsComponent],
   imports: [
     CommonModule,
     TenderRoutingModule,

@@ -9,19 +9,27 @@
       color: #163a9a;
       font-weight: 600;
       font-size: 22px;
-      margin-top: 10px;
       .header {
         padding: 10px;
+      padding-top: 22px;
+        margin-top: -2px;
         text-align: center;
         width: fit-content;
         background-color: #163a9a;
         color: white;
         border-radius: 5px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
         cursor: pointer;
       }
     }
     .app-tender-query {
       flex-grow: 1;
+      display: flex;
+      overflow-y: scroll;
+      }
+      .results {
+        flex-grow: 1;
       display: flex;
       overflow-y: scroll;
       }
