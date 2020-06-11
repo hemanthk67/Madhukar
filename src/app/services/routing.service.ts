@@ -115,6 +115,18 @@ export class RoutingService {
       500
     );
   }
+  tenderResults() {
+    this.loadingFlag = true;
+    this.router.navigate([
+      { outlets: { approved: "Tender/TenderResult" } }
+    ]);
+    setTimeout(
+      function() {
+        this.loadingFlag = false;
+      }.bind(this),
+      500
+    );
+  }
   tenderList() {
     
     this.loadingFlag = true;

@@ -58,6 +58,10 @@ export class TenderComponent implements OnInit {
     this.tenderService.tender = this.tenderService.originalData[this.tenderService.originalData.length - index - 1]; 
     this.routingService.tenderUploadDocuments();
   }
+  tenderResults(index) {
+    this.tenderService.tender = this.tenderService.originalData[this.tenderService.originalData.length - index - 1]; 
+    this.routingService.tenderResults();
+  }
   edit(index) {
     this.tenderService.newTender = this.tenderService.originalData[this.tenderService.originalData.length - index - 1]; 
     this.tenderService.editFlag = true;
