@@ -8,7 +8,7 @@ import { InfoService } from 'src/app/services/internal/info.service';
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
-private result = [
+result = [
 {
   name:'Successful',
   message:'The Tender has been alloted to us',

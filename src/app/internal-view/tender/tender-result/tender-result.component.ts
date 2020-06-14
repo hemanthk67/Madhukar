@@ -20,7 +20,7 @@ export class TenderResultComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public tenderService: TenderService,
-    private routingService: RoutingService) { }
+    public routingService: RoutingService) { }
 
   ngOnInit() {
     
