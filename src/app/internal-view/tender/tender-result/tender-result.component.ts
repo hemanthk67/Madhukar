@@ -29,10 +29,10 @@ export class TenderResultComponent implements OnInit {
   RightTab() {
     this.routingService.rightTabs = [{name:'Tender Results',
     message: 'Submission of the Tender Results',
-  flag: true },
+  flag: false },
   {name:'Query',
     message: 'Enter the Queries and their Replies',
-  flag: false }
+  flag: true }
   ];
   }
   backToTenderList () {

@@ -13,7 +13,7 @@
         <div class="start-date"><span class="blue-bold">Start Date:</span> {{ tender.startDateFormatted }}</div>
         <div class="due-date" ><span class="blue-bold"> Due Date : </span>{{ tender.dueDateFormatted }}</div>
         <div class="tender-number blue-bold">
-            <span class="tender-status" [ngClass]="{'grey': tender.status == 'Completed', 'orange': tender.status == 'On-Going', 'green': tender.status == 'Successful', 'red': tender.status == 'Un-Successful' || tender.status == 'Not-Participated' }">
+            <span class="tender-status" [ngClass]="{'grey': tender.status == 'Completed', 'orange': tender.status == 'On-Going', 'green': tender.status == 'Successful', 'red': tender.status == 'UnSuccessful' || tender.status == 'Not-Participated' ||  tender.status == 'Rejected' }">
                 {{ tender.status }}</span>
             {{ tender.number }}</div>
         </div>

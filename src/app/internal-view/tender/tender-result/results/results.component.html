@@ -1,21 +1,47 @@
 <div class="results">
     <div class="result-cards-div">
+      <div class="flex" *ngIf="resultStatus == ''">
     <div class="result-cards" *ngFor="let card of result"
     [ngClass]="{
         'background-color-red': card.color == 'red',
         'background-color-green': card.color == 'green',
         'background-color-blue': card.color == 'blue'
-      }">
+      }" (click)="tenderStatus(card.name)">
        <div class="card-nmae"> {{ card.name }} </div>
        <div class="card-message"> {{ card.message }}</div>
     </div>
+      </div>
+    </div>
+    <div class="results-remark-div" *ngIf="resultStatus !== ''">
+      <div class="result-remark-question-div">
+        <div class="result-remark-question" *ngIf="resultStatus == 'UnSuccessful'">Reason for the loss of the tender?</div>
+        <div class="result-remark-question" *ngIf="resultStatus == 'Successful'">Remarks if any:</div>
+        <div class="result-remark-question" *ngIf="resultStatus == 'Rejected'">Reason for the Rejection of the tender?
+          <div class="result-remark-rejected">
+            <select class="result-remark-rejected-select-reason" [(ngModel)]="tenderRejectedReason">
+              <option *ngFor="let reason of rejectionReason"> {{ reason }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="result-remark-question" *ngIf="resultStatus == 'Cancelled'">Remarks if any:</div>
+        <div class="results-back" (click)="tenderStatus('')">back</div>
+      </div>
+      <textarea class="result-remark-text-area" (change)="doTextareaValueChange($event)"></textarea>
     </div>
 
     <div class="page-sub-header flex space-between" >
         Prices
        </div>
-       <div class="item-prices-div">
+       <div class="add-competitor-price">
+         <select class="add-competitor-price-select" *ngIf="competitorDetails.length"[(ngModel)]="newCompetitorName"> 
+           <option *ngFor="let competitor of competitorDetails" [value]="competitor.name">{{ competitor.name }} - {{ competitor.brand }}</option>
+         </select>
+         <div class="add-competitor-price-button" *ngIf="competitorDetails.length" (click)="addCompetitortoList()">Add</div>
+         <div class="add-competitor-details" (click)="addCompetitorDetails()">Add Other Competitors?</div>
+       </div>
+       <div class="item-prices-div" *ngFor="let competitor of comparitiveItemsPrice.slice().reverse(); let j=index">
         <div class="item-prices-table">
+          <div class="item-price-organization-name-div"><div class="item-price-organization-name">{{competitor.name}}</div></div>
          <div class="item-price-head">
            <div class="item-discription"> Discription</div>
            <div class="item-price"> Price per Item</div>
@@ -26,37 +52,97 @@
            <div class="total">Total( Excl Gst )</div>
            <div class="total-with-gst">Total( Incl Gst )</div>
          </div>
-          <div class="item-price-div" *ngFor="let item of items;let i=index">
-            <div class="item-discription">{{ itemdiscription }}</div>
+         <div class="price-div">
+          <div class="item-price-div" *ngFor="let item of competitor.data;let i=index">
+            <div class="item-discription">{{ item.discription }}</div>
             <div class="item-price">
-              <input type="number" class="item-price-input"  [(ngModel)]="itempricePerItem" (keyup)="addPrice(i)" />
+              <input type="number" class="item-price-input"  [(ngModel)]="item.pricePerItem" (keyup)="addPrice(i,comparitiveItemsPrice.length - 1 - j)" [disabled]="competitor.name == 'TCC ENERGY SOLUTIONS'"/>
             </div>
             <div class="item-frieght-charges">
-             <input type="number" class="frieght-charges-input"  [(ngModel)]="itemfrieghtCharges" (keyup)="addPrice(i)" />
+             <input type="number" class="frieght-charges-input"  [(ngModel)]="item.frieghtCharges" (keyup)="addPrice(i,comparitiveItemsPrice.length - 1 - j)" [disabled]="competitor.name == 'TCC ENERGY SOLUTIONS'"/>
             </div>
             <div class="item-other-charges">
-             <input type="number" class="item-other-charges-input"  [(ngModel)]="itemotherCharges" (keyup)="addPrice(i)" />
+             <input type="number" class="item-other-charges-input"  [(ngModel)]="item.otherCharges" (keyup)="addPrice(i,comparitiveItemsPrice.length - 1 - j)" [disabled]="competitor.name == 'TCC ENERGY SOLUTIONS'"/>
             </div>
             <div class="gst">
-             <input type="number" class="gst-input"  [(ngModel)]="itemgst" (keyup)="addPrice(i)"/>
+             <input type="number" class="gst-input"  [(ngModel)]="item.gst" (keyup)="addPrice(i,comparitiveItemsPrice.length - 1 - j)" [disabled]="competitor.name == 'TCC ENERGY SOLUTIONS'"/>
             </div>
            <div class="qty"> 
-             <input type="number" class="qty-input"  [(ngModel)]="itemquantity" (keyup)="addPrice(i)"/ [disabled]="!peop[attribute.IsWritable]"> </div>
+             <input type="number" class="qty-input"  [(ngModel)]="item.quantity" (keyup)="addPrice(i,comparitiveItemsPrice.length - 1 - j)" [disabled]="competitor.name == 'TCC ENERGY SOLUTIONS'"> </div>
            <div class="total">
-             <input type="number" class="total-input" [(ngModel)]="itemtotal" disabled/>
+             <input type="number" class="total-input" [(ngModel)]="item.total" disabled/>
            </div>
            <div class="total-with-gst">
-             <input type="number" class="total-with-gst-input" [(ngModel)]="itemtotalWithGst" disabled/>
+             <input type="number" class="total-with-gst-input" [(ngModel)]="item.totalWithGst" disabled/>
            </div>
           </div>
+        </div>
           <div class="item-price-head margin-top-15">
            <div class="item-total-text">Total Price</div>
            <div class="total margin-left-5">
-             <input type="number" class="total-input" [(ngModel)]="subTotal" disabled/>
+             <input type="number" class="total-input" [(ngModel)]="comparitiveItemsPrice[comparitiveItemsPrice.length - 1 - j].total" disabled/>
            </div>
            <div class="total-with-gst  margin-left-5">
-             <input type="number" class="total-with-gst-input" [(ngModel)]="subTotalWithGst" disabled/></div>
+             <input type="number" class="total-with-gst-input" [(ngModel)]="comparitiveItemsPrice[comparitiveItemsPrice.length - 1 - j].totalWithGst" disabled/></div>
          </div>
         </div>
       </div>
+      <div class="competitor-price-submission-div">
+        <div class="competitor-price-submission-button" (click)="submit()">Submit Results</div>
+      </div>
+</div>
+ 
+<div class="add-competitor" *ngIf ="addCompetitorDetailsFlag">
+  <div class="add-competitor-div">
+    <div class="add-competitor-header">
+      <div class="cross"  (click)="addCompetitorDetails()">X</div>
+    </div>
+    <div class="add-competitor-body">
+    <div class="add-competitor-head">
+      Add Competitor
+    </div>
+    <div class="add-competitor-inputs">
+      <div class="full-name-div">
+        <div class="lables">Name</div>
+        <input class="name-input" type="text" [ngClass]="{'red-border': !addCompetitorFlag.name }" [(ngModel)]="newCompetitorDetails.name"/>
+      </div>
+      <div class="add-competitor-dash">  &ndash;  </div>
+      <div class="small-name-div">
+        <div class="lables">Location by State</div>
+        <select class="name-input" type="text" [ngClass]="{'red-border': !addCompetitorFlag.loacationByState }" [(ngModel)]="newCompetitorDetails.loacationByState">
+       <option *ngFor="let state of indianStates" [value]="state">{{ state }}</option>
+        </select>
+      </div> 
+    </div>
+    <div class="add-make">
+      <div class="select-make flex" *ngIf="!addnewMakeFlag">
+        <div>
+        <div class="lables">Brand</div>
+        <select class="name-input" type="text" [ngClass]="{'red-border': !addCompetitorFlag.brand }" [(ngModel)]="newCompetitorDetails.brand">
+          <option *ngFor="let make of infoService.competitorMakeDetails" [value]="make.brand">{{ make.brand }}</option>
+           </select>
+      </div>
+           <div>
+           <div class="add-brand-link" (click)="addBrand()">Add Brand?</div>
+        </div>
+      </div>
+      <div class="input-make" *ngIf="addnewMakeFlag">
+        <div class="full-name-div">
+          <div class="lables">Make Name</div>
+          <input class="name-input" type="text" [ngClass]="{'red-border': !newMakeDetailsFlag.name }" [(ngModel)]="newMakeDetails.name"/>
+        </div>
+        <div class="add-competitor-dash">  &ndash;  </div>
+        <div class="small-name-div">
+          <div class="lables">Brand</div> 
+         <input class="name-input" type="text" [ngClass]="{'red-border': !newMakeDetailsFlag.brand }" [(ngModel)]="newMakeDetails.brand"/>
+        </div> 
+        
+        <div class="add-brand-link" (click)="addBrand()">Select Brand?</div>
+      </div>
+    </div>
+      <div class="add-competitor-submit">
+      <div class="add-competitor-submit-button"  (click)="addCompetitor()">Submit</div>
+    </div>
+  </div>
+  </div>
 </div>

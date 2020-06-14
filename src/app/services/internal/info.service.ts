@@ -20,6 +20,10 @@ export class InfoService {
   originalExperienceDocuments: any;
   commonDocuments: any;
   originalCommonDocuments: any;
+  competitorDetails:any;
+  competitorMakeDetails:any;
+  originalCompetitorDetails:any;
+
   constructor(
     private afs: AngularFirestore,
     private router: Router) { 
@@ -50,7 +54,22 @@ addOrganizationName(data) {
   );
   this.originalOrganizationData.data.push(data);
   newUserRef.set(this.originalOrganizationData, { merge: true });
-  this.organization.push({...data});
+  this.competitorDetails.push({...data});
+}
+addCompetitorDetails(data, makeData , makeFlag) {
+  const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
+    `${this.pathBase}/CompetitorDetails`
+  );
+  this.originalCompetitorDetails.data.push(data);
+  if(makeFlag) {
+    this.originalCompetitorDetails.makeData.push(makeData);
+  }
+  newUserRef.set(this.originalCompetitorDetails, { merge: true });
+  this.competitorDetails.push({...data});
+  if(makeFlag) {
+    this.competitorMakeDetails.push({...makeData});
+  }
+  
 }
   async getMarkers() {
     await firebase.firestore().collection(this.pathBase).get()
@@ -65,6 +84,10 @@ addOrganizationName(data) {
           } else if (doc.data().name == 'Common Documents') {
             this.commonDocuments = doc.data().data;
             this.originalCommonDocuments = doc.data();
+          } else if (doc.data().name == 'Competitor Details') {
+            this.competitorDetails = doc.data().data;
+            this.competitorMakeDetails = doc.data().makeData;
+            this.originalCompetitorDetails = doc.data();
           }
       });
     });

@@ -22,6 +22,74 @@ padding-left: 10px;
         }
     }
 }
+.results-remark-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .result-remark-question-div {
+    font-size: 14px;
+    color: #163a9a;
+    font-weight: 600;
+    display: flex;
+    width: 90%;
+    .result-remark-question {
+flex-grow: 1;
+text-align: center;
+    }
+    .result-remark-rejected {
+      margin: 10px;
+      .result-remark-rejected-select-reason {
+        height: 25px;
+    font-size: 18px;
+    border: solid 1px;
+    border-radius: 5px;
+      }
+    }
+    .results-back {
+      font-size: 14px;
+      border: solid 1px;
+      padding: 2px 5px;
+      border-radius: 5px;
+      background-color: #163a9a;
+      color: white;
+      cursor: pointer;
+      height: fit-content;
+    }
+  }
+  .result-remark-text-area {
+width: 90%;
+  }
+}
+.add-competitor-price {
+  display: flex;
+  justify-content: center;
+  margin:10px;
+  .add-competitor-price-select {
+    height: 25px;
+    font-size: 18px;
+    border: solid 1px;
+    border-radius: 5px;
+  }
+.add-competitor-price-button {
+  width: fit-content;
+  margin-left: 25px;
+  padding: 5px;
+    border-radius: 5px;
+    background-color: #163a9a;
+    color: #fff;
+    cursor: pointer;
+}
+.add-competitor-details {
+  font-size: 12px;
+  color: #163a9a;
+  margin-left: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.add-competitor-details:hover {
+  text-decoration: underline;
+}
+}
 .item-prices-div {
     .item-prices-table {
       padding: 5px;
@@ -29,6 +97,20 @@ padding-left: 10px;
       background-color: #F2F2F2;
       margin-top: 10px;
   border-radius: 10px;
+  .item-price-organization-name-div {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    .item-price-organization-name {
+    font-size: 16px;
+    width: fit-content;
+    border: 1px solid #163a9a;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #163a9a;
+    color: #fff;
+    }
+  }
   .item-price-head {
     display: flex;
     color: #163a9a;
@@ -197,7 +279,188 @@ width: 135px;
   }
     }
   }
+  .competitor-price-submission-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    .competitor-price-submission-button {
+      color: white;
+      background-color: #163a9a;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 1px #163a9a;
+    width: fit-content;
+    cursor: pointer;
+    }
+  }
 }   
+      
+.add-competitor {
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(0, 0, 0, 0.9);
+  position: absolute;
+  top: 0;
+  left: 0;
+  .back {
+    .back-button {
+      position: fixed;
+      fill: #163a9a;
+      stroke: white;
+      stroke-width: 10px;
+      height: 70px;
+      width: 70px;
+      margin-left: 20px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .back-button:hover {
+      fill: white;
+      stroke: #163a9a;
+      stroke-width: 20px;
+    }
+  }
+  .add-competitor-div {
+    position: fixed;
+    margin: auto;
+    background-color: white;
+    top: 35%;
+    left: 25%;
+    height: fit-content;
+    width: 50%;
+    .add-competitor-header {
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+      height: 0px;
+      .cross {
+        padding: 6px;
+        border-radius: 5px;
+        font-size: 14px;
+        
+        border: solid 1px #163a9a;
+float: right;
+cursor: pointer;
+color: white;
+background-color: #163a9a;
+      }
+      .cross:hover {
+        background-color: #003cd9;
+      }
+      .cross:active {     
+color: #163a9a;
+background-color: white;
+      }
+    }
+    .add-competitor-body {     
+      margin: 10px;
+      margin-top: 20px;
+      padding: 0px 40px;
+    .add-competitor-head {
+      color: #163a9a;
+      font-size: 20px;
+    height: 35px;
+      font-weight: 600;
+    }
+    .add-competitor-inputs {
+      display: flex;
+      .full-name-div {
+width: 60%;
+      }
+      .add-competitor-dash {
+        width: 15px;
+        text-align: center;
+    align-self: center;
+    color: #163a9a;
+    padding-top: 10px;
+    margin-left: 5px;
+      }
+      .lables {
+        color: #163a9a;
+        font-weight: 600;
+      }
+      .name-input {
+        height: 25px;
+        width: 100%;
+        border: solid 1px #163a9a;
+        border-radius: 5px;
+      }
+    }
+    .add-brand-link {
+    padding-top: 30px;
+    font-size: 10px;
+    padding-left: 10px;
+    color: #163a9a;
+    cursor: pointer;
+    }
+    .add-brand-link:hover {
+      text-decoration: underline;
+    }
+    .add-make {
+      .select-make {
+        margin-top: 10px;
+        .lables {
+          color: #163a9a;
+          font-weight: 600;
+        }
+        .name-input {
+          height: 25px;
+          width: fit-content;
+          border: solid 1px #163a9a;
+          border-radius: 5px;
+        }
+      }
+      .input-make {
+      display: flex;
+      .full-name-div {
+width: 60%;
+      }
+      .add-competitor-dash {
+        width: 15px;
+        text-align: center;
+    align-self: center;
+    color: #163a9a;
+    padding-top: 10px;
+    margin-left: 5px;
+      }
+      .lables {
+        color: #163a9a;
+        font-weight: 600;
+      }
+      .name-input {
+        height: 25px;
+        width: 100%;
+        border: solid 1px #163a9a;
+        border-radius: 5px;
+      }
+    }
+    }
+    .add-competitor-submit {
+      .add-competitor-submit-button {
+        width: fit-content;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+            background-color: #163a9a;
+            border: solid 1px #163a9a;
+            cursor: pointer;
+            float: right;
+    margin-right: 12%;
+          }
+          .add-competitor-submit-button:hover {
+            background-color: #003cd9;
+          }
+          .add-competitor-submit-button:active {
+            color: #163a9a;
+            background-color: white;
+          }
+        }
+    }
+  }
+}
 .background-color-red {
     background-color: darkred;
 }
@@ -229,4 +492,16 @@ width: 135px;
   }
   .space-between {
     justify-content: space-between;
+  }
+  input:disabled {
+    background-color: slategrey;
+    border: none !important;
+    color: white;
+  }
+
+  .red-border {
+    border-color: red !important;
+  }
+  .red-color {
+    color: red !important;
   }

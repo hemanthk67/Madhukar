@@ -73,8 +73,9 @@ public currentTenderNo = 0;
 private queryMessage = null;
 private queryMessageReplyIndex = null;
 
-private pathBase = environment.tenderPath;  // change to Tender once done with testing and ready for production
-  constructor(
+// private pathBase = environment.tenderPath;  // change to Tender once done with testing and ready for production
+private pathBase = 'test';
+constructor(
     private afs: AngularFirestore,
     public pdfService: pdfFileService,
     public infoService:InfoService,
@@ -190,6 +191,20 @@ for(let i =0; i < this.originalData.length; i++) {
         break;
       }
     }
+  }
+  //tender results submission including opetitors price
+  tenderResultSubmission(data) {
+    this.setTenderData(data);
+    for(let i =0; i < this.originalData.length; i++) {
+      if(this.originalData[i].number == data.number) {
+        this.originalData[i].status = data.status;
+        this.originalData[i].rejectedReason = data.rejectedReason;
+        this.originalData[i].statusRemark = data.statusRemark;
+        this.originalData[i].comparitivePrice = data.comparitivePrice;
+        break;
+      }
+    }
+    this.routingService.tenderList();
   }
   // function to set upload new data
   setTenderData(data) {
