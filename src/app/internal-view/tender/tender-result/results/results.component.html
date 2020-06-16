@@ -41,7 +41,7 @@
        </div>
        <div class="item-prices-div" *ngFor="let competitor of comparitiveItemsPrice.slice().reverse(); let j=index">
         <div class="item-prices-table">
-          <div class="item-price-organization-name-div"><div class="item-price-organization-name">{{competitor.name}}</div></div>
+          <div class="item-price-organization-name-div"><div class="item-price-organization-name-only-div"><div class="item-price-organization-name">{{competitor.name}}</div></div><div class="item-price-organization-name-cross" *ngIf="competitor.name !== 'TCC ENERGY SOLUTIONS'" (click)="removeCompetitor(comparitiveItemsPrice.length - 1 - j)">X</div></div>
          <div class="item-price-head">
            <div class="item-discription"> Discription</div>
            <div class="item-price"> Price per Item</div>

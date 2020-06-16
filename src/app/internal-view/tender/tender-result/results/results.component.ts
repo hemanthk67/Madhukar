@@ -150,6 +150,9 @@ this.resultStatus = status;
     }
 
   }
+  removeCompetitor(index) {
+    this.comparitiveItemsPrice.splice(index, 1);
+  }
   addCompetitortoList() {
     var items= [];
     var data= {
