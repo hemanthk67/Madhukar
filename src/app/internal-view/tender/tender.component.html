@@ -27,7 +27,7 @@
     <div class="tender-list-card-large" *ngIf="!tender.flag">
         <div class="tender-list-card-head">
         <div class="org-head">{{ tender.organization }}<span class="grey" *ngIf="tender.tenderMode == 'offline'">({{ tender.tenderMode }})</span></div>
-        <span class="tender-status" [ngClass]="{'grey': tender.status == 'Completed', 'orange': tender.status == 'On-Going', 'green': tender.status == 'Successful', 'red': tender.status == 'Un-Successful' || tender.status == 'Not-Participated' }">
+        <span class="tender-status" [ngClass]="{'grey': tender.status == 'Completed', 'orange': tender.status == 'On-Going', 'green': tender.status == 'Successful', 'red': tender.status == 'UnSuccessful' || tender.status == 'Not-Participated' ||  tender.status == 'Rejected' }">
             {{ tender.status }}</span>
     </div>
     <div class="tender-list-card-sub-head">TCC/T-{{ tender.number }}/<span *ngFor = "let org of infoService.organization">

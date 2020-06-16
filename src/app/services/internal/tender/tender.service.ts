@@ -194,10 +194,10 @@ for(let i =0; i < this.originalData.length; i++) {
     this.setTenderData(data);
     for(let i =0; i < this.originalData.length; i++) {
       if(this.originalData[i].number == data.number) {
-        this.originalData[i].status = data.status;
-        this.originalData[i].rejectedReason = data.rejectedReason;
-        this.originalData[i].statusRemark = data.statusRemark;
-        this.originalData[i].comparitivePrice = data.comparitivePrice;
+        this.data[i].status = this.originalData[i].status = data.status;
+        this.data[i].rejectedReason = this.originalData[i].rejectedReason = data.rejectedReason;
+        this.data[i].statusRemark = this.originalData[i].statusRemark = data.statusRemark;
+        this.data[i].comparitivePrice = this.originalData[i].comparitivePrice = data.comparitivePrice;
         break;
       }
     }
