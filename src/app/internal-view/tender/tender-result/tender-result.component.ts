@@ -35,7 +35,7 @@ export class TenderResultComponent implements OnInit {
   flag: true }
   ];
   }
-  backToTenderList () {
-    
-  }
+  backToTenderList() {
+    this.routingService.tenderList();
+      }
 }

@@ -65,7 +65,7 @@ RightTab() {
   this.routingService.rightTabs = [{name:'Upload',
   message: 'Upload and Attatch all documents required for the Tender',
 flag: true },
-   {name:'Complete Tender',
+   {name:'Submit Tender',
    message: 'Upload and Attatch all documents required for the Tender',
    flag: false }
   //  ,{name:'Create Documents',
