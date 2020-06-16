@@ -16,8 +16,8 @@
                </div>
                </div>
               </div>
-              <div class="reply-div">
-                <div class="reply-present" *ngIf="query.replyData.length > 0 || query.replyMessage">
+              <div class="reply-div" *ngIf="query.replyData">
+                <div class="reply-present" *ngIf=" query.replyData.length > 0 || query.replyMessage">
                <div class="query-sub-head">{{ i+1 }}. Reply</div>
                 <div class="reply-message">
                   {{ query.replyMessage }}

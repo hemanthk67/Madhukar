@@ -57,10 +57,7 @@ export class TenderService {
     files: {
       tenderDocuments:[],
 uploadedDocuments:[],
-queryDocuments:[{
-  number: '',
-  data:[]
-}]
+queryDocuments:[]
     },
     formatedDocuments: [],
     itemsPrice:[],
