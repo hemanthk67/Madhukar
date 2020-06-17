@@ -41,6 +41,7 @@ tenderRejectedReason = '';
 resultStatus = '';
 resultStatusRemark = '';
 competitorDetails: any;
+competitorDetailsRemove = [];
 newCompetitorDetails = {
   name: '',
   loacationByState: '',
@@ -151,6 +152,13 @@ this.resultStatus = status;
 
   }
   removeCompetitor(index) {
+    for( let x=0; x<  this.competitorDetailsRemove.length; x++) {
+      if(this.competitorDetailsRemove[x].name === this.comparitiveItemsPrice[index].name) {
+        this.competitorDetails.push(this.competitorDetailsRemove[x]);
+        this.competitorDetailsRemove.splice(x, 1);
+        break;
+    }
+    }
     this.comparitiveItemsPrice.splice(index, 1);
   }
   addCompetitortoList() {
@@ -189,6 +197,7 @@ this.resultStatus = status;
     this.comparitiveItemsPrice.push(comparitiveItemsPriceData);
     for( let x=0; x< this.competitorDetails.length; x++) {
       if(this.competitorDetails[x].name === this.newCompetitorName) {
+        this.competitorDetailsRemove.push(this.competitorDetails[x]);
       this.competitorDetails.splice(x,1);
     }
     }
