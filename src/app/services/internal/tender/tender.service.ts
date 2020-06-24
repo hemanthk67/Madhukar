@@ -71,7 +71,7 @@ private queryMessage = null;
 private queryMessageReplyIndex = null;
 
 // private pathBase = environment.tenderPath;  // change to Tender once done with testing and ready for production
-private pathBase = 'test';
+private pathBase = 'Tender';
 constructor(
     private afs: AngularFirestore,
     public pdfService: pdfFileService,
