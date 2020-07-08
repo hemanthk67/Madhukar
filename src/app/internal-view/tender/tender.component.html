@@ -2,18 +2,22 @@
     <div class="tender-list-head"> Tender-list</div>
     <div class="tender-list-body">
 <span *ngIf="tenderService.data">
-<div class="tender-list-card" *ngFor="let tender of tenderService.data.slice().reverse(); let i = index">
+<div class="tender-list-card" *ngFor="let tender of tenderService.data.slice().reverse(); let i = index" [ngClass]="{'light-blue-border-color': tender.status == 'Submitted','grey': tender.status == 'Completed', 'orange-border-color': tender.status == 'On-Going', 'green-border-color': tender.status == 'Successful', 'red-border-color': tender.status == 'UnSuccessful' || tender.status == 'Not-Participated' ||  tender.status == 'Rejected' }">
     <div class="tender-list-card-small"  *ngIf="tender.flag">
     <div class="tender-list-card-head">
         <div class="org-head">{{ tender.organization }}<span class="grey" *ngIf="tender.tenderMode == 'offline'">({{ tender.tenderMode }})</span></div>
         <span class="item-div"><div class="item-head"*ngFor="let item of tender.items| slice:0:5;let i=index "><span *ngIf="!item.special"><span *ngIf="i>0">,</span> {{ item.kva }} KVA </span></div> </span>
+    </div>
+    <div class="tender-number-items">
+        <div class="tender-number"><span class="blue-bold">TenderNo:</span> {{ tender.tenderNumber }}</div>
+        <div class="e-tender-number"><span class="blue-bold">e-TenderNo:</span> {{ tender.eTenderNumber }}</div>
     </div>
     <div class="tender-list-card-body">
         <div class="items">
         <div class="start-date"><span class="blue-bold">Start Date:</span> {{ tender.startDateFormatted }}</div>
         <div class="due-date" ><span class="blue-bold"> Due Date : </span>{{ tender.dueDateFormatted }}</div>
         <div class="tender-number blue-bold">
-            <span class="tender-status" [ngClass]="{'grey': tender.status == 'Completed', 'orange': tender.status == 'On-Going', 'green': tender.status == 'Successful', 'red': tender.status == 'UnSuccessful' || tender.status == 'Not-Participated' ||  tender.status == 'Rejected' }">
+            <span class="tender-status" [ngClass]="{'light-blue-color': tender.status == 'Submitted','grey': tender.status == 'Completed', 'orange': tender.status == 'On-Going', 'green': tender.status == 'Successful', 'red': tender.status == 'UnSuccessful' || tender.status == 'Not-Participated' ||  tender.status == 'Rejected' }">
                 {{ tender.status }}</span>
             {{ tender.number }}</div>
         </div>
