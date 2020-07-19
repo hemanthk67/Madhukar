@@ -216,7 +216,7 @@ if(this.newCompetitorDetails.loacationByState != '') {
   if(!this.addnewMakeFlag) {
     if(this.newCompetitorDetails.brand != '') {
       this.addCompetitorFlag.brand = true;
-  this.infoService.addCompetitorDetails(this.newCompetitorDetails, this.newMakeDetails , this.addnewMakeFlag);
+  this.infoService.addCompetitorDetails({...this.newCompetitorDetails},{...this.newMakeDetails} , this.addnewMakeFlag);
   this.newCompetitorDetails.name = '';
   this.newCompetitorDetails.loacationByState = '';
   this.newCompetitorDetails.brand = '';
@@ -278,7 +278,7 @@ if(this.newCompetitorDetails.loacationByState != '') {
     for(let k=0; k< this.comparitiveItemsPrice[j].data.length; k++) {
       if(this.comparitiveItemsPrice[j].data[k].total && this.comparitiveItemsPrice[j].data[k].totalWithGst) {
       this.comparitiveItemsPrice[j].total = this.comparitiveItemsPrice[j].total + this.comparitiveItemsPrice[j].data[k].total;
-      this.comparitiveItemsPrice[j].totalWithGst = this.comparitiveItemsPrice[j].total + this.comparitiveItemsPrice[j].data[k].totalWithGst;
+      this.comparitiveItemsPrice[j].totalWithGst = this.comparitiveItemsPrice[j].totalWithGst + this.comparitiveItemsPrice[j].data[k].totalWithGst;
       }
     }
   }
