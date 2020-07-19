@@ -58,7 +58,19 @@ export class RoutingService {
               flag: false
             }
           ]
-        }
+        },
+        marketing:{
+               title: "Marketing",
+               role: "marketing",
+               flag: false,
+               subcategories: [
+                 {
+                   title: "Prepare Offer",
+                   path: "Marketing/PrepareOffer",
+                   flag: false
+                 }
+               ]
+             }
   };
   constructor(private router: Router) {
     router.events.subscribe((val) => {
@@ -163,17 +175,19 @@ export class RoutingService {
   }
   }
 sideNavData() {
+  
+  if (this.userData.role.marketing || this.userData.role.admin) {
+    this.leftNavData.push(this.routs.marketing);
+   }
   if(this.userData.role) {
 //     if (this.userData.role.finance && this.userData.role.admin) {
 //       this.routs[2].flag = true;
 // this.leftNavData.push(this.routs.finance);
 //     } 
    if (this.userData.role.purchase || this.userData.role.admin) {
-    // this.routs[2].flag = true;
-    this.leftNavData.push(this.routs.production);
+    this.leftNavData.push(this.routs.purchase);
    }
    if (this.userData.role.tender || this.userData.role.admin) {
-    // this.routs[0].flag = true;
     this.leftNavData.push(this.routs.tender);
    }
    this.routAuth(this.presentPath);

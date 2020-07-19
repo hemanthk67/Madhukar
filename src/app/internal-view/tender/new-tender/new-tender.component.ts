@@ -50,7 +50,7 @@ export class NewTenderComponent implements OnInit {
   issueDate: true,
   startDate: true,
   dueDate: true,
- }
+ };
   tableHeaderTest = [
     { name: "Discription", width: "180px" },
     { name: "KVA", width: "70px" },

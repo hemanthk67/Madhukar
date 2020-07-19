@@ -1,0 +1,123 @@
+<div class="prepare-offer-div"> 
+    <div class="prepare-offer-head-div">Prepare Offer: </div>
+<div class="prepare-offer-body">
+    <div class="info-div">
+        <div class="info-header">
+          <div class="header">INFORMATION</div>
+        </div>
+        <div class="info-body">
+          <div class="flex justify-content-sapce-between">
+            <div class="org-div">
+              <div class="org-label sub-header">Customer Name:</div>
+              <div class="org-input">
+                <!-- <select
+                  class="org-name"
+                  name="orgName"
+                  [(ngModel)]="tender.organization"
+                  [ngClass]="{
+                    'red-border': !flag.organization
+                  }"
+                > -->
+                <!-- <option *ngFor = "let org of infoService.organization" [value]="org.fullName"
+                >{{ org.fullName}}</option> -->
+                <select
+                  class="org-name"
+                  name="orgName"
+                >
+                  <option 
+                    ></option
+                  >
+                </select>
+              </div>
+            </div>
+        
+          <div class="tender-date-div flex">
+            <div class="tender-date">
+              <div class="tender-date-label">Issued Date:</div>
+              <Input
+                type="text"
+                class="tender-date-input"
+                [(ngModel)]="offer.issueDate"
+                ngDefaultControl
+                disabled
+                placeholder="dd/mm/yyyy"
+              />
+              <span class="calander"
+                ><button>
+                  <mat-icon class="calander-button"  [ngClass]="{'red-color': !flag.issueDate}" svgIcon="calander" (click)="calanderOpen('issueDate')"></mat-icon>
+                </button>
+              </span>
+              <app-calender class="app-calander" *ngIf="calanderFlag.issueDate" (dateEmit)='displayCounter($event)'></app-calender>
+            </div>
+          </div>
+          </div>
+          <div class="flex subject"> 
+            <div class="subject-lable sub-header" (click)="test()">Subject:</div>
+            <div class="subject-text">
+              <textarea (change)="doTextareaValueChange($event)" > Offer for Supply of</textarea>
+            </div>
+          </div>
+          <div class="price-table"> 
+            <div class="price-table-head flex" (click)="test()">
+              <div class="s-no margin-5 white-bkgd height-40 padding-top-20">S.NO</div>
+              <div class="description margin-5 white-bkgd padding-top-20">DESCRIPTION</div>
+              <div class="ex-works-price margin-5 white-bkgd padding-top-10">UNIT EX-WORKS PRICE</div>
+              <div class="qty margin-5 white-bkgd padding-top-20">QTY</div>
+              <div class="total margin-5 white-bkgd padding-top-10">TOTAL EX-WORKS PRICE
+                (Rupees)
+                </div>
+            </div>
+            <div class="price-table-body flex" *ngFor="let item of offer.items;let i = index">
+              <input class="s-no margin-5 white-bkgd height-20 " [value]="i+1" disabled>
+              <textarea class="description margin-5 white-bkgd height-20"></textarea>
+              <input class="ex-works-price margin-5 white-bkgd height-20" type="number" [(ngModel)]="item.unitPrice"(keyup)="addPrice(i)">
+              <input class="qty margin-5 white-bkgd height-20" type="number" [(ngModel)]="item.qty" (keyup)="addPrice(i)">
+              <input class="total margin-5 white-bkgd height-20" [(ngModel)]="item.totalPrice" disabled>
+            </div>
+            <div class="add-item flex">
+              <div class="add-button" (click)='addItem()'>+ Add</div>
+              <div class="remove-item" *ngFor="let item of offer.items; let i= index">
+                <div class="remove-button" (click)='removeItem(i)'>Remove - {{i+1}}</div>
+              </div>
+          </div>
+            <div class="price-table-tail flex">
+              <div class="sub-total-in-words margin-5 white-bkgd" >TOTAL EX-WORKS PRICE:  {{ subTotalPriceWords }} </div>
+              <input class="sub-total margin-5 white-bkgd"  [(ngModel)]="subTotalPrice">
+            </div>
+          </div>
+          <div class="commercial-terms">
+            <div class="header">COMMERCIAL TERMS & CONDITIONS</div>
+            <div class="terms-div">
+              <div class="terms-table">
+                <div class="term flex" *ngFor="let term of offer.terms; let i =index">
+                  <div class="term-s-no margin-5 white-bkgd"> {{ romanNumbers[i] }}</div>
+                  <textarea class="lable margin-5 white-bkgd" (change)="lableChanged($event,i)">{{ term.lable }}</textarea  >
+                  <textarea class="content margin-5 white-bkgd" (change)="contentChanged($event,i)" > {{ term.content }}</textarea>
+                </div>
+                <div class="add-item flex">
+                  <div class="add-button" *ngIf="offer.terms.length < 10" (click)='addTerm()'>+ Add</div>
+                  <div class="remove-item" *ngFor="let term of offer.terms; let i= index">
+                    <div class="remove-button" (click)='removeTerm(i)'>Remove - {{i+1}}</div>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="sign">
+            <div> <span>Signed By:</span><input class="sign-by" [(ngModel)]="offer.signBy"></div>
+           <div> <span>Phone No:</span><input class="phone-number" [(ngModel)]="offer.authorizedPhoneNumber"></div>
+           <div> <span>Office No:</span><input class="office-number" [(ngModel)]="offer.officeNumber"></div>
+           <div> <span>Email:</span><input class="email" [(ngModel)]="offer.email"></div>
+          </div>
+          <div class="submit">
+            <div class="submit-button" (click)="submit()">Submit</div>
+          </div>
+        </div>
+      </div>
+</div>
+</div>
+<app-pdf-preview
+  *ngIf="pdfPreviewFlag"
+  (backFlag)="pdfPreviewHandler($event)"
+  [type]="'thota'"
+></app-pdf-preview>

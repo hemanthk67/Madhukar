@@ -99,12 +99,13 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      role: { admin: false, finance: false, technical: false ,
+      role: { admin: false, finance: false, purchase: false, production: false, tender: false , marketing:false,
       Admin:{ role:false, tecnical:false},
       Tender:{ role:false, tecnical:false},
       Purchase:{ role:false, tecnical:false},
       Production:{ role:false, tecnical:false},
-      Accounts:{ role:false, tecnical:false}}
+      Finance:{ role:false, tecnical:false},
+      Marketing:{ role:false, technical:false}},
     };
     newUserRef.set(data, { merge: true });
     alert("Not a Authorized User - Please contact the administration");

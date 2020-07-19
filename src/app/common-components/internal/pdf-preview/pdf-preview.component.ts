@@ -22,6 +22,7 @@ import { pdfFileService } from "src/app/services/pdfFile.service";
 })
 export class PdfPreviewComponent implements OnInit {
   @Output() backFlag = new EventEmitter<boolean>();
+  @Input() type;
   savepdf: File;
   constructor(
     iconRegistry: MatIconRegistry,
@@ -39,16 +40,18 @@ export class PdfPreviewComponent implements OnInit {
     // d3.select(".pdf-container-div").style("display", "none");  the height checking is not working in the tenderdcuments page
     d3.select("#pdf-preview")
       .append("img")
-      .attr("src", "./assets/pdf/tccheader.jpg")
+      .attr("src", "./assets/pdf/" + this.type +"header.jpg")
       .style("width", "100%");
+      if(this.type !== 'thota') {
     d3.select("#pdf-preview")
       .style("position", "relative")
       .append("img")
-      .attr("src", "./assets/pdf/tccfooter.jpg")
+      .attr("src", "./assets/pdf/" + this.type +"footer.jpg")
       .style("width", "100%")
       .style("position", "absolute")
       .style("bottom", "0")
       .style("left", "0");
+      }
 
     // second page
     d3.select("#pdf-preview-1")

@@ -31,6 +31,14 @@ const routes: Routes = [
         m => m.ProductionModule
       ),
     outlet: "approved"
+  },
+  {
+    path: "Marketing",
+    loadChildren: () =>
+      import("./internal-view/marketing/marketing.module").then(
+        m => m.MarketingModule
+      ),
+    outlet: "approved"
   }
 ];
 
