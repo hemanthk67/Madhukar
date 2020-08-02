@@ -161,7 +161,7 @@ this.calanderFlag.issueDate = false;
       this.addOrganizationFlag.fullName = false;
     }
       }
-      newCustomerAddressText(ev,index) {
+      newCustomerAddressText(ev) {
         try {
           this.newOrganizationName.details[0].address = ev.target.value;
         } catch(e) {

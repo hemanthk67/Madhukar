@@ -66,7 +66,7 @@
                   <div class="price-table-body flex" *ngFor="let item of enquiry.items;let i = index">
                     <input class="s-no margin-5 white-bkgd padding-0  height-20 " [value]="i+1" disabled>
                     <textarea class="item-description margin-5 white-bkgd padding-0 height-20" (change)="itemDescriptionText($event, i)"></textarea>
-                    <input class="rating margin-5 white-bkgd  padding-0 height-20" type="number" [(ngModel)]="item.rating" (keyup)="addPrice(i)">
+                    <input class="rating margin-5 white-bkgd  padding-0 height-20" type="number" [(ngModel)]="item.rating" >
                     <div class="class margin-5 transperent-bkgd height-20">
                       <input class="class-hv white-bkgd  padding-0" type="text" [(ngModel)]="item.classHv"> / 
                       <input class="class-lv white-bkgd  padding-0" type="text" [(ngModel)]="item.classLv">
