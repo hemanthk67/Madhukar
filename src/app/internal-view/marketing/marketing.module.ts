@@ -9,10 +9,11 @@ import { MarketingComponent } from './marketing.component';
 import { PrepareOfferComponent } from './prepare-offer/prepare-offer.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { NewEnquiryComponent } from './new-enquiry/new-enquiry.component';
 
 
 @NgModule({
-  declarations: [MarketingComponent, PrepareOfferComponent],
+  declarations: [MarketingComponent, PrepareOfferComponent, NewEnquiryComponent],
   imports: [
     CommonModule,
     MarketingRoutingModule,

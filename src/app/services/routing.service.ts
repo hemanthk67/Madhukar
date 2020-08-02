@@ -65,8 +65,8 @@ export class RoutingService {
                flag: false,
                subcategories: [
                  {
-                   title: "Prepare Offer",
-                   path: "Marketing/PrepareOffer",
+                   title: "New Enquiry",
+                   path: "Marketing/NewEnquiry",
                    flag: false
                  }
                ]

@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MarketingComponent } from './marketing.component';
 import { PrepareOfferComponent } from './prepare-offer/prepare-offer.component';
+import { NewEnquiryComponent } from './new-enquiry/new-enquiry.component';
 
 const routes: Routes = [{ path: '', component: MarketingComponent }
 ,{ path: 'PrepareOffer', component: PrepareOfferComponent }
+,{ path: 'NewEnquiry', component: NewEnquiryComponent }
 ];
 
 @NgModule({

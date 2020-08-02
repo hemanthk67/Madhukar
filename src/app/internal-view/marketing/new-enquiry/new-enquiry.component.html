@@ -1,0 +1,214 @@
+<div class="new-enquiry-div"> 
+    <div class="new-enquiry-head-div">New Enquiry: </div>
+    <div class="new-enquiry-body">
+    <div class="info-div">
+        <div class="info-header">
+          <div class="header">INFORMATION</div>
+        </div>
+        <div class="info-body">
+            <div class="flex justify-content-sapce-between">
+              <div class="org-div">
+                <div class="org-label sub-header">Customer Name:</div>
+                <div class="org-input">
+                     <select
+                  class="org-name"
+                  name="orgName"
+                  [(ngModel)]="enquiry.customer"
+                  [ngClass]="{
+                    'red-border': !flag.organization
+                  }"
+                >
+                <option *ngFor = "let org of infoService.pvtCustomerData" [value]="org.fullName"
+                >{{ org.fullName}}</option>
+              </select>
+                </div>
+                </div>
+                <div class="tender-date-div flex">
+                    <div class="tender-date">
+                      <div class="tender-date-label">Issued Date:</div>
+                      <Input
+                        type="text"
+                        class="tender-date-input"
+                        [(ngModel)]="enquiry.issueDate"
+                        ngDefaultControl
+                        disabled
+                        placeholder="dd/mm/yyyy"
+                      />
+                      <span class="calander"
+                        ><button>
+                          <mat-icon class="calander-button"  [ngClass]="{'red-color': !flag.issueDate}" svgIcon="calander" (click)="calanderOpen('issueDate')"></mat-icon>
+                        </button>
+                      </span>
+                      <app-calender class="app-calander" *ngIf="calanderFlag.issueDate" (dateEmit)='displayCounter($event)'></app-calender>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex description"> 
+                  <div class="description-lable sub-header">Special Features : </div>
+                  <div class="description-text">
+                    <textarea (change)="specialFeatureText($event)" ></textarea>
+                  </div>
+                </div>
+                <div class="price-table"> 
+                  <div class="price-table-head flex">
+                    <div class="s-no margin-5 white-bkgd height-40 padding-top-10">S.NO</div>
+                    <div class="item-description margin-5 white-bkgd padding-top-10"> ITEM DESCRIPTION</div>
+                    <div class="rating margin-5 white-bkgd padding-top-10">KVA</div>
+                    <div class="class margin-5 white-bkgd padding-top-10">CLASS</div>
+                    <div class="type margin-5 white-bkgd padding-top-10">TYPE</div>
+                    <div class="standard margin-5 white-bkgd padding-top-10">STANDARD</div>
+                    <div class="tap-variation margin-5 white-bkgd ">OLTC/ OCTC</div>
+                    <div class="terminal margin-5 white-bkgd padding-top-10">HV/LV TERMINALS</div>
+                    <div class="qty margin-5 white-bkgd padding-top-10">QTY</div>
+                    <div class="remark margin-5 white-bkgd padding-top-10">Remark  
+                      </div>
+                  </div>
+                  <div class="price-table-body flex" *ngFor="let item of enquiry.items;let i = index">
+                    <input class="s-no margin-5 white-bkgd padding-0  height-20 " [value]="i+1" disabled>
+                    <textarea class="item-description margin-5 white-bkgd padding-0 height-20" (change)="itemDescriptionText($event, i)"></textarea>
+                    <input class="rating margin-5 white-bkgd  padding-0 height-20" type="number" [(ngModel)]="item.rating" (keyup)="addPrice(i)">
+                    <div class="class margin-5 transperent-bkgd height-20">
+                      <input class="class-hv white-bkgd  padding-0" type="text" [(ngModel)]="item.classHv"> / 
+                      <input class="class-lv white-bkgd  padding-0" type="text" [(ngModel)]="item.classLv">
+                    </div>
+                    <div class="type margin-5 transperent-bkgd height-20">
+                      <select
+                      class="type-select"
+                      name="type"
+                      [(ngModel)]="item.type"
+                    >
+                      <option>ONAN</option>
+                      <option>DRY</option>
+                      <option>KNAN</option>
+                      <option>Custom</option>
+                    </select>
+                    </div>
+                    <div class="standard margin-5 transperent-bkgd height-20">
+                      <select
+                      class="standard-select"
+                      name="standard"
+                      [(ngModel)]="item.standard"
+                    >
+                      <option>1180-L1</option>
+                      <option>1180-L2</option>
+                      <option>1180-L3</option>
+                      <option>2026</option>
+                      <option>higher losses</option>
+                      <option>custom</option>
+                    </select>
+                    </div>
+                    <div class="tap-variation margin-5 transperent-bkgd height-20">
+                      <select
+                      class="tap-variation-select"
+                      name="tapVariation"
+                      [(ngModel)]="item.tapVariation"
+                    >
+                      <option>OLTC</option>
+                      <option>OCTC</option>
+                      <option>Custom</option>
+                    </select>
+                    </div>
+                    <div class="terminal margin-5 transperent-bkgd height-20">
+                      <select
+                class="terminal-hv"
+                name="terminalHv"
+                [(ngModel)]="item.terminalHv"
+              >
+                <option>Cable Box</option>
+                <option>Bare Bushings</option>
+                <option>Custom</option>
+              </select> / 
+              <select
+                class="terminal-lv"
+                name="terminalLv"
+                [(ngModel)]="item.terminalLv"
+              >
+                <option>Cable Box</option>
+                <option>Bare Bushings</option>
+                <option>Custom</option>
+              </select>
+                    </div>
+                    <input class="qty margin-5 white-bkgd padding-0 height-20" type="number" [(ngModel)]="item.qty" >
+                    <textarea class="remark margin-5 white-bkgd padding-0 height-20" (change)="itemRemarkText($event, i)"></textarea>
+                  </div>
+                  <div class="add-item flex">
+                    <div class="add-button" (click)='addItem()'>+ Add</div>
+                    <div class="remove-item" *ngFor="let item of enquiry.items; let i= index">
+                      <div class="remove-button" (click)='removeItem(i)'>Remove - {{i+1}}</div>
+                    </div>
+                </div>
+                </div>
+                </div>
+    </div>
+    <div class="enquiry-submission">
+    <div class="upload-div">
+      <div class="upload-input-div">
+        <div class="upload-input-lable">Drop Files to Upload</div>
+        <input
+          class="upload-input"
+          type="file"
+          (change)="detectFile($event)"
+          multiple
+        />
+      </div>
+      <div class="files-div">
+        <div
+          class="files"
+          *ngFor="let file of allFiles; let i = index"
+          (click)="deleteFile(i)"
+        >
+          <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+          <mat-icon
+            class="cloud-cross-icon"
+            svgIcon="cloud-cross-icon" *ngIf="file.size"
+          ></mat-icon>
+          <p>{{ file.name }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="submit">
+      <div class="submit-button" (click)="submit()">Submit</div>
+    </div>
+    </div>
+    </div>
+</div>
+<div class="add-organization" *ngIf = "routingService.rightTabs[0].flag">
+  <div class="add-organization-div">
+    <div class="add-organization-header">
+      <div class="cross"  (click)="addOrganizationBack()">X</div>
+    </div>
+    <div class="add-organization-body">
+    <div class="add-organization-head">
+      Add Customer/Organization
+    </div>
+    <div class="add-organization-inputs">
+      <div class="full-name-div">
+        <div class="lables">Full Name</div>
+        <input class="name-input" type="text" [ngClass]="{'red-border': !addOrganizationFlag.fullName }" [(ngModel)]="newOrganizationName.fullName"/>
+      </div>
+      <div class="add-organization-dash">  &ndash;  </div>
+      <div class="small-name-div">
+        <div class="lables">Short Form</div>
+        <input class="name-input" type="text" [ngClass]="{'red-border': !addOrganizationFlag.name }" [(ngModel)]="newOrganizationName.name"/>
+      </div> 
+    </div>
+    <div class="add-organization-inputs contact-details">
+      <div class="address-div">
+        <div class="lables">Address</div>
+        <textarea class="address-input" type="text" (change)="newCustomerAddressText($event)"></textarea>
+      </div> 
+      <div class="contact-person-div">
+        <div class="lables">Contact Person</div>
+        <input class="name-input" type="text" [(ngModel)]="newOrganizationName.details[0].name"/>
+        <div class="lables">Email</div>
+        <input class="name-input" type="text"  [(ngModel)]="newOrganizationName.details[0].email"/>
+        <div class="lables">Phone Number</div>
+        <input class="name-input" type="text"  [(ngModel)]="newOrganizationName.details[0].phone"/>
+      </div>
+    </div>
+    <div class="add-organization-submit">
+      <div class="add-organization-submit-button"  (click)="addOrganization()">Submit</div>
+    </div>
+  </div>
+  </div>
+</div>

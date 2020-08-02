@@ -11,11 +11,16 @@ import * as d3 from "d3";
 })
 export class PrepareOfferComponent implements OnInit {
   offer = {
-    customer:'',
-    issueDate:'',
+    customer:{ name:'',
+    refer:'Mr. Mangesh Tiwari',
+    address:'M/s Shriman Electrical Asso,Timber Market ,Koper Khairane ,Navi Mumbai 400709.',
+    phone:'9989497851',
+    email:'purchase@shrimanelectrical.com'
+  },
+  issueDate:'',
     subject:'Offer for Supply of',
     items:[
-      {descrition:'',
+      {descrition:'250KVA, 0.415/0.380KV Dry Type Panel LTG. T/F.',
     unitPrice:0.00,
   qty:0.00,
 totalPrice:0.00}
@@ -146,7 +151,7 @@ this.calanderFlag.issueDate = false;
     }
   }
   submit() {
-    this.pdfPreviewFlag = true; // for the pdfPreview
+    this.pdfPreviewFlag = false; // for the pdfPreview
     d3.select("#pdf-preview")
     .selectAll("*")
     .remove();
@@ -159,6 +164,7 @@ this.calanderFlag.issueDate = false;
     
   }
   offerpdfpreview() {
+    var toAddress = this.pdfForPreviewFormate();
     d3.select("#pdf-preview").style("font-size", "13px");
     this.pdfPreviewPage1 = d3
       .select("#pdf-preview")
@@ -174,96 +180,270 @@ this.calanderFlag.issueDate = false;
       .style('text-decoration','underline');
       this.pdfPreviewPage1.append('div')
       .text("OFFER REF: TCC/PVT-406/SEA/110")
-      .style('font-size','12px')
+      .style('font-size','14px')
       .style('font-weight','600')
       .append('div')
       .text("DATE : 01.07.2020")
       .style('float','right')
-      .style('font-size','12px')
+      .style('font-size','14px')
       .style('font-weight','500');
+      this.pdfPreviewPage1.append('div')
+      .text(this.offer.customer.refer)
+      .style('font-size','14px')
+      .style('margin-top','20px')
+      .style('font-weight','600');
+     var address = this.pdfPreviewPage1.append('div')
+      .style('font-size','14px')
+      .style("white-space", "pre-line")
+      .style('margin-top','5px');
+      address.node().innerHTML = toAddress;
+      this.pdfPreviewPage1.append('div')
+      .text('Ph:' + this.offer.customer.phone)
+      .style('font-size','14px')
+      .style('margin-top','2px');
+      this.pdfPreviewPage1.append('div')
+      .text('Email:' + this.offer.customer.email)
+      .style('font-size','14px')
+      .style('margin-top','2px')
+      .style('text-decoration','underline')
+      .style('color','#163a9a');
+      this.pdfPreviewPage1.append('div')
+      .text('Sub: ')
+      .style('font-size','14px')
+      .style('margin-top','20px')
+      .style('font-weight','600')
+      .append('span')
+      .text(this.offer.subject)
+      .style('font-weight','500');
+
+      var items = this.pdfPreviewPage1.append('div')
+      .style('margin-top','10px')
+      .style('display','flex')
+      .style('font-weight','600');
+
+      items.append('div')
+      .text('S.No')       
+      .style('width','9%')
+      .style('text-align','center')
+      .style('border','solid 1px')
+      .style('line-height','32px');
+
+      items.append('div')
+      .text('Description')
+      .style('width','40%')
+      .style('text-align','center')
+      .style('border','solid 1px')
+      .style('line-height','32px');
+
+      items.append('div')
+      .text('Unit Ex-Works Price')
+      .style('width','18%')
+      .style('text-align','center')
+      .style('border','solid 1px');
+
+      items.append('div')
+      .text('Qty')
+      .style('width','9%')
+      .style('text-align','center')
+      .style('border','solid 1px')
+      .style('line-height','32px');
+      
+      items.append('div')
+      .text('Total Ex-Works Price (Rupees)')
+      .style('width','22%')
+      .style('text-align','center')
+      .style('border','solid 1px');
+      for(let i =0; i < this.offer.items.length; i++) {
+        var item = this.pdfPreviewPage1.append('div')
+        .style('display','flex')
+        .style('font-weight','500')
+        .style('min-height','30px');
+  
+        item.append('div')
+        .text(i+1)       
+        .style('width','9%')
+        .style('text-align','center')
+        .style('border','solid 1px')
+        .style('line-height','32px');
+  
+        item.append('div')
+        .text(this.offer.items[i].descrition)
+        .style('width','40%')
+        .style('text-align','center')
+        .style('border','solid 1px');
+  
+        item.append('div')
+        .text(this.offer.items[i].unitPrice)
+        .style('width','18%')
+        .style('text-align','center')
+        .style('border','solid 1px')
+        .style('line-height','32px');
+  
+        item.append('div')
+        .text(this.offer.items[i].qty)
+        .style('width','9%')
+        .style('text-align','center')
+        .style('border','solid 1px')
+        .style('line-height','32px');
+        
+        item.append('div')
+        .text(this.offer.items[i].totalPrice)
+        .style('width','22%')
+        .style('text-align','center')
+        .style('border','solid 1px')
+        .style('line-height','32px');
+      }
+
+      var items = this.pdfPreviewPage1.append('div')
+      .style('display','flex')
+      .style('font-weight','600');
+
+      items.append('div')
+      .text('TOTAL EX-WORKS PRICE: (' + this.subTotalPriceWords + ')')       
+      .style('width','77%')
+      .style('border','solid 1px');
+
+      items.append('div')
+      .text(this.subTotalPrice)
+      .style('width','22%')
+      .style('text-align','center')
+      .style('border','solid 1px')
+      .style('line-height','32px');
+ 
+      this.pdfPreviewPage1.append('div')
+      .style('margin-top', '30px')
+      .style('margin-bottom', '30px')
+      .text("Commercial Terms & Conditions")
+      .style('text-align','center')
+      .style('font-size','20px')
+      .style('font-weight','600')
+      .style('text-decoration','underline');
+      for(let i =0; i < this.offer.terms.length; i++) {
+        if( (d3.select("#pdf-preview") as any).node().getBoundingClientRect().height > ((d3.select("#pdf-preview-start") as any).node().getBoundingClientRect().height+ 124 + 110)) {
+        var item = this.pdfPreviewPage1.append('div')
+        .style('display','flex')
+        .style('font-weight','500')
+        .style('min-height','30px');
+  
+        item.append('div')      
+        .style('width','15%')
+        .style('text-align','center')
+        .style('border','solid 1px')
+        .style('line-height','32px')
+        .append('div')
+        .style('position','relative')
+        .style('top','40%')
+        .text(this.romanNumbers[i]);
+  
+        item.append('div')
+        .style('width','30%')
+        .style('text-align','center')
+        .style('font-weight','600')
+        .style('border','solid 1px')
+        .append('div')
+        .style('position','relative')
+        .style('top','40%')
+        .text(this.offer.terms[i].lable);
+
+        item.append('div')
+        .text(this.offer.terms[i].content)
+        .style('width','54%')
+        .style('text-align','center')
+        .style('border','solid 1px');
+        }
+  
+      }
+      console.log((d3.select("#pdf-preview") as any).node().getBoundingClientRect().height);
+      console.log((d3.select("#pdf-preview-start") as any).node().getBoundingClientRect());
   }
   pdfPreviewHandler($event: any) {
     this.pdfPreviewFlag = !$event;
   }
-  convertNumberToWords(amount) {
-    var words = new Array();
-    words[0] = '';
-    words[1] = 'One';
-    words[2] = 'Two';
-    words[3] = 'Three';
-    words[4] = 'Four';
-    words[5] = 'Five';
-    words[6] = 'Six';
-    words[7] = 'Seven';
-    words[8] = 'Eight';
-    words[9] = 'Nine';
-    words[10] = 'Ten';
-    words[11] = 'Eleven';
-    words[12] = 'Twelve';
-    words[13] = 'Thirteen';
-    words[14] = 'Fourteen';
-    words[15] = 'Fifteen';
-    words[16] = 'Sixteen';
-    words[17] = 'Seventeen';
-    words[18] = 'Eighteen';
-    words[19] = 'Nineteen';
-    words[20] = 'Twenty';
-    words[30] = 'Thirty';
-    words[40] = 'Forty';
-    words[50] = 'Fifty';
-    words[60] = 'Sixty';
-    words[70] = 'Seventy';
-    words[80] = 'Eighty';
-    words[90] = 'Ninety';
-    amount = amount.toString();
-    var atemp = amount.split(".");
-    var number = atemp[0].split(",").join("");
-    var n_length = number.length;
-    var words_string = "";
-    if (n_length <= 9) {
-        var n_array = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0);
-        var received_n_array = new Array();
-        for (var i = 0; i < n_length; i++) {
-            received_n_array[i] = number.substr(i, 1);
-        }
-        for (var i = 9 - n_length, j = 0; i < 9; i++, j++) {
-            n_array[i] = received_n_array[j];
-        }
-        for (var i = 0, j = 1; i < 9; i++, j++) {
-            if (i == 0 || i == 2 || i == 4 || i == 7) {
-                if (n_array[i] == 1) {
-                    n_array[j] = 10 + n_array[j];
-                    n_array[i] = 0;
-                }
-            }
-        }
-         var value ;
-        for (var i = 0; i < 9; i++) {
-            if (i == 0 || i == 2 || i == 4 || i == 7) {
-                value = n_array[i] * 10;
-            } else {
-                value = n_array[i];
-            }
-            if (value != 0) {
-                words_string += words[value] + " ";
-            }
-            if ((i == 1 && value != 0) || (i == 0 && value != 0 && n_array[i + 1] == 0)) {
-                words_string += "Crores ";
-            }
-            if ((i == 3 && value != 0) || (i == 2 && value != 0 && n_array[i + 1] == 0)) {
-                words_string += "Lakhs ";
-            }
-            if ((i == 5 && value != 0) || (i == 4 && value != 0 && n_array[i + 1] == 0)) {
-                words_string += "Thousand ";
-            }
-            if (i == 6 && value != 0 && (n_array[i + 1] != 0 && n_array[i + 2] != 0)) {
-                words_string += "Hundred and ";
-            } else if (i == 6 && value != 0) {
-                words_string += "Hundred ";
-            }
-        }
-        words_string = words_string.split("  ").join(" ");
+  pdfForPreviewFormate() {
+    var toAdress = this.offer.customer.address.replace(/,/g, "," + "&#10;");
+    return toAdress;
+  }
+  convertNumberToWords(value) {
+    var fraction = Math.round(this.frac(value)*100);
+    var f_text  = "";
+
+    if(fraction > 0) {
+        f_text = "AND "+this.convert_number(fraction)+" PAISE";
     }
-    return words_string;
+
+    return this.convert_number(value)+" RUPEES "+f_text;
+}
+frac(f) {
+  return f % 1;
+}
+convert_number(number)
+{
+    if ((number < 0) || (number > 999999999)) 
+    { 
+        return "NUMBER OUT OF RANGE!";
+    }
+    var Gn = Math.floor(number / 10000000);  /* Crore */ 
+    number -= Gn * 10000000; 
+    var kn = Math.floor(number / 100000);     /* lakhs */ 
+    number -= kn * 100000; 
+    var Hn = Math.floor(number / 1000);      /* thousand */ 
+    number -= Hn * 1000; 
+    var Dn = Math.floor(number / 100);       /* Tens (deca) */ 
+    number = number % 100;               /* Ones */ 
+    var tn= Math.floor(number / 10); 
+    var one=Math.floor(number % 10); 
+    var res = ""; 
+
+    if (Gn>0) 
+    { 
+        res += (this.convert_number(Gn) + " CRORE"); 
+    } 
+    if (kn>0) 
+    { 
+            res += (((res=="") ? "" : " ") + 
+            this.convert_number(kn) + " LAKH"); 
+    } 
+    if (Hn>0) 
+    { 
+        res += (((res=="") ? "" : " ") +
+            this.convert_number(Hn) + " THOUSAND"); 
+    } 
+
+    if (Dn) 
+    { 
+        res += (((res=="") ? "" : " ") + 
+            this.convert_number(Dn) + " HUNDRED"); 
+    } 
+
+
+    var ones = Array("", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX","SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE", "THIRTEEN","FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN", "EIGHTEEN","NINETEEN"); 
+var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY", "EIGHTY", "NINETY"); 
+
+    if (tn>0 || one>0) 
+    { 
+        if (!(res=="")) 
+        { 
+            res += " AND "; 
+        } 
+        if (tn < 2) 
+        { 
+            res += ones[tn * 10 + one]; 
+        } 
+        else 
+        { 
+
+            res += tens[tn];
+            if (one>0) 
+            { 
+                res += ("-" + ones[one]); 
+            } 
+        } 
+    }
+
+    if (res=="")
+    { 
+        res = "zero"; 
+    } 
+    return res;
 }
 }

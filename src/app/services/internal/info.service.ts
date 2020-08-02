@@ -16,6 +16,8 @@ export class InfoService {
   data: any;
   organization: any;
   originalOrganizationData:any;
+  pvtCustomerData:any;
+  originalPvtCustomerData:any;
   experienceDocuments: any;
   originalExperienceDocuments: any;
   commonDocuments: any;
@@ -47,6 +49,14 @@ setCommonDocumentData( name, path, type) {
   this.originalCommonDocuments.data.push(data);
   newUserRef.set(this.originalCommonDocuments, { merge: true });
   this.commonDocuments.push(data);
+}
+addPvtCustomerName(data) {
+  const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
+    `${this.pathBase}/pvtCutomersDetails`
+  );
+  this.originalPvtCustomerData.data.push(data);
+  newUserRef.set(this.originalPvtCustomerData, { merge: true });
+  this.pvtCustomerData.push({...data});
 }
 addOrganizationName(data) {
   const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
@@ -88,6 +98,9 @@ addCompetitorDetails(data, makeData , makeFlag) {
             this.competitorDetails = doc.data().data;
             this.competitorMakeDetails = doc.data().makeData;
             this.originalCompetitorDetails = doc.data();
+          } else if (doc.data().name == 'Private Customers') {
+            this.pvtCustomerData = doc.data().data;
+            this.originalPvtCustomerData = doc.data();
           }
       });
     });
