@@ -135,21 +135,6 @@ this.offer.terms.push(term);
 this.calanderFlag.issueDate = false;
     }
   }
-  contentChanged(ev,index) {
-    
-    try {
-      this.offer.terms[index].content = ev.target.value;
-    } catch(e) {
-      console.info('could not set textarea-value');
-    }
-  }
-  lableChanged(ev,index) {
-    try {
-      this.offer.terms[index].lable = ev.target.value;
-    } catch(e) {
-      console.info('could not set textarea-value');
-    }
-  }
   submit() {
     this.pdfPreviewFlag = false; // for the pdfPreview
     d3.select("#pdf-preview")

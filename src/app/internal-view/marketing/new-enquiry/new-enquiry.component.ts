@@ -3,6 +3,7 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { RoutingService } from 'src/app/services/routing.service';
 import { InfoService } from 'src/app/services/internal/info.service';
+import { MarketingService } from 'src/app/services/internal/marketing/marketing.service';
 
 @Component({
   selector: 'app-new-enquiry',
@@ -12,24 +13,9 @@ import { InfoService } from 'src/app/services/internal/info.service';
 export class NewEnquiryComponent implements OnInit {
   testFile: FileList;
   allFiles: any;
-  enquiry = {
-    customer:'',
-  issueDate:'',
-  specialFeatures:'',
-  items:[
-    {descrition:'',
-  rating: 1000,
-  classHv: '',
-  classLv:'',
-  type:'',
-  standard:'',
-  tapVariation:'',
-  terminalHv:'',
-  terminalLv:'',
-qty:1,
-remark:''}
-  ]
-};
+  enquiry :any;
+  editFileRemove: any;
+  editFileAdd: any;
 newOrganizationName = {
   fullName: '',
   name: '',
@@ -53,10 +39,24 @@ addOrganizationFlag= {
     organization: true,
     issueDate: true,
    };
+   items = [
+    {description:'',
+  rating: '',
+  classHv: '',
+  classLv:'',
+  type:'',
+  standard:'',
+  tapVariation:'',
+  terminalHv:'',
+  terminalLv:'',
+qty:1,
+remark:''}
+  ];
   constructor(iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public routingService: RoutingService,
-    public infoService:InfoService) { 
+    public infoService:InfoService,
+    public marketingService:MarketingService) { 
       iconRegistry.addSvgIcon(
         "calander",
         sanitizer.bypassSecurityTrustResourceUrl("assets/icons/calander.svg")
@@ -75,9 +75,19 @@ addOrganizationFlag= {
 
   ngOnInit() {
     this.RightTab();
+    this.enquiry = this.marketingService.newEnquiry;
+    if (this.marketingService.editFlag) {
+      this.items = this.enquiry.items;
+      this.allFiles = this.enquiry.files.enquiryDocuments.slice();
+    }
   }
   submit() {
-   console.log(this.enquiry);
+    if(this.marketingService.editFlag) {
+      this.marketingService.pushEnquiryData(this.enquiry,this.editFileAdd);
+    } else {
+      this.marketingService.pushEnquiryData(this.enquiry,this.allFiles);
+    }
+    this.routingService.enquiryList();
   }
   addItem() {
     var item = {descrition:'',
@@ -107,30 +117,7 @@ this.enquiry.items.push(item);
 this.calanderFlag.issueDate = false;
     }
   }
-  specialFeatureText(ev) {
-    try {
-      this.enquiry.specialFeatures = ev.target.value;
-    } catch(e) {
-      console.info('could not set textarea-value');
-    }
 
-  }
-  itemDescriptionText(ev,index) {
-    try {
-      this.enquiry.items[index].descrition = ev.target.value;
-    } catch(e) {
-      console.info('could not set textarea-value');
-    }
-
-  }
-  itemRemarkText(ev,index) {
-    try {
-      this.enquiry.items[index].remark = ev.target.value;
-    } catch(e) {
-      console.info('could not set textarea-value');
-    }
-
-  }
   RightTab() {
     this.routingService.rightTabs = [{name:'Add Customer',
     message: 'Add New Customer/Organization to our data for future use',
@@ -161,14 +148,7 @@ this.calanderFlag.issueDate = false;
       this.addOrganizationFlag.fullName = false;
     }
       }
-      newCustomerAddressText(ev) {
-        try {
-          this.newOrganizationName.details[0].address = ev.target.value;
-        } catch(e) {
-          console.info('could not set textarea-value');
-        }
-    
-      }
+
 
       detectFile(event) {
     
@@ -177,47 +157,47 @@ this.calanderFlag.issueDate = false;
         if (this.allFiles) {
           for (let i = 0; i < this.testFile.length; i++) {
             this.allFiles[this.allFiles.length] = this.testFile[i];
-        // if(this.tenderService.editFlag) { 
-        //   if(this.editFileAdd) { 
-        //   this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
-        //   } else {
-        //     this.editFileAdd = [];
-        //   this.editFileAdd.push(this.testFile[i]);
-        // }
-        // }
+        if(this.marketingService.editFlag) { 
+          if(this.editFileAdd) { 
+          this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
+          } else {
+            this.editFileAdd = [];
+          this.editFileAdd.push(this.testFile[i]);
+        }
+        }
      }
         } else {
           this.allFiles = Array.from(this.testFile);
-        //   if(this.tenderService.editFlag) {     
-        //     if(this.editFileAdd) {    
-        //   for (let i = 0; i < this.testFile.length; i++) {
-        //     this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
-        //   }
-        //     } else {
-        //     this.editFileAdd = Array.from(this.testFile);
-        //   }
-        // }
+          if(this.marketingService.editFlag) {     
+            if(this.editFileAdd) {    
+          for (let i = 0; i < this.testFile.length; i++) {
+            this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
+          }
+            } else {
+            this.editFileAdd = Array.from(this.testFile);
+          }
+        }
       }
       }
       deleteFile(value: any) {
         var editFile = true;
-    //     if (this.tenderService.editFlag) {
-    //       if(this.editFileAdd) {
-    //       for (let i =0; i < this.editFileAdd.length; i++) {
-    //         if(this.editFileAdd[i].name == this.allFiles[value].name) {
-    //           this.editFileAdd.splice(i, 1);
-    //           editFile = false;
-    //         }
-    //       }
-    //     }
-    //       if(editFile) {
-    // this.editFileRemove = this.allFiles[value];
-    //       } else {
-    //     this.allFiles.splice(value, 1);
-    //       }
-          
-    //     } else {
+        if (this.marketingService.editFlag) {
+          if(this.editFileAdd) {
+          for (let i =0; i < this.editFileAdd.length; i++) {
+            if(this.editFileAdd[i].name == this.allFiles[value].name) {
+              this.editFileAdd.splice(i, 1);
+              editFile = false;
+            }
+          }
+        }
+          if(editFile) {
+    this.editFileRemove = this.allFiles[value];
+          } else {
         this.allFiles.splice(value, 1);
-        // }
+          }
+          
+        } else {
+        this.allFiles.splice(value, 1);
+        }
       }
 }

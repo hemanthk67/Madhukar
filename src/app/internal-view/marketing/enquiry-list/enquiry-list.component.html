@@ -1,0 +1,97 @@
+<div class="enquiry-list-div">
+    <div class="enquiry-list-head"> Enquiry-List</div>
+    <div class="enquiry-list-body">
+<span class="flex flex-wrap" *ngIf="marketingService.data">
+<div class="enquiry-list-card" *ngFor="let enquiry of marketingService.data.slice().reverse(); let i = index" [ngClass]="{'width-30': enquiry.flag, 'width-100': !enquiry.flag, 'height-auto':  !enquiry.flag,'light-blue-border-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange-border-color': enquiry.status == 'On-Going', 'green-border-color': enquiry.status == 'Successful', 'red-border-color': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
+    <div class="enquiry-list-card-small"   *ngIf="enquiry.flag">
+    <div class="enquiry-list-card-head">
+        <div class="org-head">{{ enquiry.customer }}  <div class="enquiry-number blue-bold">
+            <span class="enquiry-status" [ngClass]="{'light-blue-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'On-Going', 'green': enquiry.status == 'Successful', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
+                {{ enquiry.status }}</span>
+            {{ enquiry.number }}</div></div>
+        <span class="item-div"><div class="item-head"*ngFor="let item of enquiry.items| slice:0:5;let i=index "><span *ngIf="!item.special"><span *ngIf="i>0">,</span> {{ item.rating }} KVA ({{ item.standard }})</span></div> </span>
+    </div>
+    <div class="enquiry-list-card-body">
+        <div class="items">
+           
+        <div class="start-date"><span class="blue">Date:</span> {{ enquiry.issueDateFormatted }}</div>
+        </div>
+        <div class="down-arrow" (click)="read(i)">
+            <span>Read More</span>
+            
+            <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon>
+        </div>
+    </div>
+    </div>
+    <div class="enquiry-list-card-large" *ngIf="!enquiry.flag">
+        <div class="enquiry-list-card-head">
+        <div class="org-head">{{ enquiry.customer }}</div>
+        <span class="enquiry-status" [ngClass]="{'grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'On-Going', 'green': enquiry.status == 'Successful', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
+            {{ enquiry.status }}</span>
+    </div>
+    <div class="enquiry-list-card-sub-head">TCC/P-{{ enquiry.number }}/<span *ngFor = "let customer of infoService.pvtCustomerData">
+        <span *ngIf="customer.fullName == enquiry.customer">{{ customer.name }}</span>
+    </span>
+    </div>
+    <div class="enquiry-list-card-body">
+        <div class="date-items">
+        <div class="issue-date" ><span class="blue"> Date: </span>{{ enquiry.issueDateFormatted }}</div>
+        </div>
+        <div class="items-doc-body">
+            <div class="items-div">
+                <div class="item" *ngFor="let item of enquiry.items;let i=index">
+                    <div class="item-info" *ngIf="!item.special">
+                        <div class="item-enquiry-rating"> <span class="blue">Item:</span> {{ item.rating }}KVA - {{ item.classHv }}/{{ item.classLv }}KV - {{ item.type }}</div>
+                        <div class="item-enquiry-quantity"> <span class="blue">Quantity:</span> {{ item.qty }}</div>
+                        <div class="item-enquiry-standard"> <span class="blue">Standard:</span> {{ item.standard }}</div>
+                    </div>
+                    <div class="item-discription"> <span class="blue">description:</span> {{ item.description }}</div>
+                </div>
+            </div>
+            <div class="doc-div">
+                <div class="enquiry-documents" *ngIf="!enquiry.files.length && enquiry.files.length != 0">
+                    <div class="document-lable blue">enquiry Documents:</div>
+                    <div class="document-files" *ngFor="let file of enquiry.files.enquiryDocuments" (click)="downloadFile(file.path)">
+                        
+            <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+                        <div class="file-name"> {{ file.name }} </div>
+                    </div>
+                </div>
+                <div class="enquiry-documents" *ngIf="!enquiry.files.length && enquiry.files.length != 0 && enquiry.files.preparedDocuments.length">
+                    <div class="document-lable blue">Uploaded Documents:</div>
+                    <div class="document-files" *ngFor="let file of enquiry.files.uploadedDocuments" (click)="downloadFile(file.path)">
+                        
+            <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+                        <div class="file-name"> {{ file.name }} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="final-content">
+            <div class="edit-div" (click)="edit(i)">
+            <mat-icon class="down-sprial" svgIcon="edit-icon"></mat-icon>
+                <span>Edit</span>
+            </div>
+            <div class="approval-div">
+                <!-- <div class="div" *ngIf="enquiry.status == 'New enquiry'">
+                <div class="approval" (click)="approval('On-Going', i)"> Approve </div>
+                <div class="decline" (click)="approval('Not-Participated', i)"> Decline </div>
+                </div> -->
+                <div class="div" *ngIf="enquiry.status == 'On-Going'">
+                    <div class="document-prepare" (click)="prepareOffer(i)"> Prepare Offer </div>
+                    </div>
+                    <!-- <div class="div" *ngIf="enquiry.status == 'Submitted'">
+                        <div class="document-prepare" (click)="enquiryResults(i)"> Results </div>
+                        </div> -->
+            </div>
+        <div class="down-arrow" (click)="read(i)">
+            <span>Read Less</span>
+            <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+</span>
+    </div>
+</div>

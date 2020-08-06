@@ -46,7 +46,7 @@
                 <div class="flex description"> 
                   <div class="description-lable sub-header">Special Features : </div>
                   <div class="description-text">
-                    <textarea (change)="specialFeatureText($event)" ></textarea>
+                    <textarea name="specialFeatures" [(ngModel)]="enquiry.specialFeatures" ></textarea>
                   </div>
                 </div>
                 <div class="price-table"> 
@@ -65,7 +65,7 @@
                   </div>
                   <div class="price-table-body flex" *ngFor="let item of enquiry.items;let i = index">
                     <input class="s-no margin-5 white-bkgd padding-0  height-20 " [value]="i+1" disabled>
-                    <textarea class="item-description margin-5 white-bkgd padding-0 height-20" (change)="itemDescriptionText($event, i)"></textarea>
+                    <textarea class="item-description margin-5 white-bkgd padding-0 height-20" name="descrition" [(ngModel)]="item.description"></textarea>
                     <input class="rating margin-5 white-bkgd  padding-0 height-20" type="number" [(ngModel)]="item.rating" >
                     <div class="class margin-5 transperent-bkgd height-20">
                       <input class="class-hv white-bkgd  padding-0" type="text" [(ngModel)]="item.classHv"> / 
@@ -129,7 +129,7 @@
               </select>
                     </div>
                     <input class="qty margin-5 white-bkgd padding-0 height-20" type="number" [(ngModel)]="item.qty" >
-                    <textarea class="remark margin-5 white-bkgd padding-0 height-20" (change)="itemRemarkText($event, i)"></textarea>
+                    <textarea class="remark margin-5 white-bkgd padding-0 height-20" name="remark" [(ngModel)]="item.remark"></textarea>
                   </div>
                   <div class="add-item flex">
                     <div class="add-button" (click)='addItem()'>+ Add</div>
@@ -195,7 +195,7 @@
     <div class="add-organization-inputs contact-details">
       <div class="address-div">
         <div class="lables">Address</div>
-        <textarea class="address-input" type="text" (change)="newCustomerAddressText($event)"></textarea>
+        <textarea class="address-input" type="text" name="address" [(ngModel)]="newOrganizationName.details[0].address"></textarea>
       </div> 
       <div class="contact-person-div">
         <div class="lables">Contact Person</div>

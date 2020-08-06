@@ -63,16 +63,21 @@ export class RoutingService {
                title: "Marketing",
                role: "marketing",
                flag: false,
-               subcategories: [
+               subcategories: [ 
                  {
-                   title: "New Enquiry",
-                   path: "Marketing/NewEnquiry",
-                   flag: false
-                 }
+                  title: "Enquiry List",
+                  path: "Marketing/EnquiryList",
+                  flag: false
+                } , 
+                {
+                  title: "New Enquiry",
+                  path: "Marketing/NewEnquiry",
+                  flag: false
+                }
                ]
              }
   };
-  constructor(private router: Router) {
+  constructor(private router: Router) { 
     router.events.subscribe((val) => {
       if(val instanceof NavigationEnd) {
         this.rightTabs = null;
@@ -80,11 +85,14 @@ export class RoutingService {
       }
     });
   }
+  //Rout Auth
   routAuth(path) {
+   var flag = false;
     this.presentPath = path;
     if(this.userData && this.leftNavData) {
     for(let i =0; i < this.leftNavData.length; i++) {
       if(path.includes(this.leftNavData[i].title)) {
+        flag = true;
         if(!this.leftNavData[i].flag) {
           this.presentPath = "/Internal";
           this.router.navigate([
@@ -103,8 +111,19 @@ export class RoutingService {
         }
       }
     }
+    if(path.includes('Auth')) {
+      flag = true;
+    }
+    if(!flag) {
+      this.presentPath = "/Internal";
+          this.router.navigate([
+            { outlets: { primary: "Internal", approved: null } }
+          ]);
+    }
   }
   }
+
+  // Start of Tender
   tender(path: any) {
     this.loadingFlag = true;
     this.router.navigate([{ outlets: { approved: path } }]);
@@ -164,7 +183,33 @@ export class RoutingService {
       500
     );
   }
+  //Start of Marketing
+  enquiryList() {
+    this.loadingFlag = true;
+    this.router.navigate([
+      { outlets: { approved: "Marketing/EnquiryList" } }
+    ]);
+    setTimeout(
+      function() {
+        this.loadingFlag = false;
+      }.bind(this),
+      500
+    );
+  }
+  newEnquiry() {
+    this.loadingFlag = true;
+    this.router.navigate([
+      { outlets: { approved: "Marketing/NewEnquiry" } }
+    ]);
+    setTimeout(
+      function() {
+        this.loadingFlag = false;
+      }.bind(this),
+      500
+    );
+  }
   
+  //Login
   Login(user, Flag) {
     this.userData = user;
     this.sideNavData();

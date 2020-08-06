@@ -9,13 +9,13 @@
         <span class="item-div"><div class="item-head"*ngFor="let item of tender.items| slice:0:5;let i=index "><span *ngIf="!item.special"><span *ngIf="i>0">,</span> {{ item.kva }} KVA </span></div> </span>
     </div>
     <div class="tender-number-items">
-        <div class="tender-number"><span class="blue-bold">TenderNo:</span> {{ tender.tenderNumber }}</div>
-        <div class="e-tender-number"><span class="blue-bold">e-TenderNo:</span> {{ tender.eTenderNumber }}</div>
+        <div class="tender-number"><span class="blue">TenderNo:</span> {{ tender.tenderNumber }}</div>
+        <div class="e-tender-number"><span class="blue">e-TenderNo:</span> {{ tender.eTenderNumber }}</div>
     </div>
     <div class="tender-list-card-body">
         <div class="items">
-        <div class="start-date"><span class="blue-bold">Start Date:</span> {{ tender.startDateFormatted }}</div>
-        <div class="due-date" ><span class="blue-bold"> Due Date : </span>{{ tender.dueDateFormatted }}</div>
+        <div class="start-date"><span class="blue">Start Date:</span> {{ tender.startDateFormatted }}</div>
+        <div class="due-date" ><span class="blue"> Due Date : </span>{{ tender.dueDateFormatted }}</div>
         <div class="tender-number blue-bold">
             <span class="tender-status" [ngClass]="{'light-blue-color': tender.status == 'Submitted','grey': tender.status == 'Completed', 'orange': tender.status == 'On-Going', 'green': tender.status == 'Successful', 'red': tender.status == 'UnSuccessful' || tender.status == 'Not-Participated' ||  tender.status == 'Rejected' }">
                 {{ tender.status }}</span>
@@ -40,32 +40,32 @@
     </div>
     <div class="tender-list-card-body">
         <div class="date-items">
-        <div class="start-date"><span class="blue-bold">Start Date:</span> {{ tender.startDateFormatted }}</div>
-        <div class="due-date" ><span class="blue-bold"> Due Date : </span>{{ tender.dueDateFormatted }}</div>
-        <div class="issue-date" ><span class="blue-bold"> Issue Date : </span>{{ tender.issueDateFormatted }}</div>
+        <div class="start-date"><span class="blue">Start Date:</span> {{ tender.startDateFormatted }}</div>
+        <div class="due-date" ><span class="blue"> Due Date : </span>{{ tender.dueDateFormatted }}</div>
+        <div class="issue-date" ><span class="blue"> Issue Date : </span>{{ tender.issueDateFormatted }}</div>
         </div>
         <div class="tender-number-items">
-            <div class="tender-number"><span class="blue-bold">TenderNo:</span> {{ tender.tenderNumber }}</div>
-            <div class="e-tender-number"><span class="blue-bold">e-TenderNo:</span> {{ tender.eTenderNumber }}</div>
+            <div class="tender-number"><span class="blue">TenderNo:</span> {{ tender.tenderNumber }}</div>
+            <div class="e-tender-number"><span class="blue">e-TenderNo:</span> {{ tender.eTenderNumber }}</div>
         </div>
         <div class="items-doc-body">
             <div class="items-div">
                 <div class="item" *ngFor="let item of tender.items;let i=index">
                     <div class="item-info" *ngIf="!item.special">
-                        <div class="item-tender-rating"> <span class="blue-bold">Item:</span> {{ item.kva }}KVA - {{ item.class.hv }}/{{ item.class.lv }}KV - {{ item.type }}</div>
-                        <div class="item-tender-quantity"> <span class="blue-bold">Quantity:</span> {{ item.qty }}</div>
-                        <div class="item-tender-standard"> <span class="blue-bold">Standard:</span> {{ item.standard }}</div>
+                        <div class="item-tender-rating"> <span class="blue">Item:</span> {{ item.kva }}KVA - {{ item.class.hv }}/{{ item.class.lv }}KV - {{ item.type }}</div>
+                        <div class="item-tender-quantity"> <span class="blue">Quantity:</span> {{ item.qty }}</div>
+                        <div class="item-tender-standard"> <span class="blue">Standard:</span> {{ item.standard }}</div>
                     </div>
-                    <div class="item-discription"> <span class="blue-bold">Discription:</span> {{ item.discription }}</div>
+                    <div class="item-discription"> <span class="blue">Discription:</span> {{ item.discription }}</div>
                     <div class="item-destination">
-                    <div class="item-place"> <span class="blue-bold">Destination:</span> {{ item.destination }}</div>
-                    <div class="item-distance"> <span class="blue-bold">Distance:</span> {{ item.distance }}</div>
+                    <div class="item-place"> <span class="blue">Destination:</span> {{ item.destination }}</div>
+                    <div class="item-distance"> <span class="blue">Distance:</span> {{ item.distance }}</div>
                     </div>
                 </div>
             </div>
             <div class="doc-div">
                 <div class="tender-documents" *ngIf="!tender.files.length && tender.files.length != 0">
-                    <div class="document-lable blue-bold">Tender Documents:</div>
+                    <div class="document-lable blue">Tender Documents:</div>
                     <div class="document-files" *ngFor="let file of tender.files.tenderDocuments" (click)="downloadFile(file.path)">
                         
             <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="tender-documents" *ngIf="!tender.files.length && tender.files.length != 0 && tender.files.uploadedDocuments.length">
-                    <div class="document-lable blue-bold">Uploaded Documents:</div>
+                    <div class="document-lable blue">Uploaded Documents:</div>
                     <div class="document-files" *ngFor="let file of tender.files.uploadedDocuments" (click)="downloadFile(file.path)">
                         
             <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
@@ -83,9 +83,9 @@
             </div>
         </div>
         <div class="fee-items">
-            <div class="emd-fee"><span class="blue-bold">EMD:</span> {{ tender.emd.amount }}</div>
-            <div class="transaction-cost-fee"><span class="blue-bold">Transaction-Fee:</span> {{ tender.transactionFee.amount }}</div>
-            <div class="document-cost-fee"><span class="blue-bold">Document-Cost:</span> {{ tender.documentCost.amount }}</div>
+            <div class="emd-fee"><span class="blue">EMD:</span> {{ tender.emd.amount }}</div>
+            <div class="transaction-cost-fee"><span class="blue">Transaction-Fee:</span> {{ tender.transactionFee.amount }}</div>
+            <div class="document-cost-fee"><span class="blue">Document-Cost:</span> {{ tender.documentCost.amount }}</div>
         </div>
         <div class="final-content">
             <div class="edit-div" (click)="edit(i)">

@@ -91,8 +91,8 @@
               <div class="terms-table">
                 <div class="term flex" *ngFor="let term of offer.terms; let i =index">
                   <div class="term-s-no margin-5 white-bkgd"> {{ romanNumbers[i] }}</div>
-                  <textarea class="lable margin-5 white-bkgd" (change)="lableChanged($event,i)">{{ term.lable }}</textarea  >
-                  <textarea class="content margin-5 white-bkgd" (change)="contentChanged($event,i)" > {{ term.content }}</textarea>
+                  <textarea class="lable margin-5 white-bkgd" name="lable" [(ngModel)]="term.lable">{{ term.lable }}</textarea  >
+                  <textarea class="content margin-5 white-bkgd" name="content" [(ngModel)]="term.content" > {{ term.content }}</textarea>
                 </div>
                 <div class="add-item flex">
                   <div class="add-button" *ngIf="offer.terms.length < 10" (click)='addTerm()'>+ Add</div>
