@@ -208,6 +208,19 @@ export class RoutingService {
       500
     );
   }
+
+  prepareOffer() {
+    this.loadingFlag = true;
+    this.router.navigate([
+      { outlets: { approved: "Marketing/PrepareOffer" } }
+    ]);
+    setTimeout(
+      function() {
+        this.loadingFlag = false;
+      }.bind(this),
+      500
+    );
+  }
   
   //Login
   Login(user, Flag) {

@@ -77,7 +77,7 @@
                 <div class="approval" (click)="approval('On-Going', i)"> Approve </div>
                 <div class="decline" (click)="approval('Not-Participated', i)"> Decline </div>
                 </div> -->
-                <div class="div" *ngIf="enquiry.status == 'On-Going'">
+                <div class="div" *ngIf="enquiry.status == 'New Enquiry'">
                     <div class="document-prepare" (click)="prepareOffer(i)"> Prepare Offer </div>
                     </div>
                     <!-- <div class="div" *ngIf="enquiry.status == 'Submitted'">
