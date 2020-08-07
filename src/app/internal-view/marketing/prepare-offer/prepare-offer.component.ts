@@ -86,7 +86,7 @@ totalPrice:0.00}
 
   ngOnInit() { 
     this.pdfPreviewFlag = false; // for the pdfPreview
-    this.submit();
+    // this.submit();
   }
   calanderOpen(value) {
     this.calanderFlag.issueDate = !this.calanderFlag.issueDate;
@@ -136,7 +136,7 @@ this.calanderFlag.issueDate = false;
     }
   }
   submit() {
-    this.pdfPreviewFlag = false; // for the pdfPreview
+    this.pdfPreviewFlag = true; // for the pdfPreview
     d3.select("#pdf-preview")
     .selectAll("*")
     .remove();
