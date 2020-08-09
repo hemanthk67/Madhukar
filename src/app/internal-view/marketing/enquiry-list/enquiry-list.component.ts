@@ -62,7 +62,7 @@ export class EnquiryListComponent implements OnInit {
     // this.routingService.enquiryResults();
   }
   edit(index) {
-    this.marketingService.newEnquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
+    this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
     this.marketingService.editFlag = true;
     this.routingService.newEnquiry();
   }

@@ -52,6 +52,7 @@ addOrganizationFlag= {
 qty:1,
 remark:''}
   ];
+  editFlag = false;
   constructor(iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public routingService: RoutingService,
@@ -75,17 +76,23 @@ remark:''}
 
   ngOnInit() {
     this.RightTab();
-    this.enquiry = this.marketingService.newEnquiry;
+    this.editFlag = false;
     if (this.marketingService.editFlag) {
+      this.editFlag = true;
+      this.enquiry = this.marketingService.enquiry;
       this.items = this.enquiry.items;
       this.allFiles = this.enquiry.files.enquiryDocuments.slice();
+    } else {
+      this.enquiry = this.marketingService.newEnquiry;
     }
+    this.marketingService.editFlag = false;
   }
   submit() {
-    if(this.marketingService.editFlag) {
-      this.marketingService.pushEnquiryData(this.enquiry,this.editFileAdd);
+    if(this.editFlag) {
+      this.marketingService.pushEnquiryData(this.enquiry,this.editFileAdd,this.editFlag);
+
     } else {
-      this.marketingService.pushEnquiryData(this.enquiry,this.allFiles);
+      this.marketingService.pushEnquiryData(this.enquiry,this.allFiles,this.editFlag);
     }
     this.routingService.enquiryList();
   }
@@ -157,7 +164,7 @@ this.calanderFlag.issueDate = false;
         if (this.allFiles) {
           for (let i = 0; i < this.testFile.length; i++) {
             this.allFiles[this.allFiles.length] = this.testFile[i];
-        if(this.marketingService.editFlag) { 
+        if(this.editFlag) { 
           if(this.editFileAdd) { 
           this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
           } else {
@@ -168,7 +175,7 @@ this.calanderFlag.issueDate = false;
      }
         } else {
           this.allFiles = Array.from(this.testFile);
-          if(this.marketingService.editFlag) {     
+          if(this.editFlag) {     
             if(this.editFileAdd) {    
           for (let i = 0; i < this.testFile.length; i++) {
             this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
@@ -181,7 +188,7 @@ this.calanderFlag.issueDate = false;
       }
       deleteFile(value: any) {
         var editFile = true;
-        if (this.marketingService.editFlag) {
+        if (this.editFlag) {
           if(this.editFileAdd) {
           for (let i =0; i < this.editFileAdd.length; i++) {
             if(this.editFileAdd[i].name == this.allFiles[value].name) {

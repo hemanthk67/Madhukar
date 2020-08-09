@@ -40,7 +40,9 @@ export class PdfPreviewComponent implements OnInit {
     // d3.select(".pdf-container-div").style("display", "none");  the height checking is not working in the tenderdcuments page
     d3.select("#pdf-preview")
       .append("img")
+      .attr("id", "pdf-preview-header")
       .attr("src", "./assets/pdf/" + this.type +"header.jpg")
+      .style("padding-top", "10px")
       .style("width", "100%");
       if(this.type !== 'thota') {
     d3.select("#pdf-preview")
@@ -56,16 +58,17 @@ export class PdfPreviewComponent implements OnInit {
     // second page
     d3.select("#pdf-preview-1")
       .append("img")
-      .attr("src", "./assets/pdf/tccheader.jpg")
+      .attr("src", "./assets/pdf/"+ this.type + "header.jpg")
+      .style("padding-top", "10px")
       .style("width", "100%");
-    d3.select("#pdf-preview-1")
-      .style("position", "relative")
-      .append("img")
-      .attr("src", "./assets/pdf/tccfooter.jpg")
-      .style("width", "100%")
-      .style("position", "absolute")
-      .style("bottom", "0")
-      .style("left", "0");
+    // d3.select("#pdf-preview-1")
+    //   .style("position", "relative")
+    //   .append("img")
+    //   .attr("src", "./assets/pdf/"+ this.type + "footer.jpg")
+    //   .style("width", "100%")
+    //   .style("position", "absolute")
+    //   .style("bottom", "0")
+    //   .style("left", "0");
     // setTimeout(
     //   function() {
     //     d3.select(".pdf-container-div").style("display", "unset");
@@ -123,10 +126,10 @@ export class PdfPreviewComponent implements OnInit {
           undefined,
           "FAST"
         );
-        // pdf.save("TestFile.pdf");
-        this.savepdf = pdf.output("blob");
-        console.log(this.savepdf);
-        this.pdfService.savePdf(this.savepdf);
+        pdf.save("TestFile.pdf");
+        // this.savepdf = pdf.output("blob");
+        // console.log(this.savepdf);
+        // this.pdfService.savePdf(this.savepdf);
       });
     });
   }
