@@ -113,5 +113,6 @@
 <app-pdf-preview
   *ngIf="pdfPreviewFlag"
   (backFlag)="pdfPreviewHandler($event)"
+  (confirm)="pdfPreviewconfirm($event)"
   [type]="'thota'"
 ></app-pdf-preview>

@@ -1,0 +1,48 @@
+{
+    "customer":{ "name": "",
+    "refer":"",
+    "address":"",
+    "phone":"",
+    "email":""
+  },
+  "issueDate":"",
+    "subject":"Offer for Supply of fasdhfaksdhjf kasdjfh kasjdn fkahsdf  asd fas dfas dfa sdf asdf asdf ",
+    "itemsPrice":[],
+    "totalPrice":0.00,
+    "terms":[{
+      "lable":"Taxes & Duties",
+      "content":"The quoted Price is exclusive of GST. At present GST will be 18%. Entry Tax / Octroi Duty will be extra if any as applicable at actual. Any changes in taxes and duties/any new Taxes and Duties that get attracted at the time of actual delivery shall be to your account."
+    },
+    {
+      "lable":"Freight",
+      "content":"Freight charges are EXTRA at actual."
+    },
+    {
+      "lable":"Terms of payment",
+      "content":"50% advance payment along with PO and remaining 50% against Performa Invoice before dispatch of the material."
+    },
+    {
+      "lable":"Delivery",
+      "content":"Delivery shall be done with in 5 to 8 weeks from the date of receipt of advance payment."
+    },
+    {
+      "lable":"Warranty",
+      "content":"Twelve months from the date of commissioning or eighteen months from the date of dispatch, whichever is earlier."
+    },{
+      "lable":"Validity",
+      "content":"Our Offer is valid up to 30 days from the date of this offer."
+    },
+    {
+      "lable":"Tests",
+      "content":"Routine tests shall be conducted on transformer at our works without additional cost."
+    },
+    {
+      "lable":"Erection & Commissioning",
+      "content":"Our scope is limited to Design, Manufacture, Supply of the transformer and Testing at our works."
+    }],
+    "signBy": "Thota V",
+    "authorizedPhoneNumber": "9345099945",
+    "officeNumber": "040-27760334",
+    "email": "marketing@tccpltd.com"
+  }
+  

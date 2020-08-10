@@ -21,6 +21,7 @@ import { pdfFileService } from "src/app/services/pdfFile.service";
   styleUrls: ["./pdf-preview.component.scss"]
 })
 export class PdfPreviewComponent implements OnInit {
+  @Output() confirm = new EventEmitter<boolean>();
   @Output() backFlag = new EventEmitter<boolean>();
   @Input() type;
   savepdf: File;
@@ -127,6 +128,7 @@ export class PdfPreviewComponent implements OnInit {
           "FAST"
         );
         pdf.save("TestFile.pdf");
+        this.confirm.emit(true);
         // this.savepdf = pdf.output("blob");
         // console.log(this.savepdf);
         // this.pdfService.savePdf(this.savepdf);

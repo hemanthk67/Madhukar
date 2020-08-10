@@ -150,6 +150,31 @@
                             text-decoration: underline;
                             }
                         }
+                        .prepared-documents {
+                            display: flex;
+                            padding: 0px 5px;
+                            cursor: pointer;
+                            background-color: #163a9a;
+                            color: white;
+                            padding: 5px;
+                            border-radius: 5px;
+                            .pdf-icon {
+                                height: 25px;
+                                width: 25px;
+                                color: white;
+                            }
+                            .file-name {
+                                height: 15px;
+                                padding: 5px;
+                                font-weight: 600;
+                                max-width: 150px;
+                                word-break: break-all;
+                                overflow: hidden;
+                            }
+                        }
+                        .prepared-documents:hover {
+                            background-color: #003cd9;
+                        }
                         }
                     }
                 }
