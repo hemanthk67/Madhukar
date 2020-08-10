@@ -7,6 +7,7 @@ import { MarketingService } from 'src/app/services/internal/marketing/marketing.
 import { RoutingService } from 'src/app/services/routing.service';
 import { InfoService } from 'src/app/services/internal/info.service';
 import { pdfFileService } from 'src/app/services/pdfFile.service';
+import { DocumentsService } from 'src/app/services/common/documents.service';
 
 @Component({
   selector: 'app-enquiry-list',
@@ -14,13 +15,15 @@ import { pdfFileService } from 'src/app/services/pdfFile.service';
   styleUrls: ['./enquiry-list.component.scss']
 })
 export class EnquiryListComponent implements OnInit {
+  pdfPreviewFlag: boolean;
 
   constructor( private pdf:pdfFileService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public marketingService: MarketingService,
     private routingService: RoutingService,
-    public infoService:InfoService) {
+    public infoService:InfoService,
+    public documentsService: DocumentsService) {
       iconRegistry.addSvgIcon(
         "down-spiral",
         sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-spiral.svg")
@@ -62,8 +65,115 @@ export class EnquiryListComponent implements OnInit {
     // this.routingService.enquiryResults();
   }
   edit(index) {
-    this.marketingService.newEnquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
+    this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
     this.marketingService.editFlag = true;
     this.routingService.newEnquiry();
   }
+
+  //pdf for prepare offer
+  prepareOfferPdf(index) {
+    for(let i=0; i < this.infoService.pvtCustomerData.length; i++) {
+      if(this.infoService.pvtCustomerData[i].fullName == this.marketingService.originalData[this.marketingService.originalData.length - index - 1].customer) {
+      var customerReference = this.infoService.pvtCustomerData[i]
+      }
+         }
+    var subTotalPriceWords = this.convertNumberToWords(this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.totalPrice) + 'Only';
+    this.pdfPreviewFlag = true; // for the pdfPreview 
+    this.documentsService.enquiryOffer(this.marketingService.originalData[this.marketingService.originalData.length - index - 1], customerReference , this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer, subTotalPriceWords, this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.subTotalPrice);
+  
+  }
+
+  pdfPreviewHandler($event: any) {
+    this.pdfPreviewFlag = !$event;
+  }
+  pdfPreviewconfirm($event: any) {
+    if($event) {
+      this.pdfPreviewFlag = false;
+  }
+  }
+  // indian number to word function
+  convertNumberToWords(value) {
+    var fraction = Math.round(this.frac(value)*100);
+    var f_text  = "";
+
+    if(fraction > 0) {
+        f_text = "AND "+this.convert_number(fraction)+" PAISE";
+    }
+
+    return this.convert_number(value)+" RUPEES "+f_text;
+}
+frac(f) {
+  return f % 1;
+}
+convert_number(number)
+{
+    if ((number < 0) || (number > 999999999)) 
+    { 
+        return "NUMBER OUT OF RANGE!";
+    }
+    var Gn = Math.floor(number / 10000000);  /* Crore */ 
+    number -= Gn * 10000000; 
+    var kn = Math.floor(number / 100000);     /* lakhs */ 
+    number -= kn * 100000; 
+    var Hn = Math.floor(number / 1000);      /* thousand */ 
+    number -= Hn * 1000; 
+    var Dn = Math.floor(number / 100);       /* Tens (deca) */ 
+    number = number % 100;               /* Ones */ 
+    var tn= Math.floor(number / 10); 
+    var one=Math.floor(number % 10); 
+    var res = ""; 
+
+    if (Gn>0) 
+    { 
+        res += (this.convert_number(Gn) + " CRORE"); 
+    } 
+    if (kn>0) 
+    { 
+            res += (((res=="") ? "" : " ") + 
+            this.convert_number(kn) + " LAKH"); 
+    } 
+    if (Hn>0) 
+    { 
+        res += (((res=="") ? "" : " ") +
+            this.convert_number(Hn) + " THOUSAND"); 
+    } 
+
+    if (Dn) 
+    { 
+        res += (((res=="") ? "" : " ") + 
+            this.convert_number(Dn) + " HUNDRED"); 
+    } 
+
+
+    var ones = Array("", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX","SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE", "THIRTEEN","FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN", "EIGHTEEN","NINETEEN"); 
+var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY", "EIGHTY", "NINETY"); 
+
+    if (tn>0 || one>0) 
+    { 
+        if (!(res=="")) 
+        { 
+            res += " AND "; 
+        } 
+        if (tn < 2) 
+        { 
+            res += ones[tn * 10 + one]; 
+        } 
+        else 
+        { 
+
+            res += tens[tn];
+            if (one>0) 
+            { 
+                res += ("-" + ones[one]); 
+            } 
+        } 
+    }
+
+    if (res=="")
+    { 
+        res = "zero"; 
+    } 
+    return res;
+}
+// End indian number to word function
 }

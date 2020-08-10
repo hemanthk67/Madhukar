@@ -92,9 +92,9 @@ private pathBase = 'testMarketing';
       return markers;
     }
      // function to push new enquiry data
-  pushEnquiryData(enquiryData, files) {
-    if(this.editFlag) {
-    enquiryData = this.uploadFile(files ,enquiryData ,'enquiry-documents');
+  pushEnquiryData(enquiryData, files, editFlag) {
+    if(editFlag) {
+    enquiryData = this.uploadFile(files ,enquiryData ,'enquiry-documents', editFlag);
   this.setEnquiryData(enquiryData);
   for( let j=0; j < this.originalData.length; j++)
   {
@@ -107,7 +107,7 @@ private pathBase = 'testMarketing';
   }
     } else {
     enquiryData.number = this.currentEnquiryNo + 1;
-    enquiryData = this.uploadFile(files ,enquiryData ,'enquiry-documents');
+    enquiryData = this.uploadFile(files ,enquiryData ,'enquiry-documents', editFlag);
   this.setEnquiryData(enquiryData);
     this.currentEnquiryNo = enquiryData.number;
     this.originalData.push({...enquiryData});
@@ -117,7 +117,7 @@ private pathBase = 'testMarketing';
     }
   }
     // common files upload function
-    public uploadFile(allFiles ,enquiry, type) {
+    public uploadFile(allFiles ,enquiry, type, editFlag) {
       if(allFiles) {
       for (let i = 0; i < allFiles.length; i++) {
         let file = allFiles[i];
@@ -129,11 +129,11 @@ private pathBase = 'testMarketing';
      enquiryFile.name = file.name;
      if (type == 'enquiry-documents') {
         enquiryFile.path = this.pathBase + '/' + enquiry.number + '/' + file.name;
-      // if(this.editFlag) {
-      //   enquiry.files.enquiryDocuments[enquiry.files.enquiryDocuments.length] = {...enquiryFile};
-      // } else {
+      if(editFlag) {
+        enquiry.files.enquiryDocuments[enquiry.files.enquiryDocuments.length] = {...enquiryFile};
+      } else {
       enquiry.files.enquiryDocuments.push({...enquiryFile}); 
-      // }
+      }
         }
         this.pdfService.pushUpload(currentFile, enquiryFile.path);
       }  

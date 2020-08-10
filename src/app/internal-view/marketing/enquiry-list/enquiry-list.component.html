@@ -65,6 +65,12 @@
                         <div class="file-name"> {{ file.name }} </div>
                     </div>
                 </div>
+                <div class="enquiry-documents" *ngIf="enquiry.offer">
+                    <div class="prepared-documents"  (click)="prepareOfferPdf(i)">              
+            <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+                        <div class="file-name"> Prepare Offer </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="final-content">
@@ -95,3 +101,10 @@
 </span>
     </div>
 </div>
+
+<app-pdf-preview
+  *ngIf="pdfPreviewFlag"
+  (backFlag)="pdfPreviewHandler($event)"
+  (confirm)="pdfPreviewconfirm($event)"
+  [type]="'thota'"
+></app-pdf-preview>
