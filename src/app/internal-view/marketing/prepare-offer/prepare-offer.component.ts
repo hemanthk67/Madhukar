@@ -49,6 +49,8 @@ export class PrepareOfferComponent implements OnInit {
     }
 
   ngOnInit() { 
+    // setTimeout(
+    //   function() {
    this.enquiry = this.marketingService.enquiry;
   // this.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - 2]; 
    for(let i=0; i < this.infoService.pvtCustomerData.length; i++) {
@@ -58,6 +60,11 @@ this.customerReference = this.infoService.pvtCustomerData[i]
    }
     this.pdfPreviewFlag = false; // for the pdfPreview
     this.offerDataFormate();
+    
+    //     this.submit();
+    //   }.bind(this),
+    //   3000
+    // );
 
   }
   calanderOpen(value) {

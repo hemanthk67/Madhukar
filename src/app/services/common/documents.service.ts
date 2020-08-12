@@ -47,24 +47,29 @@ export class DocumentsService {
       .style('float','right')
       .style('font-size','13px')
       .style('font-weight','500');
-      this.pdfPreviewPage1.append('div')
-      .text('Mr. ' + offer.customer.refer)
-      .style('font-size','13px')
-      .style('margin-top','20px')
-      .style('font-weight','600');
-      this.pdfPreviewPage1.append('div')
+    var customer = this.pdfPreviewPage1.append('div')
+    .style('display','flex')
+    .style('justify-content','space-between')
+    .style('margin-top','20px');
+     var customerLeft = customer.append('div');
+     var customerRight = customer.append('div');
+     customerLeft.append('div')
       .text('M/s ' + offer.customer.name)
       .style('font-size','13px')
       .style('font-weight','600');
-     var address = this.pdfPreviewPage1.append('div')
+     var address = customerLeft.append('div')
       .style('font-size','12px')
       .style("white-space", "pre-line");
       address.node().innerHTML = toAddress;
-      this.pdfPreviewPage1.append('div')
+      customerRight.append('div')
+      .text('Mr. ' + offer.customer.refer)
+      .style('font-size','13px')
+      .style('font-weight','600');
+      customerRight.append('div')
       .text('Ph:' + offer.customer.phone)
       .style('font-size','12px')
       .style('margin-top','2px');
-      this.pdfPreviewPage1.append('div')
+      customerRight.append('div')
       .text('Email:' + offer.customer.email)
       .style('font-size','12px')
       .style('margin-top','2px')
@@ -254,30 +259,62 @@ this.pdfPreviewPage1.append('div')
       this.pdfPreviewPage2.append('div')
       .style('margin-top', '15px')
       .text("We shall be glad to furnish any further information (or) clarifications required by you and await your valued instructions, which will receive our most careful and prompt attention.");
-      var reference = this.pdfPreviewPage2
+      var reference = this.pdfPreviewPage2.append('div')
+      .style('display','flex')
+      .style('justify-content','space-between')
+      .style('font-size','14px');
+      
+      var referenceLeft = reference
       .append('div')
-      .style('text-align', 'right')
+      .style('text-align', 'Center')
+      .style('margin-top', '20px');
+
+      var referenceRight = reference
+      .append('div')
+      .style('text-align', 'center')
       .style('margin-top', '15px');
 
-      reference
+      referenceLeft
       .append('div')
-      .text('With Best Regards');
-      reference
+      .text('Thota V')
+      .style('margin-top', '10px')
+      .style('font-weight','600');
+      referenceLeft
       .append('div')
-      .text(offer.signBy);
-      reference
-      .append('div')
-      .text('Cell: ' + offer.authorizedPhoneNumber);
-      reference
+      .text('Cell: ' + '9100920124');
+      referenceLeft
       .append('div')
       .text('Ph: ' + offer.officeNumber);
-      reference
+      referenceLeft
+      .append('div')
+      .text('Email: ')
+      .append('span')
+      .text('thotav@tccpltd.com')
+      .style('color','rgb(22, 58, 154)')
+      .style('text-decoration','underline');
+
+      referenceRight
+      .append('div')
+      .text('With Best Regards')
+      .style('font-weight','600');
+      referenceRight
+      .append('div')
+      .text(offer.signBy)
+      .style('font-weight','600');
+      referenceRight
+      .append('div')
+      .text(offer.designation);
+      referenceRight
+      .append('div')
+      .text('Cell: ' + offer.authorizedPhoneNumber);
+      referenceRight
       .append('div')
       .text('Email: ')
       .append('span')
       .text(offer.email)
       .style('color','rgb(22, 58, 154)')
       .style('text-decoration','underline');
+      
 
       var businessPartnersListadd =  this.pdfPreviewPage2.append('div')
       .style('margin-top', '10px');
