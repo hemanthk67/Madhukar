@@ -14,6 +14,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { pdfFileService } from "src/app/services/pdfFile.service";
+import { RoutingService } from 'src/app/services/routing.service';
 
 @Component({
   selector: "app-pdf-preview",
@@ -28,6 +29,7 @@ export class PdfPreviewComponent implements OnInit {
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
+    private routingService: RoutingService,
     private pdfService: pdfFileService
   ) {
     iconRegistry.addSvgIcon(
@@ -132,6 +134,8 @@ export class PdfPreviewComponent implements OnInit {
         // this.savepdf = pdf.output("blob");
         // console.log(this.savepdf);
         // this.pdfService.savePdf(this.savepdf);
+        this.routingService.enquiryList();
+
       });
     });
   }

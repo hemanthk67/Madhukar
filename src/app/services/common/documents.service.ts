@@ -534,7 +534,6 @@ this.solarBusinessPartnerListArrangement(solarBusinessPartnersList, businessPart
       .style('margin', '5px')
       .style('margin-bottom', solarBusinessPartnersList[i].marginBottom)
       .on("click", function() {
-        console.log(i);
          businessPartners.remove();
         solarBusinessPartnersList.splice( i, 1)
         if(solarBusinessPartnersList.length !== 0) {
@@ -577,7 +576,7 @@ this.solarBusinessPartnerListArrangement(solarBusinessPartnersList, businessPart
    // Offer End
     // Marketing End
     pdfForPreviewFormate(offer) {
-      var toAdress = offer.customer.address.replace(/,/g, "," + "&#10;");
+      var toAdress = offer.customer.address.replace(/,/g, "," + " &#10;");
       return toAdress;
     }
 }

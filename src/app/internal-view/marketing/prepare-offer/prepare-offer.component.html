@@ -48,7 +48,7 @@
           <div class="flex subject"> 
             <div class="subject-lable sub-header">Subject:</div>
             <div class="subject-text">
-              <textarea (change)="doTextareaValueChange($event)" > Offer for Supply of</textarea>
+              <textarea name="subject" [(ngModel)]="offer.subject" ></textarea>
             </div>
           </div>
           <div class="price-table"> 

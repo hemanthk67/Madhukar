@@ -55,12 +55,12 @@ export class PrepareOfferComponent implements OnInit {
   // this.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - 2]; 
    for(let i=0; i < this.infoService.pvtCustomerData.length; i++) {
 if(this.infoService.pvtCustomerData[i].fullName == this.enquiry.customer) {
-this.customerReference = this.infoService.pvtCustomerData[i]
+this.customerReference = this.infoService.pvtCustomerData[i];
 }
    }
     this.pdfPreviewFlag = false; // for the pdfPreview
     this.offerDataFormate();
-    
+  
     //     this.submit();
     //   }.bind(this),
     //   3000
@@ -233,7 +233,7 @@ var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY
 // Data formating
 offerDataFormate() {
   
-  this.offer = this.JsonData;
+  this.offer = {...this.JsonData};
   this.offer.customer.name = this.enquiry.customer;
   this.offer.issueDate = this.enquiry.issueDate;
   var item = {
@@ -241,6 +241,7 @@ offerDataFormate() {
   unitPrice:0.00,
 qty:0.00,
 totalPrice:0.00};
+this.offer.itemsPrice = [];
   for(let i=0; i < this.enquiry.items.length; i++) {
     item = {
       description:this.enquiry.items[i].description,
@@ -249,6 +250,17 @@ totalPrice:0.00};
   totalPrice:0.00};
 this.offer.itemsPrice.push({...item});
   }
+    // var kva = '';
+    // var Class= '';
+    for(let i=0; i < this.enquiry.items.length; i++) {
+      // kva = kva + this.marketingService.enquiry.items[i] 
+      if( i == this.enquiry.items.length - 1 && i !== 0) {
+        this.offer.subject = this.offer.subject + 'and ' + this.enquiry.items[i].rating + 'KVA-' + this.enquiry.items[i].classHv + '/' + this.enquiry.items[i].classLv + 'KV.';
+      } else {
+        this.offer.subject = this.offer.subject + this.enquiry.items[i].rating + 'KVA-' + this.enquiry.items[i].classHv + '/' + this.enquiry.items[i].classLv + 'KV, '; 
+      }
+          }
+         
 }
 // End Data formating
 }

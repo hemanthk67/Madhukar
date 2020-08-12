@@ -125,6 +125,11 @@ this.calanderFlag.issueDate = false;
     }
   }
 
+  // 
+  creatediscription(index) {
+    this.enquiry.items[index].description = this.enquiry.items[index].rating + 'KVA, ' + this.enquiry.items[index].classHv + '/' + this.enquiry.items[index].classLv + 'KV, IS:' + this.enquiry.items[index].standard + '.';
+  }
+
   RightTab() {
     this.routingService.rightTabs = [{name:'Add Customer',
     message: 'Add New Customer/Organization to our data for future use',
