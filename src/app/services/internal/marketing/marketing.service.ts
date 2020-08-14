@@ -28,6 +28,7 @@ class Upload {
 })
 export class MarketingService {
   public editFlag = false;
+  public editOfferFlag = false;
   public newEnquiry = {
     number: null,
     employee: '',

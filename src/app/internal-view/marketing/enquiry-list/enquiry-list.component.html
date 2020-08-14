@@ -2,11 +2,11 @@
     <div class="enquiry-list-head"> Enquiry-List</div>
     <div class="enquiry-list-body">
 <span class="flex flex-wrap" *ngIf="marketingService.data">
-<div class="enquiry-list-card" *ngFor="let enquiry of marketingService.data.slice().reverse(); let i = index" [ngClass]="{'width-30': enquiry.flag, 'width-100': !enquiry.flag, 'height-auto':  !enquiry.flag,'light-blue-border-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange-border-color': enquiry.status == 'On-Going', 'green-border-color': enquiry.status == 'Successful', 'red-border-color': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
+<div class="enquiry-list-card" *ngFor="let enquiry of marketingService.data.slice().reverse(); let i = index" [ngClass]="{'width-30': enquiry.flag, 'width-100': !enquiry.flag, 'height-auto':  !enquiry.flag,'light-blue-border-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange-border-color': enquiry.status == 'Offer-Prepared', 'green-border-color': enquiry.status == 'Successful', 'red-border-color': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
     <div class="enquiry-list-card-small"   *ngIf="enquiry.flag">
     <div class="enquiry-list-card-head">
-        <div class="org-head">{{ enquiry.customer }}  <div class="enquiry-number blue-bold">
-            <span class="enquiry-status" [ngClass]="{'light-blue-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'On-Going', 'green': enquiry.status == 'Successful', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
+        <div class="org-head" [ngClass]="{'light-blue-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'Offer-Prepared', 'green': enquiry.status == 'Successful', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">{{ enquiry.customer }}  <div class="enquiry-number" >
+            <span class="enquiry-status" >
                 {{ enquiry.status }}</span>
             {{ enquiry.number }}</div></div>
         <span class="item-div"><div class="item-head"*ngFor="let item of enquiry.items| slice:0:5;let i=index "><span *ngIf="!item.special"><span *ngIf="i>0">,</span> {{ item.rating }} KVA ({{ item.standard }})</span></div> </span>
@@ -26,7 +26,7 @@
     <div class="enquiry-list-card-large" *ngIf="!enquiry.flag">
         <div class="enquiry-list-card-head">
         <div class="org-head">{{ enquiry.customer }}</div>
-        <span class="enquiry-status" [ngClass]="{'grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'On-Going', 'green': enquiry.status == 'Successful', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
+        <span class="enquiry-status" [ngClass]="{'grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'Offer-Prepared', 'green': enquiry.status == 'Successful', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
             {{ enquiry.status }}</span>
     </div>
     <div class="enquiry-list-card-sub-head">TCC/P-{{ enquiry.number }}/<span *ngFor = "let customer of infoService.pvtCustomerData">
@@ -68,15 +68,21 @@
                 <div class="enquiry-documents" *ngIf="enquiry.offer">
                     <div class="prepared-documents"  (click)="prepareOfferPdf(i)">              
             <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
-                        <div class="file-name"> Prepare Offer </div>
+                        <div class="file-name"> Download Offer </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="final-content">
-            <div class="edit-div" (click)="edit(i)">
+            <div class="edit-div" >
+                <div class="normal-edit" (click)="edit(i)">
             <mat-icon class="down-sprial" svgIcon="edit-icon"></mat-icon>
                 <span>Edit</span>
+                </div>
+                <div class="normal-edit" (click)="editoffer(i)" *ngIf="enquiry.offer">
+                    <mat-icon class="down-sprial" svgIcon="edit-icon"></mat-icon>
+                        <span>Edit Offer</span>
+                        </div>
             </div>
             <div class="approval-div">
                 <!-- <div class="div" *ngIf="enquiry.status == 'New enquiry'">

@@ -39,6 +39,7 @@ export class PrepareOfferComponent implements OnInit {
   customerReference: any;
   employeeDetails: any;
   documentName: any;
+  editOfferFlag = false;
   constructor(    iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public infoService:InfoService,
@@ -51,10 +52,9 @@ export class PrepareOfferComponent implements OnInit {
     }
 
   ngOnInit() { 
-    // setTimeout(
-    //   function() {
+ 
+         
    this.enquiry = this.marketingService.enquiry;
-  // this.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - 2]; 
    for(let i=0; i < this.infoService.pvtCustomerData.length; i++) {
 if(this.infoService.pvtCustomerData[i].fullName == this.enquiry.customer) {
 this.customerReference = this.infoService.pvtCustomerData[i];
@@ -62,11 +62,10 @@ this.customerReference = this.infoService.pvtCustomerData[i];
    }
     this.pdfPreviewFlag = false; // for the pdfPreview
     this.offerDataFormate();
-  
-    //     this.submit();
-    //   }.bind(this),
-    //   3000
-    // );
+    if (this.marketingService.editOfferFlag) {
+    this.offer = this.enquiry.offer;
+    }
+    this.marketingService.editOfferFlag = false;
 
   }
   calanderOpen(value) {
@@ -142,6 +141,7 @@ this.calanderFlag.issueDate = false;
   pdfPreviewconfirm($event: any) {
     if($event) {
     this.enquiry.offer = {...this.offer};
+    this.enquiry.status = "Offer-Prepared"
 this.marketingService.setOfferData();
   }
   }

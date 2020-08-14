@@ -70,6 +70,11 @@ export class EnquiryListComponent implements OnInit {
     this.marketingService.editFlag = true;
     this.routingService.newEnquiry();
   }
+  editoffer(index) {
+    this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
+    this.marketingService.editOfferFlag = true;
+    this.routingService.prepareOffer();
+  }
 
   //pdf for prepare offer
   prepareOfferPdf(index) {

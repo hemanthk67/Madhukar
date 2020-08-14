@@ -179,9 +179,10 @@
                     }
                 }
                 .final-content {
-                    display: flex;
+                    display: flex;            
+    margin-top: 10px;
                     .edit-div {
-                        width: 10%;
+                        width: 15%;
                         font-size: 14px;
                                 color: #727272;
                                 cursor: pointer;
@@ -189,9 +190,12 @@
                                     position: relative;
                                     top: -8px;
                                 }
+                                .normal-edit {
+                                    float: left;
+                                }
                     }
                     .approval-div {
-                        width: 80%;
+                        width: 70%;
                         display: flex;
                         justify-content: space-around;
                         color: #F2F2F2;
@@ -234,7 +238,7 @@
                     }
                     }
                 .down-arrow {
-                    width: 100px;
+                    width: 15%;
                     font-size: 14px;
             text-align: right;
                     color: #727272;
