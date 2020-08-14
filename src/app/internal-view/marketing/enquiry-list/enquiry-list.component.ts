@@ -80,7 +80,7 @@ export class EnquiryListComponent implements OnInit {
          }
     var subTotalPriceWords = this.convertNumberToWords(this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.totalPrice) + 'Only';
     this.pdfPreviewFlag = true; // for the pdfPreview 
-    this.documentsService.enquiryOffer(this.marketingService.originalData[this.marketingService.originalData.length - index - 1], customerReference , this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer, subTotalPriceWords, this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.subTotalPrice);
+    this.documentsService.enquiryOffer(this.marketingService.originalData[this.marketingService.originalData.length - index - 1], customerReference , this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer, subTotalPriceWords, this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.totalPrice);
   
   }
 

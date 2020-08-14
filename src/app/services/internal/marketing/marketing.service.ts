@@ -30,6 +30,7 @@ export class MarketingService {
   public editFlag = false;
   public newEnquiry = {
     number: null,
+    employee: '',
     customer:'',
   issueDate:'',
   status:'New Enquiry',
@@ -57,9 +58,9 @@ public enquiry;
 public data;
 public originalData = [];
 public currentEnquiryNo = 0;
-// private pathBase = environment.enquiryPath;  // change to enquiry once done with testing and ready for production
+private pathBase = environment.marketingPath;  // change to enquiry once done with testing and ready for production
 // private pathBase = 'Marketing';
-private pathBase = 'testMarketing';
+// private pathBase = 'testMarketing';
   constructor(
     private afs: AngularFirestore,
     public pdfService: pdfFileService,

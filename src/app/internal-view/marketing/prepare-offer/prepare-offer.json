@@ -3,7 +3,8 @@
     "refer":"",
     "address":"",
     "phone":"",
-    "email":""
+    "email":"",
+    "gender":""
   },
   "issueDate":"",
     "subject":"Offer for Supply of ",
@@ -40,10 +41,10 @@
       "lable":"Erection & Commissioning",
       "content":"Our scope is limited to Design, Manufacture, Supply of the transformer and Testing at our works."
     }],
-    "signBy": "B.Venkanna",
-    "authorizedPhoneNumber": "9502175667",
-    "designation": "Marketing Executive",
+    "signBy": "",
+    "authorizedPhoneNumber": "",
+    "designation": "",
     "officeNumber": "040-27760334",
-    "email": "marketing@tccpltd.com"
+    "email": ""
   }
   

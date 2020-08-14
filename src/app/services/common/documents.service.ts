@@ -61,8 +61,12 @@ export class DocumentsService {
       .style('font-size','12px')
       .style("white-space", "pre-line");
       address.node().innerHTML = toAddress;
+      var  refAdressing = 'Mr. ';
+      if(offer.customer.gender == 'Female') {
+        refAdressing = 'Ms. ';
+      }
       customerRight.append('div')
-      .text('Mr. ' + offer.customer.refer)
+      .text(refAdressing + offer.customer.refer)
       .style('font-size','13px')
       .style('font-weight','600');
       customerRight.append('div')

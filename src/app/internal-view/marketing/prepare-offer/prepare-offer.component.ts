@@ -37,6 +37,7 @@ export class PrepareOfferComponent implements OnInit {
   pdfPreviewPage2;
   enquiry: any;
   customerReference: any;
+  employeeDetails: any;
   documentName: any;
   constructor(    iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
@@ -89,6 +90,7 @@ this.customerReference = this.infoService.pvtCustomerData[i];
       this.offer.customer.address = this.customerReference.details[i].address;
       this.offer.customer.phone = this.customerReference.details[i].phone;
       this.offer.customer.email = this.customerReference.details[i].email;
+      this.offer.customer.gender = this.customerReference.details[i].gender;
       }
          }
   }
@@ -260,6 +262,15 @@ this.offer.itemsPrice.push({...item});
       } else {
         this.offer.subject = this.offer.subject + this.enquiry.items[i].rating + 'KVA-' + this.enquiry.items[i].classHv + '/' + this.enquiry.items[i].classLv + 'KV, '; 
       }
+          }
+          for (let i=0; i < this.infoService.employeeData.length; i++) {
+            if( this.enquiry.employee === this.infoService.employeeData[i].name) {
+this.offer.signBy = this.infoService.employeeData[i].name;
+this.offer.authorizedPhoneNumber = this.infoService.employeeData[i].phoneNumber;
+this.offer.designation = this.infoService.employeeData[i].designation;
+this.offer.email = this.infoService.employeeData[i].email;
+break;
+            }
           }
 
           this.documentName = this.enquiry.customer + ' OFFER P - ' + this.enquiry.number;

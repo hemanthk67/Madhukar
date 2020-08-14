@@ -81,8 +81,18 @@
                   }
                 }
               }
+              .employee-div {
+                .name-input {
+                  min-width: 250px;
+    height: 25px;
+    font-size: 18px;
+    border: solid 1px;
+    border-radius: 5px;
+    margin-top: 8px;
+                }
+              }
               .description {
-                padding-top: 50px;
+                padding-top: 30px;
                 .description-lable {
   
                 }

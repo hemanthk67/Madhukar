@@ -25,6 +25,8 @@ export class InfoService {
   competitorDetails:any;
   competitorMakeDetails:any;
   originalCompetitorDetails:any;
+  employeeData: any;
+  originalEmployeeData: any;
 
   constructor(
     private afs: AngularFirestore,
@@ -101,6 +103,9 @@ addCompetitorDetails(data, makeData , makeFlag) {
           } else if (doc.data().name == 'Private Customers') {
             this.pvtCustomerData = doc.data().data;
             this.originalPvtCustomerData = doc.data();
+          } else if (doc.data().name == 'Employees') {
+            this.employeeData = doc.data().data;
+            this.originalEmployeeData = doc.data();
           }
       });
     });
