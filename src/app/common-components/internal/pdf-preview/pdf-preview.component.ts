@@ -24,6 +24,7 @@ import { RoutingService } from 'src/app/services/routing.service';
 export class PdfPreviewComponent implements OnInit {
   @Output() confirm = new EventEmitter<boolean>();
   @Output() backFlag = new EventEmitter<boolean>();
+  @Input() documentName;
   @Input() type;
   savepdf: File;
   constructor(
@@ -129,7 +130,7 @@ export class PdfPreviewComponent implements OnInit {
           undefined,
           "FAST"
         );
-        pdf.save("TestFile.pdf");
+        pdf.save( this.documentName + ".pdf" );
         this.confirm.emit(true);
         // this.savepdf = pdf.output("blob");
         // console.log(this.savepdf);

@@ -24,7 +24,8 @@ newOrganizationName = {
       address: '',
       name:'',
       email:'',
-      phone:''
+      phone:'',
+      gender: 'Male'
     }
   ]
 };
@@ -98,14 +99,14 @@ remark:''}
   }
   addItem() {
     var item = {descrition:'',
-    rating: 1000,
-    classHv: '',
-    classLv:'',
-    type:'',
-    standard:'',
-    tapVariation:'',
-    terminalHv:'',
-    terminalLv:'',
+    rating: '',
+    classHv: this.enquiry.items[this.enquiry.items.length -1].classHv,
+    classLv:this.enquiry.items[this.enquiry.items.length -1].classLv,
+    type:this.enquiry.items[this.enquiry.items.length -1].type,
+    standard:this.enquiry.items[this.enquiry.items.length -1].standard,
+    tapVariation:this.enquiry.items[this.enquiry.items.length -1].tapVariation,
+    terminalHv:this.enquiry.items[this.enquiry.items.length -1].terminalHv,
+    terminalLv:this.enquiry.items[this.enquiry.items.length -1].terminalLv,
   qty:1,
   remark:''};
 this.enquiry.items.push(item);

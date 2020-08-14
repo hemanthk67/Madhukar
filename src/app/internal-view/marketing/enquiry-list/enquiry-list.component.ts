@@ -16,7 +16,7 @@ import { DocumentsService } from 'src/app/services/common/documents.service';
 })
 export class EnquiryListComponent implements OnInit {
   pdfPreviewFlag: boolean;
-
+  documentName: any;
   constructor( private pdf:pdfFileService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
@@ -58,6 +58,7 @@ export class EnquiryListComponent implements OnInit {
   }
   prepareOffer(index) {
     this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
+    this.documentName = this.marketingService.enquiry.customer + ' OFFER P - ' + this.marketingService.enquiry.number;
     this.routingService.prepareOffer();
   }
   enquiryResults(index) {

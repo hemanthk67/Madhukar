@@ -206,6 +206,13 @@
         <div class="lables">Phone Number</div>
         <input class="name-input" type="text"  [(ngModel)]="newOrganizationName.details[0].phone"/>
       </div>
+      <div class="gender-div">
+      <div class="lables">Gender</div>
+      <select class="name-input"  [(ngModel)]="newOrganizationName.details[0].gender">
+        <option> Male </option>
+        <option> Female </option>
+      </select>
+      </div>
     </div>
     <div class="add-organization-submit">
       <div class="add-organization-submit-button"  (click)="addOrganization()">Submit</div>

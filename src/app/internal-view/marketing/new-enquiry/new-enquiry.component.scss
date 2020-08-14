@@ -129,7 +129,7 @@
                   text-align: center;
                   .type-select {
                     margin-top: 10px;
-                    width: 100%;
+                    width: 105%;
                   }
                 }
                 .standard {
@@ -137,7 +137,7 @@
                   text-align: center;
                   .standard-select {
                     margin-top: 10px;
-                    width: 100%;
+                    width: 105%;
                   }
                 }
                 .tap-variation {
@@ -145,7 +145,7 @@
                   text-align: center;
                   .tap-variation-select {
                     margin-top: 10px;
-                    width: 100%;
+                    width: 105%;
                   }
                 }
                 .terminal {
@@ -346,7 +346,7 @@ background-color: white;
     }
     .contact-details {
       width: fit-content;
-      float: left;
+      // float: left;
     }
     .add-organization-inputs {
       display: flex;
@@ -382,11 +382,15 @@ margin-top: 10px;
         margin-top: 10px;
         margin-left: 25px;
       }
+      .gender-div {
+        margin-top: 10px;
+        margin-left: 25px;
+        font-size: 16px;
+      }
     }
     .add-organization-submit {
       .add-organization-submit-button {
         width: fit-content;
-            margin-top: 125px;
             padding: 5px 10px;
             border-radius: 5px;
             color: white;

@@ -37,6 +37,7 @@ export class PrepareOfferComponent implements OnInit {
   pdfPreviewPage2;
   enquiry: any;
   customerReference: any;
+  documentName: any;
   constructor(    iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public infoService:InfoService,
@@ -260,6 +261,8 @@ this.offer.itemsPrice.push({...item});
         this.offer.subject = this.offer.subject + this.enquiry.items[i].rating + 'KVA-' + this.enquiry.items[i].classHv + '/' + this.enquiry.items[i].classLv + 'KV, '; 
       }
           }
+
+          this.documentName = this.enquiry.customer + ' OFFER P - ' + this.enquiry.number;
          
 }
 // End Data formating
