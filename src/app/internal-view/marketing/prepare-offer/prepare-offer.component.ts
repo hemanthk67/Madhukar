@@ -277,4 +277,9 @@ break;
          
 }
 // End Data formating
+
+// start of subPriceTotal 
+subPriceTotal() {
+  this.offer.subPriceTotalFlag = !this.offer.subPriceTotalFlag;
+}
 }

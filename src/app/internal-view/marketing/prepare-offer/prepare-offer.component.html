@@ -74,9 +74,12 @@
                 <div class="remove-button" (click)='removeItem(i)'>Remove - {{i+1}}</div>
               </div>
           </div>
-            <div class="price-table-tail flex">
+            <div class="price-table-tail flex" *ngIf="offer.subPriceTotalFlag">
               <div class="sub-total-in-words margin-5 white-bkgd" >TOTAL EX-WORKS PRICE:  {{ subTotalPriceWords }} </div>
               <input class="sub-total margin-5 white-bkgd"  [(ngModel)]="subTotalPrice">
+            </div>
+            <div class="sub-total-price-flag-div">
+              <div class="sub-total-price-flag-button" (click)='subPriceTotal()'>Sub-Price-Total</div>
             </div>
           </div>
           <div class="commercial-terms">

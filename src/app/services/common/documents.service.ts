@@ -171,7 +171,7 @@ this.pdfPreviewPage1.append('div')
         .style('border','solid 1px')
         .style('line-height','32px');
       }
-
+if( offer.subPriceTotalFlag) {
       var items = this.pdfPreviewPage1.append('div')
       .style('display','flex')
       .style('font-weight','600');
@@ -187,6 +187,7 @@ this.pdfPreviewPage1.append('div')
       .style('text-align','center')
       .style('border','solid 1px')
       .style('line-height','32px');
+}
  
       this.pdfPreviewPage1.append('div')
       .style('margin-top', '30px')
