@@ -141,6 +141,20 @@ private pathBase = environment.marketingPath;  // change to enquiry once done wi
     }
     return enquiry;
     } 
+    //set offer data
+    setOfferData() {
+
+      for(let i =0; i < this.data.length; i++ ) {
+        if( this.data[i].number == this.enquiry.number ) {
+         this.data[i] = {...this.enquiry};
+         this.data[i].issueDateFormatted = this.dateFormatting(this.data[i].issueDate);
+        }
+        if( this.originalData[i].number == this.enquiry.number ) {
+         this.originalData[i] = {...this.enquiry}; 
+        }
+       }
+       this.setEnquiryData(this.enquiry);
+    }
       // function to set upload new data
       setEnquiryData(data) {
     const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(

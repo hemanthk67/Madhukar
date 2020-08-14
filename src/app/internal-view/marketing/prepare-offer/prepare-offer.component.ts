@@ -142,7 +142,7 @@ this.calanderFlag.issueDate = false;
   pdfPreviewconfirm($event: any) {
     if($event) {
     this.enquiry.offer = {...this.offer};
-this.marketingService.setEnquiryData(this.enquiry);
+this.marketingService.setOfferData();
   }
   }
  
