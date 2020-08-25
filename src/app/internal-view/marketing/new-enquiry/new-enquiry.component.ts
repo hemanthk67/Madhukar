@@ -84,7 +84,8 @@ remark:''}
       this.items = this.enquiry.items;
       this.allFiles = this.enquiry.files.enquiryDocuments.slice();
     } else {
-      this.enquiry = this.marketingService.newEnquiry;
+      this.enquiry = {...this.marketingService.newEnquiry};
+      this.enquiry.issueDate = this.presentDate();
     }
     this.marketingService.editFlag = false;
   }
@@ -141,17 +142,17 @@ this.calanderFlag.issueDate = false;
     this.routingService.rightTabs[0].flag = !this.routingService.rightTabs[0].flag;
   }
   addOrganization() {
-    if(this.newOrganizationName.fullName != '') {
+    if(this.newOrganizationName.fullName !== '') {
       this.addOrganizationFlag.fullName = true;
-    if(this.newOrganizationName.name != '') {
-      if(this.newOrganizationName.details[0].name != ''){
-      this.infoService.addPvtCustomerName(this.newOrganizationName);
-      this.newOrganizationName.fullName = '';
-      this.newOrganizationName.name = '';
-      this.newOrganizationName.details[0].name = '';
-      this.newOrganizationName.details[0].address = '';
-      this.newOrganizationName.details[0].email = '';
-      this.newOrganizationName.details[0].phone = '';
+    if(this.newOrganizationName.name !== '') {
+      if(this.newOrganizationName.details[0].name !== ''){
+      this.infoService.addPvtCustomerName({...this.newOrganizationName});
+      // this.newOrganizationName.fullName = '';
+      // this.newOrganizationName.name = '';
+      // this.newOrganizationName.details[0].name = '';
+      // this.newOrganizationName.details[0].address = '';  // commented as the data in the array of the object is getting refreshed and its taking as reference 
+      // this.newOrganizationName.details[0].email = '';
+      // this.newOrganizationName.details[0].phone = '';
       this.routingService.rightTabs[0].flag = !this.routingService.rightTabs[0].flag;
       }
     } else {
@@ -212,5 +213,14 @@ this.calanderFlag.issueDate = false;
         } else {
         this.allFiles.splice(value, 1);
         }
+      }
+      presentDate() {
+        var today = new Date();
+var dd = String(today.getDate());
+var mm = String(today.getMonth() + 1); //January is 0!
+var yyyy = today.getFullYear();
+
+
+return( dd + '/' + mm + '/' + yyyy);
       }
 }

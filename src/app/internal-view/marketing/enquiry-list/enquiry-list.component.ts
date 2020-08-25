@@ -83,6 +83,7 @@ export class EnquiryListComponent implements OnInit {
       var customerReference = this.infoService.pvtCustomerData[i]
       }
          }
+         this.documentName = this.marketingService.originalData[this.marketingService.originalData.length - index - 1].customer + ' OFFER P - ' + this.marketingService.originalData[this.marketingService.originalData.length - index - 1].number;
     var subTotalPriceWords = this.convertNumberToWords(this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.totalPrice) + 'Only';
     this.pdfPreviewFlag = true; // for the pdfPreview 
     this.documentsService.enquiryOffer(this.marketingService.originalData[this.marketingService.originalData.length - index - 1], customerReference , this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer, subTotalPriceWords, this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.totalPrice);

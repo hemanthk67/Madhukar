@@ -200,7 +200,7 @@ if( offer.subPriceTotalFlag) {
       var nextPage = d3
       .select("#pdf-preview-1")
       .append("div")
-      .attr("id", "pdf-preview-start")
+      .attr("id", "pdf-preview-start-1-2")
       .style('padding', '20px 70px');
       var item: any;
       for(let i =0; i < offer.terms.length; i++) {
@@ -256,7 +256,7 @@ if( offer.subPriceTotalFlag) {
     this.pdfPreviewPage2 = d3
       .select("#pdf-preview-1")
       .append("div")
-      .attr("id", "pdf-preview-start")
+      .attr("id", "pdf-preview-start-1")
       .style('padding', '0px 70px');
       this.pdfPreviewPage2.append('div')
       .style('margin-top', '15px')
@@ -487,7 +487,15 @@ let solarBusinessPartnersList = [ {
 }];
 this.solarBusinessPartnerListArrangement(solarBusinessPartnersList, businessPartners, businessPartnersListadd);
 
+if( (d3.select("#pdf-preview-1") as any).node().getBoundingClientRect().height > ((d3.select("#pdf-preview-start-1") as any).node().getBoundingClientRect().height + (d3.select("#pdf-preview-start-1-2") as any).node().getBoundingClientRect().height + (d3.select("#pdf-preview-header") as any).node().getBoundingClientRect().height + 130)) {    
+      this.pdfPreviewPage2.append('div')
+      .append('img')
+      .attr('src', './assets/logo/Inspected.jpg')
+      .style("width", "100%")
+      .style("margin-top", "35px")
+}
     }
+    
     businessPartnersListArrangement(businessPartnersList, businessPartners, businessPartnersListadd) {
       for(let i=0; i < businessPartnersList.length ; i++) {
         var border = businessPartners
