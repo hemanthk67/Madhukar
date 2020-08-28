@@ -94,7 +94,7 @@ export class PdfPreviewComponent implements OnInit {
       format: "a4",
       compress: true
     });
-    html2canvas(test).then(canvas => {
+    html2canvas(test,{scale: 2, logging: true}).then(canvas => {
       var imgWidth = 212;
       var pageHeight = 295;
       var imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -112,7 +112,7 @@ export class PdfPreviewComponent implements OnInit {
         "FAST"
       );
       test = document.getElementById("pdf-preview-1");
-      html2canvas(test).then(canvas => {
+      html2canvas(test,{scale: 2, logging: true}).then(canvas => {
         var imgWidth = 212;
         var pageHeight = 295;
         var imgHeight = (canvas.height * imgWidth) / canvas.width;
