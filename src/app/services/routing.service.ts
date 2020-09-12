@@ -75,7 +75,31 @@ export class RoutingService {
                   flag: false
                 }
                ]
-             }
+             },
+        operations:{
+              title: "Operation",
+              role: "operation",
+              flag: false,
+              subcategories: [ 
+                {
+                 title: "E&W Attandance",
+                 path: "Operations/E&WAttandance",
+                 flag: false
+               }
+              ]
+            },
+            admin:{
+                  title: "Admin",
+                  role: "adimin",
+                  flag: false,
+                  subcategories: [ 
+                    {
+                     title: "LoginPermissions",
+                     path: "Admin/LoginPermissions",
+                     flag: false
+                   }
+                  ]
+                }
   };
   constructor(private router: Router) { 
     router.events.subscribe((val) => {
@@ -247,6 +271,12 @@ sideNavData() {
    }
    if (this.userData.role.tender || this.userData.role.admin) {
     this.leftNavData.push(this.routs.tender);
+   }
+   if(this.userData.role.admin) {
+    this.leftNavData.push(this.routs.admin);
+   }
+   if (this.userData.role.operations || this.userData.role.admin) {
+   this.leftNavData.push(this.routs.operations);
    }
    this.routAuth(this.presentPath);
   }

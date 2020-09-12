@@ -3,7 +3,7 @@
     <div class="tender-list-body">
 <span *ngIf="tenderService.data">
 <div class="tender-list-card" *ngFor="let tender of tenderService.data.slice().reverse(); let i = index" [ngClass]="{'light-blue-border-color': tender.status == 'Submitted','grey': tender.status == 'Completed', 'orange-border-color': tender.status == 'On-Going', 'green-border-color': tender.status == 'Successful', 'red-border-color': tender.status == 'UnSuccessful' || tender.status == 'Not-Participated' ||  tender.status == 'Rejected' }">
-    <div class="tender-list-card-small"  *ngIf="tender.flag">
+    <div class="tender-list-card-small" (click)="read(i)"  *ngIf="tender.flag">
     <div class="tender-list-card-head">
         <div class="org-head">{{ tender.organization }}<span class="grey" *ngIf="tender.tenderMode == 'offline'">({{ tender.tenderMode }})</span></div>
         <span class="item-div"><div class="item-head"*ngFor="let item of tender.items| slice:0:5;let i=index "><span *ngIf="!item.special"><span *ngIf="i>0">,</span> {{ item.kva }} KVA </span></div> </span>

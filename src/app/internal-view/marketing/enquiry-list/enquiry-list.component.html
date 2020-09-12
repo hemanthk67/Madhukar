@@ -3,7 +3,7 @@
     <div class="enquiry-list-body">
 <span class="flex flex-wrap" *ngIf="marketingService.data">
 <div class="enquiry-list-card" *ngFor="let enquiry of marketingService.data.slice().reverse(); let i = index" [ngClass]="{'width-30': enquiry.flag, 'width-100': !enquiry.flag, 'height-auto':  !enquiry.flag,'light-blue-border-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange-border-color': enquiry.status == 'Offer-Prepared', 'green-border-color': enquiry.status == 'Successful', 'red-border-color': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
-    <div class="enquiry-list-card-small"   *ngIf="enquiry.flag">
+    <div class="enquiry-list-card-small" (click)="read(i)" *ngIf="enquiry.flag">
     <div class="enquiry-list-card-head">
         <div class="org-head" [ngClass]="{'light-blue-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'Offer-Prepared', 'green': enquiry.status == 'Successful', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">{{ enquiry.customer }}  <div class="enquiry-number" >
             <span class="enquiry-status" >
