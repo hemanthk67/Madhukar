@@ -11,5 +11,6 @@ export const environment = {
     measurementId: "G-R8D4BJR94X"
   },
   tenderPath:'Tender',
-  marketingPath:'Marketing'
+  marketingPath:'Marketing',
+  operationsPath: 'Operations'
 };

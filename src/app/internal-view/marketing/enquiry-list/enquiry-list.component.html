@@ -16,10 +16,13 @@
            
         <div class="start-date"><span class="blue">Date:</span> {{ enquiry.issueDateFormatted }}</div>
         </div>
+        <div class="bottom">
+            <div class="employee-name" *ngIf="enquiry.employee"> {{ enquiry.employee }} </div>
         <div class="down-arrow" (click)="read(i)">
             <span>Read More</span>
             
             <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon>
+        </div>
         </div>
     </div>
     </div>

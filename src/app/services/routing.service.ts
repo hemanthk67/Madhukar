@@ -81,11 +81,11 @@ export class RoutingService {
               role: "operation",
               flag: false,
               subcategories: [ 
-                {
-                 title: "E&W Attandance",
-                 path: "Operations/E&WAttandance",
-                 flag: false
-               }
+               {
+                title: "Employee & Worker",
+                path: "Operations/Employees",
+                flag: false
+              }
               ]
             },
             admin:{

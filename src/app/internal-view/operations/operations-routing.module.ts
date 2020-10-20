@@ -5,8 +5,7 @@ import { EmployeesComponent } from './employees/employees.component';
 import { EandwAttandanceComponent } from './eandw-attandance/eandw-attandance.component';
 
 const routes: Routes = [{ path: '', component: OperationsComponent },
-{ path: 'Employees', component: EmployeesComponent },
-{ path: 'E&WAttandance', component: EandwAttandanceComponent }];
+{ path: 'Employees', component: EmployeesComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

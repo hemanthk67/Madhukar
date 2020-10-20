@@ -1,0 +1,168 @@
+
+    <div class="employees-list-div">
+        <div class="employees-list-head"> New Employee / Worker</div>
+        <div class="employees-list-body">
+            <div class="width-100 flex">
+    <div class="width-50">
+        <div class="employee-type flex space-between">
+            <div class="employee-label"> Recruit Type :</div>
+            <select
+            class="employee-type-select"
+            name="type"
+            [(ngModel)]="employee.type">
+                <option> Employee </option>
+                <option> Worker </option>
+                <option> Contract </option>
+            </select>
+        </div>
+    <div class="employee-name flex space-between">
+        <div class="employee-label"> Employee Full Name :</div>
+        <input class="employee-name-input" [(ngModel)]="employee.name"/>
+    </div>
+    <div class="employee-gender flex space-between">
+        <div class="employee-label"> Employee Gender :</div>
+        <div>
+        <label class="employee-gender-label">Male</label>
+        <input type="radio" id="male" name="gender" [(ngModel)]="employee.gender" value="Male" class="employee-gender-button"/>
+        <label class="employee-gender-label">Female</label>
+        <input type="radio" id="female" name="gender" [(ngModel)]="employee.gender" value="Female" class="employee-gender-button"/>
+        </div>
+    </div>
+    <div class="employee-blood-group flex space-between">
+        <div class="employee-label"> Employee Blood Group :</div>
+        <select class="employee-blood-group-select"
+        [(ngModel)]="employee.bloodGroup">
+            <option>O(+ve)</option>
+            <option>O(-ve)</option>
+            <option>A(+ve)</option>
+            <option>A(-ve)</option>
+            <option>B(+ve)</option>
+            <option>B(-ve)</option>
+            <option>AB(+ve)</option>
+            <option>AB(-ve)</option>
+            <option>special</option>
+        </select>
+    </div>
+    <div class="photo flex space-between">
+        <div class="employee-label"> Upload Employee Photo :</div>
+    <input
+          class="upload-photo-input"
+          type="file"
+          (change)="detectPhotoFile($event)"
+        />
+        </div>
+        <div class="aadhar-number flex space-between">
+            
+        <div class="employee-label"> Aadhar or Proof Number :</div>
+            <input type="text" class="aadhar-number-input" [(ngModel)]="employee.proofNumber"/>
+        </div>
+        <div class="upload-aadhar flex space-between">
+            <div class="employee-label"> Upload Aadhar or Proof :</div>
+            <input
+            class="upload-aadhar-input"
+            type="file"
+            (change)="detectProofFile($event)"
+          />
+        </div>
+        <div class="employee-name flex space-between">
+            <div class="employee-label"> Phone Number :</div>
+            <input type="number" class="employee-name-input" [(ngModel)]="employee.phoneNumber"/>
+        </div>
+        <div class="employee-name flex space-between">
+            <div class="employee-label"> Email :</div>
+            <input class="employee-name-input" [(ngModel)]="employee.email"/>
+        </div>
+    </div>
+    <div class="width-40 margin-left-30">
+        <div class="reference">
+            <div class="tender-date-div employee-name flex space-between">
+                <div class="tender-date">
+                    <div class="tender-date-label">Date of Birth:</div>
+                    <Input
+                      type="text"
+                      class="tender-date-input"
+                      [(ngModel)]="employee.dob"
+                      ngDefaultControl
+                      disabled
+                      placeholder="dd/mm/yyyy"
+                    />
+                    <span class="calander"
+                      ><button>
+                        <mat-icon class="calander-button" [ngClass]="{'red-color': !flag}" svgIcon="calander" (click)="calanderOpen('startDate')"></mat-icon>
+                      </button>
+                    </span>
+                    <app-calender class="app-calander" *ngIf="calanderFlag" (dateEmit)='displayCounter($event)'></app-calender>
+                  </div>
+            </div>
+            <div class="employee-label"> Reference 1 :</div>
+        </div>
+        <div class="reference-content flex space-between">
+            <div class="reference-label">Name :</div>
+            <input class="reference-content-input" [(ngModel)]="employee.reference[0].name"/>
+        </div>
+        <div class="reference-content flex space-between">
+            <div class="reference-label">Phone Number :</div>
+            <input class="reference-content-input" [(ngModel)]="employee.reference[0].phoneNumber"/>
+        </div>
+        <div class="reference-content flex space-between">
+            <div class="reference-label">Relation :</div>
+            <input class="reference-content-input" [(ngModel)]="employee.reference[0].relation"/>
+        </div>
+        <div class="reference">
+            <div class="employee-label"> Reference 2 :</div>
+        </div>
+        <div class="reference-content flex space-between">
+            <div class="reference-label">Name :</div>
+            <input class="reference-content-input" [(ngModel)]="employee.reference[1].name"/>
+        </div>
+        <div class="reference-content flex space-between">
+            <div class="reference-label">Phone Number :</div>
+            <input class="reference-content-input" [(ngModel)]="employee.reference[1].phoneNumber"/>
+        </div>
+        <div class="reference-content flex space-between">
+            <div class="reference-label">Relation :</div>
+            <input class="reference-content-input" [(ngModel)]="employee.reference[1].relation"/>
+        </div>
+        <div class="upload-Resume flex space-between">
+            <div class="employee-label"> Upload Resume :</div>
+            <input
+            class="upload-resume-input"
+            type="file"
+            (change)="detectResumeFile($event)"
+          />
+        </div>
+    </div>
+    </div>
+    <div class="sub-header">Internal Information:</div>
+    <div class="flex">
+    <div class="width-50">
+        <div class="designation flex space-between">
+            <div class="employee-label"> Department :</div>
+            <select class="designation-input" [(ngModel)]="employee.department">
+                <option>Marketing</option>
+                <option>Production</option>
+                <option>Administration</option>
+            </select>
+        </div>
+            <div class="designation flex space-between">
+                <div class="employee-label"> Designation :</div>
+                <input class="designation-input" [(ngModel)]="employee.designation"/>
+            </div>
+    </div>
+    <div class="width-40 margin-left-30">
+        <div class="designation flex space-between">
+            <div class="employee-label"> Monthly Salary :</div>
+            <input type="number" class="designation-input" [(ngModel)]="employee.salary.monthlySalary"/>
+        </div>
+            <div class="designation flex space-between">
+                <div class="employee-label"> Monthly Fixed Bonus :</div>
+                <input type="number" class="designation-input" [(ngModel)]="employee.salary.monthlyFixedBonus"/>
+            </div>
+    </div>
+    </div>
+    <div class="submit">
+        <div class="submit-button" (click)="submit()">Submit</div>
+    </div>
+        </div>
+        
+        </div> 

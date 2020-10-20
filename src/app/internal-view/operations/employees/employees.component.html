@@ -1,1 +1,6 @@
-<p>employees works!</p>
+<div class="container">
+    <app-employee-list *ngIf="routingService.rightTabs[2].flag" class="app-tender-query"></app-employee-list>
+    <app-new-employee *ngIf="routingService.rightTabs[1].flag" class="results"></app-new-employee>
+    <app-eandw-attandance *ngIf="routingService.rightTabs[0].flag" class="app-employee-list"></app-eandw-attandance>
+    
+  </div>

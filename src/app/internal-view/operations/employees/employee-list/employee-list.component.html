@@ -1,0 +1,37 @@
+<div class="employees-list-div">
+    <div class="employees-list-head"> Employee and Worker List</div>
+    <div class="employees-list-body">
+<span class="flex flex-wrap" *ngIf="operations.employeeData && !routingService.loadingFlag">
+    <div class="employee-list-card" *ngFor="let employee of operations.employeeData; let i = index" >
+        <div class="employee-list-card-small"  *ngIf="employee.flag">
+            <div class="employee-list-card-image" *ngIf="start()">
+                <img class="employee-image" [src]="employee.photoUrl" />
+            </div>
+            <div class="employee-list-card-content">
+        <div class="employee-list-card-head flex justify-content-space-between">
+            <div class="employee-list-card-bold-text"> {{employee.name}} </div>
+            <div class="employee-list-card-bold-text"> {{employee.type}} -- {{employee.number}} </div>
+           </div>
+           <div class="employee-list-card-head flex justify-content-space-between">
+            <div class="employee-list-card-bold-text"> {{employee.designation}} </div>
+            <div class="employee-list-card-bold-text"> {{employee.department}} </div>
+           </div>
+           <div class="employee-list-card-body flex">
+               <div class="employee-list-card-body-content">
+                <div class="employee-list-card-text"> <span>DOB:</span> {{employee.dateOfBirthFormatted}} </div>
+                <div class="employee-list-card-text"> <span>Phone Number:</span> {{employee.phoneNumber}} </div></div>
+               <div class="employee-list-card-body-action flex">
+                   <div class="employee-list-card-body-active-button" [ngClass]="{'employee-list-card-body-active-button-selected': employee.active}" (click)="userStatus('Active', i)"> Active</div>
+                   <div class="employee-list-card-body-in-active-button" [ngClass]="{'employee-list-card-body-in-active-button-selected': !employee.active}" (click)="userStatus('In-Active', i)">Not Active</div>
+                   <div class="employee-list-card-body-seperated-button" [ngClass]="{'employee-list-card-body-seperation-button-selected': seperationFlag && changeIndex == i}" (click)="userStatus('Seperate', i)">Seperated</div>
+               </div>
+           </div>
+           <div class="submit" *ngIf="changeFlag && changeIndex == i"> 
+               <div class="submit-button" (click)="submit()">Submit</div>
+           </div>
+           </div>
+        </div>
+    </div>
+    </span>
+    </div>
+    </div> 
