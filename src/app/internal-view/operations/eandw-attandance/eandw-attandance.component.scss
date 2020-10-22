@@ -14,6 +14,13 @@
         padding: 5px;
         padding-right: 15px;
         border-top: solid 1px #163a9a;
+        .head {
+            font-size: 18px;
+            font-weight: 600;
+            color: #163a9a;
+            margin: 5px;
+            text-align: center;
+        }
         .employee-attandance-worker {
             .employee-sub-header {
                 font-size: 18px;
@@ -279,6 +286,28 @@
                         }
                     }
                 }
+            }
+        }
+        .submit {
+            .submit-button {
+                width: fit-content;
+                float: right;
+                margin-right: 150px;
+                font-size: 18px;
+                margin-top: 25px;
+                padding: 5px 10px;
+                border-radius: 5px;
+                color: #fff;
+                background-color: #163a9a;
+                border: 1px solid #163a9a;
+                cursor: pointer;
+            }
+            .submit-button:hover {
+                background-color: #003cd9;
+            }
+            .submit-button:active {
+                background-color: white;
+                color: #163a9a;
             }
         }
     }

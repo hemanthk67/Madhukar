@@ -72,6 +72,10 @@
             <div class="employee-label"> Email :</div>
             <input class="employee-name-input" [(ngModel)]="employee.email"/>
         </div>
+        <div class="employee-name flex space-between">
+            <div class="employee-label"> Qualification :</div>
+            <input class="employee-name-input" [(ngModel)]="employee.qualification"/>
+        </div>
     </div>
     <div class="width-40 margin-left-30">
         <div class="reference">
@@ -88,7 +92,7 @@
                     />
                     <span class="calander"
                       ><button>
-                        <mat-icon class="calander-button" [ngClass]="{'red-color': !flag}" svgIcon="calander" (click)="calanderOpen('startDate')"></mat-icon>
+                        <mat-icon class="calander-button" [ngClass]="{'red-color': false}" svgIcon="calander" (click)="calanderOpen()"></mat-icon>
                       </button>
                     </span>
                     <app-calender class="app-calander" *ngIf="calanderFlag" (dateEmit)='displayCounter($event)'></app-calender>
@@ -131,6 +135,10 @@
             (change)="detectResumeFile($event)"
           />
         </div>
+        <div class="employee-name flex space-between">
+            <div class="employee-label"> experiance :</div>
+            <input class="employee-name-input" [(ngModel)]="employee.experiance"/>
+        </div>
     </div>
     </div>
     <div class="sub-header">Internal Information:</div>
@@ -157,6 +165,29 @@
             <div class="designation flex space-between">
                 <div class="employee-label"> Monthly Fixed Bonus :</div>
                 <input type="number" class="designation-input" [(ngModel)]="employee.salary.monthlyFixedBonus"/>
+            </div>
+    </div>
+    </div>
+    <div class="sub-header">Bank Information:</div>
+    <div class="flex">
+    <div class="width-50">
+        <div class="designation flex space-between">
+            <div class="employee-label"> Bank Name:</div>
+            <input class="designation-input" [(ngModel)]="employee.bank.name"/>
+        </div>
+            <div class="designation flex space-between">
+                <div class="employee-label"> Branch :</div>
+                <input class="designation-input" [(ngModel)]="employee.bank.branch"/>
+            </div>
+    </div>
+    <div class="width-40 margin-left-30">
+        <div class="designation flex space-between">
+            <div class="employee-label"> Account Number :</div>
+            <input type="number" class="designation-input" [(ngModel)]="employee.bank.accountNumber"/>
+        </div>
+            <div class="designation flex space-between">
+                <div class="employee-label"> IFSC Code :</div>
+                <input type="text" class="designation-input" [(ngModel)]="employee.bank.ifsc"/>
             </div>
     </div>
     </div>

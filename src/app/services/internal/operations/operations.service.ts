@@ -82,6 +82,13 @@ private pathBase = environment.operationsPath;  // change to enquiry once done w
         500
       );
     }
+    employeeAttandance (dataArray, date) {
+      const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
+        `EmployeeAttandance/${date}`
+      );
+      var data = { data:dataArray };
+      newUserRef.set(data, { merge: true });
+    }
     changeEmployeeStatus(data,seperationFlag, index) {
       if(seperationFlag) {
         this.setSeperatedEmployeeData({...data});

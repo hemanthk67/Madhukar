@@ -37,6 +37,8 @@ export class NewEmployeeComponent implements OnInit {
     proofNumber:'',
     proofPath:'',
     photoPath:'',
+    qualification:'',
+    experiance:'',
     reference: [
       {
         name:'',
@@ -53,6 +55,12 @@ export class NewEmployeeComponent implements OnInit {
     salary: {
       monthlySalary: 0,
       monthlyFixedBonus: 0
+    },
+    bank: {
+      name:'',
+      branch:'',
+      accountNumber:'',
+      ifsc:''
     }
   };
   photoFile: any;

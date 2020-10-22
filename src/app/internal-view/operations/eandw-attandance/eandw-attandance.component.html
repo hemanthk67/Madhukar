@@ -2,6 +2,7 @@
 <div class="employees-attandance-div">
     <div class="employees-attandance-head"> Attandance</div>
     <div class="employees-attandance-body">
+        <div class="head">{{ this.months[this.selectedMonth - 1] }} - {{ this.selectedYear }}</div>
         <div *ngFor="let type of types; let p = index">
         <div class="employee-attandance-worker" *ngIf="operations.employeeData">
             <div class="employee-sub-header" *ngIf="start()">
@@ -133,6 +134,9 @@
                 </div>
             </div>
         </div>
+        </div>
+        <div class="submit" *ngIf="submitFlag">
+            <div class="submit-button" (click)="submit()">Submit</div>
         </div>
     </div>
 </div>

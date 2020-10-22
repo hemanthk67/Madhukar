@@ -275,7 +275,7 @@ sideNavData() {
    if(this.userData.role.admin) {
     this.leftNavData.push(this.routs.admin);
    }
-   if (this.userData.role.operations || this.userData.role.admin) {
+   if (this.userData.role.operation || this.userData.role.admin) {
    this.leftNavData.push(this.routs.operations);
    }
    this.routAuth(this.presentPath);

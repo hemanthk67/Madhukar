@@ -59,6 +59,7 @@ dates: []
   selectedYear: any;
   date : Date;
   startFlag = true;
+  submitFlag = false;
   constructor(public operations: OperationsService) { 
     this.date =new Date();
       this.selectedMonth = this.date.getMonth();
@@ -95,6 +96,10 @@ dates: []
     var week = this.weeks[index];
     this.weeks.splice(index, 1);
     this.weeks.unshift(week);
+    this.submitFlag = false;
+    if(this.weeks[index].number == 6) {
+      this.submitFlag = true;
+    }
     
   }
   dayByDate(date) {
@@ -317,4 +322,7 @@ dates: []
       }
     }
   }
+  submit() {
+    this.operations.employeeAttandance(JSON.parse(JSON.stringify(this.newAttandance)), this.months[this.selectedMonth - 1] + '-' + this.selectedYear);
+}
 }

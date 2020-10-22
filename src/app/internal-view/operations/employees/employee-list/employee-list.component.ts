@@ -13,7 +13,7 @@ export class EmployeeListComponent implements OnInit {
  changeFlag = false;
  startFlag = true;
  changeIndex: any;
-  constructor(private operations: OperationsService,
+  constructor(public operations: OperationsService,
     public routingService: RoutingService,
     public imageService: ImageService) { }
 
