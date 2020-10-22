@@ -84,23 +84,24 @@ dates: []
   ngOnInit() {
   }
   selectWeek(index) {
-    for(let i = 0; i < this.weeks.length; i++) {
-      this.weeks[i].flag = false;
-    }
-    if(this.weeks[index].number < 6) {
-    for(let i =0 ; i < this.operations.employeeData.length; i++) {
-      this.getTimeDifference(i , this.weeks[index].number);
-     }
-    }
-    this.weeks[index].flag = true;
-    var week = this.weeks[index];
-    this.weeks.splice(index, 1);
-    this.weeks.unshift(week);
     this.submitFlag = false;
     if(this.weeks[index].number == 6) {
       this.submitFlag = true;
     }
-    
+    for(let i = 0; i < this.weeks.length; i++) {
+      this.weeks[i].flag = false;
+    }
+    const weekIndex = this.weeks[index].number;
+    this.weeks[index].flag = true;
+    var week = this.weeks[index];
+    this.weeks.splice(index, 1);
+    this.weeks.unshift(week);
+    if(weekIndex < 6) {
+      for(let i =0 ; i < this.operations.employeeData.length; i++) {
+        this.getTimeDifference(i , weekIndex);     
+       }
+      }
+
   }
   dayByDate(date) {
     var presentDate =  '/' + date + '/';
