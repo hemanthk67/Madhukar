@@ -51,37 +51,218 @@ type: '',
 weeks:[],
 dates: []
   };
-  newAttandance = [{dates:[], weeks:[]}];
+  newAttandance: any;
   days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   months = ['Jan-Feb', 'Feb-Mar', 'Mar-Apr', 'Apr-May', 'May-Jun', 'Jun-Jul', 'Jul-Aug', 'Aug-Sep', 'Sep-Oct', 'Oct-Nov', 'Nov-Dec', 'Dec-Jan'];
   years = ['2020','2021', '2022'];
   selectedMonth: any;
   selectedYear: any;
+  selectedDate: any;
   date : Date;
-  startFlag = true;
   submitFlag = false;
+  attandanceDate: any;
+  newAttandanceFlag = false;
+  startFlag = true;
+  selectedDateFlag = true;
+  presentMonthFlag = true;
+  newMonthSelectedFlag = false;
+  employeeData = [];
   constructor(public operations: OperationsService) { 
     this.date =new Date();
       this.selectedMonth = this.date.getMonth();
       this.selectedYear = this.date.getFullYear();
-      var dateProperties = {
-        date: 0, 
-  holiday: false, 
-  compensationHoliday: false, 
-  weekOff: false,
-      }
-      for(let i=0; i < this.weeks.length; i++) {
-        for(let j=0; j < this.weeks[i].dates.length; j++) {
-          this.weeks[i].days[j] = this.dayByDate(this.weeks[i].dates[j]);
-          if(this.weeks[i].days[j] !== null) {
-          dateProperties.date = this.weeks[i].dates[j]
-          this.newAttandance[0].dates.push({...dateProperties});
-          }
-        }
-      }
+      this.selectedDate = this.months[this.selectedMonth - 1] + '-' + this.selectedYear;
   }
 
   ngOnInit() {
+  }
+  presentMonth() {
+    if(this.selectedDateFlag){
+      for(let i=0; i<this.operations.attandanceInfo.length; i++) {
+        if( this.operations.attandanceInfo[i].name == this.selectedDate) {
+          this.presentMonthFlag = false;
+        }
+      }
+      this.selectedDateFlag = false;
+    }
+    return true
+  }
+  newMonthSelected() {
+    this.newMonthSelectedFlag = !this.newMonthSelectedFlag;
+    if(this.newMonthSelectedFlag) {
+      this.newAttandanceData();
+      this.startFlag = true;
+    } else {
+      this.submitFlag = false;
+    }
+    
+    this.newAttandanceFlag = this.newMonthSelectedFlag;
+  }
+  start() {
+    if(this.startFlag && !this.newAttandanceFlag) {
+      this.weeks = [
+        { number: 1,
+          name: 'Week-1',
+          flag:true,
+          dates : [20,21,22,23,24,25,26,27],
+          days : []
+         },{number: 2,
+          name: 'Week-2',
+          flag:false,
+          dates : [28,29,30,31,1,2,3],
+          days : []
+         },{number: 3,
+          name: 'Week-3',
+          flag:false,
+          dates : [4,5,6,7,8,9,10],
+          days : []
+         },{number: 4,
+          name: 'Week-4',
+          flag:false,
+          dates : [11,12,13,14,15,16,17],
+          days : []
+         },{number: 5,
+          name: 'Week-5',
+          flag:false,
+          dates : [18,19,20,21],
+          days : []
+         },{number: 6,
+          name: 'Final',
+          flag:false,
+          dates : [],
+          days : []
+         }
+      ];    
+    this.newAttandance = this.operations.presentAttandanceData;
+    console.log(this.newAttandance);
+    for(let i=0; i < this.weeks.length; i++) {
+      for(let j=0; j < this.weeks[i].dates.length; j++) {
+        console.log(this.newAttandance[0].dates[this.getAttandanceArrayIndex(this.weeks[i].dates[j],  this.weeks[i].number)].date);
+        this.weeks[i].days[j] = this.dayByDate( this.newAttandance[0].dates[this.getAttandanceArrayIndex(this.weeks[i].dates[j],  this.weeks[i].number)].date);
+      }
+    }
+    this.employeeData =[];
+    var singleEmployeeData = {
+      name:'',
+      type:'',
+      number:'',
+      designation:''
+    }
+    for(let i=1; i < this.newAttandance.length; i++) {
+      singleEmployeeData.name = this.newAttandance[i].name;
+      singleEmployeeData.type = this.newAttandance[i].type;
+      singleEmployeeData.number = this.newAttandance[i].number;
+      this.employeeData.push({...singleEmployeeData});
+    }
+    console.log(this.employeeData);
+    this.startFlag = false;
+    }
+    return true;
+  }
+  newAttandanceData() {
+    console.log('madhukar');
+    this.weeks = [
+      { number: 1,
+        name: 'Week-1',
+        flag:true,
+        dates : [20,21,22,23,24,25,26,27],
+        days : []
+       },{number: 2,
+        name: 'Week-2',
+        flag:false,
+        dates : [28,29,30,31,1,2,3],
+        days : []
+       },{number: 3,
+        name: 'Week-3',
+        flag:false,
+        dates : [4,5,6,7,8,9,10],
+        days : []
+       },{number: 4,
+        name: 'Week-4',
+        flag:false,
+        dates : [11,12,13,14,15,16,17],
+        days : []
+       },{number: 5,
+        name: 'Week-5',
+        flag:false,
+        dates : [18,19,20,21],
+        days : []
+       },{number: 6,
+        name: 'Final',
+        flag:false,
+        dates : [],
+        days : []
+       }
+    ];  
+    this.newAttandance = [{dates:[], weeks:[], finalFlag: false}];
+    var firstDateProperties = {
+      date: 0, 
+holiday: false, 
+compensationHoliday: false, 
+weekOff: false,
+    }
+    for(let i=0; i < this.weeks.length; i++) {
+      for(let j=0; j < this.weeks[i].dates.length; j++) {
+        this.weeks[i].days[j] = this.dayByDate(this.weeks[i].dates[j]);
+        if(this.weeks[i].days[j] !== null) {
+          firstDateProperties.date = this.weeks[i].dates[j]
+        this.newAttandance[0].dates.push({...firstDateProperties});
+        }
+      }
+    }
+      var dateProperties = {date: 0, 
+        timeIn: '09:00', 
+        timeOut: '17:30', 
+        holiday: false, 
+        compensationHoliday: false, 
+        weekOff: false,
+        leave: false,
+        absent: false
+      };
+      for(let i =0 ; i < this.operations.employeeData.length; i++) {
+        this.attandancePerEmployee.name = this.operations.employeeData[i].name;
+        this.attandancePerEmployee.number = this.operations.employeeData[i].number;
+        this.attandancePerEmployee.type = this.operations.employeeData[i].type;
+        this.attandancePerEmployee.weeks = [{weekHrs: 0, compensationHrs:  0, otHrs: 0 , holidayHrs: 0, weekOffHrs: 0}, {weekHrs: 0, compensationHrs:  0, otHrs: 0 , holidayHrs: 0, weekOffHrs: 0}, {weekHrs: 0, compensationHrs:  0, otHrs: 0 , holidayHrs: 0, weekOffHrs: 0}, {weekHrs: 0, compensationHrs:  0, otHrs: 0 , holidayHrs: 0, weekOffHrs: 0}, {weekHrs: 0, compensationHrs:  0, otHrs: 0 , holidayHrs: 0, weekOffHrs: 0}];
+        this.attandancePerEmployee.dates = [];
+        for(let i=0; i < this.weeks.length - 1; i++){
+          this.attandancePerEmployee.weeks[i].weekHrs = 0;
+          for(let j=0; j < this.weeks[i].dates.length; j++) {
+            this.weeks[i].days[j] = this.dayByDate(this.weeks[i].dates[j]);
+            if(this.weeks[i].days[j] !== null) {
+              if(this.weeks[i].number == 1 &&  this.weeks[i].dates[j] == 20) {
+                dateProperties.date = this.weeks[i].dates[j];
+                this.attandancePerEmployee.dates.push({...dateProperties});
+                this.attandancePerEmployee.weeks[i].weekHrs = this.attandancePerEmployee.weeks[i].weekHrs + 0;
+              } else if(this.weeks[i].number == 5 &&  this.weeks[i].dates[j] == 21) {
+                dateProperties.date = this.weeks[i].dates[j];
+                this.attandancePerEmployee.dates.push({...dateProperties});
+                this.attandancePerEmployee.weeks[i].weekHrs = this.attandancePerEmployee.weeks[i].weekHrs + 0;
+              } else {
+            dateProperties.date = this.weeks[i].dates[j];
+            this.attandancePerEmployee.dates.push({...dateProperties});
+            this.attandancePerEmployee.weeks[i].weekHrs = this.attandancePerEmployee.weeks[i].weekHrs + 8;
+              }
+            }
+          }
+        }
+        this.newAttandance.push({...this.attandancePerEmployee});
+      }
+      this.employeeData = [];
+    var singleEmployeeData = {
+      name:'',
+      type:'',
+      number:'',
+      designation:''
+    }
+    for(let i=1; i < this.newAttandance.length; i++) {
+      singleEmployeeData.name = this.newAttandance[i].name;
+      singleEmployeeData.type = this.newAttandance[i].type;
+      singleEmployeeData.number = this.newAttandance[i].number;
+      this.employeeData.push({...singleEmployeeData});
+    }
+    console.log(this.employeeData);
+      console.log(this.newAttandance);
   }
   selectWeek(index) {
     this.submitFlag = false;
@@ -176,37 +357,34 @@ dates: []
      }
   }
 
-    dayRole (type, index, weekIndex) {
+    dayRole (employeeIndex, type, index, weekIndex) {
+    employeeIndex = employeeIndex + 1;
       if(type == 'L') {
-        for(let i =0 ; i < this.newAttandance.length; i++) {
-         this.newAttandance[i].dates[index].leave = !this.newAttandance[i].dates[index].leave;
-         this.newAttandance[i].dates[index].absent = false;
-          if (i !== 0 && (this.newAttandance[i].dates[index].compensationHoliday || i !== 0 && this.newAttandance[i].dates[index].weekOff || this.newAttandance[i].dates[index].holiday )) {
-          this.newAttandance[i].dates[index].timeIn = "00:00";
-          this.newAttandance[i].dates[index].timeOut = "00:00";
-         } else if( i !== 0 && this.newAttandance[i].dates[index].leave) {
-          this.newAttandance[i].dates[index].timeIn = '09:00';
-          this.newAttandance[i].dates[index].timeOut = '17:30';
-         }  else if(i !== 0) {
-          this.newAttandance[i].dates[index].timeIn = '09:00';
-          this.newAttandance[i].dates[index].timeOut = '17:30';
+         this.newAttandance[employeeIndex].dates[index].leave = !this.newAttandance[employeeIndex].dates[index].leave;
+         this.newAttandance[employeeIndex].dates[index].absent = false;
+          if (employeeIndex !== 0 && (this.newAttandance[employeeIndex].dates[index].compensationHoliday || employeeIndex !== 0 && this.newAttandance[employeeIndex].dates[index].weekOff || this.newAttandance[employeeIndex].dates[index].holiday )) {
+          this.newAttandance[employeeIndex].dates[index].timeIn = "00:00";
+          this.newAttandance[employeeIndex].dates[index].timeOut = "00:00";
+         } else if( employeeIndex !== 0 && this.newAttandance[employeeIndex].dates[index].leave) {
+          this.newAttandance[employeeIndex].dates[index].timeIn = '09:00';
+          this.newAttandance[employeeIndex].dates[index].timeOut = '17:30';
+         }  else if(employeeIndex !== 0) {
+          this.newAttandance[employeeIndex].dates[index].timeIn = '09:00';
+          this.newAttandance[employeeIndex].dates[index].timeOut = '17:30';
          }
-        }
        } else if(type == 'A') {
-        for(let i =0 ; i < this.newAttandance.length; i++) {
-          this.newAttandance[i].dates[index].absent = !this.newAttandance[i].dates[index].absent;
-          this.newAttandance[i].dates[index].leave = false;
-          if( i !== 0 && this.newAttandance[i].dates[index].absent) {
-            this.newAttandance[i].dates[index].timeIn = "00:00";
-            this.newAttandance[i].dates[index].timeOut = "00:00";
-           } else if (i !== 0 && (this.newAttandance[i].dates[index].compensationHoliday || i !== 0 && this.newAttandance[i].dates[index].weekOff || this.newAttandance[i].dates[index].holiday )) {
-            this.newAttandance[i].dates[index].timeIn = "00:00";
-            this.newAttandance[i].dates[index].timeOut = "00:00";
-           } else if(i !== 0) {
-            this.newAttandance[i].dates[index].timeIn = '09:00';
-            this.newAttandance[i].dates[index].timeOut = '17:30';
+          this.newAttandance[employeeIndex].dates[index].absent = !this.newAttandance[employeeIndex].dates[index].absent;
+          this.newAttandance[employeeIndex].dates[index].leave = false;
+          if( employeeIndex !== 0 && this.newAttandance[employeeIndex].dates[index].absent) {
+            this.newAttandance[employeeIndex].dates[index].timeIn = "00:00";
+            this.newAttandance[employeeIndex].dates[index].timeOut = "00:00";
+           } else if (employeeIndex !== 0 && (this.newAttandance[employeeIndex].dates[index].compensationHoliday || employeeIndex !== 0 && this.newAttandance[employeeIndex].dates[index].weekOff || this.newAttandance[employeeIndex].dates[index].holiday )) {
+            this.newAttandance[employeeIndex].dates[index].timeIn = "00:00";
+            this.newAttandance[employeeIndex].dates[index].timeOut = "00:00";
+           } else if(employeeIndex !== 0) {
+            this.newAttandance[employeeIndex].dates[index].timeIn = '09:00';
+            this.newAttandance[employeeIndex].dates[index].timeOut = '17:30';
            }
-         }
        }
        if(weekIndex < 6) {
        for(let i =0 ; i < this.operations.employeeData.length; i++) {
@@ -214,51 +392,7 @@ dates: []
        }
       }
     }
-  start() {
-    if(this.startFlag) {
-      var dateProperties = {date: 0, 
-        timeIn: '09:00', 
-        timeOut: '17:30', 
-        holiday: false, 
-        compensationHoliday: false, 
-        weekOff: false,
-        leave: false,
-        absent: false
-      };
-      for(let i =0 ; i < this.operations.employeeData.length; i++) {
-        this.attandancePerEmployee.name = this.operations.employeeData[i].name;
-        this.attandancePerEmployee.number = this.operations.employeeData[i].number;
-        this.attandancePerEmployee.type = this.operations.employeeData[i].type;
-        this.attandancePerEmployee.weeks = [{weekHrs: 0, compensationHrs:  0, otHrs: 0 , holidayHrs: 0, weekOffHrs: 0}, {weekHrs: 0, compensationHrs:  0, otHrs: 0 , holidayHrs: 0, weekOffHrs: 0}, {weekHrs: 0, compensationHrs:  0, otHrs: 0 , holidayHrs: 0, weekOffHrs: 0}, {weekHrs: 0, compensationHrs:  0, otHrs: 0 , holidayHrs: 0, weekOffHrs: 0}, {weekHrs: 0, compensationHrs:  0, otHrs: 0 , holidayHrs: 0, weekOffHrs: 0}];
-        for(let i=0; i < this.weeks.length - 1; i++){
-          this.attandancePerEmployee.weeks[i].weekHrs = 0;
-          for(let j=0; j < this.weeks[i].dates.length; j++) {
-            this.weeks[i].days[j] = this.dayByDate(this.weeks[i].dates[j]);
-            if(this.weeks[i].days[j] !== null) {
-              if(this.weeks[i].number == 1 &&  this.weeks[i].dates[j] == 20) {
-                dateProperties.date = this.weeks[i].dates[j];
-                this.attandancePerEmployee.dates.push({...dateProperties});
-                this.attandancePerEmployee.weeks[i].weekHrs = this.attandancePerEmployee.weeks[i].weekHrs + 0;
-              } else if(this.weeks[i].number == 5 &&  this.weeks[i].dates[j] == 21) {
-                dateProperties.date = this.weeks[i].dates[j];
-                this.attandancePerEmployee.dates.push({...dateProperties});
-                this.attandancePerEmployee.weeks[i].weekHrs = this.attandancePerEmployee.weeks[i].weekHrs + 0;
-              } else {
-            dateProperties.date = this.weeks[i].dates[j];
-            this.attandancePerEmployee.dates.push({...dateProperties});
-            this.attandancePerEmployee.weeks[i].weekHrs = this.attandancePerEmployee.weeks[i].weekHrs + 8;
-              }
-            }
-          }
-        }
-        this.newAttandance.push({...this.attandancePerEmployee});
-      }
-      console.log(this.newAttandance);
-     
-  this.startFlag = false;
-    }
-    return true;
-  }
+
   getTimeDifference(employeeIndex, weekIndex) {
     weekIndex = weekIndex - 1;
     employeeIndex = employeeIndex + 1;
@@ -323,7 +457,16 @@ dates: []
       }
     }
   }
-  submit() {
+  attandanceDateChange() {
+    this.operations.presentAttandanceDate = this.attandanceDate;
+    this.operations.presentAttandanceData = false;
+    this.operations.getEmployeeAttandanceData(this.attandanceDate);
+  }
+  
+  submit(value) {
+    if(value == 'final') {
+      this.newAttandance[0].finalFlag = true;
+    }
     this.operations.employeeAttandance(JSON.parse(JSON.stringify(this.newAttandance)), this.months[this.selectedMonth - 1] + '-' + this.selectedYear);
 }
 }

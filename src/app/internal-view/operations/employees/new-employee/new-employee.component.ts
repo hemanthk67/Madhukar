@@ -80,7 +80,7 @@ export class NewEmployeeComponent implements OnInit {
   }
 
   submit() {
-      this.employee.number = this.employee.number + this.employee.type.slice(0, 1);
+      this.employee.number = this.employee.type.slice(0, 1);
       this.employee.number = this.employee.number + this.employee.department.slice(0, 1);
       this.operations.newEmployee(JSON.parse(JSON.stringify(this.employee)), this.photoFile[0], this.proofFile[0], this.resumeFile[0]);
       this.employee.number = '';

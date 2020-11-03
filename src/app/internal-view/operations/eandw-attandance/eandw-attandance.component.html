@@ -2,9 +2,16 @@
 <div class="employees-attandance-div">
     <div class="employees-attandance-head"> Attandance</div>
     <div class="employees-attandance-body">
-        <div class="head">{{ this.months[this.selectedMonth - 1] }} - {{ this.selectedYear }}</div>
+
+        <div class="head" *ngIf="operations.attandanceInfo">
+           <select class="attandance-date" *ngIf="!newMonthSelectedFlag"  [(ngModel)]="attandanceDate" (change)="attandanceDateChange()">
+               <option></option>
+               <option *ngFor="let info of operations.attandanceInfo"> {{ info.name }}</option>
+           </select>
+           <div class="new-month" (click)="newMonthSelected()" [ngClass]="{'new-month-selected': newMonthSelectedFlag}" *ngIf="presentMonth() && presentMonthFlag">{{ this.months[this.selectedMonth - 1] }} - {{ this.selectedYear }}</div> 
+        </div>
         <div *ngFor="let type of types; let p = index">
-        <div class="employee-attandance-worker" *ngIf="operations.employeeData">
+        <div class="employee-attandance-worker" *ngIf="operations.employeeData && (operations.presentAttandanceData || newAttandanceFlag)">
             <div class="employee-sub-header" *ngIf="start()">
                 {{ type }}:
             </div>
@@ -68,7 +75,7 @@
                 </div>
                 </span>
             </div>
-            <div class="employee-attandance-table-body-employee flex" *ngFor="let employee of operations.employeeData; let i = index">
+            <div class="employee-attandance-table-body-employee flex" *ngFor="let employee of employeeData; let i = index">
                 <div class="flex" *ngIf=" type.slice(0, -1) == employee.type">
                 <div class="employee-content"> 
                     <div class="employee-name"> {{ employee.name }} </div> 
@@ -86,8 +93,8 @@
                                 Out: <br>
                                 <input type="time" [(ngModel)]="newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].timeOut" (change)="getTimeDifference(i, week.number)"></div>
                             <div class="employee-table-date-header-category flex space-evenly">
-                                <div class="employee-table-date-header-category-leave"  [ngClass]="{'leave-active': newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].leave }" (click)="dayRole('L',getAttandanceArrayIndex(week.dates[k],  week.number),  week.number)"> L</div>
-                                <div class="employee-table-date-header-category-absent"  [ngClass]="{'absent-active': newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].absent }" (click)="dayRole('A',getAttandanceArrayIndex(week.dates[k],  week.number),  week.number)">A</div>
+                                <div class="employee-table-date-header-category-leave"  [ngClass]="{'leave-active': newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].leave }" (click)="dayRole(i, 'L',getAttandanceArrayIndex(week.dates[k],  week.number),  week.number)"> L</div>
+                                <div class="employee-table-date-header-category-absent"  [ngClass]="{'absent-active': newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].absent }" (click)="dayRole(i, 'A',getAttandanceArrayIndex(week.dates[k],  week.number),  week.number)">A</div>
                             </div>
                         </div>
                     </span>
@@ -135,8 +142,11 @@
             </div>
         </div>
         </div>
-        <div class="submit" *ngIf="submitFlag">
-            <div class="submit-button" (click)="submit()">Submit</div>
+        <div class="submit" *ngIf="submitFlag && !newAttandance[0].finalFlag">
+            <div class="submit-button" (click)="submit('submit')">Submit</div>
+        </div>
+        <div class="submit" *ngIf="submitFlag && !newAttandance[0].finalFlag">
+            <div class="submit-button" (click)="submit('final')">Finalized</div>
         </div>
     </div>
 </div>

@@ -11,10 +11,11 @@ import { EmployeesComponent } from './employees/employees.component';
 import { EandwAttandanceComponent } from './eandw-attandance/eandw-attandance.component';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
 import { NewEmployeeComponent } from './employees/new-employee/new-employee.component';
+import { SalaryStatementComponent } from './employees/salary-statement/salary-statement.component';
 
 
 @NgModule({
-  declarations: [OperationsComponent, EmployeesComponent, EandwAttandanceComponent, EmployeeListComponent, NewEmployeeComponent],
+  declarations: [OperationsComponent, EmployeesComponent, EandwAttandanceComponent, EmployeeListComponent, NewEmployeeComponent, SalaryStatementComponent],
   imports: [
     CommonModule,
     OperationsRoutingModule,

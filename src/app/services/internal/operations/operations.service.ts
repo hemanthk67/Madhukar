@@ -29,9 +29,13 @@ class Upload {
 export class OperationsService {
 
   public employeeData;
-public originalEmployeeData = [];
-highestEmployeeNumber = 0;
-private pathBase = environment.operationsPath;  // change to enquiry once done with testing and ready for production
+  presentAttandanceData: any;
+  originalPresentAttandanceData: any;
+  attandanceInfo: any;
+  public originalEmployeeData = [];
+  highestEmployeeNumber = 0;
+  presentAttandanceDate: any;
+  private pathBase = environment.operationsPath;  // change to enquiry once done with testing and ready for production
 
   constructor( private afs: AngularFirestore,
     private routingService: RoutingService,
@@ -40,6 +44,7 @@ private pathBase = environment.operationsPath;  // change to enquiry once done w
       this.getEmployeeData().then(data => {
         this.employeeData = data;
       });
+      this.getEmployeeAttandanceInfo();
      }
 
     async getEmployeeData() {
@@ -62,6 +67,14 @@ private pathBase = environment.operationsPath;  // change to enquiry once done w
     }
       return markers;
     }
+
+    getEmployeeAttandanceInfo() {
+      firebase.firestore().collection('EmployeeAttandance').doc('info').get()
+      .then(querySnapshot => {
+        this.attandanceInfo = querySnapshot.data().data;
+      });
+    }
+    
     newEmployee(data, photoFile, proofFile, resumeFile) {
       data.number = data.number + (this.highestEmployeeNumber + 1);
       data.photoPath = this.uploadFile(photoFile , data, 'photo');
@@ -139,4 +152,55 @@ private pathBase = environment.operationsPath;  // change to enquiry once done w
       var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
       return dates[0] + ' ' + month[dates[1] - 1] + ' ' + dates[2];
         }
+        getEmployeeAttandanceData(docName) {
+          firebase.firestore().collection('EmployeeAttandance').doc(docName).get()
+           .then(querySnapshot => {
+             this.presentAttandanceData = querySnapshot.data().data;
+             this.originalPresentAttandanceData = {...querySnapshot.data().data};
+             for(let i=1; i < this.presentAttandanceData.length; i++) {
+              this.presentAttandanceData[i].compensationHrs =0;
+              this.presentAttandanceData[i].weekHrs = 0;
+              this.presentAttandanceData[i].otHrs = 0;
+              this.presentAttandanceData[i].absentNumber = 0;
+              this.presentAttandanceData[i].leaveNumber = 0;
+              this.presentAttandanceData[i].weekOffNumber = 0;
+              this.presentAttandanceData[i].holidayNumber = 0;
+              this.presentAttandanceData[i].compensationHolidayNumber = 0;
+              for(let j=0; j < this.presentAttandanceData[i].weeks.length; j++) {
+                this.presentAttandanceData[i].compensationHrs = this.presentAttandanceData[i].compensationHrs + this.presentAttandanceData[i].weeks[j].compensationHrs;
+                this.presentAttandanceData[i].weekHrs = this.presentAttandanceData[i].weekHrs + this.presentAttandanceData[i].weeks[j].weekHrs;
+                this.presentAttandanceData[i].otHrs = this.presentAttandanceData[i].otHrs + this.presentAttandanceData[i].weeks[j].otHrs;
+              }
+              for(let j=0; j < this.presentAttandanceData[i].dates.length; j++) {
+                if (this.presentAttandanceData[i].dates[j].absent) {
+                  this.presentAttandanceData[i].absentNumber++;
+                }
+                if (this.presentAttandanceData[i].dates[j].leave) {
+                  this.presentAttandanceData[i].leaveNumber++;
+                }
+                if (this.presentAttandanceData[i].dates[j].weekOff) {
+                  this.presentAttandanceData[i].weekOffNumber++;
+                }
+                if (this.presentAttandanceData[i].dates[j].holiday) {
+                  this.presentAttandanceData[i].holidayNumber++;
+                }
+                if (this.presentAttandanceData[i].dates[j].compensationHoliday) {
+                  this.presentAttandanceData[i].compensationHolidayNumber++;
+                }
+              }
+              this.presentAttandanceData[i].otHrs = this.presentAttandanceData[i].otHrs - this.presentAttandanceData[i].compensationHrs;
+              this.presentAttandanceData[i].compensationHrs = 0;
+              if(this.presentAttandanceData[i].otHrs < 0) {
+                this.presentAttandanceData[i].compensationHrs = -(this.presentAttandanceData[i].otHrs);
+                this.presentAttandanceData[i].otHrs = 0;
+              }
+                for(let k=0; k < this.employeeData.length; k++) {
+                  if(this.employeeData[k].number == this.presentAttandanceData[i].number) {
+                    this.presentAttandanceData[i].salary = this.employeeData[k].salary.monthlySalary;
+                    this.presentAttandanceData[i].bonus = this.employeeData[k].salary.monthlyFixedBonus;
+                  }
+                }
+             }
+           });
+       }
 }

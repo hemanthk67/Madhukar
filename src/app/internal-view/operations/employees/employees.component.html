@@ -2,8 +2,9 @@
     <app-employee-list *ngIf="routingService.rightTabs[2].flag" class="app-tender-query"></app-employee-list>
     <app-new-employee *ngIf="routingService.rightTabs[1].flag" class="results"></app-new-employee>
     <app-eandw-attandance *ngIf="routingService.rightTabs[0].flag" class="app-employee-list"></app-eandw-attandance>
-    <div class="not-permitted" *ngIf="routingService.rightTabs[3].flag">
+    <div class="not-permitted" *ngIf="routingService.rightTabs[3].flag && false">
       NOT-PERMITTED  <br>
       PLEASE CONTACT THE ADMINISTRATOR
     </div>
+    <app-salary-statement *ngIf="routingService.rightTabs[3].flag"></app-salary-statement>
   </div>
