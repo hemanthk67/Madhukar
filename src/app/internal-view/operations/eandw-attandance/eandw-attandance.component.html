@@ -4,7 +4,7 @@
     <div class="employees-attandance-body">
 
         <div class="head" *ngIf="operations.attandanceInfo">
-           <select class="attandance-date" *ngIf="!newMonthSelectedFlag"  [(ngModel)]="attandanceDate" (change)="attandanceDateChange()">
+           <select class="attandance-date" *ngIf="!newMonthSelectedFlag"  [(ngModel)]="operations.presentAttandanceDate" (change)="attandanceDateChange()">
                <option></option>
                <option *ngFor="let info of operations.attandanceInfo"> {{ info.name }}</option>
            </select>

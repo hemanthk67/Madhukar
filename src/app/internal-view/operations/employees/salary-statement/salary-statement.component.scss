@@ -13,6 +13,21 @@
     margin-top: 25px;
     margin-bottom: 25px;
  }
+ .head {
+    font-size: 18px;
+    font-weight: 600;
+    color: #163a9a;
+    margin: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    .attandance-date {
+        font-size: 18px;
+        font-weight: 600;
+        color: #163a9a;
+        margin-bottom:15px;
+    }
+}
     .table-head {
         color: #163a9a;
         font-weight: 600;

@@ -134,11 +134,9 @@ dates: []
          }
       ];    
     this.newAttandance = this.operations.presentAttandanceData;
-    console.log(this.newAttandance);
     for(let i=0; i < this.weeks.length; i++) {
       for(let j=0; j < this.weeks[i].dates.length; j++) {
-        console.log(this.newAttandance[0].dates[this.getAttandanceArrayIndex(this.weeks[i].dates[j],  this.weeks[i].number)].date);
-        this.weeks[i].days[j] = this.dayByDate( this.newAttandance[0].dates[this.getAttandanceArrayIndex(this.weeks[i].dates[j],  this.weeks[i].number)].date);
+       this.weeks[i].days[j] = this.dayByDate( this.newAttandance[0].dates[this.getAttandanceArrayIndex(this.weeks[i].dates[j],  this.weeks[i].number)].date);
       }
     }
     this.employeeData =[];
@@ -148,19 +146,18 @@ dates: []
       number:'',
       designation:''
     }
+    
     for(let i=1; i < this.newAttandance.length; i++) {
       singleEmployeeData.name = this.newAttandance[i].name;
       singleEmployeeData.type = this.newAttandance[i].type;
       singleEmployeeData.number = this.newAttandance[i].number;
       this.employeeData.push({...singleEmployeeData});
     }
-    console.log(this.employeeData);
     this.startFlag = false;
     }
     return true;
   }
   newAttandanceData() {
-    console.log('madhukar');
     this.weeks = [
       { number: 1,
         name: 'Week-1',
@@ -261,8 +258,6 @@ weekOff: false,
       singleEmployeeData.number = this.newAttandance[i].number;
       this.employeeData.push({...singleEmployeeData});
     }
-    console.log(this.employeeData);
-      console.log(this.newAttandance);
   }
   selectWeek(index) {
     this.submitFlag = false;
@@ -278,7 +273,7 @@ weekOff: false,
     this.weeks.splice(index, 1);
     this.weeks.unshift(week);
     if(weekIndex < 6) {
-      for(let i =0 ; i < this.operations.employeeData.length; i++) {
+      for(let i =0 ; i < this.employeeData.length; i++) {
         this.getTimeDifference(i , weekIndex);     
        }
       }
@@ -352,7 +347,7 @@ weekOff: false,
        }
        
      } 
-     for(let i =0 ; i < this.operations.employeeData.length; i++) {
+     for(let i =0 ; i < this.employeeData.length; i++) {
       this.getTimeDifference(i , weekIndex);
      }
   }
@@ -387,7 +382,7 @@ weekOff: false,
            }
        }
        if(weekIndex < 6) {
-       for(let i =0 ; i < this.operations.employeeData.length; i++) {
+       for(let i =0 ; i < this.employeeData.length; i++) {
         this.getTimeDifference(i , weekIndex);
        }
       }
@@ -458,15 +453,20 @@ weekOff: false,
     }
   }
   attandanceDateChange() {
-    this.operations.presentAttandanceDate = this.attandanceDate;
     this.operations.presentAttandanceData = false;
-    this.operations.getEmployeeAttandanceData(this.attandanceDate);
+    if(this.operations.presentAttandanceDate !== '') {
+      this.operations.getEmployeeAttandanceData(this.operations.presentAttandanceDate);
+    }
   }
   
   submit(value) {
     if(value == 'final') {
       this.newAttandance[0].finalFlag = true;
     }
-    this.operations.employeeAttandance(JSON.parse(JSON.stringify(this.newAttandance)), this.months[this.selectedMonth - 1] + '-' + this.selectedYear);
+    if(this.newAttandanceFlag) {
+    this.operations.employeeAttandance(JSON.parse(JSON.stringify(this.newAttandance)), this.selectedDate);
+    } else {
+      this.operations.employeeAttandance(JSON.parse(JSON.stringify(this.newAttandance)), this.operations.presentAttandanceDate);
+    }
 }
 }

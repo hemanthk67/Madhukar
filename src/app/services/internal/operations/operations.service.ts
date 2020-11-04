@@ -156,7 +156,7 @@ export class OperationsService {
           firebase.firestore().collection('EmployeeAttandance').doc(docName).get()
            .then(querySnapshot => {
              this.presentAttandanceData = querySnapshot.data().data;
-             this.originalPresentAttandanceData = {...querySnapshot.data().data};
+             this.originalPresentAttandanceData = querySnapshot.data().data;
              for(let i=1; i < this.presentAttandanceData.length; i++) {
               this.presentAttandanceData[i].compensationHrs =0;
               this.presentAttandanceData[i].weekHrs = 0;

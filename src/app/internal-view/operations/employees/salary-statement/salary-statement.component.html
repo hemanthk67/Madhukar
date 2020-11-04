@@ -1,6 +1,12 @@
 <div class="salary-statement">
-<div class="salary-statement-body" *ngIf="operations.presentAttandanceData">
+<div class="salary-statement-body">
     <div class="salary-statement-head"> SALARY-STATEMENT</div>
+    <div class="head" *ngIf="operations.attandanceInfo">
+        <select class="attandance-date"  [(ngModel)]="operations.presentAttandanceDate" (change)="attandanceDateChange()">
+            <option></option>
+            <option *ngFor="let info of operations.attandanceInfo"> {{ info.name }}</option>
+        </select>
+    </div>
     <div class="table-head">
         <div class="employee border">Worker</div>
         <div class="Basic-Salary border">Basic Salary</div>

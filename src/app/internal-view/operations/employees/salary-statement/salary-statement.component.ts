@@ -7,14 +7,14 @@ import { OperationsService } from 'src/app/services/internal/operations/operatio
   styleUrls: ['./salary-statement.component.scss']
 })
 export class SalaryStatementComponent implements OnInit {
-  attandanceDate: any;
   constructor(public operations: OperationsService) { }
 
   ngOnInit() {
   }
   attandanceDateChange() {
-    this.operations.presentAttandanceDate = this.attandanceDate;
-    this.operations.getEmployeeAttandanceData(this.attandanceDate);
+    if(this.operations.presentAttandanceDate !== '') {
+      this.operations.getEmployeeAttandanceData(this.operations.presentAttandanceDate);
+    }
   }
   paid(index) {
     if(this.operations.originalPresentAttandanceData[index].paidFlag){
@@ -24,9 +24,6 @@ export class SalaryStatementComponent implements OnInit {
     }
   }
   submit() {
-    var data = {
-      data: this.operations.originalPresentAttandanceData
-    };
-    this.operations.employeeAttandance(data, 'Sep-Oct-2020');
+    this.operations.employeeAttandance(this.operations.originalPresentAttandanceData, 'Sep-Oct-2020');
   }
 }
