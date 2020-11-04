@@ -75,6 +75,7 @@ dates: []
   }
 
   ngOnInit() {
+    this.operations.start();
   }
   presentMonth() {
     if(this.selectedDateFlag){

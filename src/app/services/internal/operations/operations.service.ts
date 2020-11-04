@@ -10,6 +10,7 @@ import { RoutingService } from '../../routing.service';
 import { environment } from 'src/environments/environment';
 import { pdfFileService } from '../../pdfFile.service';
 import { ImageService } from '../../common/image/image.service';
+import { AuthService } from '../../auth.service';
 
 class Upload {
   $key: string;
@@ -35,18 +36,22 @@ export class OperationsService {
   public originalEmployeeData = [];
   highestEmployeeNumber = 0;
   presentAttandanceDate: any;
+  userData: any;
   private pathBase = environment.operationsPath;  // change to enquiry once done with testing and ready for production
 
   constructor( private afs: AngularFirestore,
     private routingService: RoutingService,
     private pdfService: pdfFileService,
-    private imageService: ImageService) {
+    private imageService: ImageService,
+    private authService: AuthService) {
       this.getEmployeeData().then(data => {
         this.employeeData = data;
       });
       this.getEmployeeAttandanceInfo();
      }
-
+start() {
+  this.userData = this.authService.userData;
+}
     async getEmployeeData() {
       var markers = [];
       if(!this.employeeData) {

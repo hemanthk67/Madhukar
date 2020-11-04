@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OperationsService } from 'src/app/services/internal/operations/operations.service';
 import { RoutingService } from 'src/app/services/routing.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { RoutingService } from 'src/app/services/routing.service';
 })
 export class EmployeesComponent implements OnInit {
 
-  constructor(public routingService: RoutingService) { }
+  constructor(public routingService: RoutingService,
+    public operationsService: OperationsService) { }
 
   ngOnInit() {
     this.RightTab();
