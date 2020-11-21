@@ -91,11 +91,12 @@ start() {
       data.flag = true;
       data.dateOfBirthFormatted = this.dateFormatting(data.dob);
       this.employeeData.push({...data});
+      this.routingService.loadingFlag = true; 
       setTimeout(
         function() {
-          this.routingService.loadingFlag = true; 
-      this.routingService.rightTabs[0].flag = false;
-      this.routingService.rightTabs[1].flag = true;
+          this.routingService.loadingFlag = false; 
+      this.routingService.rightTabs[1].flag = false;
+      this.routingService.rightTabs[2].flag = true;
         }.bind(this),
         500
       );
@@ -105,6 +106,25 @@ start() {
         `EmployeeAttandance/${date}`
       );
       var data = { data:dataArray };
+      newUserRef.set(data, { merge: true });
+      this.routingService.loadingFlag = true; 
+      setTimeout(
+        function() {
+          this.routingService.loadingFlag = false; 
+        }.bind(this),
+        500
+      );
+    }
+
+    employeeAttandanceInfoData(value) {
+      const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
+        `EmployeeAttandance/info`
+      );
+      var data = { data:this.attandanceInfo };
+      var valueData = {
+name:value
+      };
+      data.data.push(valueData);
       newUserRef.set(data, { merge: true });
     }
     changeEmployeeStatus(data,seperationFlag, index) {
@@ -139,6 +159,7 @@ start() {
 
     public uploadFile(file ,data, type) {
 
+      this.routingService.loadingFlag = true; 
         const enquiryFile = {
           name:null,
           path:null

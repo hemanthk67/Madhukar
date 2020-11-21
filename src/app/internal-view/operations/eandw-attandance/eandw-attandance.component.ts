@@ -66,6 +66,7 @@ dates: []
   selectedDateFlag = true;
   presentMonthFlag = true;
   newMonthSelectedFlag = false;
+  daywidthflag = true;
   employeeData = [];
   constructor(public operations: OperationsService) { 
     this.date =new Date();
@@ -278,7 +279,8 @@ weekOff: false,
         this.getTimeDifference(i , weekIndex);     
        }
       }
-
+      
+    this.daywidthflag = true;
   }
   dayByDate(date) {
     var presentDate =  '/' + date + '/';
@@ -456,8 +458,10 @@ weekOff: false,
   attandanceDateChange() {
     this.operations.presentAttandanceData = false;
     if(this.operations.presentAttandanceDate !== '') {
+      this.startFlag = true;
       this.operations.getEmployeeAttandanceData(this.operations.presentAttandanceDate);
     }
+    this.daywidthflag = true;
   }
   
   submit(value) {
@@ -466,8 +470,29 @@ weekOff: false,
     }
     if(this.newAttandanceFlag) {
     this.operations.employeeAttandance(JSON.parse(JSON.stringify(this.newAttandance)), this.selectedDate);
+    this.operations.employeeAttandanceInfoData(this.selectedDate);   
+    this.newAttandanceFlag = false; 
     } else {
       this.operations.employeeAttandance(JSON.parse(JSON.stringify(this.newAttandance)), this.operations.presentAttandanceDate);
+      this.operations.presentAttandanceData = null;
+      this.operations.presentAttandanceDate = '';
     }
+    this.submitFlag = false;
+}
+daywidth() {
+  if(this.daywidthflag) {
+    setTimeout(
+      function() {
+        var x = document.getElementsByClassName("employee-table-date-header");
+        var y= (<HTMLInputElement>(x[x.length-1])).offsetWidth;
+        for(let i=0; i< x.length; i++) {
+          (<HTMLInputElement>x[i]).style.width = y+ 1 + 'px';
+        }
+      }.bind(this),
+      500
+    );
+    this.daywidthflag = false;
+  }
+  return true
 }
 }

@@ -92,7 +92,7 @@
                             <div class="employee-table-date-header-time-out">
                                 Out: <br>
                                 <input type="time" [(ngModel)]="newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].timeOut" (change)="getTimeDifference(i, week.number)"></div>
-                            <div class="employee-table-date-header-category flex space-evenly">
+                            <div class="employee-table-date-header-category flex space-evenly" *ngIf ="daywidth()">
                                 <div class="employee-table-date-header-category-leave"  [ngClass]="{'leave-active': newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].leave }" (click)="dayRole(i, 'L',getAttandanceArrayIndex(week.dates[k],  week.number),  week.number)"> L</div>
                                 <div class="employee-table-date-header-category-absent"  [ngClass]="{'absent-active': newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].absent }" (click)="dayRole(i, 'A',getAttandanceArrayIndex(week.dates[k],  week.number),  week.number)">A</div>
                             </div>

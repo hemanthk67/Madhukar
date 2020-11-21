@@ -7,6 +7,8 @@
             <option *ngFor="let info of operations.attandanceInfo"> {{ info.name }}</option>
         </select>
     </div>
+    <div class="not-finalized" *ngIf="operations.presentAttandanceData && !operations.presentAttandanceData[0].finalFlag"> Attandance Not Finalized</div>
+    <div class="body" *ngIf="operations.presentAttandanceData && operations.presentAttandanceData[0].finalFlag">
     <div class="table-head">
         <div class="employee border">Worker</div>
         <div class="Basic-Salary border">Basic Salary</div>
@@ -56,6 +58,7 @@
 </div>
 <div class="submit">
     <div class="submit-button" (click)="submit()">Submit</div>
+</div>
 </div>
 </div>
 </div>
