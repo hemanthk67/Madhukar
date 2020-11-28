@@ -83,11 +83,16 @@ remark:''}
       this.enquiry = this.marketingService.enquiry;
       this.items = this.enquiry.items;
       this.allFiles = this.enquiry.files.enquiryDocuments.slice();
+      if(!this.enquiry.firm) {
+        this.enquiry.firm = 'TCC ENERGY SOLUTIONS';
+      }
     } else {
       this.enquiry = {...this.marketingService.newEnquiry};
       this.enquiry.issueDate = this.presentDate();
+      this.enquiry.firm = 'THOTA COLDCEL PVT LTD';
     }
     this.marketingService.editFlag = false;
+   
   }
   submit() {
     if(this.editFlag) {
@@ -97,6 +102,9 @@ remark:''}
       this.marketingService.pushEnquiryData(this.enquiry,this.allFiles,this.editFlag);
     }
     this.routingService.enquiryList();
+  }
+  firmSelected(firm) {
+    this.enquiry.firm = firm;
   }
   addItem() {
     var item = {descrition:'',

@@ -15,7 +15,7 @@
         padding: 5px;
         padding-right: 15px;
         .enquiry-list-card {
-            height: 130px;
+            height: 135px;
             border-radius: 5px;
             background-color: white;
             box-shadow: 2px 2px 18px #888888;
@@ -23,6 +23,7 @@
             padding: 5px;
             padding-right: 0;
             border-top: solid 5px #163a9a;
+            overflow: hidden;
            .enquiry-list-card-small {
                cursor: pointer;
             .enquiry-list-card-head {
@@ -75,6 +76,10 @@
             .down-arrow:hover {
                 color: #C2C2C2;
             }
+            }
+            .enquiry-list-card-tail {
+                margin-left: -10px;
+        border-bottom: solid 10px #163a9a;
             }
         }
         .enquiry-list-card-large {
@@ -260,6 +265,11 @@
                 }
             }
                 }
+                .enquiry-list-card-tail {
+                    margin-left: -10px;
+                    margin-bottom: -5px;
+            border-bottom: solid 10px #163a9a;
+                }
         }
         }
     }
@@ -326,6 +336,18 @@
     }
     .orange-border-color {
         border-top: solid 5px orange !important;
+    }
+    .light-blue-border-bottom-color {
+        border-bottom: solid 10px #3068b0 !important;
+    }
+    .red-border-bottom-color {
+        border-bottom: solid 10px red !important;
+    }
+    .green-border-bottom-color {
+        border-bottom: solid 10px green !important;
+    }
+    .orange-border-bottom-color {
+        border-bottom: solid 10px orange !important;
     }
     .flex {
         display: flex;

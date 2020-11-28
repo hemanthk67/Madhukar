@@ -1,5 +1,9 @@
 <div class="new-enquiry-div"> 
-    <div class="new-enquiry-head-div">New Enquiry: </div>
+    <div class="new-enquiry-head-div">New Enquiry: {{ enquiry.firm }} <br> 
+       <div class="firm-to-change">
+      <div class="firm-1"  [ngClass]="{ 'firm-1-selected': enquiry.firm === 'THOTA COLDCEL PVT LTD' }" (click)="firmSelected('THOTA COLDCEL PVT LTD')">THOTA COLDCEL PVT LTD</div>
+      <div class="firm-2" [ngClass]="{ 'firm-2-selected': enquiry.firm === 'TCC ENERGY SOLUTIONS' }" (click)="firmSelected('TCC ENERGY SOLUTIONS')">TCC ENERGY SOLUTIONS</div>
+       </div></div>
     <div class="new-enquiry-body">
     <div class="info-div">
         <div class="info-header">

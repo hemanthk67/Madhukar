@@ -36,6 +36,7 @@ export class MarketingService {
   issueDate:'',
   status:'New Enquiry',
   specialFeatures:'',
+  firm: 'THOTA COLDCEL PVT LTD.',
   items:[
     {description:'',
   rating: '',

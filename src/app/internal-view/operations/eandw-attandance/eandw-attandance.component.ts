@@ -102,45 +102,15 @@ dates: []
   }
   start() {
     if(this.startFlag && !this.newAttandanceFlag) {
-      this.weeks = [
-        { number: 1,
-          name: 'Week-1',
-          flag:true,
-          dates : [20,21,22,23,24,25,26,27],
-          days : []
-         },{number: 2,
-          name: 'Week-2',
-          flag:false,
-          dates : [28,29,30,31,1,2,3],
-          days : []
-         },{number: 3,
-          name: 'Week-3',
-          flag:false,
-          dates : [4,5,6,7,8,9,10],
-          days : []
-         },{number: 4,
-          name: 'Week-4',
-          flag:false,
-          dates : [11,12,13,14,15,16,17],
-          days : []
-         },{number: 5,
-          name: 'Week-5',
-          flag:false,
-          dates : [18,19,20,21],
-          days : []
-         },{number: 6,
-          name: 'Final',
-          flag:false,
-          dates : [],
-          days : []
-         }
-      ];    
     this.newAttandance = this.operations.presentAttandanceData;
-    for(let i=0; i < this.weeks.length; i++) {
-      for(let j=0; j < this.weeks[i].dates.length; j++) {
-       this.weeks[i].days[j] = this.dayByDate( this.newAttandance[0].dates[this.getAttandanceArrayIndex(this.weeks[i].dates[j],  this.weeks[i].number)].date);
-      }
+    this.selectedMonth = this.newAttandance[0].selectedMonth ;
+    this.selectedYear = this.newAttandance[0].selectedYear;
+    var week = this.newAttandance[0].weeks;
+    for(let i=0; i< week.length; i++) {
+      this.weeks[week[i].number - 1] = week[i];
+      this.weeks[week[i].number - 1].flag = false;
     }
+    this.weeks[0].flag = true;
     this.employeeData =[];
     var singleEmployeeData = {
       name:'',
@@ -202,7 +172,7 @@ weekOff: false,
     }
     for(let i=0; i < this.weeks.length; i++) {
       for(let j=0; j < this.weeks[i].dates.length; j++) {
-        this.weeks[i].days[j] = this.dayByDate(this.weeks[i].dates[j]);
+        this.weeks[i].days[j] = this.dayByDate(this.weeks[i].dates[j],  this.weeks[i].number);
         if(this.weeks[i].days[j] !== null) {
           firstDateProperties.date = this.weeks[i].dates[j]
         this.newAttandance[0].dates.push({...firstDateProperties});
@@ -227,7 +197,7 @@ weekOff: false,
         for(let i=0; i < this.weeks.length - 1; i++){
           this.attandancePerEmployee.weeks[i].weekHrs = 0;
           for(let j=0; j < this.weeks[i].dates.length; j++) {
-            this.weeks[i].days[j] = this.dayByDate(this.weeks[i].dates[j]);
+            this.weeks[i].days[j] = this.dayByDate(this.weeks[i].dates[j],  this.weeks[i].number);
             if(this.weeks[i].days[j] !== null) {
               if(this.weeks[i].number == 1 &&  this.weeks[i].dates[j] == 20) {
                 dateProperties.date = this.weeks[i].dates[j];
@@ -282,13 +252,19 @@ weekOff: false,
       
     this.daywidthflag = true;
   }
-  dayByDate(date) {
+  dayByDate(date, weekNumber) {
     var presentDate =  '/' + date + '/';
+    if(weekNumber == 5 && date == 21) {
+      presentDate = (this.selectedMonth + 1) + presentDate + this.selectedYear;
+    } if(weekNumber == 1 && date == 20) {
+      presentDate = this.selectedMonth + presentDate + this.selectedYear;
+    } else {
     if(date > 20) {
       presentDate = this.selectedMonth + presentDate + this.selectedYear;
     } else {
       presentDate = (this.selectedMonth +1) + presentDate + this.selectedYear;
     }
+  }
     const presentDay = new Date(presentDate).getDay();
 
     if( (date == 29 || date == 30 || date == 31) && this.selectedMonth == new Date(presentDate).getMonth()) {
@@ -304,7 +280,7 @@ weekOff: false,
         if(data > 21) {
           return data -20;
         } else {
-          return data +10
+          return data + (this.newAttandance[0].dates.length - 22);
         }
       }
   }
@@ -469,6 +445,9 @@ weekOff: false,
       this.newAttandance[0].finalFlag = true;
     }
     if(this.newAttandanceFlag) {
+      this.newAttandance[0].weeks = this.weeks;
+      this.newAttandance[0].selectedMonth = this.selectedMonth;
+      this.newAttandance[0].selectedYear = this.selectedYear;
     this.operations.employeeAttandance(JSON.parse(JSON.stringify(this.newAttandance)), this.selectedDate);
     this.operations.employeeAttandanceInfoData(this.selectedDate);   
     this.newAttandanceFlag = false; 

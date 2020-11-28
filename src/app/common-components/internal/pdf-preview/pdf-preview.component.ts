@@ -26,6 +26,7 @@ export class PdfPreviewComponent implements OnInit {
   @Output() backFlag = new EventEmitter<boolean>();
   @Input() documentName;
   @Input() type;
+  @Input() firm;
   savepdf: File;
   constructor(
     iconRegistry: MatIconRegistry,
@@ -42,12 +43,21 @@ export class PdfPreviewComponent implements OnInit {
   ngOnInit() {
     d3.select("html").style("overflow", "hidden");
     // d3.select(".pdf-container-div").style("display", "none");  the height checking is not working in the tenderdcuments page
+    if(this.firm === 'THOTA COLDCEL PVT LTD'){
     d3.select("#pdf-preview")
       .append("img")
       .attr("id", "pdf-preview-header")
       .attr("src", "./assets/pdf/" + this.type +"header.jpg")
       .style("padding-top", "10px")
       .style("width", "100%");
+    } else {
+      d3.select("#pdf-preview")
+      .append("img")
+      .attr("id", "pdf-preview-header")
+      .attr("src", "./assets/pdf/" + this.type +"header.jpg")
+      .style("padding-top", "10px")
+      .style("width", "100%");
+    }
       if(this.type !== 'thota') {
     d3.select("#pdf-preview")
       .style("position", "relative")

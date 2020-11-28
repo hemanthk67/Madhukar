@@ -25,6 +25,9 @@
         </div>
         </div>
     </div>
+    <div *ngIf="enquiry.firm === 'THOTA COLDCEL PVT LTD'">
+    <div class="enquiry-list-card-tail" [ngClass]="{'light-blue-border-bottom-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange-border-bottom-color': enquiry.status == 'Offer-Prepared', 'green-border-bottom-color': enquiry.status == 'Successful', 'red-border-bottom-color': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }"></div>
+    </div>    
     </div>
     <div class="enquiry-list-card-large" *ngIf="!enquiry.flag">
         <div class="enquiry-list-card-head">
@@ -105,7 +108,10 @@
         </div>
         </div>
     </div>
-    </div>
+    <div *ngIf="enquiry.firm === 'THOTA COLDCEL PVT LTD'">
+    <div class="enquiry-list-card-tail" [ngClass]="{'light-blue-border-bottom-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange-border-bottom-color': enquiry.status == 'Offer-Prepared', 'green-border-bottom-color': enquiry.status == 'Successful', 'red-border-bottom-color': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }"></div>
+        </div>
+</div>
 </div>
 </span>
     </div>

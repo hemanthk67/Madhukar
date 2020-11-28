@@ -100,39 +100,39 @@
                     </span>
                     <div class="employee-week-hrs flex" *ngIf="week.number !== 6">
                         <div class="employee-attandance-hrs">
-                            <div class="employee-hrs-input"> {{ newAttandance[i+1].weeks[week.number -1].weekHrs }} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[week.number -1].weekHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                         <div class="employee-ot-hrs">
-                            <div class="employee-hrs-input"> {{ newAttandance[i+1].weeks[week.number -1].otHrs }} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[week.number -1].otHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                         <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ newAttandance[i+1].weeks[week.number -1].compensationHrs }} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[week.number -1].compensationHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                         <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ newAttandance[i+1].weeks[week.number -1].holidayHrs }} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[week.number -1].holidayHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                         <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ newAttandance[i+1].weeks[week.number -1].weekOffHrs }} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[week.number -1].weekOffHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                     </div>
                     <div class="employee-week-hrs flex" *ngIf="week.number == 6">
                         <div class="employee-attandance-hrs">
-                            <div class="employee-hrs-input"> {{ newAttandance[i+1].weeks[0].weekHrs + newAttandance[i+1].weeks[1].weekHrs  + newAttandance[i+1].weeks[2].weekHrs + newAttandance[i+1].weeks[3].weekHrs + newAttandance[i+1].weeks[4].weekHrs}} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].weekHrs + newAttandance[i+1].weeks[1].weekHrs  + newAttandance[i+1].weeks[2].weekHrs + newAttandance[i+1].weeks[3].weekHrs + newAttandance[i+1].weeks[4].weekHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                         <div class="employee-ot-hrs">
-                            <div class="employee-hrs-input"> {{ newAttandance[i+1].weeks[0].otHrs + newAttandance[i+1].weeks[1].otHrs  + newAttandance[i+1].weeks[2].otHrs + newAttandance[i+1].weeks[3].otHrs + newAttandance[i+1].weeks[4].otHrs}} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].otHrs + newAttandance[i+1].weeks[1].otHrs  + newAttandance[i+1].weeks[2].otHrs + newAttandance[i+1].weeks[3].otHrs + newAttandance[i+1].weeks[4].otHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                         <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ newAttandance[i+1].weeks[0].compensationHrs + newAttandance[i+1].weeks[1].compensationHrs  + newAttandance[i+1].weeks[2].compensationHrs + newAttandance[i+1].weeks[3].compensationHrs + newAttandance[i+1].weeks[4].compensationHrs}} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].compensationHrs + newAttandance[i+1].weeks[1].compensationHrs  + newAttandance[i+1].weeks[2].compensationHrs + newAttandance[i+1].weeks[3].compensationHrs + newAttandance[i+1].weeks[4].compensationHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                         <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ newAttandance[i+1].weeks[0].holidayHrs + newAttandance[i+1].weeks[1].holidayHrs  + newAttandance[i+1].weeks[2].holidayHrs + newAttandance[i+1].weeks[3].holidayHrs + newAttandance[i+1].weeks[4].holidayHrs}} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].holidayHrs + newAttandance[i+1].weeks[1].holidayHrs  + newAttandance[i+1].weeks[2].holidayHrs + newAttandance[i+1].weeks[3].holidayHrs + newAttandance[i+1].weeks[4].holidayHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                         <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ newAttandance[i+1].weeks[0].weekOffHrs + newAttandance[i+1].weeks[1].weekOffHrs  + newAttandance[i+1].weeks[2].weekOffHrs + newAttandance[i+1].weeks[3].weekOffHrs + newAttandance[i+1].weeks[4].weekOffHrs}} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].weekOffHrs + newAttandance[i+1].weeks[1].weekOffHrs  + newAttandance[i+1].weeks[2].weekOffHrs + newAttandance[i+1].weeks[3].weekOffHrs + newAttandance[i+1].weeks[4].weekOffHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                         <div class="employee-ot-hrs">
-                            <div class="employee-hrs-input"> {{newAttandance[i+1].weeks[0].weekHrs + newAttandance[i+1].weeks[1].weekHrs  + newAttandance[i+1].weeks[2].weekHrs + newAttandance[i+1].weeks[3].weekHrs + newAttandance[i+1].weeks[4].weekHrs + newAttandance[i+1].weeks[0].otHrs + newAttandance[i+1].weeks[1].otHrs  + newAttandance[i+1].weeks[2].otHrs + newAttandance[i+1].weeks[3].otHrs + newAttandance[i+1].weeks[4].otHrs}} <br> Hrs</div>
+                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].weekHrs + newAttandance[i+1].weeks[1].weekHrs  + newAttandance[i+1].weeks[2].weekHrs + newAttandance[i+1].weeks[3].weekHrs + newAttandance[i+1].weeks[4].weekHrs + newAttandance[i+1].weeks[0].otHrs + newAttandance[i+1].weeks[1].otHrs  + newAttandance[i+1].weeks[2].otHrs + newAttandance[i+1].weeks[3].otHrs + newAttandance[i+1].weeks[4].otHrs).toFixed(0) }} <br> Hrs</div>
                         </div>
                     </div>
                     </div>
