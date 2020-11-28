@@ -8,7 +8,7 @@ import { OperationsService } from 'src/app/services/internal/operations/operatio
 })
 export class SalaryStatementComponent implements OnInit {
   constructor(public operations: OperationsService) { }
-
+  startFlag = true;
   ngOnInit() {
   }
   attandanceDateChange() {
@@ -25,5 +25,15 @@ export class SalaryStatementComponent implements OnInit {
   }
   submit() {
     this.operations.employeeAttandance(this.operations.originalPresentAttandanceData, 'Sep-Oct-2020');
+    this.startFlag = true;
+  }
+  start() {
+    if (this.startFlag) {
+    for(let i=1; i < this.operations.presentAttandanceData.length; i ++) {
+      this.operations.presentAttandanceData[i].basicSalaryByMonth = ( Math.round(this.operations.presentAttandanceData[i].weekHrs) + Math.round(this.operations.presentAttandanceData[i].otHrs))*(this.operations.presentAttandanceData[i].salary/(30*8) );
+    }
+    this.startFlag = false;
+  }
+    return true;
   }
 }
