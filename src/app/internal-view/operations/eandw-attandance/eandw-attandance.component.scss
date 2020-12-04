@@ -220,10 +220,26 @@
                         .employee-table-date-header-time-in {
                             font-size: 10px;
                             padding-left: 3px;
+                            select {
+                                appearance:none;
+                                background: url('/assets/icons/hour-glass.png') no-repeat right;
+                                -webkit-appearance: none;
+                                padding-right: 17px;
+                                font-size: 16px;
+                                padding-left: 5px;
+                            }
                         }
                         .employee-table-date-header-time-out {
                             font-size: 10px;
                             padding-left: 3px;
+                            select {
+                                appearance:none;
+                                background: url('/assets/icons/hour-glass.png') no-repeat right;
+                                -webkit-appearance: none;
+                                padding-right: 17px;
+                                font-size: 16px;
+                                padding-left: 5px;
+                            }
                         }
                         .employee-table-date-header-category {
                             .employee-table-date-header-category-leave {

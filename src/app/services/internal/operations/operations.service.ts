@@ -32,6 +32,8 @@ export class OperationsService {
   public employeeData;
   presentAttandanceData: any;
   originalPresentAttandanceData: any;
+  originalSeperatedEmployeeData = [];
+  SeperatedEmployeeData: any;
   attandanceInfo: any;
   public originalEmployeeData = [];
   highestEmployeeNumber = 0;
@@ -155,6 +157,38 @@ name:value
         `separatedEmployee/${data.number}`
       );
       newUserRef.set(data, { merge: true });
+    }
+    deleteSeperatedEmployeeData(data) {
+      var number = data.number;
+      if(data.number.charAt(0) !== 'S') {
+        number = 'S' + number;
+      }
+      const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
+        `separatedEmployee/${number}`
+      );
+      newUserRef.delete();
+    }
+    SeperatedEmployee() {
+      this.getSeperatedEmployeeData().then(data => {
+        this.SeperatedEmployeeData = data;
+      });
+    }
+    async getSeperatedEmployeeData() {
+      var markers = [];
+      if(!this.SeperatedEmployeeData) {
+      await firebase.firestore().collection('separatedEmployee').get()
+        .then(querySnapshot => {
+          querySnapshot.docs.forEach(doc => {
+          this.originalSeperatedEmployeeData.push(doc.data());
+          markers.push(doc.data());
+          markers[markers.length - 1].dateOfBirthFormatted = this.dateFormatting(doc.data().dob);
+          markers[markers.length - 1].flag = true;
+        });
+      });
+    } else {
+      markers = this.SeperatedEmployeeData;
+    }
+      return markers;
     }
 
     public uploadFile(file ,data, type) {

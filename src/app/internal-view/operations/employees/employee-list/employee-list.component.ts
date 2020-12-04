@@ -12,6 +12,7 @@ export class EmployeeListComponent implements OnInit {
   seperationFlag = false;
  changeFlag = false;
  startFlag = true;
+ startSeperatedFlag = true;
  changeIndex: any;
   constructor(public operations: OperationsService,
     public routingService: RoutingService,
@@ -24,7 +25,14 @@ export class EmployeeListComponent implements OnInit {
       this.changeFlag = false;
       this.seperationFlag = false;
     }
-    if(status == "Active") {
+    if(status == "add-back") {
+      var data = this.operations.originalSeperatedEmployeeData[index];
+      data.number =  data.number.slice(1);
+      this.operations.setEmployeeData(data);
+      this.operations.deleteSeperatedEmployeeData(data);
+      this.operations.originalSeperatedEmployeeData.splice(index,1);
+      this.operations.SeperatedEmployeeData.splice(index,1);
+    } else if(status == "Active") {
       if(!this.operations.employeeData[index].active) {
         this.operations.employeeData[index].active = true;
         this.changeFlag = true;
@@ -55,6 +63,7 @@ export class EmployeeListComponent implements OnInit {
           this.changeFlag = true;
         }
       }
+
     
   }
   submit() {
@@ -75,5 +84,20 @@ export class EmployeeListComponent implements OnInit {
   this.startFlag = false;
     }
     return true;
+  }
+  startSeperated() {
+    if(this.startSeperatedFlag) {
+      for(let i =0; i < this.operations.SeperatedEmployeeData.length ; i++) {
+        this.imageService.getImageUrl(this.operations.SeperatedEmployeeData[i].photoPath).then( url => {
+          this.operations.SeperatedEmployeeData[i].photoUrl = url;
+            console.log(url);   
+           });
+      }
+  this.startSeperatedFlag = false;
+    }
+    return true;
+  }
+  seperatedemployee() {
+    this.operations.SeperatedEmployee();
   }
 }
