@@ -487,13 +487,13 @@ let solarBusinessPartnersList = [ {
 }];
 this.solarBusinessPartnerListArrangement(solarBusinessPartnersList, businessPartners, businessPartnersListadd);
 
-if( (d3.select("#pdf-preview-1") as any).node().getBoundingClientRect().height > ((d3.select("#pdf-preview-start-1") as any).node().getBoundingClientRect().height + (d3.select("#pdf-preview-start-1-2") as any).node().getBoundingClientRect().height + (d3.select("#pdf-preview-header") as any).node().getBoundingClientRect().height + 130)) {    
-      this.pdfPreviewPage2.append('div')
-      .append('img')
-      .attr('src', './assets/logo/Inspected.jpg')
-      .style("width", "100%")
-      .style("margin-top", "35px")
-}
+// if( (d3.select("#pdf-preview-1") as any).node().getBoundingClientRect().height > ((d3.select("#pdf-preview-start-1") as any).node().getBoundingClientRect().height + (d3.select("#pdf-preview-start-1-2") as any).node().getBoundingClientRect().height + (d3.select("#pdf-preview-header") as any).node().getBoundingClientRect().height + 130)) {    
+//       this.pdfPreviewPage2.append('div')
+//       .append('img')
+//       .attr('src', './assets/logo/Inspected.jpg')
+//       .style("width", "100%")
+//       .style("margin-top", "35px")
+// }
     }
     
     businessPartnersListArrangement(businessPartnersList, businessPartners, businessPartnersListadd) {

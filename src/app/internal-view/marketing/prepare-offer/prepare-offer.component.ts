@@ -40,6 +40,7 @@ export class PrepareOfferComponent implements OnInit {
   employeeDetails: any;
   documentName: any;
   editOfferFlag = false;
+  pdfType : any;
   constructor(    iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public infoService:InfoService,
@@ -58,6 +59,16 @@ export class PrepareOfferComponent implements OnInit {
    for(let i=0; i < this.infoService.pvtCustomerData.length; i++) {
 if(this.infoService.pvtCustomerData[i].fullName == this.enquiry.customer) {
 this.customerReference = this.infoService.pvtCustomerData[i];
+if(this.enquiry.firm) {
+  if(this.enquiry.firm == 'THOTA COLDCEL PVT LTD') {
+    this.pdfType = 'coldcel';
+  } else {
+    this.pdfType = 'thota';
+  }
+} else {
+  
+  this.pdfType = 'thota';
+}
 }
    }
     this.pdfPreviewFlag = false; // for the pdfPreview

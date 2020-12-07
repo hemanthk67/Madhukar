@@ -58,15 +58,15 @@ export class PdfPreviewComponent implements OnInit {
       .style("padding-top", "10px")
       .style("width", "100%");
     }
-      if(this.type !== 'thota') {
+      if(this.type == 'coldcel' || this.type == 'thota') {
     d3.select("#pdf-preview")
       .style("position", "relative")
       .append("img")
-      .attr("src", "./assets/pdf/" + this.type +"footer.jpg")
-      .style("width", "100%")
+      .attr("src", "./assets/logo/" + "Inspected.jpg")
+      .style("width", "75%")
       .style("position", "absolute")
-      .style("bottom", "0")
-      .style("left", "0");
+      .style("bottom", "5px")
+      .style("left", "106px");
       }
 
     // second page
@@ -75,14 +75,16 @@ export class PdfPreviewComponent implements OnInit {
       .attr("src", "./assets/pdf/"+ this.type + "header.jpg")
       .style("padding-top", "10px")
       .style("width", "100%");
-    // d3.select("#pdf-preview-1")
-    //   .style("position", "relative")
-    //   .append("img")
-    //   .attr("src", "./assets/pdf/"+ this.type + "footer.jpg")
-    //   .style("width", "100%")
-    //   .style("position", "absolute")
-    //   .style("bottom", "0")
-    //   .style("left", "0");
+      if(this.type == 'coldcel') {
+    d3.select("#pdf-preview-1")
+      .style("position", "relative")
+      .append("img")
+      .attr("src", "./assets/pdf/"+ 'coldcel' + "footer.jpg")
+      .style("width", "100%")
+      .style("position", "absolute")
+      .style("bottom", "0")
+      .style("left", "0");
+      }
     // setTimeout(
     //   function() {
     //     d3.select(".pdf-container-div").style("display", "unset");
