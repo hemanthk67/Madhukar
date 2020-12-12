@@ -245,7 +245,18 @@ export class RoutingService {
       500
     );
   }
-  
+  marketingEnquiryResults() {
+    this.loadingFlag = true;
+    this.router.navigate([
+      { outlets: { approved: "Marketing/Results" } }
+    ]);
+    setTimeout(
+      function() {
+        this.loadingFlag = false;
+      }.bind(this),
+      500
+    );
+  }
   //Login
   Login(user, Flag) {
     this.userData = user;

@@ -2,10 +2,10 @@
     <div class="enquiry-list-head"> Enquiry-List</div>
     <div class="enquiry-list-body">
 <span class="flex flex-wrap" *ngIf="marketingService.data">
-<div class="enquiry-list-card" *ngFor="let enquiry of marketingService.data.slice().reverse(); let i = index" [ngClass]="{'width-30': enquiry.flag, 'width-100': !enquiry.flag, 'height-auto':  !enquiry.flag,'light-blue-border-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange-border-color': enquiry.status == 'Offer-Prepared', 'green-border-color': enquiry.status == 'Successful', 'red-border-color': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
+<div class="enquiry-list-card" *ngFor="let enquiry of marketingService.data.slice().reverse(); let i = index" [ngClass]="{'width-30': enquiry.flag, 'width-100': !enquiry.flag, 'height-auto':  !enquiry.flag,'light-blue-border-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange-border-color': enquiry.status == 'Offer-Prepared', 'green-border-color': enquiry.status == 'Successful','purple-border-color': enquiry.status == 'Cancelled', 'red-border-color': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
     <div class="enquiry-list-card-small" (click)="read(i)" *ngIf="enquiry.flag">
     <div class="enquiry-list-card-head">
-        <div class="org-head" [ngClass]="{'light-blue-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'Offer-Prepared', 'green': enquiry.status == 'Successful', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">{{ enquiry.customer }}  <div class="enquiry-number" >
+        <div class="org-head" [ngClass]="{'light-blue-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'Offer-Prepared', 'green': enquiry.status == 'Successful','purple': enquiry.status == 'Cancelled', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">{{ enquiry.customer }}  <div class="enquiry-number" >
             <span class="enquiry-status" >
                 {{ enquiry.status }}</span>
             {{ enquiry.number }}</div></div>
@@ -26,13 +26,13 @@
         </div>
     </div>
     <div *ngIf="enquiry.firm === 'THOTA COLDCEL PVT LTD'">
-    <div class="enquiry-list-card-tail" [ngClass]="{'light-blue-border-bottom-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange-border-bottom-color': enquiry.status == 'Offer-Prepared', 'green-border-bottom-color': enquiry.status == 'Successful', 'red-border-bottom-color': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }"></div>
+    <div class="enquiry-list-card-tail" [ngClass]="{'light-blue-border-bottom-color': enquiry.status == 'Submitted','grey': enquiry.status == 'Completed', 'orange-border-bottom-color': enquiry.status == 'Offer-Prepared', 'green-border-bottom-color': enquiry.status == 'Successful','purple-border-bottom-color': enquiry.status == 'Cancelled', 'red-border-bottom-color': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }"></div>
     </div>    
     </div>
     <div class="enquiry-list-card-large" *ngIf="!enquiry.flag">
         <div class="enquiry-list-card-head">
         <div class="org-head">{{ enquiry.customer }}</div>
-        <span class="enquiry-status" [ngClass]="{'grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'Offer-Prepared', 'green': enquiry.status == 'Successful', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
+        <span class="enquiry-status" [ngClass]="{'grey': enquiry.status == 'Completed', 'orange': enquiry.status == 'Offer-Prepared', 'green': enquiry.status == 'Successful','purple': enquiry.status == 'Cancelled', 'red': enquiry.status == 'UnSuccessful' || enquiry.status == 'Not-Participated' ||  enquiry.status == 'Rejected' }">
             {{ enquiry.status }}</span>
     </div>
     <div class="enquiry-list-card-sub-head">TCC/P-{{ enquiry.number }}/<span *ngFor = "let customer of infoService.pvtCustomerData">
@@ -98,9 +98,9 @@
                 <div class="div" *ngIf="enquiry.status == 'New Enquiry'">
                     <div class="document-prepare" (click)="prepareOffer(i)"> Prepare Offer </div>
                     </div>
-                    <!-- <div class="div" *ngIf="enquiry.status == 'Submitted'">
+                    <div class="div" *ngIf="enquiry.status == 'Offer-Prepared'">
                         <div class="document-prepare" (click)="enquiryResults(i)"> Results </div>
-                        </div> -->
+                        </div>
             </div>
         <div class="down-arrow" (click)="read(i)">
             <span>Read Less</span>

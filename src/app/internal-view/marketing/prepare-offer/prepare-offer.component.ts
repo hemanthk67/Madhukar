@@ -59,16 +59,6 @@ export class PrepareOfferComponent implements OnInit {
    for(let i=0; i < this.infoService.pvtCustomerData.length; i++) {
 if(this.infoService.pvtCustomerData[i].fullName == this.enquiry.customer) {
 this.customerReference = this.infoService.pvtCustomerData[i];
-if(this.enquiry.firm) {
-  if(this.enquiry.firm == 'THOTA COLDCEL PVT LTD') {
-    this.pdfType = 'coldcel';
-  } else {
-    this.pdfType = 'thota';
-  }
-} else {
-  
-  this.pdfType = 'thota';
-}
 }
    }
     this.pdfPreviewFlag = false; // for the pdfPreview
@@ -77,6 +67,16 @@ if(this.enquiry.firm) {
     this.offer = this.enquiry.offer;
     }
     this.marketingService.editOfferFlag = false;
+    if(this.enquiry.firm) {
+      if(this.enquiry.firm == 'THOTA COLDCEL PVT LTD') {
+        this.pdfType = 'coldcel';
+        this.offer.terms[8].content = "Bank Name: State Bank of India - Srila Park Pride Kukatpally Branch, Account No: 36730666393, IFSC:SBIN0018875 ";
+      } else {
+        this.pdfType = 'thota';
+          }
+    } else {
+      this.pdfType = 'thota';
+    }
 
   }
   calanderOpen(value) {
@@ -246,8 +246,7 @@ var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY
 // End indian number to word function
 // Data formating
 offerDataFormate() {
-  
-  this.offer = {...this.JsonData};
+  this.offer = JSON.parse(JSON.stringify(this.JsonData));
   this.offer.customer.name = this.enquiry.customer;
   this.offer.issueDate = this.enquiry.issueDate;
   var item = {

@@ -11,10 +11,11 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { NewEnquiryComponent } from './new-enquiry/new-enquiry.component';
 import { EnquiryListComponent } from './enquiry-list/enquiry-list.component';
+import { MarketingResultComponent } from './marketing-result/marketing-result.component';
 
 
 @NgModule({
-  declarations: [MarketingComponent, PrepareOfferComponent, NewEnquiryComponent, EnquiryListComponent],
+  declarations: [MarketingComponent, PrepareOfferComponent, NewEnquiryComponent, EnquiryListComponent, MarketingResultComponent],
   imports: [
     CommonModule,
     MarketingRoutingModule,

@@ -157,6 +157,19 @@ private pathBase = environment.marketingPath;  // change to enquiry once done wi
        }
        this.setEnquiryData(this.enquiry);
     }
+
+    enquiryResultSubmission(data) {
+      this.setEnquiryData(data);
+      for(let i =0; i < this.originalData.length; i++) {
+        if(this.originalData[i].number == data.number) {
+          this.data[i].status = this.originalData[i].status = data.status;
+          this.data[i].rejectedReason = this.originalData[i].rejectedReason = data.rejectedReason;
+          this.data[i].statusRemark = this.originalData[i].statusRemark = data.statusRemark;
+          break;
+        }
+      }
+      this.routingService.enquiryList();
+    }
       // function to set upload new data
       setEnquiryData(data) {
     const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(

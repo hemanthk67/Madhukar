@@ -319,6 +319,9 @@
       .green {
         color: green;
     }
+    .purple {
+        color: purple;
+    }
       .orange {
           color: orange;
       }
@@ -334,6 +337,9 @@
     .green-border-color {
         border-top: solid 5px green !important;
     }
+    .purple-border-color {
+        border-top: solid 5px purple !important;
+    }
     .orange-border-color {
         border-top: solid 5px orange !important;
     }
@@ -345,6 +351,9 @@
     }
     .green-border-bottom-color {
         border-bottom: solid 10px green !important;
+    }
+    .purple-border-bottom-color {
+        border-bottom: solid 5px purple !important;
     }
     .orange-border-bottom-color {
         border-bottom: solid 10px orange !important;

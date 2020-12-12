@@ -62,9 +62,10 @@ export class EnquiryListComponent implements OnInit {
     this.documentName = this.marketingService.enquiry.customer + ' OFFER P - ' + this.marketingService.enquiry.number;
     this.routingService.prepareOffer();
   }
+  n
   enquiryResults(index) {
     this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
-    // this.routingService.enquiryResults();
+    this.routingService.marketingEnquiryResults();
   }
   edit(index) {
     this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
