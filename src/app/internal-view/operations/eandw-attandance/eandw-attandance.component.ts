@@ -74,8 +74,12 @@ dates: []
   constructor(public operations: OperationsService) { 
     this.date =new Date();
       this.selectedMonth = this.date.getMonth();
-      this.selectedYear = this.date.getFullYear();
-      this.selectedDate = this.months[this.selectedMonth - 1] + '-' + this.selectedYear;
+      this.selectedYear = this.date.getFullYear();  
+      if(this.selectedMonth === 0) {
+      this.selectedDate = this.months[11] + '-' + (this.selectedYear - 1);
+      } else {
+        this.selectedDate = this.months[this.selectedMonth - 1] + '-' + this.selectedYear;
+      }
       this.newMonthText = this.selectedDate;
   }
 

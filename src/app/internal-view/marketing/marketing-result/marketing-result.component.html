@@ -1,3 +1,4 @@
+<span *ngIf="!po">
 <div class="header-div">
   <div class="header" (click)="backToTenderList()">
     {{ marketingService.enquiry.customer }} - {{ marketingService.enquiry.number }}
@@ -86,3 +87,5 @@
         <div class="competitor-price-submission-button" (click)="submit()">Submit Results</div>
       </div>
 </div>
+</span>
+<app-new-purchase-order-received *ngIf="po" [type]="'marketing'" [data]="marketingService.enquiry" (returnData)='poReturnData($event)'></app-new-purchase-order-received>

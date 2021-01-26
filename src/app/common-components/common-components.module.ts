@@ -6,6 +6,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { LogoComponent } from "./logo/logo.component";
 import { CalenderComponent } from "./internal/calender/caleander.component";
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
+import { NewPurchaseOrderReceivedComponent } from './internal/new-purchase-order-received/new-purchase-order-received.component';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -13,15 +15,17 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
     PdfPreviewComponent,
     LogoComponent,
     CalenderComponent,
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    NewPurchaseOrderReceivedComponent
   ],
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, FormsModule, MatIconModule],
   exports: [
     PdfViewComponent,
     PdfPreviewComponent,
     LogoComponent,
     CalenderComponent,
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    NewPurchaseOrderReceivedComponent
   ]
 })
 export class CommonComponentsModule {}
