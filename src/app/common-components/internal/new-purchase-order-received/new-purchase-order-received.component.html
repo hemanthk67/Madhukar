@@ -1,10 +1,11 @@
 <span *ngIf="type=='marketing'">
     <div class="new-enquiry-div"> 
         <div class="new-enquiry-head-div">New PO: {{ po.firm }} <br> 
-           <div class="firm-to-change">
+           <!-- <div class="firm-to-change">
           <div class="firm-1"  [ngClass]="{ 'firm-1-selected': po.firm === 'THOTA COLDCEL PVT LTD' }" (click)="firmSelected('THOTA COLDCEL PVT LTD')" ngDefaultControl>THOTA COLDCEL PVT LTD</div>
           <div class="firm-2" [ngClass]="{ 'firm-2-selected': po.firm === 'TCC ENERGY SOLUTIONS' }" (click)="firmSelected('TCC ENERGY SOLUTIONS')" ngDefaultControl>TCC ENERGY SOLUTIONS</div>
-           </div></div>
+           </div> -->
+          </div>
         <div class="new-enquiry-body">
         <div class="info-div">
             <div class="info-header">
@@ -130,18 +131,18 @@
                         <input class="qty margin-5 white-bkgd padding-0 height-20" type="number" [(ngModel)]="item.qty" >
                         <textarea class="remark margin-5 white-bkgd padding-0 height-20" name="remark" [(ngModel)]="item.remark"></textarea>
                       </div>
-                      <div class="add-item flex">
+                      <!-- <div class="add-item flex">
                         <div class="add-button" (click)='addItem()'>+ Add</div>
                         <div class="remove-item" *ngFor="let item of po.items; let i= index">
                           <div class="remove-button" (click)='removeItem(i)'>Remove - {{i+1}}</div>
                         </div>
-                    </div>
+                    </div> -->
                     </div>
                     </div>
         </div>
         <div class="enquiry-submission">
         <div class="upload-div">
-          <div class="upload-input-div">
+          <!-- <div class="upload-input-div">
             <div class="upload-input-lable">Drop Files to Upload</div>
             <input
               class="upload-input"
@@ -149,9 +150,9 @@
               (change)="detectFile($event)"
               multiple
             />
-          </div>
+          </div> -->
           <div class="files-div">
-            <div
+            <!-- <div
               class="files"
               *ngFor="let file of allFiles; let i = index"
               (click)="deleteFile(i)"
@@ -162,12 +163,12 @@
                 svgIcon="cloud-cross-icon" *ngIf="file.size"
               ></mat-icon>
               <p>{{ file.name }}</p>
-            </div>
+            </div> -->
           </div>
         </div>
-        <div class="submit">
+        <!-- <div class="submit">
           <div class="submit-button" (click)="submit()">Submit</div>
-        </div>
+        </div> -->
         </div>
         </div>
     </div>
