@@ -178,6 +178,7 @@ holiday: false,
 compensationHoliday: false, 
 weekOff: false,
     }
+    console.log(this.weeks.length, this.weeks);
     for(let i=0; i < this.weeks.length; i++) {
       for(let j=0; j < this.weeks[i].dates.length; j++) {
         this.weeks[i].days[j] = this.dayByDate(this.weeks[i].dates[j],  this.weeks[i].number);
@@ -261,10 +262,12 @@ weekOff: false,
     this.daywidthflag = true;
   }
   dayByDate(date, weekNumber) {
+    console.log(this.selectedMonth);
     var presentDate =  '/' + date + '/';
+    if(this.selectedMonth !== 0) {
     if(weekNumber == 5 && date == 21) {
       presentDate = (this.selectedMonth + 1) + presentDate + this.selectedYear;
-    } if(weekNumber == 1 && date == 20) {
+    } else if(weekNumber == 1 && date == 20) {
       presentDate = this.selectedMonth + presentDate + this.selectedYear;
     } else {
     if(date > 20) {
@@ -273,6 +276,19 @@ weekOff: false,
       presentDate = (this.selectedMonth +1) + presentDate + this.selectedYear;
     }
   }
+} else {
+  if(weekNumber == 5 && date == 21) {
+    presentDate = (this.selectedMonth + 1) + presentDate + this.selectedYear;
+  } else if(weekNumber == 1 && date == 20) {
+    presentDate = 12 + presentDate + ( this.selectedYear -1);
+  } else {
+  if(date > 20) {
+    presentDate = 12 + presentDate + (this.selectedYear - 1);
+  } else {
+    presentDate = (this.selectedMonth +1) + presentDate + this.selectedYear;
+  }
+}
+}
     const presentDay = new Date(presentDate).getDay();
 
     if( (date == 29 || date == 30 || date == 31) && this.selectedMonth == new Date(presentDate).getMonth()) {

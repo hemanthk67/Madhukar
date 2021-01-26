@@ -70,4 +70,12 @@ var yyyy = today.getFullYear();
 
 return( dd + '/' + mm + '/' + yyyy);
   }
+  displayCounter(value) {
+    if(value) {
+      this.calanderFlag.issueDate = false; 
+      // this.enquiry.issueDate = value;
+    } else {
+this.calanderFlag.issueDate = false;
+    }
+  }
 }
