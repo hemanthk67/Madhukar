@@ -96,9 +96,12 @@ remark:''}
   }
   submit() {
     if(this.editFlag) {
+      if(this.enquiry.offer) {
+        this.enquiry.offer.itemEdit = true;
+        }
       this.marketingService.pushEnquiryData(this.enquiry,this.editFileAdd,this.editFlag);
-
     } else {
+     
       this.marketingService.pushEnquiryData(this.enquiry,this.allFiles,this.editFlag);
     }
     this.routingService.enquiryList();

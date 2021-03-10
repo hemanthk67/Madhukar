@@ -65,6 +65,10 @@ this.customerReference = this.infoService.pvtCustomerData[i];
     this.offerDataFormate();
     if (this.marketingService.editOfferFlag) {
     this.offer = this.enquiry.offer;
+    if(this.offer.itemEdit) {
+      this.offerDataAssigning();
+      this.offer.itemEdit = false;
+    }
     }
     this.marketingService.editOfferFlag = false;
     if(this.enquiry.firm) {
@@ -247,10 +251,16 @@ var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY
 // Data formating
 offerDataFormate() {
   this.offer = JSON.parse(JSON.stringify(this.JsonData));
+  this.offerDataAssigning();
+
+          this.documentName = this.enquiry.customer + ' OFFER P - ' + this.enquiry.number;
+         
+}
+offerDataAssigning() {
   this.offer.customer.name = this.enquiry.customer;
   this.offer.issueDate = this.enquiry.issueDate;
   var item = {
-    description:'250KVA, 0.415/0.380KV Dry Type Panel LTG. T/F.',
+    description:'',
   unitPrice:0.00,
 qty:0.00,
 totalPrice:0.00};
@@ -263,10 +273,8 @@ this.offer.itemsPrice = [];
   totalPrice:0.00};
 this.offer.itemsPrice.push({...item});
   }
-    // var kva = '';
-    // var Class= '';
+    this.offer.subject = '';
     for(let i=0; i < this.enquiry.items.length; i++) {
-      // kva = kva + this.marketingService.enquiry.items[i] 
       if( i == this.enquiry.items.length - 1 && i !== 0) {
         this.offer.subject = this.offer.subject + 'and ' + this.enquiry.items[i].rating + 'KVA-' + this.enquiry.items[i].classHv + '/' + this.enquiry.items[i].classLv + 'KV.';
       } else {
@@ -282,10 +290,7 @@ this.offer.email = this.infoService.employeeData[i].email;
 break;
             }
           }
-
-          this.documentName = this.enquiry.customer + ' OFFER P - ' + this.enquiry.number;
-         
-}
+ }
 // End Data formating
 
 // start of subPriceTotal 

@@ -255,7 +255,7 @@ name:value
                 this.presentAttandanceData[i].otHrs = 0;
               }
                 for(let k=0; k < this.employeeData.length; k++) {
-                  if(this.employeeData[k].number == this.presentAttandanceData[i].number) {
+                  if(this.employeeData[k].number == this.presentAttandanceData[i].number && !this.presentAttandanceData[i].salary ) {
                     this.presentAttandanceData[i].salary = this.employeeData[k].salary.monthlySalary;
                     this.presentAttandanceData[i].bonus = this.employeeData[k].salary.monthlyFixedBonus;
                   }

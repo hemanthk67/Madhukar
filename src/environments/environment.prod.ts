@@ -12,5 +12,6 @@ export const environment = {
   },
   tenderPath:'Tender',
   marketingPath:'Marketing',
-  operationsPath: 'Operations'
+  operationsPath: 'Operations',
+  poPath: 'PO'
 };

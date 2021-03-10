@@ -9,7 +9,7 @@
         <div class="new-enquiry-body">
         <div class="info-div">
             <div class="info-header">
-              <div class="header">INFORMATION</div>
+              <div class="header"> General Information</div>
             </div>
             <div class="info-body">
                 <div class="flex justify-content-sapce-between">
@@ -19,12 +19,12 @@
                         {{ po.customer }}
                     </div>
                     </div>
-                    <div class="tender-date-div flex">
-                        <div class="tender-date">
-                          <div class="tender-date-label">Issued Date:</div>
+                    <div class="PO-date-div flex">
+                        <div class="PO-date">
+                          <div class="PO-date-label">Issued Date:</div>
                           <Input
                             type="text"
-                            class="tender-date-input"
+                            class="PO-date-input"
                             [(ngModel)]="po.issueDate"
                             placeholder="dd/mm/yyyy"
                             ngDefaultControl
@@ -42,107 +42,145 @@
                       <div class="employee-label sub-header">Employee :</div>
                       {{ po.marketingEmployee }}
                       </div>
+                      <div class="PO-number">
+                        <div class="PO-number-label sub-header">PO Number:</div>
+                        <Input
+                          type="text"
+                          class="PO-number-input"
+                          [(ngModel)]="po.poNumber"
+                          [ngClass]="{
+                            'red-border': false && !flag.PONumber
+                          }"
+                          ngDefaultControl
+                        />
+                      </div>
                     <div class="flex description"> 
                       <div class="description-lable sub-header">Remarks : </div>
                       <div class="description-text">
                         <textarea name="specialFeatures" [(ngModel)]="po.remarks" ></textarea>
                       </div>
                     </div>
-                    <div class="price-table"> 
-                      <div class="price-table-head flex">
-                        <div class="s-no margin-5 white-bkgd height-40 padding-top-10">S.NO</div>
-                        <div class="item-description margin-5 white-bkgd padding-top-10"> ITEM DESCRIPTION</div>
-                        <div class="rating margin-5 white-bkgd padding-top-10">KVA</div>
-                        <div class="class margin-5 white-bkgd padding-top-10">CLASS</div>
-                        <div class="type margin-5 white-bkgd padding-top-10">TYPE</div>
-                        <div class="standard margin-5 white-bkgd padding-top-10">STANDARD</div>
-                        <div class="tap-variation margin-5 white-bkgd ">OLTC/ OCTC</div>
-                        <div class="terminal margin-5 white-bkgd padding-top-10">HV/LV TERMINALS</div>
-                        <div class="qty margin-5 white-bkgd padding-top-10">QTY</div>
-                        <div class="remark margin-5 white-bkgd padding-top-10">Remark  
+                    <div class="item-prices-div" >
+                      <div class="item-prices-table">
+                        <!-- <div class="item-price-organization-name-div"><div class="item-price-organization-name-only-div"><div class="item-price-organization-name">{{po.firm}}</div></div></div> -->
+                       <div class="item-price-head">
+                         <div class="item-discription"> Discription</div>
+                         <div class="item-price"> Price per Item</div>
+                         <div class="gst"> Gst </div>
+                         <div class="qty"> Qty </div>
+                         <div class="total">Total( Excl Gst )</div>
+                         <div class="total-with-gst">Total( Incl Gst )</div>
+                       </div>
+                       <div class="price-div">
+                        <div class="item-price-div" *ngFor="let item of po.itemPrice;let i=index">
+                          <div class="item-discription">{{ item.description }}</div>
+                          <div class="item-price">
+                            <input type="number" class="item-price-input"  [(ngModel)]="item.unitPrice" (keyup)="addPrice(i)" />
                           </div>
+                          <div class="gst">
+                           <input type="number" class="gst-input"  [(ngModel)]="item.gst" (keyup)="addPrice(i)" disabled/>
+                          </div>
+                         <div class="qty"> 
+                           <input type="number" class="qty-input"  [(ngModel)]="item.qty" (keyup)="addPrice(i)" /> </div>
+                         <div class="total">
+                           <input type="number" class="total-input" [(ngModel)]="item.totalPrice" disabled/>
+                         </div>
+                         <div class="total-with-gst">
+                           <input type="number" class="total-with-gst-input" [(ngModel)]="item.totalWithGst" disabled/>
+                         </div>
+                        </div>
                       </div>
-                      <div class="price-table-body flex" *ngFor="let item of po.items;let i = index">
-                        <input class="s-no margin-5 white-bkgd padding-0  height-20 " [value]="i+1" disabled>
-                        <textarea class="item-description margin-5 white-bkgd padding-0 height-20" name="descrition" [(ngModel)]="item.description"></textarea>
-                        <!-- <input class="rating margin-5 white-bkgd  padding-0 height-20" type="number" (keyup)="creatediscription(i)" [(ngModel)]="item.rating" >
-                        <div class="class margin-5 transperent-bkgd height-20">
-                          <input class="class-hv white-bkgd  padding-0" type="text" (keyup)="creatediscription(i)" [(ngModel)]="item.classHv"> / 
-                          <input class="class-lv white-bkgd  padding-0" type="text" (keyup)="creatediscription(i)" [(ngModel)]="item.classLv">
-                        </div> -->
-                        <div class="type margin-5 transperent-bkgd height-20">
-                          <select
-                          class="type-select"
-                          name="type"
-                          [(ngModel)]="item.type"
-                        >
-                          <option>ONAN</option>
-                          <option>DRY</option>
-                          <option>KNAN</option>
-                          <option>Custom</option>
-                        </select>
-                        </div>
-                        <!-- <div class="standard margin-5 transperent-bkgd height-20">
-                          <select
-                          class="standard-select"
-                          name="standard"
-                          (change)="creatediscription(i)"
-                          [(ngModel)]="item.standard"
-                        >
-                          <option>1180-L1</option>
-                          <option>1180-L2</option>
-                          <option>1180-L3</option>
-                          <option>2026</option>
-                          <option>higher losses</option>
-                          <option>custom</option>
-                        </select>
-                        </div> -->
-                        <div class="tap-variation margin-5 transperent-bkgd height-20">
-                          <select
-                          class="tap-variation-select"
-                          name="tapVariation"
-                          [(ngModel)]="item.tapVariation"
-                        >
-                          <option>OLTC</option>
-                          <option>OCTC</option>
-                          <option>Custom</option>
-                        </select>
-                        </div>
-                        <div class="terminal margin-5 transperent-bkgd height-20">
-                          <select
-                    class="terminal-hv"
-                    name="terminalHv"
-                    [(ngModel)]="item.terminalHv"
-                  >
-                    <option>Cable Box</option>
-                    <option>Bare Bushings</option>
-                    <option>Custom</option>
-                  </select> / 
-                  <select
-                    class="terminal-lv"
-                    name="terminalLv"
-                    [(ngModel)]="item.terminalLv"
-                  >
-                    <option>Cable Box</option>
-                    <option>Bare Bushings</option>
-                    <option>Custom</option>
-                  </select>
-                        </div>
-                        <input class="qty margin-5 white-bkgd padding-0 height-20" type="number" [(ngModel)]="item.qty" >
-                        <textarea class="remark margin-5 white-bkgd padding-0 height-20" name="remark" [(ngModel)]="item.remark"></textarea>
+                        <div class="item-price-head justify-content-space-around margin-top-15">
+                         <div class="total margin-left-5">
+                         <div class="item-total-text margin-right-10">Total-Amount</div>
+                           <input type="number" class="total-input" [(ngModel)]="total" disabled/>
+                         </div>
+                         <div class="total-with-gst  margin-left-5">
+                         <div class="item-total-text margin-right-10">Total-Amount-With-Gst</div>
+                           <input type="number" class="total-with-gst-input" [(ngModel)]="totalWithGst" disabled/>
+                          </div>
+                       </div>
                       </div>
-                      <!-- <div class="add-item flex">
-                        <div class="add-button" (click)='addItem()'>+ Add</div>
-                        <div class="remove-item" *ngFor="let item of po.items; let i= index">
-                          <div class="remove-button" (click)='removeItem(i)'>Remove - {{i+1}}</div>
-                        </div>
-                    </div> -->
                     </div>
                     </div>
+                    <div class="info-header">
+                      <div class="header"> Terms and Conditions</div>
+                    </div>
+                    <div class="info-body">
+                      <div class=" flex justify-content-space-around">
+                    <div class="PO-date-div flex">
+                      <div class="PO-date">
+                        <div class="PO-date-label">Delivery Date:</div>
+                        <Input
+                          type="text"
+                          class="PO-date-input"
+                          [(ngModel)]="po.deliveryDate"
+                          placeholder="dd/mm/yyyy"
+                          ngDefaultControl
+                        />
+                        <span class="calander"
+                          ><button>
+                             <mat-icon class="calander-button"  [ngClass]="{'red-color': !flag.issueDate}" svgIcon="calander" (click)="calanderOpen('issueDate')"></mat-icon>
+                          </button>
+                        </span>
+                        <app-calender class="app-calander" *ngIf="calanderFlag.issueDate" (dateEmit)='deliveryDateCounter($event)'></app-calender>
+                      </div>
+                    </div>
+                    <div class="PO-date-div flex">
+                      <div class="PO-date">
+                        <div class="PO-date-label blue-bold-color">Delivery Address:</div>
+                        <textarea class="delivery-address-input" (change)="doTextareaValueChange($event)"></textarea>
+                        </div>
+                        </div>
+                        <div class="PO-date-div flex">
+                          <div class="PO-date">
+                            <div class="PO-date-label blue-bold-color">State:</div>
+                            <select
+                              type="number"
+                              class="PO-date-input"
+                              [(ngModel)]="po.deliveryState"
+                              ngDefaultControl
+                            >
+                            <option *ngFor="let state of indianStates" value= "{{state}}"> {{ state }}</option>
+                            </select>
+                            </div>
+                            </div>
+                    
+                          </div>
+                          <div class=" flex justify-content-space-around"> 
+                            <div class="PO-date-div flex">
+                              <div class="PO-date">
+                                <div class="PO-date-label blue-bold-color">Warrenty Period From Supply:</div>
+                                <Input
+                                  type="number"
+                                  class="PO-date-input"
+                                  [(ngModel)]="po.warrentyFromSupply"
+                                  ngDefaultControl
+                                /> <div class="PO-date-label">Months</div>
+                                </div>
+                                </div>
+                                <div class="PO-date-div flex">
+                                  <div class="PO-date">
+                                    <div class="PO-date-label blue-bold-color">Warrenty Period From Commission:</div>
+                                    <Input
+                                      type="number"
+                                      class="PO-date-input"
+                                      [(ngModel)]="po.warrentyFromCommission"
+                                      ngDefaultControl
+                                    /> <div class="PO-date-label">Months</div>
+                                    </div>
+                                    </div>
+                                    <div class="PO-date-div flex">
+                                      <div class="PO-date">
+                                        <div class="PO-date-label not-selected" [ngClass]="{ 'selected': po.warrentyEarly }" (click)="whicheverisearly()">Which Ever is Early</div>
+                                      </div>
+                                    </div>
+                          </div>
+                          </div>
         </div>
         <div class="enquiry-submission">
         <div class="upload-div">
-          <!-- <div class="upload-input-div">
+          <div class="upload-input-div">
             <div class="upload-input-lable">Drop Files to Upload</div>
             <input
               class="upload-input"
@@ -150,9 +188,9 @@
               (change)="detectFile($event)"
               multiple
             />
-          </div> -->
+          </div>
           <div class="files-div">
-            <!-- <div
+            <div
               class="files"
               *ngFor="let file of allFiles; let i = index"
               (click)="deleteFile(i)"
@@ -163,12 +201,12 @@
                 svgIcon="cloud-cross-icon" *ngIf="file.size"
               ></mat-icon>
               <p>{{ file.name }}</p>
-            </div> -->
+            </div>
           </div>
         </div>
-        <!-- <div class="submit">
+        <div class="submit">
           <div class="submit-button" (click)="submit()">Submit</div>
-        </div> -->
+        </div>
         </div>
         </div>
     </div>

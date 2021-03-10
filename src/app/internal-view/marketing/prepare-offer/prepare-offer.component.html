@@ -63,17 +63,17 @@
             </div>
             <div class="price-table-body flex" *ngFor="let item of offer.itemsPrice;let i = index">
               <input class="s-no margin-5 white-bkgd height-20 " [value]="i+1" disabled>
-              <textarea class="description margin-5 white-bkgd height-20" name="description" [(ngModel)]="item.description"></textarea>
+              <textarea class="description margin-5 white-bkgd height-20" name="description" [(ngModel)]="item.description" disabled></textarea>
               <input class="ex-works-price margin-5 white-bkgd height-20" type="number" [(ngModel)]="item.unitPrice"(keyup)="addPrice(i)">
               <input class="qty margin-5 white-bkgd height-20" type="number" [(ngModel)]="item.qty" (keyup)="addPrice(i)">
               <input class="total margin-5 white-bkgd height-20" [(ngModel)]="item.totalPrice" disabled>
             </div>
-            <div class="add-item flex">
+            <!-- <div class="add-item flex">
               <div class="add-button" (click)='addItem()'>+ Add</div>
               <div class="remove-item" *ngFor="let item of offer.itemsPrice; let i= index">
                 <div class="remove-button" (click)='removeItem(i)'>Remove - {{i+1}}</div>
               </div>
-          </div>
+          </div> -->
             <div class="price-table-tail flex" *ngIf="offer.subPriceTotalFlag">
               <div class="sub-total-in-words margin-5 white-bkgd" >TOTAL EX-WORKS PRICE:  {{ subTotalPriceWords }} </div>
               <input class="sub-total margin-5 white-bkgd"  [(ngModel)]="subTotalPrice">

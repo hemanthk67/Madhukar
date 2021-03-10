@@ -80,7 +80,7 @@ export class MarketingResultComponent implements OnInit {
         'West Bengal'];
         totalWithGst= 0;
         total = 0;
-        po = true;
+        po = false;
   constructor(public marketingService: MarketingService,
     public infoService: InfoService
     ) { }
@@ -127,13 +127,23 @@ export class MarketingResultComponent implements OnInit {
         this.marketingService.enquiry.status = this.resultStatus;
         this.marketingService.enquiry.rejectedReason = this.enquiryRejectedReason;
         this.marketingService.enquiry.statusRemark = this.resultStatusRemark;
-        // this.marketingService.enquiryResultSubmission(this.marketingService.enquiry);
+        if(this.resultStatus == 'Successful')
+        {
+          this.po = true;
+        } 
+        else {
+          this.marketingService.enquiryResultSubmission(this.marketingService.enquiry);
+        }
+        
         }
       }
 
       poReturnData(value) {
         console.log(value);
-    
+        this.marketingService.enquiry.poNumber = value.poNumber;
+        this.marketingService.enquiry.poInternalNumber = value.number; 
+    this.po = !this.po;
+    this.marketingService.enquiryResultSubmission(this.marketingService.enquiry);
       }
 
 }

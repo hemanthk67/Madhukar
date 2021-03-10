@@ -79,18 +79,348 @@
                 }
               }
             }
-            .tender-date-div {
+              .employee-div {
+                .name-input {
+                  min-width: 250px;
+    height: 25px;
+    font-size: 18px;
+    border: solid 1px;
+    border-radius: 5px;
+    margin-top: 8px;
+                }
+              }
+              .PO-number {
+                margin-top: 20px;
+                .PO-number-input {
+                  height: 25px;
+                  min-width: 400px;
+                  font-size: 18px;
+                  border: solid 1px;
+                  border-radius: 5px;
+                  margin-top: 8px;
+                }
+              }
+              .description {
+                padding-top: 30px;
+                .description-lable {
+  
+                }
+                .description-text {
+                  textarea {
+                  height: 45px;
+      width: 600px;
+      font-size: 18px;
+                  }
+                }
+              }
+              .item-prices-div {  
+                .item-prices-table {
+                  padding: 5px;
+                  padding-left: 15px;
+                  background-color: #F2F2F2;
+                  margin-top: 10px;
+              border-radius: 10px;
+              .item-price-organization-name-div {
+                display: flex;
+                margin: 5px;
+                .item-price-organization-name-only-div {
+                  flex-grow: 1;
+                  display: flex;
+                  justify-content: center;
+                .item-price-organization-name {
+                font-size: 16px;
+                width: fit-content;
+                border: 1px solid #163a9a;
+                padding: 5px;
+                border-radius: 5px;
+                background-color: #163a9a;
+                color: #fff;
+                }
+              }
+              .item-price-organization-name-cross {
+                width: fit-content;
+                padding: 6px;
+                border-radius: 5px;
+                font-size: 14px;
+                border: solid 1px #163a9a;
+                cursor: pointer;
+                color: white;
+                background-color: #163a9a;
+              }
+              .item-price-organization-name-cross:hover {
+                background-color: #003cd9;
+              }
+              }
+              .item-price-head {
+                display: flex;
+            justify-content: space-between;
+                color: #163a9a;
+                font-weight: 600;
+              font-size: 17px;
+              margin-top: 20px;
+                .item-total-text {
+            font-size: 18px;
+                  // width: 775px;
+                  text-align: right;
+                }
+                .item-discription {
+                  width: 400px;
+                  text-align: center;
+                }
+                .item-price {
+                  width: 144px;
+                  text-align: center;
+                }
+                .item-frieght-charges {
+                  width: 144px;
+                  text-align: center;
+                }
+                .item-other-charges {
+                  width: 144px;
+                  text-align: center;
+                }
+                .gst {
+                  width: 100px;
+                  text-align: center;
+                }
+                .qty {
+                  width: 100px;
+                  text-align: center;
+                }
+                .total {
+                  display: flex;
+                  word-break: keep-all;
+                  // width: 140px;
+                  text-align: center;
+                  padding-left: 5px;
+                  .total-input {      
+                    text-align: center;
+                    border-radius: 5px;
+                    height: 22px;
+                outline: none;
+                width: 150px;
+                font-size: 17px;
+                    }
+                }
+                .total-with-gst {
+                  display: flex;
+                  word-break: keep-all; 
+                  text-align: center;
+                  padding-left: 5px;
+                  .total-with-gst-input {      
+                    text-align: center;
+                    border-radius: 5px;
+                    height: 22px;
+                outline: none;
+                width: 150px;
+                font-size: 17px;
+                    }
+                }
+              }
+              .item-price-div {
+                display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 17px;
+                .item-discription {
+                  font-size: 17px;
+                  width: 400px;
+                  background: white;
+                  border-radius: 5px;
+                word-break: break-all;
+                }
+                .item-price {
+                  padding-left: 5px;
+                  display: flex;
+                justify-content: center;
+                align-items: center;
+                  .item-price-input {
+                    text-align: center;
+                    border: none;
+                    border-radius: 5px;
+                    height: 25px;
+              outline: none;
+              width: 150px;
+              font-size: 17px;
+                  }
+                }
+              
+            .gst {
+              padding-left: 5px;
+              display: flex;
+                justify-content: center;
+                align-items: center;
+              .gst-input {
+              text-align: center;
+                border: none;
+                border-radius: 5px;
+                height: 25px;
+            outline: none;
+            width: 100px;
+            font-size: 17px;
+              }
+            }
+            .qty {
+              padding-left: 5px;
+              display: flex;
+                justify-content: center;
+                align-items: center;
+              .qty-input {      
+              text-align: center;
+              border: none;
+              border-radius: 5px;
+              height: 25px;
+            outline: none;
+            width: 100px;
+            font-size: 17px;
+              }
+            }
+            .total {
+              padding-left: 5px;
+              display: flex;
+                justify-content: center;
+                align-items: center;
+              .total-input {      
+              text-align: center;
+              border-radius: 5px;
+              height: 22px;
+            outline: none;
+            width: 150px;
+            font-size: 17px;
+              }
+            }
+            .total-with-gst {
+              padding-left: 5px;
+              display: flex;
+                justify-content: center;
+                align-items: center;
+              .total-with-gst-input {      
+              text-align: center;
+              border-radius: 5px;
+              height: 22px;
+            outline: none;
+            width: 150px;
+            font-size: 17px;
+              }
+            }
+              }
+                }
+              }
+              // .price-table {
+              //   background-color: #f2f2f2;
+              //   border-radius: 2px;
+              //   border: solid 1px #163a9a;
+              //   margin-top: 20px;
+              //   .price-table-head {
+              //   }
+              //   .s-no { 
+              //       width: 4%;
+              //       text-align: center;
+              //         }
+              //   .item-description {
+              //     width: 25%;
+              //     text-align: center;
+              //   }
+              //   .rating {
+              //     width: 5%;
+              //     text-align: center;
+              //   }
+              //   .class {
+              //     width: 8%;
+              //     text-align: center;
+              //   }
+              //   .class-hv {
+              //     width: 45px;
+              //     margin-left: 13px;
+              //   }
+              //   .class-lv {
+              //     width: 45px;
+              //   }
+              //   .type {
+              //     width: 5%;
+              //     text-align: center;
+              //     .type-select {
+              //       margin-top: 10px;
+              //       width: 105%;
+              //     }
+              //   }
+              //   .standard {
+              //     width: 8%;
+              //     text-align: center;
+              //     .standard-select {
+              //       margin-top: 10px;
+              //       width: 105%;
+              //     }
+              //   }
+              //   .tap-variation {
+              //     width: 5%;
+              //     text-align: center;
+              //     .tap-variation-select {
+              //       margin-top: 10px;
+              //       width: 105%;
+              //     }
+              //   }
+              //   .terminal {
+              //     width: 12%;
+              //     text-align: center;
+              //   }
+              //   .terminal-hv {
+              //     margin-left: 12px; 
+              //   }
+              //   .qty {
+              //     width: 3%;
+              //     text-align: center;
+              //   }
+              //   .remark {
+              //     width: 15%;
+              //     text-align: center;
+              //   }
+                
+              //   .add-item {
+              //     .add-button {
+              //       width: fit-content;
+              //       background-color: darkgrey;
+              //       color: grey; 
+              //       margin-left: 5px;
+              //       border: solid 1px grey;
+              //       cursor: pointer;
+              //     }
+              //     .add-button:hover {
+              //       background-color: grey;
+              //       color: black;
+              //     }
+              //     .remove-item {
+              //       .remove-button {
+              //       width: fit-content;
+              //       background-color: darkgrey;
+              //       color: grey; 
+              //       margin-left: 5px;
+              //       border: solid 1px grey;
+              //       cursor: pointer;
+              //       }
+              //       .remove-button:hover {
+              //         background-color: grey;
+              //         color: black;
+              //       }
+              //     }
+              //   }
+              // }
+              .PO-date-div {
                 margin-top: 30px;
-                .tender-date {
+                .PO-date {
                   display: flex;
                   flex-wrap: wrap;
-    width: 350px;
+      // width: 350px;
                   height: 40px;
-                  .tender-date-label {
+                  .PO-date-label {
                     font-size: 16px;
                     padding-top: 5px;
                   }
-                  .tender-date-input {
+                  .delivery-address-input {
+                    width: 500px;
+                    margin-top: -10px;
+                  }
+                  .PO-date-input {
                     border: solid 1px;
                     border-radius: 5px;
                     width: 120px;
@@ -117,129 +447,8 @@
                   }
                 }
               }
-              .employee-div {
-                .name-input {
-                  min-width: 250px;
-    height: 25px;
-    font-size: 18px;
-    border: solid 1px;
-    border-radius: 5px;
-    margin-top: 8px;
-                }
-              }
-              .description {
-                padding-top: 30px;
-                .description-lable {
-  
-                }
-                .description-text {
-                  textarea {
-                  height: 45px;
-      width: 600px;
-      font-size: 18px;
-                  }
-                }
-              }
-              .price-table {
-                background-color: #f2f2f2;
-                border-radius: 2px;
-                border: solid 1px #163a9a;
-                margin-top: 20px;
-                .price-table-head {
-                }
-                .s-no { 
-                    width: 4%;
-                    text-align: center;
-                      }
-                .item-description {
-                  width: 25%;
-                  text-align: center;
-                }
-                .rating {
-                  width: 5%;
-                  text-align: center;
-                }
-                .class {
-                  width: 8%;
-                  text-align: center;
-                }
-                .class-hv {
-                  width: 45px;
-                  margin-left: 13px;
-                }
-                .class-lv {
-                  width: 45px;
-                }
-                .type {
-                  width: 5%;
-                  text-align: center;
-                  .type-select {
-                    margin-top: 10px;
-                    width: 105%;
-                  }
-                }
-                .standard {
-                  width: 8%;
-                  text-align: center;
-                  .standard-select {
-                    margin-top: 10px;
-                    width: 105%;
-                  }
-                }
-                .tap-variation {
-                  width: 5%;
-                  text-align: center;
-                  .tap-variation-select {
-                    margin-top: 10px;
-                    width: 105%;
-                  }
-                }
-                .terminal {
-                  width: 12%;
-                  text-align: center;
-                }
-                .terminal-hv {
-                  margin-left: 12px; 
-                }
-                .qty {
-                  width: 3%;
-                  text-align: center;
-                }
-                .remark {
-                  width: 15%;
-                  text-align: center;
-                }
-                
-                .add-item {
-                  .add-button {
-                    width: fit-content;
-                    background-color: darkgrey;
-                    color: grey; 
-                    margin-left: 5px;
-                    border: solid 1px grey;
-                    cursor: pointer;
-                  }
-                  .add-button:hover {
-                    background-color: grey;
-                    color: black;
-                  }
-                  .remove-item {
-                    .remove-button {
-                    width: fit-content;
-                    background-color: darkgrey;
-                    color: grey; 
-                    margin-left: 5px;
-                    border: solid 1px grey;
-                    cursor: pointer;
-                    }
-                    .remove-button:hover {
-                      background-color: grey;
-                      color: black;
-                    }
-                  }
-                }
-              }
         }
+      
     }
     .submit {
       width: 100%;
@@ -334,6 +543,9 @@ cursor: pointer;
   .justify-content-sapce-between {
     justify-content: space-between;
   }
+  .justify-content-space-around {
+    justify-content: space-around;
+  }
   .header {
     width: 100%;
               font-size: 20px;
@@ -346,6 +558,7 @@ cursor: pointer;
   }
   .sub-header {
     font-size: 18px;
+    color: #163a9a;
   }
   .margin-auto {
     margin: auto;
@@ -384,4 +597,19 @@ cursor: pointer;
   }
   .red-color {
     color: red !important;
+  }
+  .blue-bold-color {
+    font-weight: 600;
+    color: #163a9a;
+  }
+  .selected {
+    background-color: #163a9a;
+    color: white !important;
+  }
+  .not-selected {
+    color: #163a9a;
+    border: solid 1px;
+    padding: 10px !important;
+    border-radius: 5px;
+    cursor: pointer;
   }
