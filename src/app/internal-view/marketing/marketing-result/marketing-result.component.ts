@@ -86,7 +86,7 @@ export class MarketingResultComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.marketingService.enquiry.itemPrice = this.marketingService.enquiry.offer.itemsPrice;
+    this.marketingService.enquiry.itemPrice = JSON.parse(JSON.stringify(this.marketingService.enquiry.offer.itemsPrice));
     if(!this.marketingService.enquiry.firm) {
       this.marketingService.enquiry.firm = "TCC ENERGY SOLUTIONS";
     }

@@ -117,11 +117,10 @@ export class NewPurchaseOrderReceivedComponent implements OnInit {
     this.po.customer = this.data.customer;
     this.po.marketingEmployee = this.data.employee;
     this.po.itemPrice = this.data.itemPrice;
-    for(let i =0; i < this.po.items.length; i++) {
-      this.total = this.total + this.po.items[i].totalPrice;
-      this.totalWithGst = this.totalWithGst + this.po.items[i].totalWithGst;
+    for(let i =0; i < this.po.itemPrice.length; i++) {
+      this.total = this.total + this.po.itemPrice[i].totalPrice;
+      this.totalWithGst = this.totalWithGst + this.po.itemPrice[i].totalWithGst;
     }
-    console.log(this.data);
   }
   calanderOpen(value) {
     this.calanderFlag.issueDate = !this.calanderFlag.issueDate;

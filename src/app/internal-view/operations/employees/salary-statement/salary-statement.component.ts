@@ -30,7 +30,13 @@ export class SalaryStatementComponent implements OnInit {
   start() {
     if (this.startFlag) {
     for(let i=1; i < this.operations.presentAttandanceData.length; i ++) {
-      this.operations.presentAttandanceData[i].basicSalaryByMonth = ( Math.round(this.operations.presentAttandanceData[i].weekHrs) + Math.round(this.operations.presentAttandanceData[i].otHrs))*(this.operations.presentAttandanceData[i].salary/(30*8) );
+      if(this.operations.presentAttandanceData[i].type == "Worker" )
+      {
+      this.operations.presentAttandanceData[i].basicSalaryByMonth = ( Math.round(this.operations.presentAttandanceData[i].weekHrs) + Math.round(this.operations.presentAttandanceData[i].otHrs))*(this.operations.presentAttandanceData[i].salary/((this.operations.presentAttandanceData[0].dates.length - 2) *8) );
+      } else {
+        this.operations.presentAttandanceData[i].basicSalaryByMonth = this.operations.presentAttandanceData[i].salary;
+      }
+
     }
     this.startFlag = false;
   }
