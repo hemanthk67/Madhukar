@@ -7,7 +7,12 @@
     <div class="calander-year">{{ dateInput.year }}</div>
   </div>
   <div class="calander-body-div">
-    <div  class="calander-body" *ngIf="!dateInput.year">
+    <div  class="calander-body" *ngIf="!dateInput.years">
+      <div  class="calander-month" *ngFor="let year of years; let i = index;" (click)="dateselected(year.value,i)">
+        {{ year.name }}
+      </div>
+      </div>
+    <div  class="calander-body" *ngIf="!dateInput.year && dateInput.years">
       <div  class="calander-month" *ngFor="let item of arrayOne(9); let i = index;" (click)="dateselected(dateInputNumber.year + 4 - i,i)">
         {{ dateInputNumber.year + 4 - i }}
       </div>

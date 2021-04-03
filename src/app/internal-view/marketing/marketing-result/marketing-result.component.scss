@@ -1,0 +1,344 @@
+.header-div {
+  display: flex;
+  justify-content: space-around;
+   color: #163a9a;
+   font-weight: 600;
+   font-size: 22px;
+   .header {
+     padding: 10px;
+   padding-top: 22px;
+     margin-top: -2px;
+     text-align: center;
+     width: fit-content;
+     background-color: #163a9a;
+     color: white;
+     border-radius: 5px;
+     border-top-left-radius: 0;
+     border-top-right-radius: 0;
+     cursor: pointer;
+   }
+ }
+.results {
+    width: 100%;
+    overflow-y: scroll;
+    flex-grow: 1;
+    margin-top: 50px;
+    padding-left: 10px;
+    .result-cards-div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .result-cards {
+            width: 150px;
+            height: 75px;
+            margin: 5px;
+            padding: 7px;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            .card-message {
+                font-size: 12px;
+        margin-top: 5px;
+            }
+        }
+    }
+    .results-remark-div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      .result-remark-question-div {
+        font-size: 17px;
+        color: #163a9a;
+        font-weight: 600;
+        display: flex;
+        width: 90%;
+        .result-remark-question {
+    flex-grow: 1;
+    text-align: center;
+        }
+        .result-remark-rejected {
+          margin: 10px;
+          .result-remark-rejected-select-reason {
+            height: 25px;
+        font-size: 18px;
+        border: solid 1px;
+        border-radius: 5px;
+          }
+        }
+        .results-back {
+          font-size: 17px;
+          border: solid 1px;
+          padding: 2px 5px;
+          border-radius: 5px;
+          background-color: #163a9a;
+          color: white;
+          cursor: pointer;
+          height: fit-content;
+        }
+      }
+      .result-remark-text-area {
+    width: 90%;
+      }
+    }
+    .item-prices-div {  
+        .item-prices-table {
+          padding: 5px;
+          padding-left: 15px;
+          background-color: #F2F2F2;
+          margin-top: 10px;
+      border-radius: 10px;
+      .item-price-organization-name-div {
+        display: flex;
+        margin: 5px;
+        .item-price-organization-name-only-div {
+          flex-grow: 1;
+          display: flex;
+          justify-content: center;
+        .item-price-organization-name {
+        font-size: 16px;
+        width: fit-content;
+        border: 1px solid #163a9a;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #163a9a;
+        color: #fff;
+        }
+      }
+      .item-price-organization-name-cross {
+        width: fit-content;
+        padding: 6px;
+        border-radius: 5px;
+        font-size: 14px;
+        border: solid 1px #163a9a;
+        cursor: pointer;
+        color: white;
+        background-color: #163a9a;
+      }
+      .item-price-organization-name-cross:hover {
+        background-color: #003cd9;
+      }
+      }
+      .item-price-head {
+        display: flex;
+    justify-content: space-between;
+        color: #163a9a;
+        font-weight: 600;
+      font-size: 17px;
+        .item-total-text {
+    font-size: 18px;
+          // width: 775px;
+          text-align: right;
+        }
+        .item-discription {
+          width: 400px;
+          text-align: center;
+        }
+        .item-price {
+          width: 144px;
+          text-align: center;
+        }
+        .item-frieght-charges {
+          width: 144px;
+          text-align: center;
+        }
+        .item-other-charges {
+          width: 144px;
+          text-align: center;
+        }
+        .gst {
+          width: 100px;
+          text-align: center;
+        }
+        .qty {
+          width: 100px;
+          text-align: center;
+        }
+        .total {
+          display: flex;
+          word-break: keep-all;
+          // width: 140px;
+          text-align: center;
+          padding-left: 5px;
+          .total-input {      
+            text-align: center;
+            border-radius: 5px;
+            height: 22px;
+        outline: none;
+        width: 150px;
+        font-size: 17px;
+            }
+        }
+        .total-with-gst {
+          display: flex;
+          word-break: keep-all; 
+          text-align: center;
+          padding-left: 5px;
+          .total-with-gst-input {      
+            text-align: center;
+            border-radius: 5px;
+            height: 22px;
+        outline: none;
+        width: 150px;
+        font-size: 17px;
+            }
+        }
+      }
+      .item-price-div {
+        display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 17px;
+        .item-discription {
+          font-size: 17px;
+          width: 400px;
+          background: white;
+          border-radius: 5px;
+        word-break: break-all;
+        }
+        .item-price {
+          padding-left: 5px;
+          display: flex;
+        justify-content: center;
+        align-items: center;
+          .item-price-input {
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            height: 25px;
+      outline: none;
+      width: 150px;
+      font-size: 17px;
+          }
+        }
+      
+    .gst {
+      padding-left: 5px;
+      display: flex;
+        justify-content: center;
+        align-items: center;
+      .gst-input {
+      text-align: center;
+        border: none;
+        border-radius: 5px;
+        height: 25px;
+    outline: none;
+    width: 100px;
+    font-size: 17px;
+      }
+    }
+    .qty {
+      padding-left: 5px;
+      display: flex;
+        justify-content: center;
+        align-items: center;
+      .qty-input {      
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      height: 25px;
+    outline: none;
+    width: 100px;
+    font-size: 17px;
+      }
+    }
+    .total {
+      padding-left: 5px;
+      display: flex;
+        justify-content: center;
+        align-items: center;
+      .total-input {      
+      text-align: center;
+      border-radius: 5px;
+      height: 22px;
+    outline: none;
+    width: 150px;
+    font-size: 17px;
+      }
+    }
+    .total-with-gst {
+      padding-left: 5px;
+      display: flex;
+        justify-content: center;
+        align-items: center;
+      .total-with-gst-input {      
+      text-align: center;
+      border-radius: 5px;
+      height: 22px;
+    outline: none;
+    width: 150px;
+    font-size: 17px;
+      }
+    }
+      }
+        }
+      }
+      .competitor-price-submission-div {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        .competitor-price-submission-button {
+          color: white;
+          background-color: #163a9a;
+        padding: 5px;
+        border-radius: 5px;
+        border: solid 1px #163a9a;
+        width: fit-content;
+        cursor: pointer;
+        }
+      }
+    }   
+
+    .background-color-red {
+        background-color: darkred;
+    }
+    .background-color-red:hover {
+        background-color: red;
+    }
+    .background-color-green {
+        background-color: darkgreen;
+    }
+    .background-color-green:hover {
+        background-color: green;
+    }
+    .background-color-blue {
+        background-color: #163a9a;
+    }
+    .background-color-blue:hover {
+        background-color: #003cd9;
+    }
+    
+    .page-sub-header {
+        font-size: 18px;
+        font-weight: 600;
+        color: #163a9a;
+        width: 100%;
+        border-bottom: solid 1px #163a9a;
+      }
+      .flex {
+        display: flex;
+      }
+      .space-between {
+        justify-content: space-between;
+      }
+      .space-around {
+        justify-content: space-around !important;
+      }
+      input:disabled {
+        background-color: slategrey;
+        border: none !important;
+        color: white;
+      }
+    
+      .red-border {
+        border-color: red !important;
+      }
+      .red-color {
+        color: red !important;
+      }
+      .margin-top-15 {
+        margin-top: 15px;
+      }
+      .margin-right-10 {
+        margin-right: 10px;
+      }

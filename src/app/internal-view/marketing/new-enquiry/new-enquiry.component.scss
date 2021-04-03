@@ -5,6 +5,42 @@
         font-size: 24px;
     font-weight: 600;
     color: #163a9a;
+    .firm-to-change {
+      font-size: 12px;
+      display: flex;
+      .firm-1 {
+        padding: 7px;
+        border: solid 1px #3569f7;
+        margin: 5px;
+        color: #3569f7;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .firm-1:hover {
+        color: white;
+        background-color: #003cd9;
+      }
+      .firm-1-selected {
+        color: white !important;
+        background-color: #3569f7 !important;
+      }
+      .firm-2 {
+        padding: 7px;
+        border: solid 1px #163a9a;
+        margin: 5px;
+        color: #163a9a;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .firm-2:hover {
+        color: white;
+        background-color: #003cd9;
+      }
+      .firm-2-selected {
+        color: white !important;
+        background-color:  #163a9a !important;
+      }
+    }
     }
     .new-enquiry-body {
         width: 98%;
@@ -20,7 +56,7 @@
           font-weight: 600;
           color: #163a9a;
           border-bottom: solid 1px #163a9a;
-          padding-top: 30px;
+          padding-top: 10px;
           display: flex;
           justify-content: space-between;
         }
@@ -81,8 +117,18 @@
                   }
                 }
               }
+              .employee-div {
+                .name-input {
+                  min-width: 250px;
+    height: 25px;
+    font-size: 18px;
+    border: solid 1px;
+    border-radius: 5px;
+    margin-top: 8px;
+                }
+              }
               .description {
-                padding-top: 50px;
+                padding-top: 30px;
                 .description-lable {
   
                 }
@@ -129,7 +175,7 @@
                   text-align: center;
                   .type-select {
                     margin-top: 10px;
-                    width: 100%;
+                    width: 105%;
                   }
                 }
                 .standard {
@@ -137,7 +183,7 @@
                   text-align: center;
                   .standard-select {
                     margin-top: 10px;
-                    width: 100%;
+                    width: 105%;
                   }
                 }
                 .tap-variation {
@@ -145,7 +191,7 @@
                   text-align: center;
                   .tap-variation-select {
                     margin-top: 10px;
-                    width: 100%;
+                    width: 105%;
                   }
                 }
                 .terminal {
@@ -346,7 +392,7 @@ background-color: white;
     }
     .contact-details {
       width: fit-content;
-      float: left;
+      // float: left;
     }
     .add-organization-inputs {
       display: flex;
@@ -382,11 +428,15 @@ margin-top: 10px;
         margin-top: 10px;
         margin-left: 25px;
       }
+      .gender-div {
+        margin-top: 10px;
+        margin-left: 25px;
+        font-size: 16px;
+      }
     }
     .add-organization-submit {
       .add-organization-submit-button {
         width: fit-content;
-            margin-top: 125px;
             padding: 5px 10px;
             border-radius: 5px;
             color: white;
@@ -424,7 +474,7 @@ margin-top: 10px;
               font-weight: 600;
               color: #163a9a;
               border-bottom: solid 1px #163a9a;
-              padding-top: 30px;
+              padding-top: 10px;
               display: flex;
               justify-content: space-between;
   }

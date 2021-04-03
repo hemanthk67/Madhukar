@@ -37,6 +37,10 @@ export class PrepareOfferComponent implements OnInit {
   pdfPreviewPage2;
   enquiry: any;
   customerReference: any;
+  employeeDetails: any;
+  documentName: any;
+  editOfferFlag = false;
+  pdfType : any;
   constructor(    iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public infoService:InfoService,
@@ -49,15 +53,34 @@ export class PrepareOfferComponent implements OnInit {
     }
 
   ngOnInit() { 
+ 
+         
    this.enquiry = this.marketingService.enquiry;
-  // this.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - 2]; 
    for(let i=0; i < this.infoService.pvtCustomerData.length; i++) {
 if(this.infoService.pvtCustomerData[i].fullName == this.enquiry.customer) {
-this.customerReference = this.infoService.pvtCustomerData[i]
+this.customerReference = this.infoService.pvtCustomerData[i];
 }
    }
     this.pdfPreviewFlag = false; // for the pdfPreview
     this.offerDataFormate();
+    if (this.marketingService.editOfferFlag) {
+    this.offer = this.enquiry.offer;
+    if(this.offer.itemEdit) {
+      this.offerDataAssigning();
+      this.offer.itemEdit = false;
+    }
+    }
+    this.marketingService.editOfferFlag = false;
+    if(this.enquiry.firm) {
+      if(this.enquiry.firm == 'THOTA COLDCEL PVT LTD') {
+        this.pdfType = 'coldcel';
+        this.offer.terms[8].content = "Bank Name: State Bank of India - Srila Park Pride Kukatpally Branch, Account No: 36730666393, IFSC:SBIN0018875 ";
+      } else {
+        this.pdfType = 'thota';
+          }
+    } else {
+      this.pdfType = 'thota';
+    }
 
   }
   calanderOpen(value) {
@@ -81,6 +104,7 @@ this.customerReference = this.infoService.pvtCustomerData[i]
       this.offer.customer.address = this.customerReference.details[i].address;
       this.offer.customer.phone = this.customerReference.details[i].phone;
       this.offer.customer.email = this.customerReference.details[i].email;
+      this.offer.customer.gender = this.customerReference.details[i].gender;
       }
          }
   }
@@ -132,7 +156,8 @@ this.calanderFlag.issueDate = false;
   pdfPreviewconfirm($event: any) {
     if($event) {
     this.enquiry.offer = {...this.offer};
-this.marketingService.setEnquiryData(this.enquiry);
+    this.enquiry.status = "Offer-Prepared"
+this.marketingService.setOfferData();
   }
   }
  
@@ -225,15 +250,21 @@ var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY
 // End indian number to word function
 // Data formating
 offerDataFormate() {
-  
-  this.offer = this.JsonData;
+  this.offer = JSON.parse(JSON.stringify(this.JsonData));
+  this.offerDataAssigning();
+
+          this.documentName = this.enquiry.customer + ' OFFER P - ' + this.enquiry.number;
+         
+}
+offerDataAssigning() {
   this.offer.customer.name = this.enquiry.customer;
   this.offer.issueDate = this.enquiry.issueDate;
   var item = {
-    description:'250KVA, 0.415/0.380KV Dry Type Panel LTG. T/F.',
+    description:'',
   unitPrice:0.00,
 qty:0.00,
 totalPrice:0.00};
+this.offer.itemsPrice = [];
   for(let i=0; i < this.enquiry.items.length; i++) {
     item = {
       description:this.enquiry.items[i].description,
@@ -242,6 +273,28 @@ totalPrice:0.00};
   totalPrice:0.00};
 this.offer.itemsPrice.push({...item});
   }
-}
+    this.offer.subject = '';
+    for(let i=0; i < this.enquiry.items.length; i++) {
+      if( i == this.enquiry.items.length - 1 && i !== 0) {
+        this.offer.subject = this.offer.subject + 'and ' + this.enquiry.items[i].rating + 'KVA-' + this.enquiry.items[i].classHv + '/' + this.enquiry.items[i].classLv + 'KV.';
+      } else {
+        this.offer.subject = this.offer.subject + this.enquiry.items[i].rating + 'KVA-' + this.enquiry.items[i].classHv + '/' + this.enquiry.items[i].classLv + 'KV, '; 
+      }
+          }
+          for (let i=0; i < this.infoService.employeeData.length; i++) {
+            if( this.enquiry.employee === this.infoService.employeeData[i].name) {
+this.offer.signBy = this.infoService.employeeData[i].name;
+this.offer.authorizedPhoneNumber = this.infoService.employeeData[i].phoneNumber;
+this.offer.designation = this.infoService.employeeData[i].designation;
+this.offer.email = this.infoService.employeeData[i].email;
+break;
+            }
+          }
+ }
 // End Data formating
+
+// start of subPriceTotal 
+subPriceTotal() {
+  this.offer.subPriceTotalFlag = !this.offer.subPriceTotalFlag;
+}
 }

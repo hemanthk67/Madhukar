@@ -141,6 +141,18 @@
                   text-align: center;
                 }
               }
+              .sub-total-price-flag-div {
+                .sub-total-price-flag-button {
+                  width: fit-content;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: #163a9a;
+    border: solid 1px #163a9a;
+    cursor: pointer;
+    float: right;
+                }
+              }
             }
             .commercial-terms {
               .terms-div {

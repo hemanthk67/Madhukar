@@ -75,7 +75,31 @@ export class RoutingService {
                   flag: false
                 }
                ]
-             }
+             },
+        operations:{
+              title: "Operation",
+              role: "operation",
+              flag: false,
+              subcategories: [ 
+               {
+                title: "Employee & Worker",
+                path: "Operations/Employees",
+                flag: false
+              }
+              ]
+            },
+            admin:{
+                  title: "Admin",
+                  role: "adimin",
+                  flag: false,
+                  subcategories: [ 
+                    {
+                     title: "LoginPermissions",
+                     path: "Admin/LoginPermissions",
+                     flag: false
+                   }
+                  ]
+                }
   };
   constructor(private router: Router) { 
     router.events.subscribe((val) => {
@@ -221,7 +245,18 @@ export class RoutingService {
       500
     );
   }
-  
+  marketingEnquiryResults() {
+    this.loadingFlag = true;
+    this.router.navigate([
+      { outlets: { approved: "Marketing/Results" } }
+    ]);
+    setTimeout(
+      function() {
+        this.loadingFlag = false;
+      }.bind(this),
+      500
+    );
+  }
   //Login
   Login(user, Flag) {
     this.userData = user;
@@ -247,6 +282,12 @@ sideNavData() {
    }
    if (this.userData.role.tender || this.userData.role.admin) {
     this.leftNavData.push(this.routs.tender);
+   }
+   if(this.userData.role.admin) {
+    this.leftNavData.push(this.routs.admin);
+   }
+   if (this.userData.role.operation || this.userData.role.admin) {
+   this.leftNavData.push(this.routs.operations);
    }
    this.routAuth(this.presentPath);
   }

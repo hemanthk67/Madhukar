@@ -28,6 +28,7 @@ class Upload {
 })
 export class TenderService {
   public editFlag = false;
+  public permissions;
   public newTender = {
     number: null,
     organization: "",
@@ -81,6 +82,7 @@ constructor(
       this.data = data.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
       this.originalData = this.originalData.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
     });
+    this.permissions = this.routingService.userData;
    }
 
    // function to et data from the DB

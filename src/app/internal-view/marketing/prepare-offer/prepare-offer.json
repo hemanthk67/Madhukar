@@ -3,10 +3,11 @@
     "refer":"",
     "address":"",
     "phone":"",
-    "email":""
+    "email":"",
+    "gender":""
   },
   "issueDate":"",
-    "subject":"Offer for Supply of fasdhfaksdhjf kasdjfh kasjdn fkahsdf  asd fas dfas dfa sdf asdf asdf ",
+    "subject":"Offer for Supply of ",
     "itemsPrice":[],
     "totalPrice":0.00,
     "terms":[{
@@ -39,10 +40,16 @@
     {
       "lable":"Erection & Commissioning",
       "content":"Our scope is limited to Design, Manufacture, Supply of the transformer and Testing at our works."
+    },
+    {
+      "lable":"Bank Details",
+      "content":"Bank Name: Canara Bank - Balanagar Branch, Account No: 0625261005595, IFSC:CNRB0000625"
     }],
-    "signBy": "Thota V",
-    "authorizedPhoneNumber": "9345099945",
+    "signBy": "",
+    "authorizedPhoneNumber": "",
+    "designation": "",
     "officeNumber": "040-27760334",
-    "email": "marketing@tccpltd.com"
+    "email": "",
+    "subPriceTotalFlag": true
   }
   

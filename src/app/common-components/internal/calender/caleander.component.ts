@@ -10,6 +10,24 @@ import { DomSanitizer } from "@angular/platform-browser";
 export class CalenderComponent implements OnInit {
   @Output() dateEmit = new EventEmitter();
   currentYear = new Date().getFullYear();
+  years = [ {name:'1950-58',
+value:1954},
+{name:'1959-67',
+value:1963},
+{name:'1968-76',
+value:1972},
+{name:'1977-85',
+value:1981},
+{name:'1986-94',
+value:1990},
+{name:'1995-03',
+value:1999},
+{name:'2004-12',
+value:2008},
+{name:'2013-21',
+value:2017},
+{name:'2022-30',
+value:2026}]
   year = [];
   dateInputNumber = {
     year: this.currentYear,
@@ -17,6 +35,7 @@ export class CalenderComponent implements OnInit {
     date:null
   };
   dateInput = {
+    years: true,
     year: this.currentYear,
     month:null,
     date:null
@@ -82,11 +101,17 @@ export class CalenderComponent implements OnInit {
          this.dateInputNumber.month = i +1;
       }
     } else {
+      if (this.dateInput.years) {
       this.dateInput.year = value;
       this.dateInputNumber.year = value;
+      } else {
+        this.dateInput.years = true;
+      this.dateInputNumber.year = value;
+      }
     }
   } 
   back() {
+    if(this.dateInput.years) {
     if(this.dateInput.year) {
       if(this.dateInput.month) {
          if(!this.dateInput.date) {
@@ -98,9 +123,11 @@ export class CalenderComponent implements OnInit {
         //  this.dateInputNumber.year = null;
       }
     } else {
-      
-      this.dateEmit.emit(null);
+      this.dateInput.years = false;
     }
+  } else {
+    this.dateEmit.emit(null);
+  }
   }
 
   arrayOne(n: number): any[] {

@@ -16,7 +16,8 @@ import { DocumentsService } from 'src/app/services/common/documents.service';
 })
 export class EnquiryListComponent implements OnInit {
   pdfPreviewFlag: boolean;
-
+  documentName: any;
+  pdfType: any;
   constructor( private pdf:pdfFileService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
@@ -58,16 +59,23 @@ export class EnquiryListComponent implements OnInit {
   }
   prepareOffer(index) {
     this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
+    this.documentName = this.marketingService.enquiry.customer + ' OFFER P - ' + this.marketingService.enquiry.number;
     this.routingService.prepareOffer();
   }
+  n
   enquiryResults(index) {
     this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
-    // this.routingService.enquiryResults();
+    this.routingService.marketingEnquiryResults();
   }
   edit(index) {
     this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
     this.marketingService.editFlag = true;
     this.routingService.newEnquiry();
+  }
+  editoffer(index) {
+    this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
+    this.marketingService.editOfferFlag = true;
+    this.routingService.prepareOffer();
   }
 
   //pdf for prepare offer
@@ -77,9 +85,20 @@ export class EnquiryListComponent implements OnInit {
       var customerReference = this.infoService.pvtCustomerData[i]
       }
          }
+         this.documentName = this.marketingService.originalData[this.marketingService.originalData.length - index - 1].customer + ' OFFER P - ' + this.marketingService.originalData[this.marketingService.originalData.length - index - 1].number;
     var subTotalPriceWords = this.convertNumberToWords(this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.totalPrice) + 'Only';
     this.pdfPreviewFlag = true; // for the pdfPreview 
-    this.documentsService.enquiryOffer(this.marketingService.originalData[this.marketingService.originalData.length - index - 1], customerReference , this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer, subTotalPriceWords, this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.subTotalPrice);
+    if(this.marketingService.originalData[this.marketingService.originalData.length - index - 1].firm) {
+      if(this.marketingService.originalData[this.marketingService.originalData.length - index - 1].firm == 'THOTA COLDCEL PVT LTD') {
+        this.pdfType = 'coldcel';
+      } else {
+        this.pdfType = 'thota';
+      }
+    } else {
+      
+      this.pdfType = 'thota';
+    }
+    this.documentsService.enquiryOffer(this.marketingService.originalData[this.marketingService.originalData.length - index - 1], customerReference , this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer, subTotalPriceWords, this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.totalPrice);
   
   }
 

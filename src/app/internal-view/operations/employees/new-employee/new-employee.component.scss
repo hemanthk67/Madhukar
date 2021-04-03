@@ -1,0 +1,297 @@
+
+.employees-list-div {
+    padding-top: 8vh;
+    padding-left: 50px;
+    .employees-list-head {
+    font-size: 24px;
+        font-weight: 600;
+        color: #163a9a;
+    }
+    .employees-list-body {
+        width: 98%;
+        height: 85vh;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding: 5px;
+        padding-right: 15px;
+        border-top: solid 1px #163a9a;
+        .employee-type {
+            margin-top: 15px;
+            .employee-type-select {
+               min-width: 120px;
+               height: 25px;
+               font-size: 18px;
+               border: 1px solid;
+               border-radius: 5px;
+               margin-left: 30px;
+            }
+        }
+        .employee-name {
+            margin-top: 15px;
+            .employee-label {
+                margin-top: 5px;
+            }
+            .employee-name-input {
+                height: 25px;
+                min-width: 250px;
+                font-size: 18px;
+                border: 1px solid;
+                border-radius: 5px;
+                margin-left: 30px;
+            }
+        }
+        .employee-gender {
+            margin-top: 15px;
+            .employee-gender-label {
+                font-size: 16px;
+                margin-left: 30px;
+            }
+        }
+        .employee-blood-group {
+            margin-top: 15px;
+            .employee-blood-group-select {
+                height: 25px;
+                min-width: 75px;
+                font-size: 18px;
+                border: 1px solid;
+                border-radius: 5px;
+                margin-left: 30px;
+            }
+        }
+        .photo {
+            margin-top: 15px;
+            .upload-photo-input {
+                height: 25px;
+                min-width: 100px;
+                font-size: 18px;
+                border: 1px solid;
+                border-radius: 5px;
+                margin-left: 30px;
+            }
+        }
+        .aadhar-number {
+            margin-top: 15px;
+            .aadhar-number-input {
+                height: 25px;
+                min-width: 150px;
+                font-size: 18px;
+                border: 1px solid;
+                border-radius: 5px;
+                margin-left: 30px;
+            }
+        }
+        .upload-aadhar {
+            margin-top: 15px;
+            .upload-aadhar-input {
+                height: 25px;
+                min-width: 100px;
+                font-size: 18px;
+                border: 1px solid;
+                border-radius: 5px;
+                margin-left: 30px;
+            }
+        }
+        .employee-label {
+            font-size: 18px;
+            font-weight: 600;
+            max-width: 300px;
+            color:  #163a9a;
+        }
+        .tender-date-div {
+            margin-top: 40px;
+            .tender-date {
+              display: flex;
+              flex-wrap: wrap;
+              height: 40px;
+              .tender-date-label {
+                font-size: 16px;
+                padding-top: 5px;
+              }
+              .tender-date-input {
+                border: solid 1px;
+                border-radius: 5px;
+                width: 120px;
+                height: 25px;
+                margin-left: 5px;
+                font-size: 18px;
+                text-align: right;
+              }
+              .calander {
+                margin-right: 20px;
+                button {
+                  background-color: white;
+                  border: solid 1px;
+                  border: none;
+                  cursor: pointer;
+                  padding: 0;
+                  .calander-button {
+                    color: #163a9a;
+                    padding: 3px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                  }
+                }
+              }
+            }
+          }
+        .reference {
+            margin-top: 20px;
+        }
+        .reference-content {
+            margin-top: 5px;
+        .reference-content-input {
+            height: 25px;
+            min-width: 250px;
+            font-size: 18px;
+            border: 1px solid;
+            border-radius: 5px;
+            margin-left: 30px;
+        }
+    }
+    .upload-Resume {
+        margin-top: 15px;
+        .upload-resume-input {
+            height: 25px;
+            min-width: 100px;
+            font-size: 18px;
+            border: 1px solid;
+            border-radius: 5px;
+            margin-left: 30px;
+        }
+    }
+    .designation {
+        margin-top: 15px;
+        .designation-input {
+            height: 25px;
+            min-width: 150px;
+            font-size: 18px;
+            border: 1px solid;
+            border-radius: 5px;
+            margin-left: 30px;
+        }
+    }
+    .submit {
+        .submit-button {
+            width: fit-content;
+            float: right;
+            margin-right: 150px;
+            font-size: 18px;
+            margin-top: 25px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #163a9a;
+            border: 1px solid #163a9a;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #003cd9;
+        }
+        .submit-button:active {
+            background-color: white;
+            color: #163a9a;
+        }
+    }
+    } 
+    
+}
+
+.sub-header {
+    width: 100%;
+        font-size: 20px;
+        font-weight: 600;
+        color: #163a9a;
+        border-bottom: solid 1px #163a9a;
+        padding-top: 30px;
+        display: flex;
+        justify-content: space-between;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    // box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #C2C2C2;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #525252;
+  }
+  //end of scroll bar css
+
+  .app-calander {
+    z-index: 1;
+  }
+  //colors
+  .grey {
+      color: #525252;
+  }
+  .blue-bold {
+    color:#163a9a;
+    font-weight: 600;
+}
+  .blue {
+      color:#163a9a;
+  }
+  .light-blue-color {
+    color: #003cd9 !important;
+}
+  .red {
+      color: red;
+  }
+  .green {
+    color: green;
+}
+  .orange {
+      color: orange;
+  }
+
+  // border-color
+
+  .light-blue-border-color {
+    border-top: solid 5px #003cd9 !important;
+}
+.red-border-color {
+    border-top: solid 5px red !important;
+}
+.green-border-color {
+    border-top: solid 5px green !important;
+}
+.orange-border-color {
+    border-top: solid 5px orange !important;
+}
+.flex {
+    display: flex;
+}
+.flex-wrap {
+    flex-wrap:wrap;
+}
+.space-between {
+  justify-content: space-between;
+}
+
+.width-40 {
+    width: 40%;
+}
+.width-50 {
+    width: 50%;
+}
+.width-100 {
+    width: 100%;
+}
+.height-auto {
+    height: auto !important;
+}
+.margin-left-30 {
+    margin-left: 30px;
+}

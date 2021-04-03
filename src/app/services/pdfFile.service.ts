@@ -6,6 +6,7 @@ import {
 } from "@angular/fire/firestore";
 import * as firebase from "firebase";
 import { ThrowStmt } from "@angular/compiler";
+import { RoutingService } from './routing.service';
 
 class Upload {
   $key: string;
@@ -22,7 +23,8 @@ class Upload {
   providedIn: "root"
 })
 export class pdfFileService {
-  constructor(af: AngularFirestore) {}
+  constructor(af: AngularFirestore,
+    private routingService: RoutingService) {}
   private uploadTask: firebase.storage.UploadTask;
 
   pushUpload(upload: Upload, path: any) {
@@ -40,6 +42,8 @@ export class pdfFileService {
       },
       () => {
         console.log(this.uploadTask.snapshot);
+        
+          this.routingService.loadingFlag = false;
       }
     );
   }

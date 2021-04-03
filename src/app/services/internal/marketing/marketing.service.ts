@@ -28,22 +28,25 @@ class Upload {
 })
 export class MarketingService {
   public editFlag = false;
+  public editOfferFlag = false;
   public newEnquiry = {
     number: null,
+    employee: '',
     customer:'',
   issueDate:'',
   status:'New Enquiry',
   specialFeatures:'',
+  firm: 'THOTA COLDCEL PVT LTD.',
   items:[
     {description:'',
   rating: '',
-  classHv: '',
-  classLv:'',
-  type:'',
+  classHv: '11',
+  classLv:'0.433',
+  type:'ONAN',
   standard:'',
-  tapVariation:'',
-  terminalHv:'',
-  terminalLv:'',
+  tapVariation:'OCTC',
+  terminalHv:'Bare Bushings',
+  terminalLv:'Bare Bushings',
 qty:1,
 remark:''}
   ],
@@ -57,9 +60,9 @@ public enquiry;
 public data;
 public originalData = [];
 public currentEnquiryNo = 0;
-// private pathBase = environment.enquiryPath;  // change to enquiry once done with testing and ready for production
+private pathBase = environment.marketingPath;  // change to enquiry once done with testing and ready for production
 // private pathBase = 'Marketing';
-private pathBase = 'testMarketing';
+// private pathBase = 'testMarketing';
   constructor(
     private afs: AngularFirestore,
     public pdfService: pdfFileService,
@@ -140,6 +143,33 @@ private pathBase = 'testMarketing';
     }
     return enquiry;
     } 
+    //set offer data
+    setOfferData() {
+
+      for(let i =0; i < this.data.length; i++ ) {
+        if( this.data[i].number == this.enquiry.number ) {
+         this.data[i] = {...this.enquiry};
+         this.data[i].issueDateFormatted = this.dateFormatting(this.data[i].issueDate);
+        }
+        if( this.originalData[i].number == this.enquiry.number ) {
+         this.originalData[i] = {...this.enquiry}; 
+        }
+       }
+       this.setEnquiryData(this.enquiry);
+    }
+
+    enquiryResultSubmission(data) {
+      this.setEnquiryData(data);
+      for(let i =0; i < this.originalData.length; i++) {
+        if(this.originalData[i].number == data.number) {
+          this.data[i].status = this.originalData[i].status = data.status;
+          this.data[i].rejectedReason = this.originalData[i].rejectedReason = data.rejectedReason;
+          this.data[i].statusRemark = this.originalData[i].statusRemark = data.statusRemark;
+          break;
+        }
+      }
+      this.routingService.enquiryList();
+    }
       // function to set upload new data
       setEnquiryData(data) {
     const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
