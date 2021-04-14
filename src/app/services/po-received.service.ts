@@ -3,11 +3,12 @@ import * as firebase from "firebase/app";
 import {
   AngularFirestore,
   AngularFirestoreDocument,
-  AngularFirestoreCollection
 } from "@angular/fire/firestore";
 
 import { pdfFileService } from 'src/app/services/pdfFile.service';
 import { environment } from 'src/environments/environment';
+import { PurchaseOrder } from './../internal-view/admin/review-po/po.model';
+import { map, take } from 'rxjs/operators';
 class Upload {
   $key: string;
   file: File;
@@ -28,8 +29,8 @@ export class PoReceivedService {
   private pathBase = environment.poPath;
   public poInfo:any;
   public poNumber = 0;
-  constructor(private afs: AngularFirestore,  
-    public pdfService: pdfFileService) { 
+  constructor(private afs: AngularFirestore,
+    public pdfService: pdfFileService) {
       this.getPoInfo();
     }
 
@@ -48,11 +49,11 @@ export class PoReceivedService {
       if(editFlag) {
         po.files.customerDocuments[po.files.customerDocuments.length] = {...poFile};
       } else {
-      po.files.customerDocuments.push({...poFile}); 
+      po.files.customerDocuments.push({...poFile});
       }
-  
+
         this.pdfService.pushUpload(currentFile, poFile.path);
-      }  
+      }
     }
     po.number = this.poNumber + 1;
     return po;
@@ -64,7 +65,7 @@ export class PoReceivedService {
       newUserRef.set(JSON.parse(JSON.stringify(po)), { merge: true });
       this.setPoInfo(po);
       this.poNumber = this.poNumber + 1;
-    }  
+    }
     // updatePoInfo(data) {
 
     // }
@@ -96,6 +97,35 @@ export class PoReceivedService {
           }
         }
       });
-      
+    }
+    async getPOs() : Promise<PurchaseOrder[]> {
+      var purchaseOrders: PurchaseOrder[] = [];
+      try {
+        purchaseOrders = await this.afs.collection<PurchaseOrder>(environment.poPath,
+          query => query.limit(5).where('number', '>=', 0))
+          .valueChanges()
+          .pipe(take(1))
+          .toPromise();
+
+      } catch (error) {
+        console.error("There was a problem fetching purchase orders ! : " + error);
+      }
+      return purchaseOrders;
+    }
+
+    async getMorePOs(lastItem: number, size: number): Promise<PurchaseOrder[]> {
+      var purchaseOrders: PurchaseOrder[] = [];
+      try {
+        purchaseOrders = await this.afs.collection<PurchaseOrder>(environment.poPath,
+          query => query.limit(size).where('number', '>=', 0).orderBy('number').startAfter(lastItem))
+          .valueChanges()
+          .pipe(take(1))
+          .toPromise();
+
+      } catch (error) {
+        console.error("There was a problem fetching purchase orders ! : " + error);
+      }
+      return purchaseOrders;
+
     }
 }

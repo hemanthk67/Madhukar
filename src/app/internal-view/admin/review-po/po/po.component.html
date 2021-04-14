@@ -1,0 +1,22 @@
+<div class="item">
+  <div class="item-heading">
+    <p style="flex-grow: 1;">{{this.purchaseOrder.customer}}</p>
+    <p>{{this.status && this.status !== '' ? this.purchaseOrder.status : 'TBD'}}</p>
+  </div>
+  <div class= "middle-row">
+    <div class="item-wrapper"><p class="item-label">Number : </p><p>{{this.purchaseOrder.number}}</p></div>
+    <div class="item-wrapper"><p class="item-label">PO-Number : </p><p>{{this.purchaseOrder.poNumber}}</p></div>
+    <div class="item-wrapper"><p class="item-label">Warrenty Early : </p><p>{{this.purchaseOrder.warrentyEarly}}</p></div>
+  </div>
+  <div class= "middle-row">
+    <div class="item-wrapper"><p class="item-label">Issue Date : </p><p>{{this.purchaseOrder.issueDate}}</p></div>
+    <div class="item-wrapper"><p class="item-label">Delivery Date : </p><p>{{this.purchaseOrder.deliveryDate}}</p></div>
+    <div class="item-wrapper"><p class="item-label">Delivery State : </p><p>{{this.purchaseOrder.deliveryState}}</p></div>
+  </div>
+  <div style="flex-grow: 1;"></div>
+  <div style="display: flex;">
+    <button class="item-button">Approve</button>
+    <div style="flex-grow: 1;"></div>
+    <button class="item-button reject">Reject</button>
+  </div>
+</div>

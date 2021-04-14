@@ -1,0 +1,40 @@
+.item {
+  box-shadow: rgb(136, 136, 136) 2px 2px 18px 0px;
+  border-radius: 7px;
+  min-height: 100px;
+  border-top: thick solid #0000FF;
+  margin: 15px 0px 15px 0px;
+  padding: 0px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-heading{
+  font-weight: 600;
+  color: #0000FF;
+  display: flex;
+}
+.item-footer{
+  display: flex;
+}
+.item-button{
+  color: white;
+  background-color: #0000FF;
+  border: 0px;
+  border-radius: 5px;
+}
+
+.reject{
+  background-color: red;
+}
+.middle-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.item-label{
+  color: royalblue  ;
+}
+.item-wrapper{
+  display: flex;
+}

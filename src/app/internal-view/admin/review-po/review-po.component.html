@@ -1,0 +1,13 @@
+<h2 class="group-header">
+  Review Puchase Orders
+</h2>
+<div class="item-body">
+  <div class="item-group">
+    <app-po *ngFor="let po of this.purchaseOrders" [purchaseOrder]="po">
+    </app-po>
+    </div>
+    <div *ngIf="this.hasMoreItems" class="down-arrow" (click)="loadMore()">
+      <span>Read More</span>
+</div>
+
+

@@ -63,12 +63,12 @@ export class RoutingService {
                title: "Marketing",
                role: "marketing",
                flag: false,
-               subcategories: [ 
+               subcategories: [
                  {
                   title: "Enquiry List",
                   path: "Marketing/EnquiryList",
                   flag: false
-                } , 
+                } ,
                 {
                   title: "New Enquiry",
                   path: "Marketing/NewEnquiry",
@@ -80,7 +80,7 @@ export class RoutingService {
               title: "Operation",
               role: "operation",
               flag: false,
-              subcategories: [ 
+              subcategories: [
                {
                 title: "Employee & Worker",
                 path: "Operations/Employees",
@@ -92,16 +92,20 @@ export class RoutingService {
                   title: "Admin",
                   role: "adimin",
                   flag: false,
-                  subcategories: [ 
+                  subcategories: [
                     {
                      title: "LoginPermissions",
                      path: "Admin/LoginPermissions",
                      flag: false
-                   }
+                   }, {
+                    title: "ReviewPO",
+                    path: "Admin/ReviewPO",
+                    flag: false
+                  }
                   ]
                 }
   };
-  constructor(private router: Router) { 
+  constructor(private router: Router) {
     router.events.subscribe((val) => {
       if(val instanceof NavigationEnd) {
         this.rightTabs = null;
@@ -125,7 +129,7 @@ export class RoutingService {
         } else {
           this.leftNavData[i].flag = true;
           for (let j = 0; j< this.leftNavData[i].subcategories.length ; j++) {
-            
+
             this.leftNavData[i].subcategories[j].flag = false;
             if (path.includes(this.leftNavData[i].subcategories[j].path)) {
               this.leftNavData[i].flag = true;
@@ -183,7 +187,7 @@ export class RoutingService {
     );
   }
   tenderList() {
-    
+
     this.loadingFlag = true;
     this.router.navigate([
       { outlets: {  approved: "Tender/TenderList" } }
@@ -268,7 +272,7 @@ export class RoutingService {
   }
   }
 sideNavData() {
-  
+
   if (this.userData.role.marketing || this.userData.role.admin) {
     this.leftNavData.push(this.routs.marketing);
    }
@@ -276,7 +280,7 @@ sideNavData() {
 //     if (this.userData.role.finance && this.userData.role.admin) {
 //       this.routs[2].flag = true;
 // this.leftNavData.push(this.routs.finance);
-//     } 
+//     }
    if (this.userData.role.purchase || this.userData.role.admin) {
     this.leftNavData.push(this.routs.purchase);
    }
