@@ -231,7 +231,7 @@ name:value
                 this.presentAttandanceData[i].weekHrs = this.presentAttandanceData[i].weekHrs + this.presentAttandanceData[i].weeks[j].weekHrs;
                 this.presentAttandanceData[i].otHrs = this.presentAttandanceData[i].otHrs + this.presentAttandanceData[i].weeks[j].otHrs;
               }
-              for(let j=0; j < this.presentAttandanceData[i].dates.length; j++) {
+              for(let j=1; j < this.presentAttandanceData[i].dates.length - 1; j++) {
                 if (this.presentAttandanceData[i].dates[j].absent) {
                   this.presentAttandanceData[i].absentNumber++;
                 }
