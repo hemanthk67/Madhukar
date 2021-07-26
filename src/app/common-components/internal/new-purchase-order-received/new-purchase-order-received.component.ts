@@ -77,11 +77,14 @@ export class NewPurchaseOrderReceivedComponent implements OnInit {
     firm: '',
     marketingEmployee: '',
     remarks:'',
-    warrentyEarly: true
+    warrentyEarly: true,
+    warrentyFromSupply: '',
+    warrentyFromCommission: ''
   };
   public flag = {
     organization: true,
     issueDate: true,
+    PONumber: true
    };
    calanderFlag = {
     issueDate: false,
@@ -179,6 +182,18 @@ this.calanderFlag.issueDate = false;
     // } 
     
     this.returnData.emit(this.po);
+  }
+
+  addPrice(i) {
+    if(this.po.itemPrice[i].unitPrice) {
+      this.po.itemPrice[i].totalPrice = (this.po.itemPrice[i].unitPrice)*this.po.itemPrice[i].qty;
+      this.po.itemPrice[i].totalWithGst = (this.po.itemPrice[i].totalPrice )*(1+(this.po.itemPrice[i].gst/100));
+    }
+    this.total =0;
+    for(let j =0; j< this.po.itemPrice.length; j++) {
+      this.total = this.total + this.po.itemPrice[j].totalPrice;
+    }
+    this.totalWithGst = this.total + this.total*(this.po.itemPrice[0].gst/100);
   }
 
   // ADDING AND REMOVING FILES
