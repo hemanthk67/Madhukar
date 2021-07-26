@@ -77,7 +77,9 @@ export class NewPurchaseOrderReceivedComponent implements OnInit {
     firm: '',
     marketingEmployee: '',
     remarks:'',
-    warrentyEarly: true
+    warrentyEarly: true,
+    warrentyFromSupply: 0,
+    warrentyFromCommission: 0
   };
   public flag = {
     organization: true,

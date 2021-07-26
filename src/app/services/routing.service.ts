@@ -289,6 +289,9 @@ sideNavData() {
    if (this.userData.role.operation || this.userData.role.admin) {
    this.leftNavData.push(this.routs.operations);
    }
+   if (this.userData.role.production || this.userData.role.admin) {
+    this.leftNavData.push(this.routs.production);
+    }
    this.routAuth(this.presentPath);
   }
    }
