@@ -110,7 +110,7 @@ remark:''}
     this.enquiry.firm = firm;
   }
   addItem() {
-    var item = {descrition:'',
+    var item = {description:'',
     rating: '',
     classHv: this.enquiry.items[this.enquiry.items.length -1].classHv,
     classLv:this.enquiry.items[this.enquiry.items.length -1].classLv,

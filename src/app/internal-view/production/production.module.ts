@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { ProductionRoutingModule } from './production-routing.module';
 import { ProductionComponent } from './production.component';
+import { ProductionListComponent } from './production-list/production-list.component';
 
 
 @NgModule({
-  declarations: [ProductionComponent],
+  declarations: [ProductionComponent, ProductionListComponent],
   imports: [
     CommonModule,
     ProductionRoutingModule

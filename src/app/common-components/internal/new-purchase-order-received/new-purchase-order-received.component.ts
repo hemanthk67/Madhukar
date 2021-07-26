@@ -78,8 +78,8 @@ export class NewPurchaseOrderReceivedComponent implements OnInit {
     marketingEmployee: '',
     remarks:'',
     warrentyEarly: true,
-    warrentyFromSupply: '',
-    warrentyFromCommission: ''
+    warrentyFromSupply: 0,
+    warrentyFromCommission: 0
   };
   public flag = {
     organization: true,
