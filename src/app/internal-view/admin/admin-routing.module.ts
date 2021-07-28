@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginPermissionsComponent } from './login-permissions/login-permissions.component';
-import { ReviewPOComponent } from './review-po/review-po.component';
+import { PoReviewComponent } from './po-review/po-review.component';
 
 
-const routes: Routes = [{ path: 'LoginPermissions', component: LoginPermissionsComponent }, { path: 'ReviewPO', component: ReviewPOComponent }];
+const routes: Routes = [{ path: 'LoginPermissions', component: LoginPermissionsComponent }
+, { path: 'ReviewPO', component: PoReviewComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

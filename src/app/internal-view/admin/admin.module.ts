@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { LoginPermissionsComponent } from './login-permissions/login-permissions.component';
-import { ReviewPOComponent } from './review-po/review-po.component';
-import { POComponent } from './review-po/po/po.component';
+import { PoReviewComponent } from './po-review/po-review.component';
+
+import { MatIconModule } from "@angular/material/icon";
+import { CommonComponentsModule } from 'src/app/common-components/common-components.module';
 
 
 @NgModule({
-  declarations: [LoginPermissionsComponent, ReviewPOComponent, POComponent],
+  declarations: [LoginPermissionsComponent, PoReviewComponent, PoReviewComponent],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    MatIconModule,
+    CommonComponentsModule
   ]
 })
 export class AdminModule { }

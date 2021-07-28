@@ -1,4 +1,4 @@
-<span *ngIf="type=='marketing'">
+<span *ngIf="type=='marketing' || type=='marketingEdit'">
     <div class="new-enquiry-div"> 
         <div class="new-enquiry-head-div">New PO: {{ po.firm }} <br> 
            <!-- <div class="firm-to-change">
@@ -71,17 +71,36 @@
                          <div class="total">Total( Excl Gst )</div>
                          <div class="total-with-gst">Total( Incl Gst )</div>
                        </div>
-                       <div class="price-div">
+                       <div class="price-div" *ngIf="type=='marketing'">
                         <div class="item-price-div" *ngFor="let item of po.itemPrice;let i=index">
                           <div class="item-discription">{{ item.description }}</div>
                           <div class="item-price">
-                            <input type="number" class="item-price-input"  [(ngModel)]="item.unitPrice" (keyup)="addPrice(i)" />
+                            <input type="number" class="item-price-input"  [(ngModel)]="item.unitPrice" (keyup)="addPrice(i)" disabled/>
                           </div>
                           <div class="gst">
                            <input type="number" class="gst-input"  [(ngModel)]="item.gst" (keyup)="addPrice(i)" disabled/>
                           </div>
                          <div class="qty"> 
-                           <input type="number" class="qty-input"  [(ngModel)]="item.qty" (keyup)="addPrice(i)" /> </div>
+                           <input type="number" class="qty-input"  [(ngModel)]="item.qty" (keyup)="addPrice(i)" disabled/> </div>
+                         <div class="total">
+                           <input type="number" class="total-input" [(ngModel)]="item.totalPrice" disabled/>
+                         </div>
+                         <div class="total-with-gst">
+                           <input type="number" class="total-with-gst-input" [(ngModel)]="item.totalWithGst" disabled/>
+                         </div>
+                        </div>
+                      </div>
+                      <div class="price-div" *ngIf="type=='marketingEdit'">
+                        <div class="item-price-div" *ngFor="let item of po.itemPrice;let i=index">
+                          <div class="item-discription">{{ item.description }}</div>
+                          <div class="item-price">
+                            <input type="number" class="item-price-input"  [(ngModel)]="item.unitPrice" (keyup)="addPrice(i)"/>
+                          </div>
+                          <div class="gst">
+                           <input type="number" class="gst-input"  [(ngModel)]="item.gst" (keyup)="addPrice(i)" disabled/>
+                          </div>
+                         <div class="qty"> 
+                           <input type="number" class="qty-input"  [(ngModel)]="item.qty" (keyup)="addPrice(i)" disabled/> </div>
                          <div class="total">
                            <input type="number" class="total-input" [(ngModel)]="item.totalPrice" disabled/>
                          </div>

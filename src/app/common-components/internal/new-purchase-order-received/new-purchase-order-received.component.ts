@@ -62,6 +62,10 @@ export class NewPurchaseOrderReceivedComponent implements OnInit {
 
   po ={
     poNumber: 0,
+    enquiryNumber: 0,
+    poMode: 'Private',
+    status: 'New',
+    workOrderNumber: 0,
     number:0, 
     customer: '',
     items: [],
@@ -93,6 +97,9 @@ export class NewPurchaseOrderReceivedComponent implements OnInit {
   totalWithGst = 0;
   testFile: FileList;
   allFiles: any;
+  editFlag = false;
+  editFileRemove: any;
+  editFileAdd: any;
   constructor(iconRegistry: MatIconRegistry,
     public poreceivedservice: PoReceivedService,
     sanitizer: DomSanitizer) { 
@@ -110,16 +117,24 @@ export class NewPurchaseOrderReceivedComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.editFlag = false;
+    if(this.type == 'marketing') {
     for( let i =0 ; i < this.data.items.length; i++ ) {
       if(this.data.items[i].qty !== 0) {
       this.po.items.push( this.data.items[i]);
       }
     }
     this.po.firm = this.data.firm;
+    this.po.enquiryNumber = this.data.number;
     this.po.customer = this.data.customer;
     this.po.marketingEmployee = this.data.employee;
     this.po.itemPrice = this.data.itemPrice;
+    this.qtyCheck();
+  } else if (this.type == 'marketingEdit') {
+    this.po = this.data;
+    this.editFlag = true;
+    this.allFiles = this.po.files.customerDocuments.slice();
+  }
     for(let i =0; i < this.po.itemPrice.length; i++) {
       this.total = this.total + this.po.itemPrice[i].totalPrice;
       this.totalWithGst = this.totalWithGst + this.po.itemPrice[i].totalWithGst;
@@ -170,18 +185,41 @@ this.calanderFlag.issueDate = false;
     this.po.warrentyEarly = !this.po.warrentyEarly;
   }
   submit() {
-    // if(this.editFlag) {
-    //   if(this.enquiry.offer) {
-    //     this.enquiry.offer.itemEdit = true;
-    //     }
-    //   this.marketingService.pushEnquiryData(this.enquiry,this.editFileAdd,this.editFlag);
-    // } else {
-     
-      this.po = this.poreceivedservice.uploadFile(this.allFiles,this.po, false);
-      this.poreceivedservice.setPoData(this.po);
-    // } 
-    
+    if(this.editFlag) {
+      this.po = this.poreceivedservice.uploadFile(this.editFileAdd,this.po, this.editFlag);
+      for( let j=0; j < this.poreceivedservice.originalPos.length; j++)
+      {
+        if(this.poreceivedservice.originalPos[j].number == this.po.number) {
+          this.poreceivedservice.originalPos[j] = {...this.po};
+
+          this.poreceivedservice.pos[j]= {...this.po};
+           this.poreceivedservice.pos[j].issueDateFormatted = this.poreceivedservice.dateFormatting(this.po.issueDate);    
+        this.poreceivedservice.pos[j].deliveryDateFormatted = this.poreceivedservice.dateFormatting(this.po.deliveryDate);
+        this.poreceivedservice.pos[j].flag = true;
+        this.poreceivedservice.pos[j].totalPrice = 0;
+        for(let k=0; k < this.poreceivedservice.pos[j].itemPrice.length; k++) {
+          this.poreceivedservice.pos[j].totalPrice = this.poreceivedservice.pos[j].totalPrice + this.poreceivedservice.pos[j].itemPrice[k].totalPrice; 
+        }
+        this.poreceivedservice.pos[j].totalPriceGst = this.poreceivedservice.pos[j].totalPrice + (this.poreceivedservice.pos[j].totalPrice * 0.18);
+          
+        }
+      }
+    } else {
+      this.po = this.poreceivedservice.uploadFile(this.allFiles,this.po, this.editFlag); 
+    } 
+    this.poreceivedservice.setPoData(this.po);
     this.returnData.emit(this.po);
+  }
+  qtyCheck()
+  {
+    for(let i =0; i < this.po.itemPrice.length; i++) {
+      if(this.po.itemPrice[i].qty == 0) {
+        this.po.itemPrice.splice(i,1);
+        this.po.items.splice(i,1);
+        this.qtyCheck();
+        break;
+      }
+    }
   }
 
   addPrice(i) {
@@ -204,47 +242,47 @@ this.calanderFlag.issueDate = false;
     if (this.allFiles) {
       for (let i = 0; i < this.testFile.length; i++) {
         this.allFiles[this.allFiles.length] = this.testFile[i];
-    // if(this.editFlag) { 
-    //   if(this.editFileAdd) { 
-    //   this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
-    //   } else {
-    //     this.editFileAdd = [];
-    //   this.editFileAdd.push(this.testFile[i]);
-    // }
-    // }
+    if(this.editFlag) { 
+      if(this.editFileAdd) { 
+      this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
+      } else {
+        this.editFileAdd = [];
+      this.editFileAdd.push(this.testFile[i]);
+    }
+    }
  }
     } else {
       this.allFiles = Array.from(this.testFile);
-    //   if(this.editFlag) {     
-    //     if(this.editFileAdd) {    
-    //   for (let i = 0; i < this.testFile.length; i++) {
-    //     this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
-    //   }
-    //     } else {
-    //     this.editFileAdd = Array.from(this.testFile);
-    //   }
-    // }
+      if(this.editFlag) {     
+        if(this.editFileAdd) {    
+      for (let i = 0; i < this.testFile.length; i++) {
+        this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
+      }
+        } else {
+        this.editFileAdd = Array.from(this.testFile);
+      }
+    }
   }
   }
   deleteFile(value: any) {
-//     var editFile = true;
-//     if (this.editFlag) {
-//       if(this.editFileAdd) {
-//       for (let i =0; i < this.editFileAdd.length; i++) {
-//         if(this.editFileAdd[i].name == this.allFiles[value].name) {
-//           this.editFileAdd.splice(i, 1);
-//           editFile = false;
-//         }
-//       }
-//     }
-//       if(editFile) {
-// this.editFileRemove = this.allFiles[value];
-//       } else {
-//     this.allFiles.splice(value, 1);
-//       }
-      
-//     } else {
+    var editFile = true;
+    if (this.editFlag) {
+      if(this.editFileAdd) {
+      for (let i =0; i < this.editFileAdd.length; i++) {
+        if(this.editFileAdd[i].name == this.allFiles[value].name) {
+          this.editFileAdd.splice(i, 1);
+          editFile = false;
+        }
+      }
+    }
+      if(editFile) {
+this.editFileRemove = this.allFiles[value];
+      } else {
     this.allFiles.splice(value, 1);
-    // }
+      }
+      
+    } else {
+    this.allFiles.splice(value, 1);
+    }
   }
 }
