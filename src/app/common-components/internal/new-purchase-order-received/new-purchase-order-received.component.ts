@@ -92,6 +92,7 @@ export class NewPurchaseOrderReceivedComponent implements OnInit {
    };
    calanderFlag = {
     issueDate: false,
+    deliveryDate: false
   };
   total = 0;
   totalWithGst = 0;
@@ -141,7 +142,12 @@ export class NewPurchaseOrderReceivedComponent implements OnInit {
     }
   }
   calanderOpen(value) {
+    if(value == 'deliveryDate') {
+      this.calanderFlag.deliveryDate = !this.calanderFlag.deliveryDate;
+    } 
+    if(value == 'issueDate') {
     this.calanderFlag.issueDate = !this.calanderFlag.issueDate;
+    }
   }
   poReturnData () {
     
@@ -167,9 +173,11 @@ this.calanderFlag.issueDate = false;
   deliveryDateCounter(value) {
     if(value) {
       this.calanderFlag.issueDate = false; 
+      this.calanderFlag.deliveryDate = false; 
       this.po.deliveryDate = value;
     } else {
 this.calanderFlag.issueDate = false;
+this.calanderFlag.deliveryDate = false; 
     }
   }
   doTextareaValueChange(ev) {
@@ -217,7 +225,6 @@ this.calanderFlag.issueDate = false;
         this.po.itemPrice.splice(i,1);
         this.po.items.splice(i,1);
         this.qtyCheck();
-        break;
       }
     }
   }

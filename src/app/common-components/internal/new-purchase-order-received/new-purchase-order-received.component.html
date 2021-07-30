@@ -139,10 +139,10 @@
                         />
                         <span class="calander"
                           ><button>
-                             <mat-icon class="calander-button"  [ngClass]="{'red-color': !flag.issueDate}" svgIcon="calander" (click)="calanderOpen('issueDate')"></mat-icon>
+                             <mat-icon class="calander-button"  [ngClass]="{'red-color': !flag.issueDate}" svgIcon="calander" (click)="calanderOpen('deliveryDate')"></mat-icon>
                           </button>
                         </span>
-                        <app-calender class="app-calander" *ngIf="calanderFlag.issueDate" (dateEmit)='deliveryDateCounter($event)'></app-calender>
+                        <app-calender class="app-calander" *ngIf="calanderFlag.deliveryDate" (dateEmit)='deliveryDateCounter($event)'></app-calender>
                       </div>
                     </div>
                     <div class="PO-date-div flex">

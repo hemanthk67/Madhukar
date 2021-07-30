@@ -92,12 +92,44 @@ remark:''}
       this.enquiry.firm = 'THOTA COLDCEL PVT LTD';
     }
     this.marketingService.editFlag = false;
-   
   }
   submit() {
     if(this.editFlag) {
+      if(this.enquiry.itemPrice) {
+        this.enquiry.itemPrice = [];
+        var itemPrice = {
+          description:'',
+          qty: 0,
+          unitPrice: 0,
+          totalPrice: 0
+        }
+        for(let i=0; i < this.enquiry.items.length; i++) {
+          itemPrice.description = this.enquiry.items[i].description;
+          itemPrice.qty = this.enquiry.items[i].qty;
+          itemPrice.unitPrice = 0;
+          itemPrice.totalPrice = 0;
+          this.enquiry.itemPrice.push(itemPrice);
+        }
+      }
       if(this.enquiry.offer) {
         this.enquiry.offer.itemEdit = true;
+        this.enquiry.offer.totalPrice = 0;
+        if(this.enquiry.offer.itemsPrice) {
+          this.enquiry.offer.itemsPrice = [];
+          var itemPrice = {
+            description:'',
+            qty: 0,
+            unitPrice: 0,
+            totalPrice: 0
+          }
+          for(let i=0; i < this.enquiry.items.length; i++) {
+            itemPrice.description = this.enquiry.items[i].description;
+          itemPrice.qty = this.enquiry.items[i].qty;
+          itemPrice.unitPrice = 0;
+          itemPrice.totalPrice = 0;
+          this.enquiry.offer.itemsPrice.push(itemPrice);
+          }
+        }
         }
       this.marketingService.pushEnquiryData(this.enquiry,this.editFileAdd,this.editFlag);
     } else {
