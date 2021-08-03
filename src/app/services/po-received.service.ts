@@ -124,11 +124,11 @@ export class PoReceivedService {
         }
       });
     }
-    async getPOs() {
+    async getNewPOs() {
       var purchaseOrders: PurchaseOrder[] = [];
       try {
         purchaseOrders = await this.afs.collection<PurchaseOrder>(environment.poPath,
-          query => query.limit(7).where('status', '==', 'New'))
+          query => query.where('status', '==', 'New').orderBy("number", "asc").limit(20))
           .valueChanges()
           .pipe(take(1))
           .toPromise();

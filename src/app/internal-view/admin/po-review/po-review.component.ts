@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
+import { ProductionService } from 'src/app/services/internal/production/production.service';
 import { pdfFileService } from 'src/app/services/pdfFile.service';
 
 import { PoReceivedService } from 'src/app/services/po-received.service';
@@ -17,8 +18,9 @@ export class PoReviewComponent implements OnInit {
   poFlag = false;
   constructor(iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,public poReceivedService: PoReceivedService,
-    private pdf:pdfFileService) {
-    this.poReceivedService.getPOs();
+    private pdf:pdfFileService,
+    private productionService:ProductionService) {
+    this.poReceivedService.getNewPOs();
     iconRegistry.addSvgIcon(
       "down-spiral",
       sanitizer.bypassSecurityTrustResourceUrl("assets/icons/down-spiral.svg")
@@ -50,6 +52,7 @@ export class PoReviewComponent implements OnInit {
     this.poReceivedService.originalPos[this.poReceivedService.originalPos.length - index - 1].status = value;
     this.poReceivedService.setPoData(this.poReceivedService.originalPos[this.poReceivedService.originalPos.length - index - 1]);
     this.poReceivedService.pos[this.poReceivedService.originalPos.length - index - 1].status = value;
+    this.productionService.newWorkOrder(this.poReceivedService.originalPos[this.poReceivedService.originalPos.length - index - 1]);
    }
 
   edit(index) {
@@ -59,7 +62,6 @@ this.poFlag = !this.poFlag;
     // this.routingService.newTender();
   }
   poReturnData(value) {
-    console.log(value);
 //     this.marketingService.enquiry.poNumber = value.poNumber;
 //     this.marketingService.enquiry.poInternalNumber = value.number; 
 this.poFlag = !this.poFlag;

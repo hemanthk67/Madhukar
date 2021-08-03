@@ -13,5 +13,6 @@ export const environment = {
   tenderPath:'Tender',
   marketingPath:'Marketing',
   operationsPath: 'Operations',
-  poPath: 'PO'
+  poPath: 'PO',
+  productionPath: 'Production'
 };

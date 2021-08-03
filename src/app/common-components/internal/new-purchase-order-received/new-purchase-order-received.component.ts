@@ -225,6 +225,8 @@ this.calanderFlag.deliveryDate = false;
         this.po.itemPrice.splice(i,1);
         this.po.items.splice(i,1);
         this.qtyCheck();
+      } else {
+        this.po.items[i].qty = this.po.itemPrice[i].qty;
       }
     }
   }
