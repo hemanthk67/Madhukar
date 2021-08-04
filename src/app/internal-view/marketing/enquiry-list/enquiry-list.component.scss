@@ -272,6 +272,24 @@
                 }
         }
         }
+        .div-more{
+            display: flex;
+            justify-content: flex-end;
+        .more {
+            background-color: #163a9a;
+            padding: 5px;
+            border-radius: 5px;
+            width: fit-content;
+        border: solid 1px #163a9a;
+            cursor: pointer;
+            color: white;
+    }
+    .more:hover {
+        width: fit-content;
+        background-color: #003cd9;
+        color: white;
+}
+        }
     }
     }
     

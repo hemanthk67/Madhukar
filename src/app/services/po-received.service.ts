@@ -127,7 +127,7 @@ export class PoReceivedService {
     async getNewPOs() {
       var purchaseOrders: PurchaseOrder[] = [];
       try {
-        purchaseOrders = await this.afs.collection<PurchaseOrder>(environment.poPath,
+        purchaseOrders = await this.afs.collection<PurchaseOrder>(this.pathBase,
           query => query.where('status', '==', 'New').orderBy("number", "asc").limit(20))
           .valueChanges()
           .pipe(take(1))

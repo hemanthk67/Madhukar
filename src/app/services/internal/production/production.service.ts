@@ -41,7 +41,7 @@ public productionInfo:any;
   }
   newWorkOrder(value) {
     this.workOrder.firm = value.firm;
-    this.workOrder.issueDate = value.issueDate;
+    this.workOrder.issueDate = this.presentDate();
     this.workOrder.warrentyEarly = value.warrentyEarly;
     this.workOrder.warrentyFromSupply = value.warrentyFromSupply;
     this.workOrder.warrentyFromCommission = value.warrentyFromCommission;
@@ -95,5 +95,16 @@ public productionInfo:any;
         }
       }
     });
+  }
+
+  // needed functions
+  presentDate() {
+    var today = new Date();
+var dd = String(today.getDate());
+var mm = String(today.getMonth() + 1); //January is 0!
+var yyyy = today.getFullYear();
+
+
+return( dd + '/' + mm + '/' + yyyy);
   }
 }

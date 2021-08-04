@@ -11,6 +11,8 @@ import { InfoService } from "../../../services/internal/info.service";
 import { RoutingService } from '../../routing.service';
 import { environment } from 'src/environments/environment';
 
+import { map, take } from 'rxjs/operators';
+
 class Upload {
   $key: string;
   file: File;
@@ -61,6 +63,7 @@ public data;
 public originalData = [];
 public currentEnquiryNo = 0;
 private pathBase = environment.marketingPath;  // change to enquiry once done with testing and ready for production
+  nextEnquiryNo =0;
 // private pathBase = 'Marketing';
 // private pathBase = 'testMarketing';
   constructor(
@@ -69,28 +72,63 @@ private pathBase = environment.marketingPath;  // change to enquiry once done wi
     public infoService:InfoService,
       private routingService: RoutingService) { 
     this.getMarkers().then(data => {
-      this.data = data.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
-      this.originalData = this.originalData.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
+      // this.data = data.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
+      // if( this.nextEnquiryNo == 0) {
+      this.data = data;
+    this.nextEnquiryNo = data[0].number - 20;
+      // } else {
+      //   this.data.concat(data);
+      // }
+      // this.originalData = this.originalData.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
     });
   }
      // function to et data from the DB
      async getMarkers() {
       var markers = [];
-      if(!this.data) {
-      await firebase.firestore().collection(this.pathBase).get()
-        .then(querySnapshot => {
-          querySnapshot.docs.forEach(doc => {
-            if(doc.data().number > this.currentEnquiryNo) {
-              this.currentEnquiryNo = doc.data().number;
-            }
-          this.originalData.push(doc.data());
-          markers.push(doc.data());
-          markers[markers.length - 1].issueDateFormatted = this.dateFormatting(doc.data().issueDate);
-          markers[markers.length - 1].flag = true;
-        });
-      });
-    } else {
-      markers = this.data;
+    //   if(!this.data) {
+    //   await firebase.firestore().collection(this.pathBase).get()
+    //     .then(querySnapshot => {
+    //       querySnapshot.docs.forEach(doc => {
+    //         if(doc.data().number > this.currentEnquiryNo) {
+    //           this.currentEnquiryNo = doc.data().number;
+    //         }
+    //       this.originalData.push(doc.data());
+    //       markers.push(doc.data());
+    //       markers[markers.length - 1].issueDateFormatted = this.dateFormatting(doc.data().issueDate);
+    //       markers[markers.length - 1].flag = true;
+    //     });
+    //   });
+    // } else {
+    //   markers = this.data;
+    // }
+    try {
+      if(this.nextEnquiryNo == 0){
+      markers = await this.afs.collection(this.pathBase,
+        query => query.orderBy("number", "desc").limit(20))
+        .valueChanges()
+        .pipe(take(1))
+        .toPromise();
+      } else if (this.nextEnquiryNo > 1001) {
+        markers = await this.afs.collection(this.pathBase,
+          query => query.orderBy("number", "desc").startAt(this.nextEnquiryNo).limit(20))
+          .valueChanges()
+          .pipe(take(1))
+          .toPromise();
+      }
+
+    } catch (error) {
+      console.error("There was a problem fetching purchase orders ! : " + error);
+    }
+    if( this.nextEnquiryNo == 0) {
+    this.originalData = JSON.parse(JSON.stringify(markers));
+    this.currentEnquiryNo = markers[0].number;
+    } else if (this.nextEnquiryNo > 1001) {
+      this.originalData = this.originalData.concat(JSON.parse(JSON.stringify(markers)));
+    this.nextEnquiryNo = markers[0].number - 20;
+    }
+        for(let i =0; i < markers.length; i++) {
+            markers[i].issueDateFormatted = this.dateFormatting(markers[i].issueDate);
+            markers[i].flag = true;
     }
       return markers;
     }

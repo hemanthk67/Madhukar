@@ -42,9 +42,9 @@ export class EnquiryListComponent implements OnInit {
   ngOnInit() {
   }
   read(index) {
-    this.marketingService.data[this.marketingService.data.length - 1 - index].flag = !this.marketingService.data[this.marketingService.data.length - 1 - index].flag;
+    this.marketingService.data[index].flag = !this.marketingService.data[index].flag;
     for(let i = 0 ; i < this.marketingService.data.length; i++) {
-      if( (this.marketingService.data.length - 1 - index) != i ) {
+      if( (index) != i ) {
       this.marketingService.data[i].flag = true;
       }
     }
@@ -53,27 +53,27 @@ export class EnquiryListComponent implements OnInit {
     this.pdf.downloadPdf(path);
   }
   approval(value, index) {
-   this.marketingService.originalData[this.marketingService.originalData.length - index - 1].status = value;
-   this.marketingService.setEnquiryData(this.marketingService.originalData[this.marketingService.originalData.length - index - 1]);
-   this.marketingService.data[this.marketingService.originalData.length - index - 1].status = value;
+   this.marketingService.originalData[index].status = value;
+   this.marketingService.setEnquiryData(this.marketingService.originalData[index]);
+   this.marketingService.data[index].status = value;
   }
   prepareOffer(index) {
-    this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
+    this.marketingService.enquiry = this.marketingService.originalData[index]; 
     this.documentName = this.marketingService.enquiry.customer + ' OFFER P - ' + this.marketingService.enquiry.number;
     this.routingService.prepareOffer();
   }
   n
   enquiryResults(index) {
-    this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
+    this.marketingService.enquiry = this.marketingService.originalData[index]; 
     this.routingService.marketingEnquiryResults();
   }
   edit(index) {
-    this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
+    this.marketingService.enquiry = this.marketingService.originalData[index]; 
     this.marketingService.editFlag = true;
     this.routingService.newEnquiry();
   }
   editoffer(index) {
-    this.marketingService.enquiry = this.marketingService.originalData[this.marketingService.originalData.length - index - 1]; 
+    this.marketingService.enquiry = this.marketingService.originalData[index]; 
     this.marketingService.editOfferFlag = true;
     this.routingService.prepareOffer();
   }
@@ -81,15 +81,15 @@ export class EnquiryListComponent implements OnInit {
   //pdf for prepare offer
   prepareOfferPdf(index) {
     for(let i=0; i < this.infoService.pvtCustomerData.length; i++) {
-      if(this.infoService.pvtCustomerData[i].fullName == this.marketingService.originalData[this.marketingService.originalData.length - index - 1].customer) {
+      if(this.infoService.pvtCustomerData[i].fullName == this.marketingService.originalData[index].customer) {
       var customerReference = this.infoService.pvtCustomerData[i]
       }
          }
-         this.documentName = this.marketingService.originalData[this.marketingService.originalData.length - index - 1].customer + ' OFFER P - ' + this.marketingService.originalData[this.marketingService.originalData.length - index - 1].number;
-    var subTotalPriceWords = this.convertNumberToWords(this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.totalPrice) + 'Only';
+         this.documentName = this.marketingService.originalData[index].customer + ' OFFER P - ' + this.marketingService.originalData[index].number;
+    var subTotalPriceWords = this.convertNumberToWords(this.marketingService.originalData[index].offer.totalPrice) + 'Only';
     this.pdfPreviewFlag = true; // for the pdfPreview 
-    if(this.marketingService.originalData[this.marketingService.originalData.length - index - 1].firm) {
-      if(this.marketingService.originalData[this.marketingService.originalData.length - index - 1].firm == 'THOTA COLDCEL PVT LTD') {
+    if(this.marketingService.originalData[index].firm) {
+      if(this.marketingService.originalData[index].firm == 'THOTA COLDCEL PVT LTD') {
         this.pdfType = 'coldcel';
       } else {
         this.pdfType = 'thota';
@@ -98,7 +98,7 @@ export class EnquiryListComponent implements OnInit {
       
       this.pdfType = 'thota';
     }
-    this.documentsService.enquiryOffer(this.marketingService.originalData[this.marketingService.originalData.length - index - 1], customerReference , this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer, subTotalPriceWords, this.marketingService.originalData[this.marketingService.originalData.length - index - 1].offer.totalPrice);
+    this.documentsService.enquiryOffer(this.marketingService.originalData[index], customerReference , this.marketingService.originalData[index].offer, subTotalPriceWords, this.marketingService.originalData[index].offer.totalPrice);
   
   }
 
@@ -195,4 +195,17 @@ var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY
     return res;
 }
 // End indian number to word function
+needMore() {
+  console.log('aku');
+  this.marketingService.getMarkers().then(data => {
+    // this.data = data.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
+  //   if( this.marketingService.nextEnquiryNo == 0) {
+  //   this.marketingService.data = data;
+  // this.marketingService.nextEnquiryNo = data[0].number - 20;
+  //   } else {
+      this.marketingService.data = this.marketingService.data.concat(data);
+    // }
+    // this.originalData = this.originalData.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
+  });;
+}
 }
