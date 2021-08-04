@@ -81,11 +81,11 @@
         </div>
         <div class="final-content">
             <div class="edit-div" >
-                <div class="normal-edit" (click)="edit(i)">
+                <div class="normal-edit" (click)="edit(i)" *ngIf="enquiry.status == 'Offer-Prepared' || enquiry.status == 'New Enquiry'">
             <mat-icon class="down-sprial" svgIcon="edit-icon"></mat-icon>
                 <span>Edit</span>
                 </div>
-                <div class="normal-edit" (click)="editoffer(i)" *ngIf="enquiry.offer">
+                <div class="normal-edit" (click)="editoffer(i)" *ngIf="enquiry.offer && (enquiry.status == 'Offer-Prepared' || enquiry.status == 'New Enquiry')">
                     <mat-icon class="down-sprial" svgIcon="edit-icon"></mat-icon>
                         <span>Edit Offer</span>
                         </div>
