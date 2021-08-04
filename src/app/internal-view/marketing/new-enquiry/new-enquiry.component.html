@@ -85,6 +85,7 @@
                       <select
                       class="type-select"
                       name="type"
+                      (change)="creatediscription(i)"
                       [(ngModel)]="item.type"
                     >
                       <option>ONAN</option>
@@ -114,6 +115,7 @@
                       <select
                       class="tap-variation-select"
                       name="tapVariation"
+                      (change)="creatediscription(i)"
                       [(ngModel)]="item.tapVariation"
                     >
                       <option>OLTC</option>
