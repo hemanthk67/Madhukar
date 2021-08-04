@@ -142,6 +142,7 @@ remark:''}
     this.enquiry.firm = firm;
   }
   addItem() {
+    if(this.enquiry.items.length) {
     var item = {description:'',
     rating: '',
     classHv: this.enquiry.items[this.enquiry.items.length -1].classHv,
@@ -154,6 +155,21 @@ remark:''}
   qty:1,
   remark:''};
 this.enquiry.items.push(item);
+    } else {
+this.enquiry.items = [
+  {description:'',
+  rating: '',
+  classHv: '11',
+  classLv:'0.433',
+  type:'ONAN',
+  standard:'',
+  tapVariation:'OCTC',
+  terminalHv:'Bare Bushings',
+  terminalLv:'Cable Box',
+qty:1,
+remark:''}
+];
+    }
   }
   removeItem(index) {
     this.enquiry.items.splice(index,1);
