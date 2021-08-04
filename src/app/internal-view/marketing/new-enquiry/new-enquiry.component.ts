@@ -89,7 +89,7 @@ remark:''}
     } else {
       this.enquiry = {...this.marketingService.newEnquiry};
       this.enquiry.issueDate = this.presentDate();
-      this.enquiry.firm = 'THOTA COLDCEL PVT LTD';
+      // this.enquiry.firm = 'THOTA COLDCEL PVT LTD';
     }
     this.marketingService.editFlag = false;
   }
@@ -172,7 +172,7 @@ this.calanderFlag.issueDate = false;
 
   // 
   creatediscription(index) {
-    this.enquiry.items[index].description = this.enquiry.items[index].rating + 'KVA, ' + this.enquiry.items[index].classHv + '/' + this.enquiry.items[index].classLv + 'KV, IS:' + this.enquiry.items[index].standard + '.';
+    this.enquiry.items[index].description = this.enquiry.items[index].rating + 'KVA, ' + this.enquiry.items[index].classHv + '/' + this.enquiry.items[index].classLv + 'KV, IS:' + this.enquiry.items[index].standard + ',' + this.enquiry.items[index].type + ' with ' + this.enquiry.items[index].tapVariation + '.';
   }
 
   RightTab() {

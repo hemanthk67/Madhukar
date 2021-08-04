@@ -38,7 +38,7 @@ export class MarketingService {
   issueDate:'',
   status:'New Enquiry',
   specialFeatures:'',
-  firm: 'THOTA COLDCEL PVT LTD.',
+  firm: 'TCC ENERGY SOLUTIONS',
   items:[
     {description:'',
   rating: '',
@@ -48,7 +48,7 @@ export class MarketingService {
   standard:'',
   tapVariation:'OCTC',
   terminalHv:'Bare Bushings',
-  terminalLv:'Bare Bushings',
+  terminalLv:'Cable Box',
 qty:1,
 remark:''}
   ],
@@ -151,10 +151,10 @@ private pathBase = environment.marketingPath;  // change to enquiry once done wi
     enquiryData = this.uploadFile(files ,enquiryData ,'enquiry-documents', editFlag);
   this.setEnquiryData(enquiryData);
     this.currentEnquiryNo = enquiryData.number;
-    this.originalData.push({...enquiryData});
+    this.originalData.splice(0,0,{...enquiryData});
     enquiryData.issueDateFormatted = this.dateFormatting(enquiryData.issueDate);
     enquiryData.flag = true;
-    this.data.push({...enquiryData});
+    this.data.splice(0,0,{...enquiryData});
     }
   }
     // common files upload function

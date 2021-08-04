@@ -22,7 +22,7 @@
                     'red-border': !flag.organization
                   }"
                 >
-                <option *ngFor = "let org of infoService.pvtCustomerData" [value]="org.fullName"
+                <option *ngFor = "let org of infoService.pvtCustomerData.slice().reverse()" [value]="org.fullName"
                 >{{ org.fullName}}</option>
               </select>
                 </div>
@@ -104,6 +104,8 @@
                       <option>1180-L2</option>
                       <option>1180-L3</option>
                       <option>2026</option>
+                      <option>11171</option>
+                      <option>Solar</option>
                       <option>higher losses</option>
                       <option>custom</option>
                     </select>
