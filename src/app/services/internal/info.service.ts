@@ -60,6 +60,14 @@ addPvtCustomerName(data) {
   newUserRef.set(this.originalPvtCustomerData, { merge: true });
   this.pvtCustomerData.push({...data});
 }
+updatePvtCustomerName(data, index) {
+  const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
+    `${this.pathBase}/pvtCutomersDetails`
+  );
+  this.originalPvtCustomerData.data[index].details.push(data);
+  newUserRef.set(this.originalPvtCustomerData, { merge: true });
+  this.pvtCustomerData[index].details.push({...data});
+}
 addOrganizationName(data) {
   const newUserRef: AngularFirestoreDocument<any> = this.afs.doc(
     `${this.pathBase}/Organization`

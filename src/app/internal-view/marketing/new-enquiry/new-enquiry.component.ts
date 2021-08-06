@@ -205,13 +205,13 @@ this.calanderFlag.issueDate = false;
       this.addOrganizationFlag.fullName = true;
     if(this.newOrganizationName.name !== '') {
       if(this.newOrganizationName.details[0].name !== ''){
-      this.infoService.addPvtCustomerName({...this.newOrganizationName});
-      // this.newOrganizationName.fullName = '';
-      // this.newOrganizationName.name = '';
-      // this.newOrganizationName.details[0].name = '';
-      // this.newOrganizationName.details[0].address = '';  // commented as the data in the array of the object is getting refreshed and its taking as reference 
-      // this.newOrganizationName.details[0].email = '';
-      // this.newOrganizationName.details[0].phone = '';
+      this.infoService.addPvtCustomerName(JSON.parse(JSON.stringify(this.newOrganizationName)));
+      this.newOrganizationName.fullName = '';
+      this.newOrganizationName.name = '';
+      this.newOrganizationName.details[0].name = '';
+      this.newOrganizationName.details[0].address = '';  // commented as the data in the array of the object is getting refreshed and its taking as reference 
+      this.newOrganizationName.details[0].email = '';
+      this.newOrganizationName.details[0].phone = '';
       this.routingService.rightTabs[0].flag = !this.routingService.rightTabs[0].flag;
       }
     } else {

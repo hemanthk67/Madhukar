@@ -52,7 +52,7 @@
             </div>
           </div>
           <div class="price-table"> 
-            <div class="price-table-head flex" (click)="test()">
+            <div class="price-table-head flex">
               <div class="s-no margin-5 white-bkgd height-40 padding-top-20">S.NO</div>
               <div class="description margin-5 white-bkgd padding-top-20">DESCRIPTION</div>
               <div class="ex-works-price margin-5 white-bkgd padding-top-10">UNIT EX-WORKS PRICE</div>
@@ -112,6 +112,50 @@
         </div>
       </div>
 </div>
+</div>
+<div class="add-organization" *ngIf = "routingService.rightTabs[0].flag">
+  <div class="add-organization-div">
+    <div class="add-organization-header">
+      <div class="cross"  (click)="customerReferenceBack()">X</div>
+    </div>
+    <div class="add-organization-body">
+    <div class="add-organization-head">
+      Add Customer Reference
+    </div>
+    <div class="add-organization-inputs">
+      <div class="full-name-div">
+        <div class="lables">{{ this.customerReference.fullName }}</div>
+      </div>
+      <div class="small-name-div">
+        <div class="lables">({{ this.customerReference.name }})</div>
+      </div> 
+    </div>
+    <div class="add-organization-inputs contact-details">
+      <div class="address-div">
+        <div class="lables">Address</div>
+        <textarea class="address-input" type="text" name="address" [(ngModel)]="newCustomerReference.address"></textarea>
+      </div> 
+      <div class="contact-person-div">
+        <div class="lables">Contact Person</div>
+        <input class="name-input" type="text" [ngClass]="{'red-border': !addCustomerReferenceFlag.name }" [(ngModel)]="newCustomerReference.name"/>
+        <div class="lables">Email</div>
+        <input class="name-input" type="text"  [(ngModel)]="newCustomerReference.email"/>
+        <div class="lables">Phone Number</div>
+        <input class="name-input" type="text"  [(ngModel)]="newCustomerReference.phone"/>
+      </div>
+      <div class="gender-div">
+      <div class="lables">Gender</div>
+      <select class="name-input"  [(ngModel)]="newCustomerReference.gender">
+        <option> Male </option>
+        <option> Female </option>
+      </select>
+      </div>
+    </div>
+    <div class="add-organization-submit">
+      <div class="add-organization-submit-button"  (click)="addCustomerReference()">Submit</div>
+    </div>
+  </div>
+  </div>
 </div>
 <app-pdf-preview
   *ngIf="pdfPreviewFlag"

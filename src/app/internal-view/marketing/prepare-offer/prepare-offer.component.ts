@@ -5,6 +5,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { InfoService } from 'src/app/services/internal/info.service';
 import { MarketingService } from 'src/app/services/internal/marketing/marketing.service';
 import { DocumentsService } from 'src/app/services/common/documents.service';
+import { RoutingService } from 'src/app/services/routing.service';
 
 
 import * as jsonData from "./prepare-offer.json";
@@ -41,9 +42,21 @@ export class PrepareOfferComponent implements OnInit {
   documentName: any;
   editOfferFlag = false;
   pdfType : any;
+  newCustomerReference = {
+        address: '',
+        name:'',
+        email:'',
+        phone:'',
+        gender: 'Male'
+  };
+  addCustomerReferenceFlag = {
+    name: true
+  };
+  customerReferenceIndex: number;
   constructor(    iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public infoService:InfoService,
+    public routingService: RoutingService,
     public marketingService: MarketingService,
     public documentsService: DocumentsService) { 
       iconRegistry.addSvgIcon(
@@ -54,11 +67,13 @@ export class PrepareOfferComponent implements OnInit {
 
   ngOnInit() { 
  
+    this.RightTab();
          
    this.enquiry = this.marketingService.enquiry;
    for(let i=0; i < this.infoService.pvtCustomerData.length; i++) {
 if(this.infoService.pvtCustomerData[i].fullName == this.enquiry.customer) {
 this.customerReference = this.infoService.pvtCustomerData[i];
+this.customerReferenceIndex = i;
 }
    }
     this.pdfPreviewFlag = false; // for the pdfPreview
@@ -94,9 +109,29 @@ this.customerReference = this.infoService.pvtCustomerData[i];
     }
 
   }
-  test() {
-    console.log(this.offer.terms);
+  RightTab() {
+    this.routingService.rightTabs = [{name:'Add Reference',
+    message: 'Add New Customer Reference to our data for future use',
+  flag: false }
+  ];
   }
+  customerReferenceBack() {
+    this.routingService.rightTabs[0].flag = !this.routingService.rightTabs[0].flag;
+  }
+  addCustomerReference() {
+      if(this.newCustomerReference.name !== ''){
+        
+      this.addCustomerReferenceFlag.name = true;
+      this.infoService.updatePvtCustomerName(JSON.parse(JSON.stringify(this.newCustomerReference)), this.customerReferenceIndex);
+      this.newCustomerReference.name = '';
+      this.newCustomerReference.address = '';  // commented as the data in the array of the object is getting refreshed and its taking as reference 
+      this.newCustomerReference.email = '';
+      this.newCustomerReference.phone = '';
+      this.routingService.rightTabs[0].flag = !this.routingService.rightTabs[0].flag;
+      } else {
+      this.addCustomerReferenceFlag.name = false;
+      }
+      }
   referenceChange() {
     for(let i=0; i < this.customerReference.details.length; i++) {
       console.log(this.customerReference.details[i].name, this.offer.customer.refer);
