@@ -14,17 +14,15 @@
               <div class="org-div">
                 <div class="org-label sub-header">Customer Name:</div>
                 <div class="org-input">
-                     <select
-                  class="org-name"
+                  <input class="org-name" list="browsers" name="browser" id="browser"  [(ngModel)]="enquiry.customer" [ngClass]="{'red-border': !flag.organization }">
+
+                     <datalist
+                     id="browsers"
                   name="orgName"
-                  [(ngModel)]="enquiry.customer"
-                  [ngClass]="{
-                    'red-border': !flag.organization
-                  }"
                 >
                 <option *ngFor = "let org of infoService.pvtCustomerData.slice().reverse()" [value]="org.fullName"
                 >{{ org.fullName}}</option>
-              </select>
+              </datalist>
                 </div>
                 </div>
                 <div class="tender-date-div flex">
