@@ -1,16 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { ProductionRoutingModule } from './production-routing.module';
-import { ProductionComponent } from './production.component';
-import { ProductionListComponent } from './production-list/production-list.component';
+import { ProductionRoutingModule } from "./production-routing.module";
+import { ProductionComponent } from "./production.component";
+import { ProductionListComponent } from "./production-list/production-list.component";
 
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [ProductionComponent, ProductionListComponent],
-  imports: [
-    CommonModule,
-    ProductionRoutingModule
-  ]
+  imports: [CommonModule, MatIconModule, ProductionRoutingModule],
 })
-export class ProductionModule { }
+export class ProductionModule {}

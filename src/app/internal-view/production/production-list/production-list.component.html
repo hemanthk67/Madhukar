@@ -1,1 +1,268 @@
-<p>production-list works!</p>
+<div class="work-order-list-div" *ngIf="routingService.rightTabs[0].flag">
+  <div class="work-order-list-head">Production-list</div>
+  <div class="work-order-list-body">
+    <span *ngIf="productionService.workOrdersData">
+      <div
+        class="work-order-list-card"
+        *ngFor="
+          let workOrder of productionService.workOrdersData;
+          let i = index
+        "
+        [ngClass]="{
+          'light-blue-border-color': workOrder.status == 'Submitted',
+          grey: workOrder.status == 'Completed',
+          'orange-border-color': workOrder.status == 'On-Going',
+          'green-border-color': workOrder.status == 'Successful',
+          'red-border-color':
+            workOrder.status == 'UnSuccessful' ||
+            workOrder.status == 'Not-Participated' ||
+            workOrder.status == 'Rejected'
+        }"
+      >
+        <div
+          class="work-order-list-card-small"
+          (click)="read(i)"
+          *ngIf="workOrder.flag"
+        >
+          <div class="work-order-list-card-head">
+            <div class="org-head">
+              {{ workOrder.number
+              }}<span class="grey" *ngIf="workOrder.workOrderMode == 'tender'"
+                >({{ workOrder.workOrderMode }})</span
+              >
+            </div>
+            <span class="item-div"
+              ><div
+                class="item-head"
+                *ngFor="let item of workOrder.items | slice: 0:5; let i = index"
+              >
+                <span *ngIf="!item.special"
+                  ><span *ngIf="i > 0">,</span> {{ item.rating }} KVA
+                </span>
+              </div>
+            </span>
+          </div>
+          <div class="work-order-number-items">
+            <div class="work-order-number">
+              <span class="blue">TenderNo:</span>
+              {{ workOrder.workOrderNumber }}
+            </div>
+            <!-- <div class="e-work-order-number">
+              <span class="blue">e-TenderNo:</span> {{ workOrder.eTenderNumber }}
+            </div> -->
+          </div>
+          <div class="work-order-list-card-body">
+            <div class="items">
+              <div class="start-date">
+                <span class="blue">Issue Date:</span>
+                {{ workOrder.issueDateFormatted }}
+              </div>
+              <div class="due-date">
+                <span class="blue"> Delivery Date : </span
+                >{{ workOrder.deliveryDateFormatted }}
+              </div>
+              <div class="work-order-number blue-bold">
+                <span
+                  class="work-order-status"
+                  [ngClass]="{
+                    'light-blue-color': workOrder.status == 'Submitted',
+                    grey: workOrder.status == 'Completed',
+                    orange: workOrder.status == 'On-Going',
+                    green: workOrder.status == 'Successful',
+                    red:
+                      workOrder.status == 'UnSuccessful' ||
+                      workOrder.status == 'Not-Participated' ||
+                      workOrder.status == 'Rejected'
+                  }"
+                >
+                  {{ workOrder.status }}</span
+                >
+                {{ workOrder.number }}
+              </div>
+            </div>
+            <div class="down-arrow" (click)="read(i)">
+              <span>Read More</span>
+
+              <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon>
+            </div>
+          </div>
+        </div>
+        <div class="work-order-list-card-large" *ngIf="!workOrder.flag">
+          <div class="work-order-list-card-head">
+            <div class="org-head">
+              {{ workOrder.number
+              }}<span class="grey" *ngIf="workOrder.workOrderMode == 'tender'"
+                >({{ workOrder.workOrderMode }})</span
+              >
+            </div>
+            <span
+              class="work-order-status"
+              [ngClass]="{
+                grey: workOrder.status == 'Completed',
+                orange: workOrder.status == 'On-Going',
+                green: workOrder.status == 'Successful',
+                red:
+                  workOrder.status == 'UnSuccessful' ||
+                  workOrder.status == 'Not-Participated' ||
+                  workOrder.status == 'Rejected'
+              }"
+            >
+              {{ workOrder.status }}</span
+            >
+          </div>
+          <div class="work-order-list-card-sub-head">
+            P-{{ workOrder.number }}
+            <!-- <span
+              *ngFor="let org of infoService.organization"
+            >
+              <span *ngIf="org.fullName == workOrder.organization">{{
+                org.name
+              }}</span>
+            </span> -->
+          </div>
+          <div class="work-order-list-card-body">
+            <div class="date-items">
+              <!-- <div class="start-date">
+                <span class="blue">Start Date:</span>
+                {{ tender.startDateFormatted }}
+              </div> -->
+              <div class="due-date">
+                <span class="blue">Issue Date:</span>
+                {{ workOrder.issueDateFormatted }}
+              </div>
+              <div class="issue-date">
+                <span class="blue"> Delivery Date : </span
+                >{{ workOrder.deliveryDateFormatted }}
+              </div>
+            </div>
+            <div class="work-order-number-items">
+              <div class="work-order-number">
+                <span class="blue">State:</span> {{ workOrder.deliveryState }}
+              </div>
+              <!-- <div class="e-work-order-number">
+                <span class="blue">e-TenderNo:</span> {{ tender.eTenderNumber }}
+              </div> -->
+            </div>
+            <div class="items-doc-body">
+              <div class="items-div">
+                <div
+                  class="item"
+                  *ngFor="let item of workOrder.items; let i = index"
+                >
+                  <div class="item-info" *ngIf="!item.special">
+                    <div class="item-work-order-rating">
+                      <span class="blue">Item:</span> {{ item.rating }}KVA -
+                      {{ item.classHv }}/{{ item.classLv }}KV -
+                      {{ item.type }} - {{ item.tapVariation }}
+                    </div>
+                    <div class="item-work-order-quantity">
+                      <span class="blue">Quantity:</span> {{ item.qty }}
+                    </div>
+                    <div class="item-work-order-standard">
+                      <span class="blue">Standard:</span> {{ item.standard }}
+                    </div>
+                  </div>
+                  <div class="item-discription">
+                    <span class="blue">Discription:</span>
+                    {{ item.description }} -- Hv: {{ item.terminalHv }} / Lv:
+                    {{ item.terminalLv }}
+                  </div>
+                  <!-- <div class="item-destination">
+                        <div class="item-place">
+                        <span class="blue">Destination:</span>
+                        {{ item.destination }}
+                        </div>
+                        <div class="item-distance">
+                        <span class="blue">Distance:</span> {{ item.distance }}
+                        </div>
+                    </div> -->
+                </div>
+              </div>
+              <div class="doc-div">
+                <!-- <div
+                  class="work-order-documents"
+                  *ngIf="!workOrder.files.length && workOrder.files.length != 0"
+                >
+                  <div class="document-lable blue">Tender Documents:</div>
+                  <div
+                    class="document-files"
+                    *ngFor="let file of workOrder.files.workOrderDocuments"
+                    (click)="downloadFile(file.path)"
+                  >
+                    <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+                    <div class="file-name">{{ file.name }}</div>
+                  </div>
+                </div>
+                <div
+                  class="work-order-documents"
+                  *ngIf="
+                    !workOrder.files.length &&
+                    workOrder.files.length != 0 &&
+                    workOrder.files.uploadedDocuments.length
+                  "
+                >
+                  <div class="document-lable blue">Uploaded Documents:</div>
+                  <div
+                    class="document-files"
+                    *ngFor="let file of workOrder.files.uploadedDocuments"
+                    (click)="downloadFile(file.path)"
+                  >
+                    <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+                    <div class="file-name">{{ file.name }}</div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <div class="fee-items">
+              <div class="emd-fee">
+                <span class="blue">Warrenty From Supplies:</span>
+                {{ workOrder.warrentyFromSupply }}
+              </div>
+              <div class="transaction-cost-fee">
+                <span class="blue">Warrenty From Commission:</span>
+                {{ workOrder.warrentyFromCommission }}
+              </div>
+              <!-- <div class="document-cost-fee">
+                <span class="blue">Document-Cost:</span>
+                {{ tender.documentCost.amount }}
+              </div> -->
+            </div>
+            <div class="final-content">
+              <div class="edit-div" (click)="edit(i)">
+                <mat-icon class="down-sprial" svgIcon="edit-icon"></mat-icon>
+                <span>Edit</span>
+              </div>
+              <div class="approval-div">
+                <div class="div" *ngIf="workOrder.status == 'New Tender'">
+                  <div class="approval" (click)="approval('On-Going', i)">
+                    Approve
+                  </div>
+                  <div
+                    class="decline"
+                    (click)="approval('Not-Participated', i)"
+                  >
+                    Decline
+                  </div>
+                </div>
+                <div class="div" *ngIf="workOrder.status == 'On-Going'">
+                  <div class="document-prepare" (click)="documentprep(i)">
+                    Prepare Documents
+                  </div>
+                </div>
+                <div class="div" *ngIf="workOrder.status == 'Submitted'">
+                  <div class="document-prepare" (click)="workOrderResults(i)">
+                    Results
+                  </div>
+                </div>
+              </div>
+              <div class="down-arrow" (click)="read(i)">
+                <span>Read Less</span>
+                <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
