@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TenderQueryComponent } from './tender-query.component';
+import { TenderQueryComponent } from "./tender-query.component";
 
-describe('TenderQueryComponent', () => {
+describe("TenderQueryComponent", () => {
   let component: TenderQueryComponent;
   let fixture: ComponentFixture<TenderQueryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TenderQueryComponent ]
-    })
-    .compileComponents();
+      declarations: [TenderQueryComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('TenderQueryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

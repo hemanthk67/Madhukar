@@ -1,64 +1,137 @@
 <div class="salary-statement">
-<div class="salary-statement-body">
-    <div class="salary-statement-head"> SALARY-STATEMENT</div>
+  <div class="salary-statement-body">
+    <div class="salary-statement-head">SALARY-STATEMENT</div>
     <div class="head" *ngIf="operations.attandanceInfo">
-        <select class="attandance-date"  [(ngModel)]="operations.presentAttandanceDate" (change)="attandanceDateChange()">
-            <option></option>
-            <option *ngFor="let info of operations.attandanceInfo"> {{ info.name }}</option>
-        </select>
+      <select
+        class="attandance-date"
+        [(ngModel)]="operations.presentAttandanceDate"
+        (change)="attandanceDateChange()"
+      >
+        <option></option>
+        <option *ngFor="let info of operations.attandanceInfo">
+          {{ info.name }}
+        </option>
+      </select>
     </div>
-    <div class="not-finalized" *ngIf="operations.presentAttandanceData && !operations.presentAttandanceData[0].finalFlag"> Attandance Not Finalized</div>
-    <div class="body" *ngIf="operations.presentAttandanceData && operations.presentAttandanceData[0].finalFlag">
-    <div class="table-head" *ngIf="start()">
+    <div
+      class="not-finalized"
+      *ngIf="
+        operations.presentAttandanceData &&
+        !operations.presentAttandanceData[0].finalFlag
+      "
+    >
+      Attandance Not Finalized
+    </div>
+    <div
+      class="body"
+      *ngIf="
+        operations.presentAttandanceData &&
+        operations.presentAttandanceData[0].finalFlag
+      "
+    >
+      <div class="table-head" *ngIf="start()">
         <div class="employee border">Worker</div>
         <div class="Basic-Salary border">Basic Salary</div>
-        <div class="Hours border"> -- Week Hrs + (Ot Hrs - Compensation Hrs) <br>-- Absents /Leaves /WeekOffs /Holidays /CompensationHolidays</div>
+        <div class="Hours border">
+          -- Week Hrs + (Ot Hrs - Compensation Hrs) <br />-- Absents /Leaves
+          /WeekOffs /Holidays /CompensationHolidays
+        </div>
         <div class="Salary border">Basic Salary to be Paid</div>
         <div class="bonus border">Bonus</div>
         <div class="Total-Salary border">Total Final Salary</div>
         <div class="action border">Action</div>
-    </div>
-    <div class="salary-statement-table" *ngFor="let data of operations.presentAttandanceData; let i = index">
-     <div class="row" *ngIf="i !== 0 && data.type == 'Worker'">
-        <div class="employee border flex-wrap">{{ data.name }}</div>
-        <div class="Basic-Salary border">{{ data.salary }}</div>
-        <div class="Hours border"> -- {{ data.weekHrs.toFixed(0) }} + ({{ data.otHrs.toFixed(0) }}) <br> -- {{ data.absentNumber }}/{{ data.leaveNumber }}/{{ data.weekOffNumber }}/{{ data.holidayNumber }}/{{ data.compensationHolidayNumber }}</div>
-        <div class="Salary border">{{ data.basicSalaryByMonth.toFixed(0) }}</div>
-        <div class="bonus border">{{ data.bonusByMonth.toFixed(0) }}</div>
-        <div class="Total-Salary border">{{ (data.basicSalaryByMonth + data.bonusByMonth).toFixed(0) }}</div>
-        <div class="action border"> 
-       <span class="not-paid" *ngIf="!operations.originalPresentAttandanceData[i].paidFlag" (click)="paid(i)"> Not-Paid </span>  
-       <span class="paid" *ngIf="operations.originalPresentAttandanceData[i].paidFlag" (click)="paid(i)"> Paid </span>
+      </div>
+      <div
+        class="salary-statement-table"
+        *ngFor="let data of operations.presentAttandanceData; let i = index"
+      >
+        <div class="row" *ngIf="i !== 0 && data.type == 'Worker'">
+          <div class="employee border flex-wrap">{{ data.name }}</div>
+          <div class="Basic-Salary border">{{ data.salary }}</div>
+          <div class="Hours border">
+            -- {{ data.weekHrs.toFixed(0) }} + ({{ data.otHrs.toFixed(0) }})
+            <br />
+            -- {{ data.absentNumber }}/{{ data.leaveNumber }}/{{
+              data.weekOffNumber
+            }}/{{ data.holidayNumber }}/{{ data.compensationHolidayNumber }}
+          </div>
+          <div class="Salary border">
+            {{ data.basicSalaryByMonth.toFixed(0) }}
+          </div>
+          <div class="bonus border">{{ data.bonusByMonth.toFixed(0) }}</div>
+          <div class="Total-Salary border">
+            {{ (data.basicSalaryByMonth + data.bonusByMonth).toFixed(0) }}
+          </div>
+          <div class="action border">
+            <span
+              class="not-paid"
+              *ngIf="!operations.originalPresentAttandanceData[i].paidFlag"
+              (click)="paid(i)"
+            >
+              Not-Paid
+            </span>
+            <span
+              class="paid"
+              *ngIf="operations.originalPresentAttandanceData[i].paidFlag"
+              (click)="paid(i)"
+            >
+              Paid
+            </span>
+          </div>
         </div>
+      </div>
+      <br />
+      <div class="table-head">
+        <div class="employee border">Employee</div>
+        <div class="Basic-Salary border">Basic Salary</div>
+        <div class="Hours border">
+          Absents /Leaves /WeekOffs /Holidays /CompensationHolidays
+        </div>
+        <div class="Salary border">Basic Salary to be Paid</div>
+        <div class="bonus border">Bonus</div>
+        <div class="Total-Salary border">Total Final Salary</div>
+        <div class="action border">Action</div>
+      </div>
+      <div
+        class="salary-statement-table"
+        *ngFor="let data of operations.presentAttandanceData; let i = index"
+      >
+        <div class="row" *ngIf="i !== 0 && data.type == 'Employee'">
+          <div class="employee border flex-wrap">{{ data.name }}</div>
+          <div class="Basic-Salary border">{{ data.salary }}</div>
+          <div class="Hours border">
+            {{ data.absentNumber }}/{{ data.leaveNumber }}/{{
+              data.weekOffNumber
+            }}/{{ data.holidayNumber }}/{{ data.compensationHolidayNumber }}
+          </div>
+          <div class="Salary border">
+            {{ data.basicSalaryByMonth.toFixed(0) }}
+          </div>
+          <div class="bonus border">{{ data.bonusByMonth }}</div>
+          <div class="Total-Salary border">
+            {{ (data.basicSalaryByMonth + data.bonusByMonth).toFixed(0) }}
+          </div>
+          <div class="action border">
+            <span
+              class="not-paid"
+              *ngIf="!operations.originalPresentAttandanceData[i].paidFlag"
+              (click)="paid(i)"
+            >
+              Not-Paid
+            </span>
+            <span
+              class="paid"
+              *ngIf="operations.originalPresentAttandanceData[i].paidFlag"
+              (click)="paid(i)"
+            >
+              Paid
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="submit">
+        <div class="submit-button" (click)="submit()">Submit</div>
+      </div>
     </div>
-</div>
-<br>
-<div class="table-head">
-    <div class="employee border">Employee</div>
-    <div class="Basic-Salary border">Basic Salary</div>
-    <div class="Hours border">Absents /Leaves /WeekOffs /Holidays /CompensationHolidays</div>
-    <div class="Salary border">Basic Salary to be Paid</div>
-    <div class="bonus border">Bonus</div>
-    <div class="Total-Salary border">Total Final Salary</div>
-    <div class="action border">Action</div>
-</div>
-<div class="salary-statement-table" *ngFor="let data of operations.presentAttandanceData; let i = index">
- <div class="row" *ngIf="i !== 0 && data.type == 'Employee'">
-    <div class="employee border flex-wrap">{{ data.name }}</div>
-    <div class="Basic-Salary border">{{ data.salary }}</div>
-    <div class="Hours border"> {{ data.absentNumber }}/{{ data.leaveNumber }}/{{ data.weekOffNumber }}/{{ data.holidayNumber }}/{{ data.compensationHolidayNumber }}</div>
-    <div class="Salary border">{{ data.basicSalaryByMonth.toFixed(0) }}</div>
-    <div class="bonus border">{{ data.bonusByMonth }}</div>
-    <div class="Total-Salary border">{{ (data.basicSalaryByMonth + data.bonusByMonth ).toFixed(0)}}</div>
-    <div class="action border"> 
-        <span class="not-paid" *ngIf="!operations.originalPresentAttandanceData[i].paidFlag" (click)="paid(i)"> Not-Paid </span>  
-        <span class="paid" *ngIf="operations.originalPresentAttandanceData[i].paidFlag" (click)="paid(i)"> Paid </span>
-    </div>
-</div>
-</div>
-<div class="submit">
-    <div class="submit-button" (click)="submit()">Submit</div>
-</div>
-</div>
-</div>
+  </div>
 </div>

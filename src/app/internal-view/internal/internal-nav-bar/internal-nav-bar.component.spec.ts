@@ -8,7 +8,7 @@ describe("InternalNavBarComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [InternalNavBarComponent]
+      declarations: [InternalNavBarComponent],
     }).compileComponents();
   }));
 

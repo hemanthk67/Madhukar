@@ -1,79 +1,83 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
-import { RoutingService } from 'src/app/services/routing.service';
-import { InfoService } from 'src/app/services/internal/info.service';
-import { MarketingService } from 'src/app/services/internal/marketing/marketing.service';
+import { RoutingService } from "src/app/services/routing.service";
+import { InfoService } from "src/app/services/internal/info.service";
+import { MarketingService } from "src/app/services/internal/marketing/marketing.service";
 
 @Component({
-  selector: 'app-new-enquiry',
-  templateUrl: './new-enquiry.component.html',
-  styleUrls: ['./new-enquiry.component.scss']
+  selector: "app-new-enquiry",
+  templateUrl: "./new-enquiry.component.html",
+  styleUrls: ["./new-enquiry.component.scss"],
 })
 export class NewEnquiryComponent implements OnInit {
   testFile: FileList;
   allFiles: any;
-  enquiry :any;
+  enquiry: any;
   editFileRemove: any;
   editFileAdd: any;
-newOrganizationName = {
-  fullName: '',
-  name: '',
-  details: [
-    {
-      address: '',
-      name:'',
-      email:'',
-      phone:'',
-      gender: 'Male'
-    }
-  ]
-};
-addOrganizationFlag= {
-  fullName: true,
-  name: true
-};
+  newOrganizationName = {
+    fullName: "",
+    name: "",
+    details: [
+      {
+        address: "",
+        name: "",
+        email: "",
+        phone: "",
+        gender: "Male",
+      },
+    ],
+  };
+  addOrganizationFlag = {
+    fullName: true,
+    name: true,
+  };
   calanderFlag = {
     issueDate: false,
   };
   public flag = {
     organization: true,
     issueDate: true,
-   };
-   items = [
-    {description:'',
-  rating: '',
-  classHv: '',
-  classLv:'',
-  type:'',
-  standard:'',
-  tapVariation:'',
-  terminalHv:'',
-  terminalLv:'',
-qty:1,
-remark:''}
+  };
+  items = [
+    {
+      description: "",
+      rating: "",
+      classHv: "",
+      classLv: "",
+      type: "",
+      standard: "",
+      tapVariation: "",
+      terminalHv: "",
+      terminalLv: "",
+      qty: 1,
+      remark: "",
+    },
   ];
   editFlag = false;
-  constructor(iconRegistry: MatIconRegistry,
+  constructor(
+    iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public routingService: RoutingService,
-    public infoService:InfoService,
-    public marketingService:MarketingService) { 
-      iconRegistry.addSvgIcon(
-        "calander",
-        sanitizer.bypassSecurityTrustResourceUrl("assets/icons/calander.svg")
-      );
-      iconRegistry.addSvgIcon(
-        "pdf-icon",
-        sanitizer.bypassSecurityTrustResourceUrl("assets/icons/pdf-icon.svg")
-      );
-      iconRegistry.addSvgIcon(
-        "cloud-cross-icon",
-        sanitizer.bypassSecurityTrustResourceUrl(
-          "assets/icons/cloud-cross-icon.svg"
-        )
-      );
-    }
+    public infoService: InfoService,
+    public marketingService: MarketingService
+  ) {
+    iconRegistry.addSvgIcon(
+      "calander",
+      sanitizer.bypassSecurityTrustResourceUrl("assets/icons/calander.svg")
+    );
+    iconRegistry.addSvgIcon(
+      "pdf-icon",
+      sanitizer.bypassSecurityTrustResourceUrl("assets/icons/pdf-icon.svg")
+    );
+    iconRegistry.addSvgIcon(
+      "cloud-cross-icon",
+      sanitizer.bypassSecurityTrustResourceUrl(
+        "assets/icons/cloud-cross-icon.svg"
+      )
+    );
+  }
 
   ngOnInit() {
     this.RightTab();
@@ -83,27 +87,27 @@ remark:''}
       this.enquiry = this.marketingService.enquiry;
       this.items = this.enquiry.items;
       this.allFiles = this.enquiry.files.enquiryDocuments.slice();
-      if(!this.enquiry.firm) {
-        this.enquiry.firm = 'TCC ENERGY SOLUTIONS';
+      if (!this.enquiry.firm) {
+        this.enquiry.firm = "TCC ENERGY SOLUTIONS";
       }
     } else {
-      this.enquiry = {...this.marketingService.newEnquiry};
+      this.enquiry = { ...this.marketingService.newEnquiry };
       this.enquiry.issueDate = this.presentDate();
       // this.enquiry.firm = 'THOTA COLDCEL PVT LTD';
     }
     this.marketingService.editFlag = false;
   }
   submit() {
-    if(this.editFlag) {
-      if(this.enquiry.itemPrice) {
+    if (this.editFlag) {
+      if (this.enquiry.itemPrice) {
         this.enquiry.itemPrice = [];
         var itemPrice = {
-          description:'',
+          description: "",
           qty: 0,
           unitPrice: 0,
-          totalPrice: 0
-        }
-        for(let i=0; i < this.enquiry.items.length; i++) {
+          totalPrice: 0,
+        };
+        for (let i = 0; i < this.enquiry.items.length; i++) {
           itemPrice.description = this.enquiry.items[i].description;
           itemPrice.qty = this.enquiry.items[i].qty;
           itemPrice.unitPrice = 0;
@@ -111,30 +115,37 @@ remark:''}
           this.enquiry.itemPrice.push(itemPrice);
         }
       }
-      if(this.enquiry.offer) {
+      if (this.enquiry.offer) {
         this.enquiry.offer.itemEdit = true;
         this.enquiry.offer.totalPrice = 0;
-        if(this.enquiry.offer.itemsPrice) {
+        if (this.enquiry.offer.itemsPrice) {
           this.enquiry.offer.itemsPrice = [];
           var itemPrice = {
-            description:'',
+            description: "",
             qty: 0,
             unitPrice: 0,
-            totalPrice: 0
-          }
-          for(let i=0; i < this.enquiry.items.length; i++) {
+            totalPrice: 0,
+          };
+          for (let i = 0; i < this.enquiry.items.length; i++) {
             itemPrice.description = this.enquiry.items[i].description;
-          itemPrice.qty = this.enquiry.items[i].qty;
-          itemPrice.unitPrice = 0;
-          itemPrice.totalPrice = 0;
-          this.enquiry.offer.itemsPrice.push(itemPrice);
+            itemPrice.qty = this.enquiry.items[i].qty;
+            itemPrice.unitPrice = 0;
+            itemPrice.totalPrice = 0;
+            this.enquiry.offer.itemsPrice.push(itemPrice);
           }
         }
-        }
-      this.marketingService.pushEnquiryData(this.enquiry,this.editFileAdd,this.editFlag);
+      }
+      this.marketingService.pushEnquiryData(
+        this.enquiry,
+        this.editFileAdd,
+        this.editFlag
+      );
     } else {
-     
-      this.marketingService.pushEnquiryData(this.enquiry,this.allFiles,this.editFlag);
+      this.marketingService.pushEnquiryData(
+        this.enquiry,
+        this.allFiles,
+        this.editFlag
+      );
     }
     this.routingService.enquiryList();
   }
@@ -142,144 +153,166 @@ remark:''}
     this.enquiry.firm = firm;
   }
   addItem() {
-    if(this.enquiry.items.length) {
-    var item = {description:'',
-    rating: '',
-    classHv: this.enquiry.items[this.enquiry.items.length -1].classHv,
-    classLv:this.enquiry.items[this.enquiry.items.length -1].classLv,
-    type:this.enquiry.items[this.enquiry.items.length -1].type,
-    standard:this.enquiry.items[this.enquiry.items.length -1].standard,
-    tapVariation:this.enquiry.items[this.enquiry.items.length -1].tapVariation,
-    terminalHv:this.enquiry.items[this.enquiry.items.length -1].terminalHv,
-    terminalLv:this.enquiry.items[this.enquiry.items.length -1].terminalLv,
-  qty:1,
-  remark:''};
-this.enquiry.items.push(item);
+    if (this.enquiry.items.length) {
+      var item = {
+        description: "",
+        rating: "",
+        classHv: this.enquiry.items[this.enquiry.items.length - 1].classHv,
+        classLv: this.enquiry.items[this.enquiry.items.length - 1].classLv,
+        type: this.enquiry.items[this.enquiry.items.length - 1].type,
+        standard: this.enquiry.items[this.enquiry.items.length - 1].standard,
+        tapVariation:
+          this.enquiry.items[this.enquiry.items.length - 1].tapVariation,
+        terminalHv:
+          this.enquiry.items[this.enquiry.items.length - 1].terminalHv,
+        terminalLv:
+          this.enquiry.items[this.enquiry.items.length - 1].terminalLv,
+        qty: 1,
+        remark: "",
+      };
+      this.enquiry.items.push(item);
     } else {
-this.enquiry.items = [
-  {description:'',
-  rating: '',
-  classHv: '11',
-  classLv:'0.433',
-  type:'ONAN',
-  standard:'',
-  tapVariation:'OCTC',
-  terminalHv:'Bare Bushings',
-  terminalLv:'Cable Box',
-qty:1,
-remark:''}
-];
+      this.enquiry.items = [
+        {
+          description: "",
+          rating: "",
+          classHv: "11",
+          classLv: "0.433",
+          type: "ONAN",
+          standard: "",
+          tapVariation: "OCTC",
+          terminalHv: "Bare Bushings",
+          terminalLv: "Cable Box",
+          qty: 1,
+          remark: "",
+        },
+      ];
     }
   }
   removeItem(index) {
-    this.enquiry.items.splice(index,1);
+    this.enquiry.items.splice(index, 1);
   }
   calanderOpen(value) {
     this.calanderFlag.issueDate = !this.calanderFlag.issueDate;
   }
   displayCounter(value) {
-    if(value) {
-      this.calanderFlag.issueDate = false; 
+    if (value) {
+      this.calanderFlag.issueDate = false;
       this.enquiry.issueDate = value;
     } else {
-this.calanderFlag.issueDate = false;
+      this.calanderFlag.issueDate = false;
     }
   }
 
-  // 
+  //
   creatediscription(index) {
-    this.enquiry.items[index].description = this.enquiry.items[index].rating + 'KVA, ' + this.enquiry.items[index].classHv + '/' + this.enquiry.items[index].classLv + 'KV, IS:' + this.enquiry.items[index].standard + ',' + this.enquiry.items[index].type + ' with ' + this.enquiry.items[index].tapVariation + '.';
+    this.enquiry.items[index].description =
+      this.enquiry.items[index].rating +
+      "KVA, " +
+      this.enquiry.items[index].classHv +
+      "/" +
+      this.enquiry.items[index].classLv +
+      "KV, IS:" +
+      this.enquiry.items[index].standard +
+      "," +
+      this.enquiry.items[index].type +
+      " with " +
+      this.enquiry.items[index].tapVariation +
+      ".";
   }
 
   RightTab() {
-    this.routingService.rightTabs = [{name:'Add Customer',
-    message: 'Add New Customer/Organization to our data for future use',
-  flag: false }
-  ];
+    this.routingService.rightTabs = [
+      {
+        name: "Add Customer",
+        message: "Add New Customer/Organization to our data for future use",
+        flag: false,
+      },
+    ];
   }
   addOrganizationBack() {
-    this.routingService.rightTabs[0].flag = !this.routingService.rightTabs[0].flag;
+    this.routingService.rightTabs[0].flag =
+      !this.routingService.rightTabs[0].flag;
   }
   addOrganization() {
-    if(this.newOrganizationName.fullName !== '') {
+    if (this.newOrganizationName.fullName !== "") {
       this.addOrganizationFlag.fullName = true;
-    if(this.newOrganizationName.name !== '') {
-      if(this.newOrganizationName.details[0].name !== ''){
-      this.infoService.addPvtCustomerName(JSON.parse(JSON.stringify(this.newOrganizationName)));
-      this.newOrganizationName.fullName = '';
-      this.newOrganizationName.name = '';
-      this.newOrganizationName.details[0].name = '';
-      this.newOrganizationName.details[0].address = '';  // commented as the data in the array of the object is getting refreshed and its taking as reference 
-      this.newOrganizationName.details[0].email = '';
-      this.newOrganizationName.details[0].phone = '';
-      this.routingService.rightTabs[0].flag = !this.routingService.rightTabs[0].flag;
+      if (this.newOrganizationName.name !== "") {
+        if (this.newOrganizationName.details[0].name !== "") {
+          this.infoService.addPvtCustomerName(
+            JSON.parse(JSON.stringify(this.newOrganizationName))
+          );
+          this.newOrganizationName.fullName = "";
+          this.newOrganizationName.name = "";
+          this.newOrganizationName.details[0].name = "";
+          this.newOrganizationName.details[0].address = ""; // commented as the data in the array of the object is getting refreshed and its taking as reference
+          this.newOrganizationName.details[0].email = "";
+          this.newOrganizationName.details[0].phone = "";
+          this.routingService.rightTabs[0].flag =
+            !this.routingService.rightTabs[0].flag;
+        }
+      } else {
+        this.addOrganizationFlag.name = false;
       }
     } else {
-      this.addOrganizationFlag.name = false;
-    }
-    }  else {
       this.addOrganizationFlag.fullName = false;
     }
-      }
+  }
 
-
-      detectFile(event) {
-    
-        this.testFile = event.target.files;
-        console.log(this.testFile);
-        if (this.allFiles) {
-          for (let i = 0; i < this.testFile.length; i++) {
-            this.allFiles[this.allFiles.length] = this.testFile[i];
-        if(this.editFlag) { 
-          if(this.editFileAdd) { 
-          this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
+  detectFile(event) {
+    this.testFile = event.target.files;
+    console.log(this.testFile);
+    if (this.allFiles) {
+      for (let i = 0; i < this.testFile.length; i++) {
+        this.allFiles[this.allFiles.length] = this.testFile[i];
+        if (this.editFlag) {
+          if (this.editFileAdd) {
+            this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
           } else {
             this.editFileAdd = [];
-          this.editFileAdd.push(this.testFile[i]);
+            this.editFileAdd.push(this.testFile[i]);
+          }
         }
-        }
-     }
-        } else {
-          this.allFiles = Array.from(this.testFile);
-          if(this.editFlag) {     
-            if(this.editFileAdd) {    
+      }
+    } else {
+      this.allFiles = Array.from(this.testFile);
+      if (this.editFlag) {
+        if (this.editFileAdd) {
           for (let i = 0; i < this.testFile.length; i++) {
             this.editFileAdd[this.editFileAdd.length] = this.testFile[i];
           }
-            } else {
-            this.editFileAdd = Array.from(this.testFile);
-          }
-        }
-      }
-      }
-      deleteFile(value: any) {
-        var editFile = true;
-        if (this.editFlag) {
-          if(this.editFileAdd) {
-          for (let i =0; i < this.editFileAdd.length; i++) {
-            if(this.editFileAdd[i].name == this.allFiles[value].name) {
-              this.editFileAdd.splice(i, 1);
-              editFile = false;
-            }
-          }
-        }
-          if(editFile) {
-    this.editFileRemove = this.allFiles[value];
-          } else {
-        this.allFiles.splice(value, 1);
-          }
-          
         } else {
-        this.allFiles.splice(value, 1);
+          this.editFileAdd = Array.from(this.testFile);
         }
       }
-      presentDate() {
-        var today = new Date();
-var dd = String(today.getDate());
-var mm = String(today.getMonth() + 1); //January is 0!
-var yyyy = today.getFullYear();
-
-
-return( dd + '/' + mm + '/' + yyyy);
+    }
+  }
+  deleteFile(value: any) {
+    var editFile = true;
+    if (this.editFlag) {
+      if (this.editFileAdd) {
+        for (let i = 0; i < this.editFileAdd.length; i++) {
+          if (this.editFileAdd[i].name == this.allFiles[value].name) {
+            this.editFileAdd.splice(i, 1);
+            editFile = false;
+          }
+        }
       }
+      if (editFile) {
+        this.editFileRemove = this.allFiles[value];
+      } else {
+        this.allFiles.splice(value, 1);
+      }
+    } else {
+      this.allFiles.splice(value, 1);
+    }
+  }
+  presentDate() {
+    var today = new Date();
+    var dd = String(today.getDate());
+    var mm = String(today.getMonth() + 1); //January is 0!
+    var yyyy = today.getFullYear();
+
+    return dd + "/" + mm + "/" + yyyy;
+  }
 }

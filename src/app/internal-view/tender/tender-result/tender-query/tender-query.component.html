@@ -1,83 +1,115 @@
 <div class="tender-query">
-    <div class="queries">
-        <div class="page-sub-header flex space-between" >
-            Queries
-           </div>
-           <div class="queries-list" *ngFor="let query of tenderService.tender.files.queryDocuments; let i = index">
-             <div class="query-div">
-               <div class="query-sub-head">{{ i+1 }}. Query</div>
-               <div class="query-message">
-               {{ query.message }}
-               </div>
-               <div class="query-documents-div">
-               <div class="query-documents" *ngFor="let document of query.data" (click)="downloadFile(document.path)">
-                <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
-                 {{ document.name }}
-               </div>
-               </div>
-              </div>
-              <div class="reply-div" *ngIf="query.replyData">
-                <div class="reply-present" *ngIf=" query.replyData.length > 0 || query.replyMessage">
-               <div class="query-sub-head">{{ i+1 }}. Reply</div>
-                <div class="reply-message">
-                  {{ query.replyMessage }}
-                  </div>
-                  <div class="reply-documents" *ngFor="let document of query.replyData" (click)="downloadFile(document.path)">
-                    <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
-                    {{ document.name }}
-                  </div>
-                </div>
-                <div class="add-reply-div" *ngIf="query.replyData.length == 0 && !query.replyMessage">
-                  <div class="upload-reply">
-                    <input  class="upload-reply-documents" id="common-document-id" type="file" 
-                    (change)="detectReplyFile($event)">
-                    <div class="query-reply-input-div"><textarea class="query-reply-input" (change)="doTextareaValueChange($event, 'reply')"></textarea></div>
-                  </div>
-                  <div class="reply-submit-button-div">
-<div class="reply-submit-button" (click)="submitReply(i)">Submit</div>
-                  </div>
-                </div>
-              </div>
-           </div>
-    </div>
-    <div class="new-query-div">
-    <div class="page-sub-header flex space-between" >
-        New Query
-       </div>
-<div class="qeury-input-div">
-    <div class="upload-documents">
-        <div class="flex  space-between">
-        <div class="upload-div">
-          <div class="upload-input-lable">Drop Files to Upload</div>
-        <input
-                class="upload-input"
-                type="file"
-                (change)="detectFile($event)"
-                multiple
-              />
+  <div class="queries">
+    <div class="page-sub-header flex space-between">Queries</div>
+    <div
+      class="queries-list"
+      *ngFor="
+        let query of tenderService.tender.files.queryDocuments;
+        let i = index
+      "
+    >
+      <div class="query-div">
+        <div class="query-sub-head">{{ i + 1 }}. Query</div>
+        <div class="query-message">
+          {{ query.message }}
         </div>
-        <textarea class="query-input" (change)="doTextareaValueChange($event, 'query')"></textarea>
-        </div>
-        <div class="flex  space-between">
-        <div class="files-div">
+        <div class="query-documents-div">
           <div
-            class="files"
-            *ngFor="let file of allFiles; let i = index"
-            (click)="deleteFile(i)"
+            class="query-documents"
+            *ngFor="let document of query.data"
+            (click)="downloadFile(document.path)"
           >
             <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
-            <mat-icon
-              class="cloud-cross-icon"
-              svgIcon="cloud-cross-icon"
-            ></mat-icon>
-            <p>{{ file.name }}</p>
+            {{ document.name }}
           </div>
         </div>
-        <div class="upload-submission">
-         <div class="upload-button" (click)="submitQuery()"> Submit Query</div>
+      </div>
+      <div class="reply-div" *ngIf="query.replyData">
+        <div
+          class="reply-present"
+          *ngIf="query.replyData.length > 0 || query.replyMessage"
+        >
+          <div class="query-sub-head">{{ i + 1 }}. Reply</div>
+          <div class="reply-message">
+            {{ query.replyMessage }}
+          </div>
+          <div
+            class="reply-documents"
+            *ngFor="let document of query.replyData"
+            (click)="downloadFile(document.path)"
+          >
+            <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+            {{ document.name }}
+          </div>
         </div>
+        <div
+          class="add-reply-div"
+          *ngIf="query.replyData.length == 0 && !query.replyMessage"
+        >
+          <div class="upload-reply">
+            <input
+              class="upload-reply-documents"
+              id="common-document-id"
+              type="file"
+              (change)="detectReplyFile($event)"
+            />
+            <div class="query-reply-input-div">
+              <textarea
+                class="query-reply-input"
+                (change)="doTextareaValueChange($event, 'reply')"
+              ></textarea>
+            </div>
+          </div>
+          <div class="reply-submit-button-div">
+            <div class="reply-submit-button" (click)="submitReply(i)">
+              Submit
+            </div>
+          </div>
         </div>
-        </div>
-</div>
+      </div>
     </div>
+  </div>
+  <div class="new-query-div">
+    <div class="page-sub-header flex space-between">New Query</div>
+    <div class="qeury-input-div">
+      <div class="upload-documents">
+        <div class="flex space-between">
+          <div class="upload-div">
+            <div class="upload-input-lable">Drop Files to Upload</div>
+            <input
+              class="upload-input"
+              type="file"
+              (change)="detectFile($event)"
+              multiple
+            />
+          </div>
+          <textarea
+            class="query-input"
+            (change)="doTextareaValueChange($event, 'query')"
+          ></textarea>
+        </div>
+        <div class="flex space-between">
+          <div class="files-div">
+            <div
+              class="files"
+              *ngFor="let file of allFiles; let i = index"
+              (click)="deleteFile(i)"
+            >
+              <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+              <mat-icon
+                class="cloud-cross-icon"
+                svgIcon="cloud-cross-icon"
+              ></mat-icon>
+              <p>{{ file.name }}</p>
+            </div>
+          </div>
+          <div class="upload-submission">
+            <div class="upload-button" (click)="submitQuery()">
+              Submit Query
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

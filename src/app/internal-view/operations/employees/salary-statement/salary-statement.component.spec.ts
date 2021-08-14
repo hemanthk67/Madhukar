@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SalaryStatementComponent } from './salary-statement.component';
+import { SalaryStatementComponent } from "./salary-statement.component";
 
-describe('SalaryStatementComponent', () => {
+describe("SalaryStatementComponent", () => {
   let component: SalaryStatementComponent;
   let fixture: ComponentFixture<SalaryStatementComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SalaryStatementComponent ]
-    })
-    .compileComponents();
+      declarations: [SalaryStatementComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('SalaryStatementComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

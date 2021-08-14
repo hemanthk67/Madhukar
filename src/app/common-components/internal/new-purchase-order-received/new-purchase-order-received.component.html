@@ -1,203 +1,329 @@
-<span *ngIf="type=='marketing' || type=='marketingEdit'">
-    <div class="new-enquiry-div"> 
-        <div class="new-enquiry-head-div">New PO: {{ po.firm }} <br> 
-           <!-- <div class="firm-to-change">
+<span *ngIf="type == 'marketing' || type == 'marketingEdit'">
+  <div class="new-enquiry-div">
+    <div class="new-enquiry-head-div">
+      New PO: {{ po.firm }} <br />
+      <!-- <div class="firm-to-change">
           <div class="firm-1"  [ngClass]="{ 'firm-1-selected': po.firm === 'THOTA COLDCEL PVT LTD' }" (click)="firmSelected('THOTA COLDCEL PVT LTD')" ngDefaultControl>THOTA COLDCEL PVT LTD</div>
           <div class="firm-2" [ngClass]="{ 'firm-2-selected': po.firm === 'TCC ENERGY SOLUTIONS' }" (click)="firmSelected('TCC ENERGY SOLUTIONS')" ngDefaultControl>TCC ENERGY SOLUTIONS</div>
            </div> -->
-          </div>
-        <div class="new-enquiry-body">
-        <div class="info-div">
-            <div class="info-header">
-              <div class="header"> General Information</div>
-            </div>
-            <div class="info-body">
-                <div class="flex justify-content-sapce-between">
-                  <div class="org-div">
-                    <div class="org-label sub-header">Customer Name:</div>
-                    <div class="org-input">
-                        {{ po.customer }}
-                    </div>
-                    </div>
-                    <div class="PO-date-div flex">
-                        <div class="PO-date">
-                          <div class="PO-date-label">Issued Date:</div>
-                          <Input
-                            type="text"
-                            class="PO-date-input"
-                            [(ngModel)]="po.issueDate"
-                            placeholder="dd/mm/yyyy"
-                            ngDefaultControl
-                          />
-                          <span class="calander"
-                            ><button>
-                               <mat-icon class="calander-button"  [ngClass]="{'red-color': !flag.issueDate}" svgIcon="calander" (click)="calanderOpen('issueDate')"></mat-icon>
-                            </button>
-                          </span>
-                          <app-calender class="app-calander" *ngIf="calanderFlag.issueDate" (dateEmit)='displayCounter($event)'></app-calender>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="employee-div">
-                      <div class="employee-label sub-header">Employee :</div>
-                      {{ po.marketingEmployee }}
-                      </div>
-                      <div class="PO-number">
-                        <div class="PO-number-label sub-header">PO Number:</div>
-                        <Input
-                          type="text"
-                          class="PO-number-input"
-                          [(ngModel)]="po.poNumber"
-                          [ngClass]="{
-                            'red-border': false && !flag.PONumber
-                          }"
-                          ngDefaultControl
-                        />
-                      </div>
-                    <div class="flex description"> 
-                      <div class="description-lable sub-header">Remarks : </div>
-                      <div class="description-text">
-                        <textarea name="specialFeatures" [(ngModel)]="po.remarks" ></textarea>
-                      </div>
-                    </div>
-                    <div class="item-prices-div" >
-                      <div class="item-prices-table">
-                        <!-- <div class="item-price-organization-name-div"><div class="item-price-organization-name-only-div"><div class="item-price-organization-name">{{po.firm}}</div></div></div> -->
-                       <div class="item-price-head">
-                         <div class="item-discription"> Discription</div>
-                         <div class="item-price"> Price per Item</div>
-                         <div class="gst"> Gst </div>
-                         <div class="qty"> Qty </div>
-                         <div class="total">Total( Excl Gst )</div>
-                         <div class="total-with-gst">Total( Incl Gst )</div>
-                       </div>
-                       <div class="price-div" *ngIf="type=='marketing'">
-                        <div class="item-price-div" *ngFor="let item of po.itemPrice;let i=index">
-                          <div class="item-discription">{{ item.description }}</div>
-                          <div class="item-price">
-                            <input type="number" class="item-price-input"  [(ngModel)]="item.unitPrice" (keyup)="addPrice(i)" disabled/>
-                          </div>
-                          <div class="gst">
-                           <input type="number" class="gst-input"  [(ngModel)]="item.gst" (keyup)="addPrice(i)" disabled/>
-                          </div>
-                         <div class="qty"> 
-                           <input type="number" class="qty-input"  [(ngModel)]="item.qty" (keyup)="addPrice(i)" disabled/> </div>
-                         <div class="total">
-                           <input type="number" class="total-input" [(ngModel)]="item.totalPrice" disabled/>
-                         </div>
-                         <div class="total-with-gst">
-                           <input type="number" class="total-with-gst-input" [(ngModel)]="item.totalWithGst" disabled/>
-                         </div>
-                        </div>
-                      </div>
-                      <div class="price-div" *ngIf="type=='marketingEdit'">
-                        <div class="item-price-div" *ngFor="let item of po.itemPrice;let i=index">
-                          <div class="item-discription">{{ item.description }}</div>
-                          <div class="item-price">
-                            <input type="number" class="item-price-input"  [(ngModel)]="item.unitPrice" (keyup)="addPrice(i)"/>
-                          </div>
-                          <div class="gst">
-                           <input type="number" class="gst-input"  [(ngModel)]="item.gst" (keyup)="addPrice(i)" disabled/>
-                          </div>
-                         <div class="qty"> 
-                           <input type="number" class="qty-input"  [(ngModel)]="item.qty" (keyup)="addPrice(i)" disabled/> </div>
-                         <div class="total">
-                           <input type="number" class="total-input" [(ngModel)]="item.totalPrice" disabled/>
-                         </div>
-                         <div class="total-with-gst">
-                           <input type="number" class="total-with-gst-input" [(ngModel)]="item.totalWithGst" disabled/>
-                         </div>
-                        </div>
-                      </div>
-                        <div class="item-price-head justify-content-space-around margin-top-15">
-                         <div class="total margin-left-5">
-                         <div class="item-total-text margin-right-10">Total-Amount</div>
-                           <input type="number" class="total-input" [(ngModel)]="total" disabled/>
-                         </div>
-                         <div class="total-with-gst  margin-left-5">
-                         <div class="item-total-text margin-right-10">Total-Amount-With-Gst</div>
-                           <input type="number" class="total-with-gst-input" [(ngModel)]="totalWithGst" disabled/>
-                          </div>
-                       </div>
-                      </div>
-                    </div>
-                    </div>
-                    <div class="info-header">
-                      <div class="header"> Terms and Conditions</div>
-                    </div>
-                    <div class="info-body">
-                      <div class=" flex justify-content-space-around">
-                    <div class="PO-date-div flex">
-                      <div class="PO-date">
-                        <div class="PO-date-label">Delivery Date:</div>
-                        <Input
-                          type="text"
-                          class="PO-date-input"
-                          [(ngModel)]="po.deliveryDate"
-                          placeholder="dd/mm/yyyy"
-                          ngDefaultControl
-                        />
-                        <span class="calander"
-                          ><button>
-                             <mat-icon class="calander-button"  [ngClass]="{'red-color': !flag.issueDate}" svgIcon="calander" (click)="calanderOpen('deliveryDate')"></mat-icon>
-                          </button>
-                        </span>
-                        <app-calender class="app-calander" *ngIf="calanderFlag.deliveryDate" (dateEmit)='deliveryDateCounter($event)'></app-calender>
-                      </div>
-                    </div>
-                    <div class="PO-date-div flex">
-                      <div class="PO-date">
-                        <div class="PO-date-label blue-bold-color">Delivery Address:</div>
-                        <textarea class="delivery-address-input" (change)="doTextareaValueChange($event)"></textarea>
-                        </div>
-                        </div>
-                        <div class="PO-date-div flex">
-                          <div class="PO-date">
-                            <div class="PO-date-label blue-bold-color">State:</div>
-                            <select
-                              type="number"
-                              class="PO-date-input"
-                              [(ngModel)]="po.deliveryState"
-                              ngDefaultControl
-                            >
-                            <option *ngFor="let state of indianStates" value= "{{state}}"> {{ state }}</option>
-                            </select>
-                            </div>
-                            </div>
-                    
-                          </div>
-                          <div class=" flex justify-content-space-around"> 
-                            <div class="PO-date-div flex">
-                              <div class="PO-date">
-                                <div class="PO-date-label blue-bold-color">Warrenty Period From Supply:</div>
-                                <Input
-                                  type="number"
-                                  class="PO-date-input"
-                                  [(ngModel)]="po.warrentyFromSupply"
-                                  ngDefaultControl
-                                /> <div class="PO-date-label">Months</div>
-                                </div>
-                                </div>
-                                <div class="PO-date-div flex">
-                                  <div class="PO-date">
-                                    <div class="PO-date-label blue-bold-color">Warrenty Period From Commission:</div>
-                                    <Input
-                                      type="number"
-                                      class="PO-date-input"
-                                      [(ngModel)]="po.warrentyFromCommission"
-                                      ngDefaultControl
-                                    /> <div class="PO-date-label">Months</div>
-                                    </div>
-                                    </div>
-                                    <div class="PO-date-div flex">
-                                      <div class="PO-date">
-                                        <div class="PO-date-label not-selected" [ngClass]="{ 'selected': po.warrentyEarly }" (click)="whicheverisearly()">Which Ever is Early</div>
-                                      </div>
-                                    </div>
-                          </div>
-                          </div>
+    </div>
+    <div class="new-enquiry-body">
+      <div class="info-div">
+        <div class="info-header">
+          <div class="header">General Information</div>
         </div>
-        <div class="enquiry-submission">
+        <div class="info-body">
+          <div class="flex justify-content-sapce-between">
+            <div class="org-div">
+              <div class="org-label sub-header">Customer Name:</div>
+              <div class="org-input">
+                {{ po.customer }}
+              </div>
+            </div>
+            <div class="PO-date-div flex">
+              <div class="PO-date">
+                <div class="PO-date-label">Issued Date:</div>
+                <Input
+                  type="text"
+                  class="PO-date-input"
+                  [(ngModel)]="po.issueDate"
+                  placeholder="dd/mm/yyyy"
+                  ngDefaultControl
+                />
+                <span class="calander"
+                  ><button>
+                    <mat-icon
+                      class="calander-button"
+                      [ngClass]="{ 'red-color': !flag.issueDate }"
+                      svgIcon="calander"
+                      (click)="calanderOpen('issueDate')"
+                    ></mat-icon>
+                  </button>
+                </span>
+                <app-calender
+                  class="app-calander"
+                  *ngIf="calanderFlag.issueDate"
+                  (dateEmit)="displayCounter($event)"
+                ></app-calender>
+              </div>
+            </div>
+          </div>
+          <div class="employee-div">
+            <div class="employee-label sub-header">Employee :</div>
+            {{ po.marketingEmployee }}
+          </div>
+          <div class="PO-number">
+            <div class="PO-number-label sub-header">PO Number:</div>
+            <Input
+              type="text"
+              class="PO-number-input"
+              [(ngModel)]="po.poNumber"
+              [ngClass]="{
+                'red-border': false && !flag.PONumber
+              }"
+              ngDefaultControl
+            />
+          </div>
+          <div class="flex description">
+            <div class="description-lable sub-header">Remarks :</div>
+            <div class="description-text">
+              <textarea
+                name="specialFeatures"
+                [(ngModel)]="po.remarks"
+              ></textarea>
+            </div>
+          </div>
+          <div class="item-prices-div">
+            <div class="item-prices-table">
+              <!-- <div class="item-price-organization-name-div"><div class="item-price-organization-name-only-div"><div class="item-price-organization-name">{{po.firm}}</div></div></div> -->
+              <div class="item-price-head">
+                <div class="item-discription">Discription</div>
+                <div class="item-price">Price per Item</div>
+                <div class="gst">Gst</div>
+                <div class="qty">Qty</div>
+                <div class="total">Total( Excl Gst )</div>
+                <div class="total-with-gst">Total( Incl Gst )</div>
+              </div>
+              <div class="price-div" *ngIf="type == 'marketing'">
+                <div
+                  class="item-price-div"
+                  *ngFor="let item of po.itemPrice; let i = index"
+                >
+                  <div class="item-discription">{{ item.description }}</div>
+                  <div class="item-price">
+                    <input
+                      type="number"
+                      class="item-price-input"
+                      [(ngModel)]="item.unitPrice"
+                      (keyup)="addPrice(i)"
+                      disabled
+                    />
+                  </div>
+                  <div class="gst">
+                    <input
+                      type="number"
+                      class="gst-input"
+                      [(ngModel)]="item.gst"
+                      (keyup)="addPrice(i)"
+                      disabled
+                    />
+                  </div>
+                  <div class="qty">
+                    <input
+                      type="number"
+                      class="qty-input"
+                      [(ngModel)]="item.qty"
+                      (keyup)="addPrice(i)"
+                      disabled
+                    />
+                  </div>
+                  <div class="total">
+                    <input
+                      type="number"
+                      class="total-input"
+                      [(ngModel)]="item.totalPrice"
+                      disabled
+                    />
+                  </div>
+                  <div class="total-with-gst">
+                    <input
+                      type="number"
+                      class="total-with-gst-input"
+                      [(ngModel)]="item.totalWithGst"
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="price-div" *ngIf="type == 'marketingEdit'">
+                <div
+                  class="item-price-div"
+                  *ngFor="let item of po.itemPrice; let i = index"
+                >
+                  <div class="item-discription">{{ item.description }}</div>
+                  <div class="item-price">
+                    <input
+                      type="number"
+                      class="item-price-input"
+                      [(ngModel)]="item.unitPrice"
+                      (keyup)="addPrice(i)"
+                    />
+                  </div>
+                  <div class="gst">
+                    <input
+                      type="number"
+                      class="gst-input"
+                      [(ngModel)]="item.gst"
+                      (keyup)="addPrice(i)"
+                      disabled
+                    />
+                  </div>
+                  <div class="qty">
+                    <input
+                      type="number"
+                      class="qty-input"
+                      [(ngModel)]="item.qty"
+                      (keyup)="addPrice(i)"
+                      disabled
+                    />
+                  </div>
+                  <div class="total">
+                    <input
+                      type="number"
+                      class="total-input"
+                      [(ngModel)]="item.totalPrice"
+                      disabled
+                    />
+                  </div>
+                  <div class="total-with-gst">
+                    <input
+                      type="number"
+                      class="total-with-gst-input"
+                      [(ngModel)]="item.totalWithGst"
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class="
+                  item-price-head
+                  justify-content-space-around
+                  margin-top-15
+                "
+              >
+                <div class="total margin-left-5">
+                  <div class="item-total-text margin-right-10">
+                    Total-Amount
+                  </div>
+                  <input
+                    type="number"
+                    class="total-input"
+                    [(ngModel)]="total"
+                    disabled
+                  />
+                </div>
+                <div class="total-with-gst margin-left-5">
+                  <div class="item-total-text margin-right-10">
+                    Total-Amount-With-Gst
+                  </div>
+                  <input
+                    type="number"
+                    class="total-with-gst-input"
+                    [(ngModel)]="totalWithGst"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="info-header">
+          <div class="header">Terms and Conditions</div>
+        </div>
+        <div class="info-body">
+          <div class="flex justify-content-space-around">
+            <div class="PO-date-div flex">
+              <div class="PO-date">
+                <div class="PO-date-label">Delivery Date:</div>
+                <Input
+                  type="text"
+                  class="PO-date-input"
+                  [(ngModel)]="po.deliveryDate"
+                  placeholder="dd/mm/yyyy"
+                  ngDefaultControl
+                />
+                <span class="calander"
+                  ><button>
+                    <mat-icon
+                      class="calander-button"
+                      [ngClass]="{ 'red-color': !flag.issueDate }"
+                      svgIcon="calander"
+                      (click)="calanderOpen('deliveryDate')"
+                    ></mat-icon>
+                  </button>
+                </span>
+                <app-calender
+                  class="app-calander"
+                  *ngIf="calanderFlag.deliveryDate"
+                  (dateEmit)="deliveryDateCounter($event)"
+                ></app-calender>
+              </div>
+            </div>
+            <div class="PO-date-div flex">
+              <div class="PO-date">
+                <div class="PO-date-label blue-bold-color">
+                  Delivery Address:
+                </div>
+                <textarea
+                  class="delivery-address-input"
+                  (change)="doTextareaValueChange($event)"
+                ></textarea>
+              </div>
+            </div>
+            <div class="PO-date-div flex">
+              <div class="PO-date">
+                <div class="PO-date-label blue-bold-color">State:</div>
+                <select
+                  type="number"
+                  class="PO-date-input"
+                  [(ngModel)]="po.deliveryState"
+                  ngDefaultControl
+                >
+                  <option
+                    *ngFor="let state of indianStates"
+                    value="{{ state }}"
+                  >
+                    {{ state }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-content-space-around">
+            <div class="PO-date-div flex">
+              <div class="PO-date">
+                <div class="PO-date-label blue-bold-color">
+                  Warrenty Period From Supply:
+                </div>
+                <Input
+                  type="number"
+                  class="PO-date-input"
+                  [(ngModel)]="po.warrentyFromSupply"
+                  ngDefaultControl
+                />
+                <div class="PO-date-label">Months</div>
+              </div>
+            </div>
+            <div class="PO-date-div flex">
+              <div class="PO-date">
+                <div class="PO-date-label blue-bold-color">
+                  Warrenty Period From Commission:
+                </div>
+                <Input
+                  type="number"
+                  class="PO-date-input"
+                  [(ngModel)]="po.warrentyFromCommission"
+                  ngDefaultControl
+                />
+                <div class="PO-date-label">Months</div>
+              </div>
+            </div>
+            <div class="PO-date-div flex">
+              <div class="PO-date">
+                <div
+                  class="PO-date-label not-selected"
+                  [ngClass]="{ selected: po.warrentyEarly }"
+                  (click)="whicheverisearly()"
+                >
+                  Which Ever is Early
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="enquiry-submission">
         <div class="upload-div">
           <div class="upload-input-div">
             <div class="upload-input-lable">Drop Files to Upload</div>
@@ -217,7 +343,8 @@
               <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
               <mat-icon
                 class="cloud-cross-icon"
-                svgIcon="cloud-cross-icon" *ngIf="file.size"
+                svgIcon="cloud-cross-icon"
+                *ngIf="file.size"
               ></mat-icon>
               <p>{{ file.name }}</p>
             </div>
@@ -226,7 +353,7 @@
         <div class="submit">
           <div class="submit-button" (click)="submit()">Submit</div>
         </div>
-        </div>
-        </div>
+      </div>
     </div>
+  </div>
 </span>

@@ -1,10 +1,16 @@
-
 <div class="container">
-    <div class="header-div">
+  <div class="header-div">
     <div class="header" (click)="backToTenderList()">
-      {{ tenderService.tender.organization }} - {{ tenderService.tender.number }}
+      {{ tenderService.tender.organization }} -
+      {{ tenderService.tender.number }}
     </div>
-    </div>
-    <app-tender-query *ngIf="routingService.rightTabs[1].flag" class="app-tender-query"></app-tender-query>
-    <app-results *ngIf="routingService.rightTabs[0].flag" class="results"></app-results>
   </div>
+  <app-tender-query
+    *ngIf="routingService.rightTabs[1].flag"
+    class="app-tender-query"
+  ></app-tender-query>
+  <app-results
+    *ngIf="routingService.rightTabs[0].flag"
+    class="results"
+  ></app-results>
+</div>

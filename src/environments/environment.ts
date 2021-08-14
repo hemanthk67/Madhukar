@@ -12,13 +12,13 @@ export const environment = {
     storageBucket: "tcc-daecf.appspot.com",
     messagingSenderId: "520153747299",
     appId: "1:520153747299:web:4ceffc316e905097254d56",
-    measurementId: "G-R8D4BJR94X"
+    measurementId: "G-R8D4BJR94X",
   },
-  tenderPath:'test',
-  marketingPath:'testMarketing',
-  operationsPath: 'Operations',
-  poPath: 'testPO',
-  productionPath: 'testProduction'
+  tenderPath: "test",
+  marketingPath: "testMarketing",
+  operationsPath: "Operations",
+  poPath: "testPO",
+  productionPath: "testProduction",
 };
 
 /*

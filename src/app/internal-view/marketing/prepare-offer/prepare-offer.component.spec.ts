@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PrepareOfferComponent } from './prepare-offer.component';
+import { PrepareOfferComponent } from "./prepare-offer.component";
 
-describe('PrepareOfferComponent', () => {
+describe("PrepareOfferComponent", () => {
   let component: PrepareOfferComponent;
   let fixture: ComponentFixture<PrepareOfferComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrepareOfferComponent ]
-    })
-    .compileComponents();
+      declarations: [PrepareOfferComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('PrepareOfferComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

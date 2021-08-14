@@ -7,7 +7,7 @@ import { AuthService } from "src/app/services/auth.service";
 @Component({
   selector: "app-internal-nav-bar",
   templateUrl: "./internal-nav-bar.component.html",
-  styleUrls: ["./internal-nav-bar.component.scss"]
+  styleUrls: ["./internal-nav-bar.component.scss"],
 })
 export class InternalNavBarComponent implements OnInit {
   categories: any;
@@ -17,8 +17,8 @@ export class InternalNavBarComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer
   ) {
-    if(!this.Auth.userData) {
-      this.Auth.user.subscribe(value => this.Auth.login(value, true));
+    if (!this.Auth.userData) {
+      this.Auth.user.subscribe((value) => this.Auth.login(value, true));
     }
     this.categories = this.RoutingServices.leftNavData;
     iconRegistry.addSvgIcon(
@@ -27,8 +27,7 @@ export class InternalNavBarComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   categoryrSelected(i) {
     this.categories[i].flag = !this.categories[i].flag;

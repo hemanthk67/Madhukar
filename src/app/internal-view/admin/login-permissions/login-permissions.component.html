@@ -1,131 +1,429 @@
 <div class="permission-list-div">
-    <div class="permission-list-head"> Login-Permission-List</div>
-    <div class="permission-list-body">
-       <div class="header" *ngIf="changeUserData.length"> Change User Permissions </div>
-        <span class="flex flex-wrap margin-top-20" *ngIf="changeUserData.length">
-            <div class="permission-list-card" *ngFor="let user of changeUserData; let i = index">
-                {{ user.displayName }} --  {{ user.email }}
-                <div class="permission-category">
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.admin, 'not-permitted': !user.role.admin }" (click)="permission('admin', i)">Admin</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.tender, 'not-permitted': !user.role.tender }" (click)="permission('tender', i)">Tender</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.marketing, 'not-permitted': !user.role.marketing }" (click)="permission('marketing', i)">Marketing</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.production, 'not-permitted': !user.role.production }" (click)="permission('production', i)">Production</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.purchase, 'not-permitted': !user.role.purchase }" (click)="permission('purchase', i)">Purchase</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.finance, 'not-permitted': !user.role.finance }" (click)="permission('finance', i)">Finance</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.operation, 'not-permitted': !user.role.operation }" (click)="permission('operation', i)">Operations</span> 
-                </div>
-                <div class="permission-category-list">
-                    <div class="permission-sub-category">
-                        <div class="permission-sub-category-item" *ngIf="user.role.admin">
-                            Admin:<br/><br/>
-                            <span class="permission-category-item" [ngClass]="{'permitted': user.role.Admin.role, 'not-permitted': !user.role.Admin.role }" (click)="subPermission('admin','role', i)">Role</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.Admin.technical, 'not-permitted': !user.role.Admin.technical }" (click)="subPermission('admin','technical', i)">Technical</span> 
-                        </div>
-                        <div class="permission-sub-category-item" *ngIf="user.role.tender">
-                            Tender:<br/><br/>
-                            <span class="permission-category-item" [ngClass]="{'permitted': user.role.Tender.role, 'not-permitted': !user.role.Tender.role }" (click)="subPermission('tender','role', i)">Role</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.Tender.technical, 'not-permitted': !user.role.Tender.technical }" (click)="subPermission('tender','technical', i)">Technical</span> 
-                        </div>
-                        <div class="permission-sub-category-item" *ngIf="user.role.marketing">
-                            Marketing:<br/><br/>
-                            <span class="permission-category-item" [ngClass]="{'permitted': user.role.Marketing.role, 'not-permitted': !user.role.Marketing.role }" (click)="subPermission('marketing','role', i)">Role</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.Marketing.technical, 'not-permitted': !user.role.Marketing.technical }" (click)="subPermission('marketing','technical', i)">Technical</span> 
-                        </div>
-                        <div class="permission-sub-category-item" *ngIf="user.role.production">
-                            Production:<br/><br/>
-                            <span class="permission-category-item" [ngClass]="{'permitted': user.role.Production.role, 'not-permitted': !user.role.Production.role }" (click)="subPermission('production','role', i)">Role</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.Production.technical, 'not-permitted': !user.role.Production.technical }" (click)="subPermission('production','technical', i)">Technical</span> 
-                        </div>  
-                        <div class="permission-sub-category-item" *ngIf="user.role.purchase">
-                            Purchase:<br/><br/>
-                            <span class="permission-category-item" [ngClass]="{'permitted': user.role.Purchase.role, 'not-permitted': !user.role.Purchase.role }" (click)="subPermission('purchase','role', i)">Role</span> 
-                       <span class="permission-category-item" [ngClass]="{'permitted': user.role.Purchase.technical, 'not-permitted': !user.role.Purchase.technical }" (click)="subPermission('purchase','technical', i)">Technical</span> 
-                        </div>
-                        <div class="permission-sub-category-item" *ngIf="user.role.finance">
-                            Finance:<br/><br/>
-                            <span class="permission-category-item"[ngClass]="{'permitted': user.role.Finance.role, 'not-permitted': !user.role.Finance.role }" (click)="subPermission('finance','role', i)">Role</span> 
-                            <span class="permission-category-item" [ngClass]="{'permitted': user.role.Finance.technical, 'not-permitted': !user.role.Finance.technical }" (click)="subPermission('finance','technical', i)">Technical</span> 
-                        </div>
-                        <div class="permission-sub-category-item" *ngIf="user.role.operation">
-                            Operations:<br/><br/>
-                            <span class="permission-category-item"[ngClass]="{'permitted': user.role.Operation.role, 'not-permitted': !user.role.Operation.role }" (click)="subPermission('operation','role', i)">Role</span> 
-                            <span class="permission-category-item" [ngClass]="{'permitted': user.role.Operation.technical, 'not-permitted': !user.role.Operation.technical }" (click)="subPermission('operation','technical', i)">Technical</span> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </span>       
-        <div class="submit-changes" *ngIf="submitFlag" (click)="submitChanges()">Submit Changes</div> 
-        
-        <div class="header"> Active Users </div>
-        <span class="flex flex-wrap margin-top-20" *ngIf="adminService.userData">
-            <div class="permission-list-card" *ngFor="let user of adminService.userData.slice().reverse(); let i = index">
-                {{ user.displayName }} --  {{ user.email }}
-                <div class="permission-category">
-                       <span class="permission-sub-category-item" *ngIf="user.role.admin" >Admin</span> 
-                       <span class="permission-sub-category-item" *ngIf="user.role.tender" >Tender</span> 
-                       <span class="permission-sub-category-item" *ngIf="user.role.marketing" >Marketing</span> 
-                       <span class="permission-sub-category-item" *ngIf="user.role.production" >Production</span> 
-                       <span class="permission-sub-category-item" *ngIf="user.role.purchase" >Purchase</span> 
-                       <span class="permission-sub-category-item" *ngIf="user.role.finance" >Finance</span> 
-                       <span class="permission-sub-category-item" *ngIf="user.role.operation" >Operations</span> 
-                </div>
-                <div class="permission-category-list">
-                    <div class="permission-sub-category">
-                        <div class="permission-sub-category-item" *ngIf="user.role.Admin.role || user.role.Admin.technical">
-                            Admin:<br/>
-                            <span class="permission-sub-category-item" *ngIf="user.role.Admin.role">- Role</span>
-                            <br/>
-                       <span class="permission-sub-category-item" *ngIf="user.role.Admin.technical">- Technical</span> 
-                        </div>
-                        <div class="permission-sub-category-item" *ngIf="user.role.Tender.role || user.role.Tender.technical">
-                            Tender:<br/>
-                            <span class="permission-sub-category-item" *ngIf="user.role.Tender.role">- Role</span>
-                            <br/>
-                       <span class="permission-sub-category-item" *ngIf="user.role.Tender.technical">- Technical</span> 
-                        </div>
-                        <div class="permission-sub-category-item" *ngIf="user.role.Marketing.role || user.role.Marketing.technical">
-                            Marketing:<br/>
-                            <span class="permission-sub-category-item" *ngIf="user.role.Marketing.role">- Role</span>
-                            <br/>
-                       <span class="permission-sub-category-item" *ngIf="user.role.Marketing.technical">- Technical</span> 
-                        </div>
-                        <div class="permission-sub-category-item" *ngIf="user.role.Production.role || user.role.Production.technical">
-                            Production:<br/>
-                            <span class="permission-sub-category-item" *ngIf="user.role.Production.role">- Role</span>
-                            <br/>
-                       <span class="permission-sub-category-item" *ngIf="user.role.Production.technical">- Technical</span> 
-                        </div>  
-                        <div class="permission-sub-category-item" *ngIf="user.role.Purchase.role || user.role.Purchase.technical">
-                            Purchase:<br/>
-                            <span class="permission-sub-category-item" *ngIf="user.role.Purchase.role">- Role</span>
-                            <br/>
-                       <span class="permission-sub-category-item" *ngIf="user.role.Purchase.technical">- Technical</span> 
-                        </div>
-                        <div class="permission-sub-category-item" *ngIf="user.role.Finance.role || user.role.Finance.technical">
-                            Finance:<br/>
-                            <span class="permission-sub-category-item" *ngIf="user.role.Finance.role">- Role</span>
-                            <br/>
-                       <span class="permission-sub-category-item" *ngIf="user.role.Finance.technical">- Technical</span> 
-                        </div>
-                        <div class="permission-sub-category-item" *ngIf="user.role.Operation && user.role.Operation.role || user.role.Operation.technical">
-                            Operations:<br/>
-                            <span class="permission-sub-category-item" *ngIf="user.role.Operation.role">- Role</span>
-                            <br/>
-                       <span class="permission-sub-category-item" *ngIf="user.role.Operation.technical">- Technical</span> 
-                        </div>
-                        <div class="permission-change" (click)="changePermission(i)">Change Permission</div>
-
-                    </div>
-                </div>
-            </div>
-        </span>  
-        <div class="header"> Tried to Login-In  </div>
-        <span class="flex flex-wrap margin-top-20" *ngIf="adminService.newUserData">
-            <div class="permission-list-card height-auto" *ngFor="let newUser of adminService.newUserData.slice().reverse(); let i = index">
-                {{ newUser.displayName }} --  {{ newUser.email }}
-                <div class="add-permission" (click)="addUser(i)">ADD</div>
-            </div>
-        </span>      
+  <div class="permission-list-head">Login-Permission-List</div>
+  <div class="permission-list-body">
+    <div class="header" *ngIf="changeUserData.length">
+      Change User Permissions
     </div>
+    <span class="flex flex-wrap margin-top-20" *ngIf="changeUserData.length">
+      <div
+        class="permission-list-card"
+        *ngFor="let user of changeUserData; let i = index"
+      >
+        {{ user.displayName }} -- {{ user.email }}
+        <div class="permission-category">
+          <span
+            class="permission-category-item"
+            [ngClass]="{
+              permitted: user.role.admin,
+              'not-permitted': !user.role.admin
+            }"
+            (click)="permission('admin', i)"
+            >Admin</span
+          >
+          <span
+            class="permission-category-item"
+            [ngClass]="{
+              permitted: user.role.tender,
+              'not-permitted': !user.role.tender
+            }"
+            (click)="permission('tender', i)"
+            >Tender</span
+          >
+          <span
+            class="permission-category-item"
+            [ngClass]="{
+              permitted: user.role.marketing,
+              'not-permitted': !user.role.marketing
+            }"
+            (click)="permission('marketing', i)"
+            >Marketing</span
+          >
+          <span
+            class="permission-category-item"
+            [ngClass]="{
+              permitted: user.role.production,
+              'not-permitted': !user.role.production
+            }"
+            (click)="permission('production', i)"
+            >Production</span
+          >
+          <span
+            class="permission-category-item"
+            [ngClass]="{
+              permitted: user.role.purchase,
+              'not-permitted': !user.role.purchase
+            }"
+            (click)="permission('purchase', i)"
+            >Purchase</span
+          >
+          <span
+            class="permission-category-item"
+            [ngClass]="{
+              permitted: user.role.finance,
+              'not-permitted': !user.role.finance
+            }"
+            (click)="permission('finance', i)"
+            >Finance</span
+          >
+          <span
+            class="permission-category-item"
+            [ngClass]="{
+              permitted: user.role.operation,
+              'not-permitted': !user.role.operation
+            }"
+            (click)="permission('operation', i)"
+            >Operations</span
+          >
+        </div>
+        <div class="permission-category-list">
+          <div class="permission-sub-category">
+            <div class="permission-sub-category-item" *ngIf="user.role.admin">
+              Admin:<br /><br />
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Admin.role,
+                  'not-permitted': !user.role.Admin.role
+                }"
+                (click)="subPermission('admin', 'role', i)"
+                >Role</span
+              >
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Admin.technical,
+                  'not-permitted': !user.role.Admin.technical
+                }"
+                (click)="subPermission('admin', 'technical', i)"
+                >Technical</span
+              >
+            </div>
+            <div class="permission-sub-category-item" *ngIf="user.role.tender">
+              Tender:<br /><br />
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Tender.role,
+                  'not-permitted': !user.role.Tender.role
+                }"
+                (click)="subPermission('tender', 'role', i)"
+                >Role</span
+              >
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Tender.technical,
+                  'not-permitted': !user.role.Tender.technical
+                }"
+                (click)="subPermission('tender', 'technical', i)"
+                >Technical</span
+              >
+            </div>
+            <div
+              class="permission-sub-category-item"
+              *ngIf="user.role.marketing"
+            >
+              Marketing:<br /><br />
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Marketing.role,
+                  'not-permitted': !user.role.Marketing.role
+                }"
+                (click)="subPermission('marketing', 'role', i)"
+                >Role</span
+              >
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Marketing.technical,
+                  'not-permitted': !user.role.Marketing.technical
+                }"
+                (click)="subPermission('marketing', 'technical', i)"
+                >Technical</span
+              >
+            </div>
+            <div
+              class="permission-sub-category-item"
+              *ngIf="user.role.production"
+            >
+              Production:<br /><br />
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Production.role,
+                  'not-permitted': !user.role.Production.role
+                }"
+                (click)="subPermission('production', 'role', i)"
+                >Role</span
+              >
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Production.technical,
+                  'not-permitted': !user.role.Production.technical
+                }"
+                (click)="subPermission('production', 'technical', i)"
+                >Technical</span
+              >
+            </div>
+            <div
+              class="permission-sub-category-item"
+              *ngIf="user.role.purchase"
+            >
+              Purchase:<br /><br />
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Purchase.role,
+                  'not-permitted': !user.role.Purchase.role
+                }"
+                (click)="subPermission('purchase', 'role', i)"
+                >Role</span
+              >
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Purchase.technical,
+                  'not-permitted': !user.role.Purchase.technical
+                }"
+                (click)="subPermission('purchase', 'technical', i)"
+                >Technical</span
+              >
+            </div>
+            <div class="permission-sub-category-item" *ngIf="user.role.finance">
+              Finance:<br /><br />
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Finance.role,
+                  'not-permitted': !user.role.Finance.role
+                }"
+                (click)="subPermission('finance', 'role', i)"
+                >Role</span
+              >
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Finance.technical,
+                  'not-permitted': !user.role.Finance.technical
+                }"
+                (click)="subPermission('finance', 'technical', i)"
+                >Technical</span
+              >
+            </div>
+            <div
+              class="permission-sub-category-item"
+              *ngIf="user.role.operation"
+            >
+              Operations:<br /><br />
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Operation.role,
+                  'not-permitted': !user.role.Operation.role
+                }"
+                (click)="subPermission('operation', 'role', i)"
+                >Role</span
+              >
+              <span
+                class="permission-category-item"
+                [ngClass]="{
+                  permitted: user.role.Operation.technical,
+                  'not-permitted': !user.role.Operation.technical
+                }"
+                (click)="subPermission('operation', 'technical', i)"
+                >Technical</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </span>
+    <div class="submit-changes" *ngIf="submitFlag" (click)="submitChanges()">
+      Submit Changes
+    </div>
+
+    <div class="header">Active Users</div>
+    <span class="flex flex-wrap margin-top-20" *ngIf="adminService.userData">
+      <div
+        class="permission-list-card"
+        *ngFor="
+          let user of adminService.userData.slice().reverse();
+          let i = index
+        "
+      >
+        {{ user.displayName }} -- {{ user.email }}
+        <div class="permission-category">
+          <span class="permission-sub-category-item" *ngIf="user.role.admin"
+            >Admin</span
+          >
+          <span class="permission-sub-category-item" *ngIf="user.role.tender"
+            >Tender</span
+          >
+          <span class="permission-sub-category-item" *ngIf="user.role.marketing"
+            >Marketing</span
+          >
+          <span
+            class="permission-sub-category-item"
+            *ngIf="user.role.production"
+            >Production</span
+          >
+          <span class="permission-sub-category-item" *ngIf="user.role.purchase"
+            >Purchase</span
+          >
+          <span class="permission-sub-category-item" *ngIf="user.role.finance"
+            >Finance</span
+          >
+          <span class="permission-sub-category-item" *ngIf="user.role.operation"
+            >Operations</span
+          >
+        </div>
+        <div class="permission-category-list">
+          <div class="permission-sub-category">
+            <div
+              class="permission-sub-category-item"
+              *ngIf="user.role.Admin.role || user.role.Admin.technical"
+            >
+              Admin:<br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Admin.role"
+                >- Role</span
+              >
+              <br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Admin.technical"
+                >- Technical</span
+              >
+            </div>
+            <div
+              class="permission-sub-category-item"
+              *ngIf="user.role.Tender.role || user.role.Tender.technical"
+            >
+              Tender:<br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Tender.role"
+                >- Role</span
+              >
+              <br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Tender.technical"
+                >- Technical</span
+              >
+            </div>
+            <div
+              class="permission-sub-category-item"
+              *ngIf="user.role.Marketing.role || user.role.Marketing.technical"
+            >
+              Marketing:<br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Marketing.role"
+                >- Role</span
+              >
+              <br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Marketing.technical"
+                >- Technical</span
+              >
+            </div>
+            <div
+              class="permission-sub-category-item"
+              *ngIf="
+                user.role.Production.role || user.role.Production.technical
+              "
+            >
+              Production:<br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Production.role"
+                >- Role</span
+              >
+              <br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Production.technical"
+                >- Technical</span
+              >
+            </div>
+            <div
+              class="permission-sub-category-item"
+              *ngIf="user.role.Purchase.role || user.role.Purchase.technical"
+            >
+              Purchase:<br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Purchase.role"
+                >- Role</span
+              >
+              <br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Purchase.technical"
+                >- Technical</span
+              >
+            </div>
+            <div
+              class="permission-sub-category-item"
+              *ngIf="user.role.Finance.role || user.role.Finance.technical"
+            >
+              Finance:<br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Finance.role"
+                >- Role</span
+              >
+              <br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Finance.technical"
+                >- Technical</span
+              >
+            </div>
+            <div
+              class="permission-sub-category-item"
+              *ngIf="
+                (user.role.Operation && user.role.Operation.role) ||
+                user.role.Operation.technical
+              "
+            >
+              Operations:<br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Operation.role"
+                >- Role</span
+              >
+              <br />
+              <span
+                class="permission-sub-category-item"
+                *ngIf="user.role.Operation.technical"
+                >- Technical</span
+              >
+            </div>
+            <div class="permission-change" (click)="changePermission(i)">
+              Change Permission
+            </div>
+          </div>
+        </div>
+      </div>
+    </span>
+    <div class="header">Tried to Login-In</div>
+    <span class="flex flex-wrap margin-top-20" *ngIf="adminService.newUserData">
+      <div
+        class="permission-list-card height-auto"
+        *ngFor="
+          let newUser of adminService.newUserData.slice().reverse();
+          let i = index
+        "
+      >
+        {{ newUser.displayName }} -- {{ newUser.email }}
+        <div class="add-permission" (click)="addUser(i)">ADD</div>
+      </div>
+    </span>
+  </div>
 </div>

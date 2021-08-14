@@ -1,129 +1,262 @@
 <span *ngIf="!poFlag">
-<div class="po-list-div">
-    <div class="po-list-head"> Po-list</div>
+  <div class="po-list-div">
+    <div class="po-list-head">Po-list</div>
     <div class="po-list-body">
-<span *ngIf="poReceivedService.pos">
-<div class="po-list-card" *ngFor="let po of poReceivedService.pos.slice().reverse(); let i = index" [ngClass]="{'light-blue-border-color': po.status == 'Submitted','grey':    po.status == 'Completed', 'orange-border-color': po.status == 'On-Going', 'green-border-color': po.status == 'Successful', 'red-border-color': po.status == 'UnSuccessful' || po.status == 'Not-Participated' ||  po.status == 'Rejected' }">
-    <div class="po-list-card-small" (click)="read(i)"  *ngIf="po.flag">
-    <div class="po-list-card-head">
-        <div class="org-head">{{ po.customer }}<span class="grey" *ngIf="po.poMode == 'tender'">({{ po.poMode }})</span></div>
-        <span class="item-div"><div class="item-head"*ngFor="let item of po.items| slice:0:5;let i=index "><span *ngIf="!item.special"><span *ngIf="i>0">,</span> {{ item.rating }} KVA </span></div> </span>
-    </div>
-    <div class="po-number-items">
-        <div class="po-number"><span class="blue">po No:</span> {{ po.poNumber }}</div>
-        <!-- <div class="e-po-number"><span class="blue">e-poNo:</span> {{ po.epoNumber }}</div> -->
-    </div>
-    <div class="po-list-card-body">
-        <div class="items">
-        <div class="start-date"><span class="blue">Start Date:</span> {{ po.issueDateFormatted }}</div>
-        <div class="due-date" ><span class="blue"> Delivery Date : </span>{{ po.deliveryDateFormatted }}</div>
-        <div class="po-number blue-bold">
-            <span class="po-status" [ngClass]="{'light-blue-color': po.status == 'Submitted','grey': po.status == 'Completed', 'orange': po.status == 'On-Going', 'green': po.status == 'Successful', 'red': po.status == 'UnSuccessful' || po.status == 'Not-Participated' ||  po.status == 'Rejected' }">
-                {{ po.status }}</span>
-            {{ po.number }}</div>
-        </div>
-        <div class="down-arrow" (click)="read(i)">
-            <span>Read More</span>
-            
-            <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon>
-        </div>
-    </div>
-    </div>
-    <div class="po-list-card-large" *ngIf="!po.flag">
-        <div class="po-list-card-head">
-        <div class="org-head">{{ po.customer }}<span class="grey" *ngIf="po.poMode == 'tender'">({{ po.poMode }})</span></div>
-        <span class="po-status" [ngClass]="{'grey': po.status == 'Completed', 'orange': po.status == 'On-Going', 'green': po.status == 'Successful', 'red': po.status == 'UnSuccessful' || po.status == 'Not-Participated' ||  po.status == 'Rejected' }">
-            {{ po.status }}</span>
-    </div>
-    <!-- <div class="po-list-card-sub-head">TCC/T-{{ po.number }}/<span *ngFor = "let org of infoService.organization">
+      <span *ngIf="poReceivedService.pos">
+        <div
+          class="po-list-card"
+          *ngFor="
+            let po of poReceivedService.pos.slice().reverse();
+            let i = index
+          "
+          [ngClass]="{
+            'light-blue-border-color': po.status == 'Submitted',
+            grey: po.status == 'Completed',
+            'orange-border-color': po.status == 'On-Going',
+            'green-border-color': po.status == 'Successful',
+            'red-border-color':
+              po.status == 'UnSuccessful' ||
+              po.status == 'Not-Participated' ||
+              po.status == 'Rejected'
+          }"
+        >
+          <div class="po-list-card-small" (click)="read(i)" *ngIf="po.flag">
+            <div class="po-list-card-head">
+              <div class="org-head">
+                {{ po.customer
+                }}<span class="grey" *ngIf="po.poMode == 'tender'"
+                  >({{ po.poMode }})</span
+                >
+              </div>
+              <span class="item-div"
+                ><div
+                  class="item-head"
+                  *ngFor="let item of po.items | slice: 0:5; let i = index"
+                >
+                  <span *ngIf="!item.special"
+                    ><span *ngIf="i > 0">,</span> {{ item.rating }} KVA
+                  </span>
+                </div>
+              </span>
+            </div>
+            <div class="po-number-items">
+              <div class="po-number">
+                <span class="blue">po No:</span> {{ po.poNumber }}
+              </div>
+              <!-- <div class="e-po-number"><span class="blue">e-poNo:</span> {{ po.epoNumber }}</div> -->
+            </div>
+            <div class="po-list-card-body">
+              <div class="items">
+                <div class="start-date">
+                  <span class="blue">Start Date:</span>
+                  {{ po.issueDateFormatted }}
+                </div>
+                <div class="due-date">
+                  <span class="blue"> Delivery Date : </span
+                  >{{ po.deliveryDateFormatted }}
+                </div>
+                <div class="po-number blue-bold">
+                  <span
+                    class="po-status"
+                    [ngClass]="{
+                      'light-blue-color': po.status == 'Submitted',
+                      grey: po.status == 'Completed',
+                      orange: po.status == 'On-Going',
+                      green: po.status == 'Successful',
+                      red:
+                        po.status == 'UnSuccessful' ||
+                        po.status == 'Not-Participated' ||
+                        po.status == 'Rejected'
+                    }"
+                  >
+                    {{ po.status }}</span
+                  >
+                  {{ po.number }}
+                </div>
+              </div>
+              <div class="down-arrow" (click)="read(i)">
+                <span>Read More</span>
+
+                <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon>
+              </div>
+            </div>
+          </div>
+          <div class="po-list-card-large" *ngIf="!po.flag">
+            <div class="po-list-card-head">
+              <div class="org-head">
+                {{ po.customer
+                }}<span class="grey" *ngIf="po.poMode == 'tender'"
+                  >({{ po.poMode }})</span
+                >
+              </div>
+              <span
+                class="po-status"
+                [ngClass]="{
+                  grey: po.status == 'Completed',
+                  orange: po.status == 'On-Going',
+                  green: po.status == 'Successful',
+                  red:
+                    po.status == 'UnSuccessful' ||
+                    po.status == 'Not-Participated' ||
+                    po.status == 'Rejected'
+                }"
+              >
+                {{ po.status }}</span
+              >
+            </div>
+            <!-- <div class="po-list-card-sub-head">TCC/T-{{ po.number }}/<span *ngFor = "let org of infoService.organization">
         <span *ngIf="org.fullName == po.organization">{{ org.name }}</span>
     </span>
     </div> -->
-    <div class="po-list-card-body">
-        <div class="date-items">
-        <div class="start-date"><span class="blue">Start Date:</span> {{ po.issueDateFormatted }}</div>
-        <div class="due-date" ><span class="blue"> Delivery Date : </span>{{ po.deliveryDateFormatted }}</div>
-        <!-- <div class="issue-date" ><span class="blue"> Issue Date : </span>{{ po.issueDateFormatted }}</div> -->
-        </div>
-        <div class="po-number-items">
-            <div class="po-number"><span class="blue">poNumber:</span> {{ po.poNumber }}</div>
-            <div class="e-po-number"><span class="blue">Number:</span> {{ po.number }}</div>
-        </div>
-        <div class="items-doc-body">
-            <div class="items-div">
-                <div class="item" *ngFor="let item of po.items;let i=index">
+            <div class="po-list-card-body">
+              <div class="date-items">
+                <div class="start-date">
+                  <span class="blue">Start Date:</span>
+                  {{ po.issueDateFormatted }}
+                </div>
+                <div class="due-date">
+                  <span class="blue"> Delivery Date : </span
+                  >{{ po.deliveryDateFormatted }}
+                </div>
+                <!-- <div class="issue-date" ><span class="blue"> Issue Date : </span>{{ po.issueDateFormatted }}</div> -->
+              </div>
+              <div class="po-number-items">
+                <div class="po-number">
+                  <span class="blue">poNumber:</span> {{ po.poNumber }}
+                </div>
+                <div class="e-po-number">
+                  <span class="blue">Number:</span> {{ po.number }}
+                </div>
+              </div>
+              <div class="items-doc-body">
+                <div class="items-div">
+                  <div
+                    class="item"
+                    *ngFor="let item of po.items; let i = index"
+                  >
                     <div class="item-info" *ngIf="!item.special">
-                        <div class="item-po-rating"> <span class="blue">Item:</span> {{ item.rating }}KVA - {{ item.classHv }}/{{ item.classLv }}KV - {{ item.type }} - ({{ item.tapVariation }})</div>
-                        <div class="item-po-quantity"> <span class="blue">Quantity:</span> {{ item.qty }}</div>
-                        <div class="item-po-standard"> <span class="blue">Standard:</span> {{ item.standard }}</div>
+                      <div class="item-po-rating">
+                        <span class="blue">Item:</span> {{ item.rating }}KVA -
+                        {{ item.classHv }}/{{ item.classLv }}KV -
+                        {{ item.type }} - ({{ item.tapVariation }})
+                      </div>
+                      <div class="item-po-quantity">
+                        <span class="blue">Quantity:</span> {{ item.qty }}
+                      </div>
+                      <div class="item-po-standard">
+                        <span class="blue">Standard:</span> {{ item.standard }}
+                      </div>
                     </div>
-                    <div class="item-discription"> <span class="blue">Discription:</span> {{ item.description }}</div>
+                    <div class="item-discription">
+                      <span class="blue">Discription:</span>
+                      {{ item.description }}
+                    </div>
                     <div class="item-destination">
-                    <div class="item-place"> <span class="blue">Destination:</span> {{ po.deliveryAddress }}</div>
-                    <div class="item-distance"> <span class="blue">State:</span> {{ po.deliveryState }}</div>
+                      <div class="item-place">
+                        <span class="blue">Destination:</span>
+                        {{ po.deliveryAddress }}
+                      </div>
+                      <div class="item-distance">
+                        <span class="blue">State:</span> {{ po.deliveryState }}
+                      </div>
                     </div>
                     <div class="item-destination">
-                        <div class="item-place"> <span class="blue">Unit Price:</span> {{ po.itemPrice[i].unitPrice }}</div>
-                    <div class="item-distance"> <span class="blue">Total Price:</span> {{ po.itemPrice[i].totalPrice }}</div>
-                    <div class="item-distance"> <span class="blue">Total Price + Gst:</span> {{ po.itemPrice[i].totalWithGst }}</div>
+                      <div class="item-place">
+                        <span class="blue">Unit Price:</span>
+                        {{ po.itemPrice[i].unitPrice }}
+                      </div>
+                      <div class="item-distance">
+                        <span class="blue">Total Price:</span>
+                        {{ po.itemPrice[i].totalPrice }}
+                      </div>
+                      <div class="item-distance">
+                        <span class="blue">Total Price + Gst:</span>
+                        {{ po.itemPrice[i].totalWithGst }}
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-            <div class="doc-div">
-                <div class="po-documents" *ngIf="!po.files.length && po.files.length != 0">
+                <div class="doc-div">
+                  <div
+                    class="po-documents"
+                    *ngIf="!po.files.length && po.files.length != 0"
+                  >
                     <div class="document-lable blue">Po Documents:</div>
-                    <div class="document-files" *ngFor="let file of po.files.customerDocuments" (click)="downloadFile(file.path)">
-                        
-            <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
-                        <div class="file-name"> {{ file.name }} </div>
+                    <div
+                      class="document-files"
+                      *ngFor="let file of po.files.customerDocuments"
+                      (click)="downloadFile(file.path)"
+                    >
+                      <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+                      <div class="file-name">{{ file.name }}</div>
                     </div>
-                </div>
-                <div class="po-documents" *ngIf="!po.files.length && po.files.length != 0 && po.files.technicalDocuments.length">
+                  </div>
+                  <div
+                    class="po-documents"
+                    *ngIf="
+                      !po.files.length &&
+                      po.files.length != 0 &&
+                      po.files.technicalDocuments.length
+                    "
+                  >
                     <div class="document-lable blue">technical Documents:</div>
-                    <div class="document-files" *ngFor="let file of po.files.uploadedDocuments" (click)="downloadFile(file.path)">
-                        
-            <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
-                        <div class="file-name"> {{ file.name }} </div>
+                    <div
+                      class="document-files"
+                      *ngFor="let file of po.files.uploadedDocuments"
+                      (click)="downloadFile(file.path)"
+                    >
+                      <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
+                      <div class="file-name">{{ file.name }}</div>
                     </div>
-                </div>
-                <div class="po-total-price">
-                    Total Price: {{ po.totalPrice }} <br/>
+                  </div>
+                  <div class="po-total-price">
+                    Total Price: {{ po.totalPrice }} <br />
                     Total Price With GST: {{ po.totalPriceGst }}
+                  </div>
                 </div>
-            </div>
-        </div>
-        <!-- <div class="fee-items">
+              </div>
+              <!-- <div class="fee-items">
             <div class="emd-fee"><span class="blue">EMD:</span> {{ po.emd.amount }}</div>
             <div class="transaction-cost-fee"><span class="blue">Transaction-Fee:</span> {{ po.transactionFee.amount }}</div>
             <div class="document-cost-fee"><span class="blue">Document-Cost:</span> {{ po.documentCost.amount }}</div>
         </div> -->
-        <div class="final-content">
-            <div class="edit-div" (click)="edit(i)">
-            <mat-icon class="down-sprial" svgIcon="edit-icon"></mat-icon>
-                <span>Edit</span>
-            </div>
-            <div class="approval-div">
-                <div class="div" *ngIf="po.status == 'New'">
-                <div class="approval" (click)="approval('On-Going', i)"> Approve </div>
-                <!-- <div class="decline" (click)="approval('Not-Participated', i)"> Decline </div> -->
+              <div class="final-content">
+                <div class="edit-div" (click)="edit(i)">
+                  <mat-icon class="down-sprial" svgIcon="edit-icon"></mat-icon>
+                  <span>Edit</span>
                 </div>
-                <!-- <div class="div" *ngIf="po.status == 'On-Going'">
+                <div class="approval-div">
+                  <div class="div" *ngIf="po.status == 'New'">
+                    <div class="approval" (click)="approval('On-Going', i)">
+                      Approve
+                    </div>
+                    <!-- <div class="decline" (click)="approval('Not-Participated', i)"> Decline </div> -->
+                  </div>
+                  <!-- <div class="div" *ngIf="po.status == 'On-Going'">
                     <div class="document-prepare" (click)="documentprep(i)"> Prepare Documents </div>
                     </div>
                     <div class="div" *ngIf="po.status == 'Submitted'">
                         <div class="document-prepare" (click)="tenderResults(i)"> Results </div>
                         </div> -->
+                </div>
+                <div class="down-arrow" (click)="read(i)">
+                  <span>Read Less</span>
+                  <mat-icon
+                    class="down-sprial"
+                    svgIcon="down-spiral"
+                  ></mat-icon>
+                </div>
+              </div>
             </div>
-        <div class="down-arrow" (click)="read(i)">
-            <span>Read Less</span>
-            <mat-icon class="down-sprial" svgIcon="down-spiral"></mat-icon>
+          </div>
         </div>
-        </div>
+      </span>
     </div>
-    </div>
-</div>
+  </div>
 </span>
-    </div>
-</div>
-</span>
-<app-new-purchase-order-received *ngIf="poFlag" [type]="'marketingEdit'" [data]="poReceivedService.po" (returnData)='poReturnData($event)'></app-new-purchase-order-received>
+<app-new-purchase-order-received
+  *ngIf="poFlag"
+  [type]="'marketingEdit'"
+  [data]="poReceivedService.po"
+  (returnData)="poReturnData($event)"
+></app-new-purchase-order-received>

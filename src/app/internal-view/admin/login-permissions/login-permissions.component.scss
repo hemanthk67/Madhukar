@@ -1,176 +1,175 @@
 .permission-list-div {
-    padding-top: 8vh;
-    padding-left: 50px;
-    .permission-list-head {
+  padding-top: 8vh;
+  padding-left: 50px;
+  .permission-list-head {
     font-size: 24px;
-        font-weight: 600;
-        color: #163a9a;
-    }
-    .permission-list-body {
-        width: 98%;
-        height: 85vh;
-        overflow-x: hidden;
-        overflow-y: scroll;
+    font-weight: 600;
+    color: #163a9a;
+  }
+  .permission-list-body {
+    width: 98%;
+    height: 85vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 5px;
+    padding-right: 15px;
+    .permission-list-card {
+      width: 100%;
+      height: 100px;
+      padding: 5px;
+      font-size: 17px;
+      color: #163a9a;
+      font-weight: 600;
+      border-radius: 5px;
+      background-color: white;
+      box-shadow: 2px 2px 18px #888888;
+      margin: 15px 0px;
+      border-top: solid 5px white;
+      padding-right: 0;
+      .permission-category {
+        float: right;
+      }
+      .permission-category-item {
+        margin: 3px 5px;
         padding: 5px;
-        padding-right: 15px;
-        .permission-list-card {
-            width: 100%;
-            height: 100px;
-            padding: 5px;
-            font-size: 17px;
-            color: #163a9a;
-            font-weight: 600;
-            border-radius: 5px;
-            background-color: white;
-            box-shadow: 2px 2px 18px #888888;
-            margin: 15px 0px;
-            border-top: solid 5px white;
-            padding-right: 0;
-            .permission-category {
-                float: right;
-            }
-            .permission-category-item {
-                margin: 3px 5px;
-                padding: 5px;
-                border: solid 1px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            .permitted {
-                background-color: #163a9a;
-                color: white;
-            }
-            .permission-category-item:hover {
-                background-color: #003cd9;
-                color: white;
-            }
-            .permission-category-item:active {
-                background-color: #163a9a;
-                color: white;
-            }
-            .permission-category-list {
-                margin-top: 5px;
-                margin-bottom: 5pxx;
-                .permission-sub-category {
-                    
-                }
-            }
-            .permission-sub-category-item {
-                border-right: solid 1px;
-                margin-top: 5px;
-                margin-left: 5px;
-                float: left;
-                cursor: pointer;
-            }
-            .permission-change {
-                width: fit-content;
-                float: right;
-                margin-top: 10px;
-                padding: 5px;
-                border: solid 1px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            .permission-change:hover {
-                background-color: #003cd9;
-                color: white;
-            }
+        border: solid 1px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .permitted {
+        background-color: #163a9a;
+        color: white;
+      }
+      .permission-category-item:hover {
+        background-color: #003cd9;
+        color: white;
+      }
+      .permission-category-item:active {
+        background-color: #163a9a;
+        color: white;
+      }
+      .permission-category-list {
+        margin-top: 5px;
+        margin-bottom: 5pxx;
+        .permission-sub-category {
+        }
+      }
+      .permission-sub-category-item {
+        border-right: solid 1px;
+        margin-top: 5px;
+        margin-left: 5px;
+        float: left;
+        cursor: pointer;
+      }
+      .permission-change {
+        width: fit-content;
+        float: right;
+        margin-top: 10px;
+        padding: 5px;
+        border: solid 1px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .permission-change:hover {
+        background-color: #003cd9;
+        color: white;
+      }
 
-            .permission-change:active {
-                background-color: #163a9a;
-                color: white;
-            }
+      .permission-change:active {
+        background-color: #163a9a;
+        color: white;
+      }
 
-            .add-permission {
-                float: right;
-                margin: 3px 5px;
-                padding: 5px;
-                border: solid 1px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            .add-permission:hover {
-                background-color: #003cd9;
-                color: white;
-            }
-            .add-permission:active {
-                background-color: #163a9a;
-                color: white;
-            }
-        }
-        .submit-changes {
-            font-size: 17px;
-            color: #163a9a;
-            font-weight: 600;
-            width: fit-content;
-            float: right;
-            margin-top: 10px;
-            padding: 5px;
-            border: solid 1px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .submit-changes:hover {
-            background-color: #003cd9;
-            color: white;
-        }
-
-        .submit-changes:active {
-            background-color: #163a9a;
-            color: white;
-        }
+      .add-permission {
+        float: right;
+        margin: 3px 5px;
+        padding: 5px;
+        border: solid 1px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .add-permission:hover {
+        background-color: #003cd9;
+        color: white;
+      }
+      .add-permission:active {
+        background-color: #163a9a;
+        color: white;
+      }
     }
+    .submit-changes {
+      font-size: 17px;
+      color: #163a9a;
+      font-weight: 600;
+      width: fit-content;
+      float: right;
+      margin-top: 10px;
+      padding: 5px;
+      border: solid 1px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .submit-changes:hover {
+      background-color: #003cd9;
+      color: white;
+    }
+
+    .submit-changes:active {
+      background-color: #163a9a;
+      color: white;
+    }
+  }
 }
 
 .header {
-    width: 100%;
-    font-size: 20px;
-    font-weight: 600;
-    color: #163a9a;
-    border-bottom: solid 1px #163a9a;
-    padding-top: 30px;
-    display: flex;
-    justify-content: space-between;
-  }
+  width: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  color: #163a9a;
+  border-bottom: solid 1px #163a9a;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
 
 // scroll bar css
-    /* width */
-    ::-webkit-scrollbar {
-        width: 10px;
-      }
-      
-      /* Track */
-      ::-webkit-scrollbar-track {
-        // box-shadow: inset 0 0 5px grey;
-        border-radius: 10px;
-      }
-      
-      /* Handle */
-      ::-webkit-scrollbar-thumb {
-        background: #C2C2C2;
-        border-radius: 10px;
-      }
-      
-      /* Handle on hover */
-      ::-webkit-scrollbar-thumb:hover {
-        background: #525252;
-      }
-      //end of scroll bar css
-      .flex {
-        display: flex;
-    }
-    .flex-wrap {
-        flex-wrap:wrap;
-    }
-    .margin-top-20 {
-        margin-top: 20px;
-    }
-    .width-30 {
-        width: 30%;
-    }
-    .width-100 {
-        width: 100%;
-    }
-    .height-auto {
-        height: auto !important;
-    }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  // box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c2c2c2;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #525252;
+}
+//end of scroll bar css
+.flex {
+  display: flex;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.margin-top-20 {
+  margin-top: 20px;
+}
+.width-30 {
+  width: 30%;
+}
+.width-100 {
+  width: 100%;
+}
+.height-auto {
+  height: auto !important;
+}

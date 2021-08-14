@@ -40,9 +40,12 @@
                   'red-border': !flag.organization
                 }"
               >
-                <option *ngFor = "let org of infoService.organization" [value]="org.fullName"
-                  >{{ org.fullName}}</option
+                <option
+                  *ngFor="let org of infoService.organization"
+                  [value]="org.fullName"
                 >
+                  {{ org.fullName }}
+                </option>
               </select>
             </div>
           </div>
@@ -86,10 +89,19 @@
             />
             <span class="calander"
               ><button>
-                <mat-icon class="calander-button"  [ngClass]="{'red-color': !flag.issueDate}" svgIcon="calander" (click)="calanderOpen('issueDate')"></mat-icon>
+                <mat-icon
+                  class="calander-button"
+                  [ngClass]="{ 'red-color': !flag.issueDate }"
+                  svgIcon="calander"
+                  (click)="calanderOpen('issueDate')"
+                ></mat-icon>
               </button>
             </span>
-            <app-calender class="app-calander" *ngIf="calanderFlag.issueDate" (dateEmit)='displayCounter($event)'></app-calender>
+            <app-calender
+              class="app-calander"
+              *ngIf="calanderFlag.issueDate"
+              (dateEmit)="displayCounter($event)"
+            ></app-calender>
           </div>
           <div class="tender-date">
             <div class="tender-date-label">Start Date:</div>
@@ -103,10 +115,19 @@
             />
             <span class="calander"
               ><button>
-                <mat-icon class="calander-button" [ngClass]="{'red-color': !flag.startDate}" svgIcon="calander" (click)="calanderOpen('startDate')"></mat-icon>
+                <mat-icon
+                  class="calander-button"
+                  [ngClass]="{ 'red-color': !flag.startDate }"
+                  svgIcon="calander"
+                  (click)="calanderOpen('startDate')"
+                ></mat-icon>
               </button>
             </span>
-            <app-calender class="app-calander" *ngIf="calanderFlag.startDate" (dateEmit)='displayCounter($event)'></app-calender>
+            <app-calender
+              class="app-calander"
+              *ngIf="calanderFlag.startDate"
+              (dateEmit)="displayCounter($event)"
+            ></app-calender>
           </div>
           <div class="tender-date">
             <div class="tender-date-label">Due Date:</div>
@@ -120,10 +141,19 @@
             />
             <span class="calander"
               ><button>
-                <mat-icon class="calander-button" [ngClass]="{'red-color': !flag.dueDate}" svgIcon="calander" (click)="calanderOpen('dueDate')"></mat-icon>
+                <mat-icon
+                  class="calander-button"
+                  [ngClass]="{ 'red-color': !flag.dueDate }"
+                  svgIcon="calander"
+                  (click)="calanderOpen('dueDate')"
+                ></mat-icon>
               </button>
             </span>
-            <app-calender class="app-calander" *ngIf="calanderFlag.dueDate" (dateEmit)='displayCounter($event)'></app-calender>
+            <app-calender
+              class="app-calander"
+              *ngIf="calanderFlag.dueDate"
+              (dateEmit)="displayCounter($event)"
+            ></app-calender>
           </div>
         </div>
       </div>
@@ -176,11 +206,11 @@
             >
           </div>
         </div>
-        <div class="trans width-33" >
+        <div class="trans width-33">
           <div class="fee-sub-head">
             <span class="fee-sub-head-lable">Transaction Fee</span>
           </div>
-          <div class="trans-exemption flex" >
+          <div class="trans-exemption flex">
             <div
               [ngClass]="{
                 'fee-lables-selected': tender.transactionFee.exemption,
@@ -378,7 +408,8 @@
             <mat-icon class="pdf-icon" svgIcon="pdf-icon"></mat-icon>
             <mat-icon
               class="cloud-cross-icon"
-              svgIcon="cloud-cross-icon" *ngIf="file.size"
+              svgIcon="cloud-cross-icon"
+              *ngIf="file.size"
             ></mat-icon>
             <p>{{ file.name }}</p>
           </div>
@@ -390,29 +421,39 @@
     </div>
   </div>
 </div>
-<div class="add-organization" *ngIf = "routingService.rightTabs[0].flag">
+<div class="add-organization" *ngIf="routingService.rightTabs[0].flag">
   <div class="add-organization-div">
     <div class="add-organization-header">
-      <div class="cross"  (click)="addOrganizationBack()">X</div>
+      <div class="cross" (click)="addOrganizationBack()">X</div>
     </div>
     <div class="add-organization-body">
-    <div class="add-organization-head">
-      Add Organization
-    </div>
-    <div class="add-organization-inputs">
-      <div class="full-name-div">
-        <div class="lables">Full Name</div>
-        <input class="name-input" type="text" [ngClass]="{'red-border': !addOrganizationFlag.fullName }" [(ngModel)]="newOrganizationName.fullName"/>
+      <div class="add-organization-head">Add Organization</div>
+      <div class="add-organization-inputs">
+        <div class="full-name-div">
+          <div class="lables">Full Name</div>
+          <input
+            class="name-input"
+            type="text"
+            [ngClass]="{ 'red-border': !addOrganizationFlag.fullName }"
+            [(ngModel)]="newOrganizationName.fullName"
+          />
+        </div>
+        <div class="add-organization-dash">&ndash;</div>
+        <div class="small-name-div">
+          <div class="lables">Short Form</div>
+          <input
+            class="name-input"
+            type="text"
+            [ngClass]="{ 'red-border': !addOrganizationFlag.name }"
+            [(ngModel)]="newOrganizationName.name"
+          />
+        </div>
       </div>
-      <div class="add-organization-dash">  &ndash;  </div>
-      <div class="small-name-div">
-        <div class="lables">Short Form</div>
-        <input class="name-input" type="text" [ngClass]="{'red-border': !addOrganizationFlag.name }" [(ngModel)]="newOrganizationName.name"/>
-      </div> 
+      <div class="add-organization-submit">
+        <div class="add-organization-submit-button" (click)="addOrganization()">
+          Submit
+        </div>
+      </div>
     </div>
-    <div class="add-organization-submit">
-      <div class="add-organization-submit-button"  (click)="addOrganization()">Submit</div>
-    </div>
-  </div>
   </div>
 </div>

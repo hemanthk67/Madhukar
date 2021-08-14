@@ -7,13 +7,13 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import {
   AngularFirestore,
   AngularFirestoreDocument,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
 } from "@angular/fire/firestore";
 
 import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 
-import { RoutingService } from 'src/app/services/routing.service';
+import { RoutingService } from "src/app/services/routing.service";
 
 export interface Organization {
   fullname: string;
@@ -28,11 +28,11 @@ interface User {
   role?: any;
 }
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class AuthService {
   user: Observable<User>;
- public userData: any;
+  public userData: any;
   OrganizationCollectionRef: AngularFirestoreDocument<Organization>;
   Organization: Observable<Organization>;
 
@@ -43,9 +43,8 @@ export class AuthService {
     private zone: NgZone,
     private routingService: RoutingService
   ) {
-    
     this.user = this.afAuth.authState.pipe(
-      switchMap(user => {
+      switchMap((user) => {
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
@@ -61,7 +60,7 @@ export class AuthService {
   }
 
   private oAuthLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider).then(credential => {
+    return this.afAuth.auth.signInWithPopup(provider).then((credential) => {
       this.login(credential.user, true);
     });
   }
@@ -73,18 +72,18 @@ export class AuthService {
     userRef.ref
       .get()
       .then(
-        function(doc) {
-                    this.userData = doc.data();
+        function (doc) {
+          this.userData = doc.data();
           if (doc.exists) {
             this.zone.run(() => {
-            this.routingService.Login(this.userData, flag);
+              this.routingService.Login(this.userData, flag);
             });
           } else {
             this.updateUserData(user);
           }
         }.bind(this)
       )
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
         alert("Error: Please Login Again");
       });
@@ -99,14 +98,22 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      role: { admin: false, finance: false, purchase: false, production: false, tender: false , marketing:false, operation:false,
-      Admin:{ role:false, technical:false},
-      Tender:{ role:false, technical:false},
-      Purchase:{ role:false, technical:false},
-      Production:{ role:false, technical:false},
-      Finance:{ role:false, technical:false},
-      Operation:{ role:false, technical:false},
-      Marketing:{ role:false, technical:false}},
+      role: {
+        admin: false,
+        finance: false,
+        purchase: false,
+        production: false,
+        tender: false,
+        marketing: false,
+        operation: false,
+        Admin: { role: false, technical: false },
+        Tender: { role: false, technical: false },
+        Purchase: { role: false, technical: false },
+        Production: { role: false, technical: false },
+        Finance: { role: false, technical: false },
+        Operation: { role: false, technical: false },
+        Marketing: { role: false, technical: false },
+      },
     };
     newUserRef.set(data, { merge: true });
     alert("Not a Authorized User - Please contact the administration");
@@ -120,5 +127,4 @@ export class AuthService {
   }
 
   // helping functions
-
 }

@@ -5,8 +5,8 @@ import { PdfPreviewComponent } from "./internal/pdf-preview/pdf-preview.componen
 import { MatIconModule } from "@angular/material/icon";
 import { LogoComponent } from "./logo/logo.component";
 import { CalenderComponent } from "./internal/calender/caleander.component";
-import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
-import { NewPurchaseOrderReceivedComponent } from './internal/new-purchase-order-received/new-purchase-order-received.component';
+import { LoadingScreenComponent } from "./loading-screen/loading-screen.component";
+import { NewPurchaseOrderReceivedComponent } from "./internal/new-purchase-order-received/new-purchase-order-received.component";
 import { FormsModule } from "@angular/forms";
 
 @NgModule({
@@ -16,7 +16,7 @@ import { FormsModule } from "@angular/forms";
     LogoComponent,
     CalenderComponent,
     LoadingScreenComponent,
-    NewPurchaseOrderReceivedComponent
+    NewPurchaseOrderReceivedComponent,
   ],
   imports: [CommonModule, FormsModule, MatIconModule],
   exports: [
@@ -25,7 +25,7 @@ import { FormsModule } from "@angular/forms";
     LogoComponent,
     CalenderComponent,
     LoadingScreenComponent,
-    NewPurchaseOrderReceivedComponent
-  ]
+    NewPurchaseOrderReceivedComponent,
+  ],
 })
 export class CommonComponentsModule {}

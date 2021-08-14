@@ -1,7 +1,9 @@
 <div class="internal-left-nav-bar">
   <div class="internal-left-nav-bar-fixed">
     <div class="internal-left-nav-bar-header">
-      <div class="internal-left-nav-bar-header-name">{{ Auth.userData?.displayName }}</div>
+      <div class="internal-left-nav-bar-header-name">
+        {{ Auth.userData?.displayName }}
+      </div>
       <div class="internal-left-nav-bar-header-role">Technical Lead</div>
     </div>
     <div class="internal-left-nav-bar-body">
@@ -9,15 +11,13 @@
         <div
           [ngClass]="{
             'internal-left-nav-bar-list': !category.flag,
-            'internal-left-nav-bar-list-selected':
-            category.flag
+            'internal-left-nav-bar-list-selected': category.flag
           }"
         >
           <div
             [ngClass]="{
               'internal-left-nav-bar-main-button': !category.flag,
-              'internal-left-nav-bar-main-button-selected':
-              category.flag
+              'internal-left-nav-bar-main-button-selected': category.flag
             }"
             (click)="categoryrSelected(i)"
           >
@@ -32,8 +32,7 @@
           >
             <div
               [ngClass]="{
-                'internal-left-nav-bar-button-selected':
-                subcategory.flag,
+                'internal-left-nav-bar-button-selected': subcategory.flag,
                 'internal-left-nav-bar-button': !subcategory.flag
               }"
               (click)="subCategoryrSelected(i, j)"

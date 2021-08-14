@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PoReviewComponent } from './po-review.component';
+import { PoReviewComponent } from "./po-review.component";
 
-describe('PoReviewComponent', () => {
+describe("PoReviewComponent", () => {
   let component: PoReviewComponent;
   let fixture: ComponentFixture<PoReviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PoReviewComponent ]
-    })
-    .compileComponents();
+      declarations: [PoReviewComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('PoReviewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

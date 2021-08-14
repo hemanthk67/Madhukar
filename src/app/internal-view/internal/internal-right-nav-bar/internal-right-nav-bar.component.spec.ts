@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { InternalRightNavBarComponent } from './internal-right-nav-bar.component';
+import { InternalRightNavBarComponent } from "./internal-right-nav-bar.component";
 
-describe('InternalRightNavBarComponent', () => {
+describe("InternalRightNavBarComponent", () => {
   let component: InternalRightNavBarComponent;
   let fixture: ComponentFixture<InternalRightNavBarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InternalRightNavBarComponent ]
-    })
-    .compileComponents();
+      declarations: [InternalRightNavBarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('InternalRightNavBarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

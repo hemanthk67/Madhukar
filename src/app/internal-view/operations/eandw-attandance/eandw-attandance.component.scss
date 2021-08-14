@@ -1,381 +1,380 @@
 .employees-attandance-div {
-    padding-top: 8vh;
-    padding-left: 50px;
-    .employees-attandance-head {
+  padding-top: 8vh;
+  padding-left: 50px;
+  .employees-attandance-head {
     font-size: 24px;
+    font-weight: 600;
+    color: #163a9a;
+  }
+  .employees-attandance-body {
+    width: 98%;
+    height: 85vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 5px;
+    padding-right: 15px;
+    border-top: solid 1px #163a9a;
+    .head {
+      font-size: 18px;
+      font-weight: 600;
+      color: #163a9a;
+      margin: 5px;
+      text-align: center;
+      display: flex;
+      justify-content: space-evenly;
+      .attandance-date {
+        font-size: 18px;
         font-weight: 600;
         color: #163a9a;
+        margin-left: 206px;
+      }
+      .new-month {
+        padding: 3px;
+        border: solid 1px #163a9a;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .new-month:hover {
+        background-color: #003cd9;
+        color: white;
+      }
+      .new-month-selected {
+        color: white;
+        background-color: #163a9a;
+      }
     }
-    .employees-attandance-body {
-        width: 98%;
-        height: 85vh;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        padding: 5px;
-        padding-right: 15px;
-        border-top: solid 1px #163a9a;
-        .head {
-            font-size: 18px;
+    .employee-attandance-worker {
+      .employee-sub-header {
+        font-size: 18px;
+        font-weight: 600;
+        color: #163a9a;
+        margin: 5px;
+      }
+      .employee-attandance-table-header {
+        margin-bottom: 81px;
+        .employee-content {
+          width: 200px;
+        }
+        .employee-table-sub-header {
+          width: 90px;
+          height: 0px;
+          .employee-week-div {
+            width: 100%;
+            border-bottom: 40px solid #f8f8f8;
+            border-left: 20px solid white;
+            cursor: pointer;
+            .employee-week {
+              float: right;
+              font-size: 14px;
+              font-weight: 600;
+              color: #163a9a;
+              width: 75px;
+              height: 25px;
+              padding: 7px;
+              padding-top: 6px;
+              padding-bottom: 0px;
+            }
+          }
+          .employee-week-div-selected {
+            border-bottom: 40px solid #d8d8d8 !important;
+          }
+          .employee-week-div:hover {
+            border-bottom: 40px solid #d8d8d8;
+          }
+        }
+        .employee-table-sub-header-selected {
+          width: 750px;
+        }
+        .employee-table-date-header-div {
+          .employee-table-date-header {
+            padding: 10px 0px;
+            min-width: 80px;
+            text-align: center;
+            border: solid 1px #163a9a;
+            .employee-table-date-header-date {
+              font-size: 11px;
+              font-weight: 600;
+            }
+            .employee-table-date-header-day {
+              font-size: 13px;
+              font-weight: 600;
+            }
+            .employee-table-date-header-category {
+              .employee-table-date-header-category-holiday {
+                border: solid 1px orange;
+                border-radius: 3px;
+                padding: 2px;
+                color: orange;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+              }
+              .employee-table-date-header-category-holiday:hover {
+                background-color: orange;
+                color: white;
+              }
+              .holiday-active {
+                background-color: orange !important;
+                color: white !important;
+              }
+              .employee-table-date-header-category-compensation-holiday {
+                border: solid 1px grey;
+                border-radius: 3px;
+                padding: 2px;
+                color: grey;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+              }
+              .employee-table-date-header-category-compensation-holiday:hover {
+                background-color: grey;
+                color: white;
+              }
+              .compensation-holiday-active {
+                background-color: grey;
+                color: white;
+              }
+              .employee-table-date-header-category-week-off {
+                border: solid 1px green;
+                border-radius: 3px;
+                padding: 2px;
+                color: green;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+              }
+              .employee-table-date-header-category-week-off:hover {
+                background-color: green;
+                color: white;
+              }
+              .week-off-active {
+                background-color: green;
+                color: white;
+              }
+            }
+          }
+          .employee-week-hrs {
+            .employee-attandance-hrs {
+              padding: 10px 0px;
+              min-width: 80px;
+              text-align: center;
+              border: solid 1px #163a9a;
+              font-size: 15px;
+              font-weight: 600;
+              text-align: center;
+              color: #163a9a;
+            }
+            .employee-ot-hrs {
+              padding: 10px 0px;
+              min-width: 80px;
+              text-align: center;
+              border: solid 1px #163a9a;
+              font-size: 15px;
+              font-weight: 600;
+              text-align: center;
+              color: #163a9a;
+            }
+            .employee-hrs-input {
+            }
+            .employee-division-ot-hrs {
+              padding: 10px 0px;
+              min-width: 80px;
+              text-align: center;
+              border: solid 1px orange;
+              font-size: 15px;
+              font-weight: 600;
+              text-align: center;
+              color: orange;
+            }
+          }
+        }
+      }
+      .employee-attandance-table-body-employee {
+        .employee-content {
+          width: 200px;
+          padding: 32px 0px;
+          background-color: #d8d8d8;
+          text-align: center;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          .employee-name {
+            font-size: 14px;
             font-weight: 600;
             color: #163a9a;
-            margin: 5px;
-            text-align: center;
-            display: flex;
-            justify-content: space-evenly;
-            .attandance-date {
-                font-size: 18px;
-                font-weight: 600;
-                color: #163a9a;
-                margin-left: 206px;
-            }
-            .new-month {
-                padding: 3px;
-                border: solid 1px #163a9a;
-                border-radius: 3px;
-                cursor: pointer;
-            }
-            .new-month:hover {
-                background-color: #003cd9;
-                color: white;
-            }
-            .new-month-selected {
-                color: white;
-                background-color: #163a9a;
-            }
+          }
+          .employee-designation {
+            font-size: 12px;
+            color: #163a9a;
+          }
         }
-        .employee-attandance-worker {
-            .employee-sub-header {
-                font-size: 18px;
-                font-weight: 600;
-                color: #163a9a;
-                margin: 5px;
+        .employee-table {
+          .employee-table-date-header-div {
+            .employee-table-date-header {
+              padding: 3px 0px;
+              min-width: 80px;
+              // text-align:center;
+              border: solid 1px #163a9a;
+              .employee-table-date-header-time-in {
+                font-size: 10px;
+                padding-left: 3px;
+                select {
+                  appearance: none;
+                  background: url("/assets/icons/hour-glass.png") no-repeat
+                    right;
+                  -webkit-appearance: none;
+                  padding-right: 17px;
+                  font-size: 16px;
+                  padding-left: 5px;
+                }
+              }
+              .employee-table-date-header-time-out {
+                font-size: 10px;
+                padding-left: 3px;
+                select {
+                  appearance: none;
+                  background: url("/assets/icons/hour-glass.png") no-repeat
+                    right;
+                  -webkit-appearance: none;
+                  padding-right: 17px;
+                  font-size: 16px;
+                  padding-left: 5px;
+                }
+              }
+              .employee-table-date-header-category {
+                .employee-table-date-header-category-leave {
+                  border: solid 1px green;
+                  border-radius: 3px;
+                  padding: 1px 7px;
+                  color: green;
+                  font-size: 13px;
+                  font-weight: 600;
+                  cursor: pointer;
+                }
+                .employee-table-date-header-category-leave:hover {
+                  background-color: green;
+                  color: white;
+                }
+                .leave-active {
+                  background-color: green;
+                  color: white;
+                }
+                .employee-table-date-header-category-absent {
+                  border: solid 1px red;
+                  border-radius: 3px;
+                  padding: 1px 7px;
+                  color: red;
+                  font-size: 13px;
+                  font-weight: 600;
+                  cursor: pointer;
+                }
+                .employee-table-date-header-category-absent:hover {
+                  background-color: red;
+                  color: white;
+                }
+                .absent-active {
+                  background-color: red;
+                  color: white;
+                }
+              }
             }
-            .employee-attandance-table-header {
-                margin-bottom: 81px;
-                .employee-content {
-                    width: 200px;
-                }
-                .employee-table-sub-header {
-                    width: 90px;
-                    height: 0px;
-                    .employee-week-div {
-                        width: 100%;
-                        border-bottom: 40px solid #F8F8F8;
-                        border-left: 20px solid white;
-                        cursor: pointer;
-                    .employee-week {
-                        float: right;
-                        font-size: 14px;
-                        font-weight: 600;
-                        color: #163a9a;
-                        width: 75px;
-                        height: 25px;
-                        padding: 7px;
-                        padding-top: 6px;
-                        padding-bottom: 0px;
-                       
-                    }
-                } 
-                .employee-week-div-selected {
-                    border-bottom: 40px solid #D8D8D8 !important;
-                }
-                .employee-week-div:hover {
-                    border-bottom: 40px solid #D8D8D8;
-                }
-                }
-                .employee-table-sub-header-selected {
-                    width: 750px;
-                }
-                .employee-table-date-header-div {
-                    .employee-table-date-header {
-                        padding: 10px 0px;
-                        min-width: 80px;
-                        text-align:center;
-                        border: solid 1px #163a9a;
-                        .employee-table-date-header-date {
-                            font-size: 11px;
-                            font-weight: 600;
-                        }
-                        .employee-table-date-header-day {
-                            font-size: 13px;
-                            font-weight: 600;
-                        }
-                        .employee-table-date-header-category {
-                            .employee-table-date-header-category-holiday {
-                                border:solid 1px orange;
-                                border-radius: 3px;
-                                padding: 2px;
-                                color:orange;
-                                font-size: 13px;
-                                font-weight: 600;
-                                cursor: pointer;
-                            }
-                            .employee-table-date-header-category-holiday:hover {
-                                background-color: orange;
-                                color: white;
-                            }
-                            .holiday-active {
-                                background-color: orange !important;
-                                color: white !important;
-                            }
-                            .employee-table-date-header-category-compensation-holiday {
-                                border:solid 1px grey;
-                                border-radius: 3px;
-                                padding: 2px;
-                                color:grey;
-                                font-size: 13px;
-                                font-weight: 600;
-                                cursor: pointer;
-                            }
-                            .employee-table-date-header-category-compensation-holiday:hover {
-                                background-color:grey;
-                                color: white;
-                            }
-                            .compensation-holiday-active {
-                                background-color:grey;
-                                color: white;
-                            }
-                            .employee-table-date-header-category-week-off {
-                                border:solid 1px green;
-                                border-radius: 3px;
-                                padding: 2px;
-                                color:green;
-                                font-size: 13px;
-                                font-weight: 600;
-                                cursor: pointer;
-                            }
-                            .employee-table-date-header-category-week-off:hover {
-                                background-color: green;
-                                color: white;
-                            }
-                            .week-off-active {
-                                background-color: green;
-                                color: white;
-                            }
-                        }
-                    }
-                    .employee-week-hrs {
-                        
-                        .employee-attandance-hrs {
-                            padding: 10px 0px;
-                            min-width: 80px;
-                            text-align:center;
-                            border: solid 1px #163a9a;
-                            font-size: 15px;
-                            font-weight: 600;
-                            text-align: center;
-                            color: #163a9a;
-                        }
-                        .employee-ot-hrs {
-                            padding: 10px 0px;
-                            min-width: 80px;
-                            text-align:center;
-                            border: solid 1px #163a9a;
-                            font-size: 15px;
-                            font-weight: 600;
-                            text-align: center;
-                            color: #163a9a;
-                        }
-                        .employee-hrs-input {
-
-                        }
-                        .employee-division-ot-hrs {
-                            padding: 10px 0px;
-                            min-width: 80px;
-                            text-align:center;
-                            border: solid 1px orange;
-                            font-size: 15px;
-                            font-weight: 600;
-                            text-align: center;
-                                color: orange;
-                        }
-                    }
-                }
-            }
-            .employee-attandance-table-body-employee {
-                .employee-content {
-                    width: 200px;
-                    padding: 32px 0px;
-                    background-color: #D8D8D8;
-                    text-align: center;
-                    border-top-left-radius: 5px;
-                    border-bottom-left-radius: 5px;
-                    .employee-name {
-                        font-size: 14px;
-                        font-weight: 600;
-                        color: #163a9a;
-                    }
-                    .employee-designation {
-                        font-size: 12px;
-                        color: #163a9a;
-                    }
-                }
-                .employee-table {
-                    .employee-table-date-header-div {
-                        .employee-table-date-header {
-                            padding: 3px 0px;
-                        min-width: 80px;
-                        // text-align:center;
-                        border: solid 1px #163a9a;
-                        .employee-table-date-header-time-in {
-                            font-size: 10px;
-                            padding-left: 3px;
-                            select {
-                                appearance:none;
-                                background: url('/assets/icons/hour-glass.png') no-repeat right;
-                                -webkit-appearance: none;
-                                padding-right: 17px;
-                                font-size: 16px;
-                                padding-left: 5px;
-                            }
-                        }
-                        .employee-table-date-header-time-out {
-                            font-size: 10px;
-                            padding-left: 3px;
-                            select {
-                                appearance:none;
-                                background: url('/assets/icons/hour-glass.png') no-repeat right;
-                                -webkit-appearance: none;
-                                padding-right: 17px;
-                                font-size: 16px;
-                                padding-left: 5px;
-                            }
-                        }
-                        .employee-table-date-header-category {
-                            .employee-table-date-header-category-leave {
-                                border:solid 1px green;
-                                border-radius: 3px;
-                                padding: 1px 7px;
-                                color:green;
-                                font-size: 13px;
-                                font-weight: 600;
-                                cursor: pointer;
-                            }
-                            .employee-table-date-header-category-leave:hover {
-                                background-color: green;
-                                color: white;
-                            }
-                            .leave-active {
-                                background-color: green;
-                                color: white;
-                            }
-                            .employee-table-date-header-category-absent {
-                                border:solid 1px red;
-                                border-radius: 3px;
-                                padding: 1px 7px;
-                                color:red;
-                                font-size: 13px;
-                                font-weight: 600;
-                                cursor: pointer;
-                            }
-                            .employee-table-date-header-category-absent:hover {
-                                background-color: red;
-                                color: white;
-                            }
-                            .absent-active {
-                                background-color: red;
-                                color: white;
-                            }
-                        }
-                        }
-                    }
-                }
-                .employee-week-hrs {
-                    .employee-attandance-hrs {
-                        min-width: 80px;
-                        height: 98px;
-                        border: solid 1px #163a9a;
-                        .employee-hrs-input {
-                            margin-top: 30px;
-                            text-align: center;
-                            border: none;
-                            font-size: 15px;
-                            font-weight: 600;
-                            text-align: center;
-                            color: #163a9a;
-                        }
-                    }
-                    .employee-ot-hrs {
-                        min-width: 80px;
-                        height: 98px;
-                        border: solid 1px #163a9a;
-                        .employee-hrs-input {
-                            margin-top: 30px;
-                            text-align: center;
-                            border: none; 
-                            font-size: 15px;
-                            font-weight: 600;
-                            text-align: center;
-                            color: #163a9a;
-                        }
-                    }
-                    .employee-division-ot-hrs {
-                        min-width: 80px;
-                        height: 98px;
-                        border: solid 1px orange;
-                        .employee-hrs-input {
-                            margin-top: 30px;
-                            text-align: center;
-                            border: none; 
-                            font-size: 15px;
-                            font-weight: 600;
-                            text-align: center;
-                            color: orange;
-                        }
-                    }
-                }
-            }
+          }
         }
-        .submit {
-            .submit-button {
-                width: fit-content;
-                float: right;
-                margin-right: 150px;
-                font-size: 18px;
-                margin-top: 25px;
-                padding: 5px 10px;
-                border-radius: 5px;
-                color: #fff;
-                background-color: #163a9a;
-                border: 1px solid #163a9a;
-                cursor: pointer;
+        .employee-week-hrs {
+          .employee-attandance-hrs {
+            min-width: 80px;
+            height: 98px;
+            border: solid 1px #163a9a;
+            .employee-hrs-input {
+              margin-top: 30px;
+              text-align: center;
+              border: none;
+              font-size: 15px;
+              font-weight: 600;
+              text-align: center;
+              color: #163a9a;
             }
-            .submit-button:hover {
-                background-color: #003cd9;
+          }
+          .employee-ot-hrs {
+            min-width: 80px;
+            height: 98px;
+            border: solid 1px #163a9a;
+            .employee-hrs-input {
+              margin-top: 30px;
+              text-align: center;
+              border: none;
+              font-size: 15px;
+              font-weight: 600;
+              text-align: center;
+              color: #163a9a;
             }
-            .submit-button:active {
-                background-color: white;
-                color: #163a9a;
+          }
+          .employee-division-ot-hrs {
+            min-width: 80px;
+            height: 98px;
+            border: solid 1px orange;
+            .employee-hrs-input {
+              margin-top: 30px;
+              text-align: center;
+              border: none;
+              font-size: 15px;
+              font-weight: 600;
+              text-align: center;
+              color: orange;
             }
+          }
         }
+      }
     }
+    .submit {
+      .submit-button {
+        width: fit-content;
+        float: right;
+        margin-right: 150px;
+        font-size: 18px;
+        margin-top: 25px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: #fff;
+        background-color: #163a9a;
+        border: 1px solid #163a9a;
+        cursor: pointer;
+      }
+      .submit-button:hover {
+        background-color: #003cd9;
+      }
+      .submit-button:active {
+        background-color: white;
+        color: #163a9a;
+      }
+    }
+  }
 }
 
 // genral css
 .flex {
-    display: flex;
+  display: flex;
 }
 .flex-wrap {
-    flex-wrap:wrap;
+  flex-wrap: wrap;
 }
 .space-between {
   justify-content: space-between;
 }
 .space-evenly {
-    justify-content: space-evenly;
-  }
+  justify-content: space-evenly;
+}
 .width-40 {
-    width: 40%;
+  width: 40%;
 }
 .width-50 {
-    width: 50%;
+  width: 50%;
 }
 .width-100 {
-    width: 100%;
+  width: 100%;
 }
 .height-auto {
-    height: auto !important;
+  height: auto !important;
 }
 .margin-left-30 {
-    margin-left: 30px;
+  margin-left: 30px;
 }

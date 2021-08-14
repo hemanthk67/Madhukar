@@ -1,104 +1,104 @@
 .nav {
   width: 180px;
   height: 100vh;
-.logo {
-  margin-left: 15px;
+  .logo {
+    margin-left: 15px;
   }
 
   .tabs {
-   color: #163a9a;
-   display:flex;
-   height: 60vh;
-   flex-direction: column;
-   margin-top: 40px;
-   margin-bottom: 5px;
-   .tab-div {
-     display: flex;
-     flex-grow: 1;
-     overflow: scroll;
-     overflow-x: hidden;
-     flex-direction: column;
-  //  margin: auto;
-  .tab {
-  //  display: flex;
-   width: 135px;
-   margin-left: 20px;
-   min-height: 85px;
-   border: solid 1px white;
-   background-color: #163a9a;
-   color: white;
-   border-radius: 5px;
-   padding: 5px;
-   padding-left: 10px;
-   cursor: pointer;
-   .tab-name {
-     display: flex;
-     height: fit-content;
-     width: 100%;
-     font-size: 14px;
+    color: #163a9a;
+    display: flex;
+    height: 60vh;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-bottom: 5px;
+    .tab-div {
+      display: flex;
+      flex-grow: 1;
+      overflow: scroll;
+      overflow-x: hidden;
+      flex-direction: column;
+      //  margin: auto;
+      .tab {
+        //  display: flex;
+        width: 135px;
+        margin-left: 20px;
+        min-height: 85px;
+        border: solid 1px white;
+        background-color: #163a9a;
+        color: white;
+        border-radius: 5px;
+        padding: 5px;
+        padding-left: 10px;
+        cursor: pointer;
+        .tab-name {
+          display: flex;
+          height: fit-content;
+          width: 100%;
+          font-size: 14px;
+        }
+        .tab-message {
+          margin-top: 10px;
+          font-size: 10px;
+        }
+        .tab-sub-div {
+          width: 100%;
+          height: 100%;
+          .sub-div {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: inherit;
+            .sub {
+              border-radius: 4px;
+              .sub-small-name {
+                text-align: center;
+              }
+              .sub-name {
+                font-size: 10px;
+                text-align: center;
+              }
+            }
+            .sub:hover {
+              background-color: #003cd9 !important;
+            }
+          }
+        }
+      }
+      .tab:hover {
+        background-color: #003cd9;
+        color: white;
+      }
+      .tab-active {
+        width: 150px;
+        min-height: 95px;
+        padding: 0;
+        background-color: white !important;
+        color: white;
+        .sub-div {
+          .sub {
+            width: 48% !important;
+            height: 50% !important;
+            border: solid 1px white !important;
+            border-radius: 4px;
+            background-color: #163a9a;
+            text-align: center;
+            .sub-small-name {
+              text-align: center;
+            }
+            .sub-name {
+              font-size: 10px;
+              text-align: center;
+            }
+          }
+          .sub:hover {
+            background-color: #003cd9 !important;
+          }
+        }
+      }
     }
-   .tab-message {
-     margin-top: 10px;
-    font-size: 10px;
-   }
-   .tab-sub-div {
-     width: 100%;
-     height: 100%;
-   .sub-div {
-     height: 100%;
-     width: 100%;
-     display: flex;
-     flex-wrap: wrap;
-     overflow: inherit;
-     .sub {
-      border-radius: 4px;
-       .sub-small-name {
-        text-align: center;
-       }
-       .sub-name {
-        font-size: 10px;
-        text-align: center;
-       }
-     }
-     .sub:hover {
-      background-color: #003cd9 !important;
-     }
-   }
- }
   }
-  .tab:hover {
-    background-color: #003cd9;
-    color: white;
-  }
-  .tab-active {
-    width: 150px;
-    min-height: 95px;
-    padding: 0;
-    background-color: white !important;
-    color: white;
-    .sub-div {
-    .sub {
-      width: 48% !important;
-    height: 50% !important;
-    border: solid 1px white !important;
-    border-radius: 4px;
-    background-color: #163a9a;
-    text-align: center;
-    .sub-small-name {
-     text-align: center;
-    }
-    .sub-name {
-     font-size: 10px;
-     text-align: center;
-    }
-    }
-     .sub:hover {
-      background-color: #003cd9 !important;
-     }
-  }
-  }
- }
- }  
 }
 .hide {
   height: 0px !important;

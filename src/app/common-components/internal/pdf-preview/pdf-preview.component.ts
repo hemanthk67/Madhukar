@@ -5,7 +5,7 @@ import {
   Output,
   EventEmitter,
   Input,
-  HostListener
+  HostListener,
 } from "@angular/core";
 import * as d3 from "d3";
 import { MatIconRegistry } from "@angular/material/icon";
@@ -14,12 +14,12 @@ import { DomSanitizer } from "@angular/platform-browser";
 import * as jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { pdfFileService } from "src/app/services/pdfFile.service";
-import { RoutingService } from 'src/app/services/routing.service';
+import { RoutingService } from "src/app/services/routing.service";
 
 @Component({
   selector: "app-pdf-preview",
   templateUrl: "./pdf-preview.component.html",
-  styleUrls: ["./pdf-preview.component.scss"]
+  styleUrls: ["./pdf-preview.component.scss"],
 })
 export class PdfPreviewComponent implements OnInit {
   @Output() confirm = new EventEmitter<boolean>();
@@ -43,48 +43,48 @@ export class PdfPreviewComponent implements OnInit {
   ngOnInit() {
     d3.select("html").style("overflow", "hidden");
     // d3.select(".pdf-container-div").style("display", "none");  the height checking is not working in the tenderdcuments page
-    if(this.firm === 'THOTA COLDCEL PVT LTD'){
-    d3.select("#pdf-preview")
-      .append("img")
-      .attr("id", "pdf-preview-header")
-      .attr("src", "./assets/pdf/" + this.type +"header.jpg")
-      .style("padding-top", "10px")
-      .style("width", "100%");
+    if (this.firm === "THOTA COLDCEL PVT LTD") {
+      d3.select("#pdf-preview")
+        .append("img")
+        .attr("id", "pdf-preview-header")
+        .attr("src", "./assets/pdf/" + this.type + "header.jpg")
+        .style("padding-top", "10px")
+        .style("width", "100%");
     } else {
       d3.select("#pdf-preview")
-      .append("img")
-      .attr("id", "pdf-preview-header")
-      .attr("src", "./assets/pdf/" + this.type +"header.jpg")
-      .style("padding-top", "10px")
-      .style("width", "100%");
+        .append("img")
+        .attr("id", "pdf-preview-header")
+        .attr("src", "./assets/pdf/" + this.type + "header.jpg")
+        .style("padding-top", "10px")
+        .style("width", "100%");
     }
-      if(this.type == 'coldcel' || this.type == 'thota') {
-    d3.select("#pdf-preview")
-      .style("position", "relative")
-      .append("img")
-      .attr("src", "./assets/logo/" + "Inspected.jpg")
-      .style("width", "75%")
-      .style("position", "absolute")
-      .style("bottom", "5px")
-      .style("left", "106px");
-      }
+    if (this.type == "coldcel" || this.type == "thota") {
+      d3.select("#pdf-preview")
+        .style("position", "relative")
+        .append("img")
+        .attr("src", "./assets/logo/" + "Inspected.jpg")
+        .style("width", "75%")
+        .style("position", "absolute")
+        .style("bottom", "5px")
+        .style("left", "106px");
+    }
 
     // second page
     d3.select("#pdf-preview-1")
       .append("img")
-      .attr("src", "./assets/pdf/"+ this.type + "header.jpg")
+      .attr("src", "./assets/pdf/" + this.type + "header.jpg")
       .style("padding-top", "10px")
       .style("width", "100%");
-      if(this.type == 'coldcel') {
-    d3.select("#pdf-preview-1")
-      .style("position", "relative")
-      .append("img")
-      .attr("src", "./assets/pdf/"+ 'coldcel' + "footer.jpg")
-      .style("width", "100%")
-      .style("position", "absolute")
-      .style("bottom", "0")
-      .style("left", "0");
-      }
+    if (this.type == "coldcel") {
+      d3.select("#pdf-preview-1")
+        .style("position", "relative")
+        .append("img")
+        .attr("src", "./assets/pdf/" + "coldcel" + "footer.jpg")
+        .style("width", "100%")
+        .style("position", "absolute")
+        .style("bottom", "0")
+        .style("left", "0");
+    }
     // setTimeout(
     //   function() {
     //     d3.select(".pdf-container-div").style("display", "unset");
@@ -104,9 +104,9 @@ export class PdfPreviewComponent implements OnInit {
       orientation: "p",
       unit: "mm",
       format: "a4",
-      compress: true
+      compress: true,
     });
-    html2canvas(test,{scale: 2, logging: true}).then(canvas => {
+    html2canvas(test, { scale: 2, logging: true }).then((canvas) => {
       var imgWidth = 212;
       var pageHeight = 295;
       var imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -124,7 +124,7 @@ export class PdfPreviewComponent implements OnInit {
         "FAST"
       );
       test = document.getElementById("pdf-preview-1");
-      html2canvas(test,{scale: 2, logging: true}).then(canvas => {
+      html2canvas(test, { scale: 2, logging: true }).then((canvas) => {
         var imgWidth = 212;
         var pageHeight = 295;
         var imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -142,13 +142,12 @@ export class PdfPreviewComponent implements OnInit {
           undefined,
           "FAST"
         );
-        pdf.save( this.documentName + ".pdf" );
+        pdf.save(this.documentName + ".pdf");
         this.confirm.emit(true);
         // this.savepdf = pdf.output("blob");
         // console.log(this.savepdf);
         // this.pdfService.savePdf(this.savepdf);
         this.routingService.enquiryList();
-
       });
     });
   }

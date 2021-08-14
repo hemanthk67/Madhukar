@@ -1,91 +1,170 @@
 <span *ngIf="!po">
-<div class="header-div">
-  <!-- <div class="header" (click)="backToTenderList()">
+  <div class="header-div">
+    <!-- <div class="header" (click)="backToTenderList()">
     {{ marketingService.enquiry.customer }} - {{ marketingService.enquiry.number }}
   </div> -->
   </div>
-<div class="results">
+  <div class="results">
     <div class="result-cards-div">
       <div class="flex" *ngIf="resultStatus == ''">
-    <div class="result-cards" *ngFor="let card of result"
-    [ngClass]="{
-        'background-color-red': card.color == 'red',
-        'background-color-green': card.color == 'green',
-        'background-color-blue': card.color == 'blue'
-      }" (click)="enquiryStatus(card.name)">
-       <div class="card-nmae"> {{ card.name }} </div>
-       <div class="card-message"> {{ card.message }}</div>
-    </div>
+        <div
+          class="result-cards"
+          *ngFor="let card of result"
+          [ngClass]="{
+            'background-color-red': card.color == 'red',
+            'background-color-green': card.color == 'green',
+            'background-color-blue': card.color == 'blue'
+          }"
+          (click)="enquiryStatus(card.name)"
+        >
+          <div class="card-nmae">{{ card.name }}</div>
+          <div class="card-message">{{ card.message }}</div>
+        </div>
       </div>
     </div>
     <div class="results-remark-div" *ngIf="resultStatus !== ''">
       <div class="result-remark-question-div">
-        <div class="result-remark-question" *ngIf="resultStatus == 'UnSuccessful'">Reason for the loss of the enquiry?</div>
-        <div class="result-remark-question" *ngIf="resultStatus == 'Successful'">Remarks if any:</div>
-        <div class="result-remark-question" *ngIf="resultStatus == 'Rejected'">Reason for the Rejection of the enquiry?
+        <div
+          class="result-remark-question"
+          *ngIf="resultStatus == 'UnSuccessful'"
+        >
+          Reason for the loss of the enquiry?
+        </div>
+        <div
+          class="result-remark-question"
+          *ngIf="resultStatus == 'Successful'"
+        >
+          Remarks if any:
+        </div>
+        <div class="result-remark-question" *ngIf="resultStatus == 'Rejected'">
+          Reason for the Rejection of the enquiry?
           <div class="result-remark-rejected">
-            <select class="result-remark-rejected-select-reason" [(ngModel)]="enquiryRejectedReason">
-              <option *ngFor="let reason of rejectionReason"> {{ reason }}</option>
+            <select
+              class="result-remark-rejected-select-reason"
+              [(ngModel)]="enquiryRejectedReason"
+            >
+              <option *ngFor="let reason of rejectionReason">
+                {{ reason }}
+              </option>
             </select>
           </div>
         </div>
-        <div class="result-remark-question" *ngIf="resultStatus == 'Cancelled'">Remarks if any:</div>
+        <div class="result-remark-question" *ngIf="resultStatus == 'Cancelled'">
+          Remarks if any:
+        </div>
         <div class="results-back" (click)="enquiryStatus('')">back</div>
       </div>
-      <textarea class="result-remark-text-area" (change)="doTextareaValueChange($event)"></textarea>
+      <textarea
+        class="result-remark-text-area"
+        (change)="doTextareaValueChange($event)"
+      ></textarea>
     </div>
 
-    <div class="page-sub-header flex space-between" >
-        Prices
-       </div>
-       <div class="add-competitor-price">
-
-       </div>
-       <div class="item-prices-div" >
-        <div class="item-prices-table">
-          <div class="item-price-organization-name-div"><div class="item-price-organization-name-only-div"><div class="item-price-organization-name">{{marketingService.enquiry.firm}}</div></div></div>
-         <div class="item-price-head">
-           <div class="item-discription"> Discription</div>
-           <div class="item-price"> Price per Item</div>
-           <div class="gst"> Gst </div>
-           <div class="qty"> Qty </div>
-           <div class="total">Total( Excl Gst )</div>
-           <div class="total-with-gst">Total( Incl Gst )</div>
-         </div>
-         <div class="price-div">
-          <div class="item-price-div" *ngFor="let item of marketingService.enquiry.itemPrice;let i=index">
-            <div class="item-discription">{{ item.description }}</div>
-            <div class="item-price">
-              <input type="number" class="item-price-input"  [(ngModel)]="item.unitPrice" (keyup)="addPrice(i)" />
+    <div class="page-sub-header flex space-between">Prices</div>
+    <div class="add-competitor-price"></div>
+    <div class="item-prices-div">
+      <div class="item-prices-table">
+        <div class="item-price-organization-name-div">
+          <div class="item-price-organization-name-only-div">
+            <div class="item-price-organization-name">
+              {{ marketingService.enquiry.firm }}
             </div>
-            <div class="gst">
-             <input type="number" class="gst-input"  [(ngModel)]="item.gst" (keyup)="addPrice(i)" disabled/>
-            </div>
-           <div class="qty"> 
-             <input type="number" class="qty-input"  [(ngModel)]="item.qty" (keyup)="addPrice(i)" /> </div>
-           <div class="total">
-             <input type="number" class="total-input" [(ngModel)]="item.totalPrice" disabled/>
-           </div>
-           <div class="total-with-gst">
-             <input type="number" class="total-with-gst-input" [(ngModel)]="item.totalWithGst" disabled/>
-           </div>
           </div>
         </div>
-          <div class="item-price-head space-around margin-top-15">
-           <div class="total margin-left-5">
-           <div class="item-total-text margin-right-10">Total-Amount</div>
-             <input type="number" class="total-input" [(ngModel)]="total" disabled/>
-           </div>
-           <div class="total-with-gst  margin-left-5">
-           <div class="item-total-text margin-right-10">Total-Amount-With-Gst</div>
-             <input type="number" class="total-with-gst-input" [(ngModel)]="totalWithGst" disabled/>
+        <div class="item-price-head">
+          <div class="item-discription">Discription</div>
+          <div class="item-price">Price per Item</div>
+          <div class="gst">Gst</div>
+          <div class="qty">Qty</div>
+          <div class="total">Total( Excl Gst )</div>
+          <div class="total-with-gst">Total( Incl Gst )</div>
+        </div>
+        <div class="price-div">
+          <div
+            class="item-price-div"
+            *ngFor="
+              let item of marketingService.enquiry.itemPrice;
+              let i = index
+            "
+          >
+            <div class="item-discription">{{ item.description }}</div>
+            <div class="item-price">
+              <input
+                type="number"
+                class="item-price-input"
+                [(ngModel)]="item.unitPrice"
+                (keyup)="addPrice(i)"
+              />
             </div>
-         </div>
+            <div class="gst">
+              <input
+                type="number"
+                class="gst-input"
+                [(ngModel)]="item.gst"
+                (keyup)="addPrice(i)"
+                disabled
+              />
+            </div>
+            <div class="qty">
+              <input
+                type="number"
+                class="qty-input"
+                [(ngModel)]="item.qty"
+                (keyup)="addPrice(i)"
+              />
+            </div>
+            <div class="total">
+              <input
+                type="number"
+                class="total-input"
+                [(ngModel)]="item.totalPrice"
+                disabled
+              />
+            </div>
+            <div class="total-with-gst">
+              <input
+                type="number"
+                class="total-with-gst-input"
+                [(ngModel)]="item.totalWithGst"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+        <div class="item-price-head space-around margin-top-15">
+          <div class="total margin-left-5">
+            <div class="item-total-text margin-right-10">Total-Amount</div>
+            <input
+              type="number"
+              class="total-input"
+              [(ngModel)]="total"
+              disabled
+            />
+          </div>
+          <div class="total-with-gst margin-left-5">
+            <div class="item-total-text margin-right-10">
+              Total-Amount-With-Gst
+            </div>
+            <input
+              type="number"
+              class="total-with-gst-input"
+              [(ngModel)]="totalWithGst"
+              disabled
+            />
+          </div>
         </div>
       </div>
-      <div class="competitor-price-submission-div">
-        <div class="competitor-price-submission-button" (click)="submit()">Submit Results</div>
+    </div>
+    <div class="competitor-price-submission-div">
+      <div class="competitor-price-submission-button" (click)="submit()">
+        Submit Results
       </div>
-</div>
+    </div>
+  </div>
 </span>
-<app-new-purchase-order-received *ngIf="po" [type]="'marketing'" [data]="marketingService.enquiry" (returnData)='poReturnData($event)'></app-new-purchase-order-received>
+<app-new-purchase-order-received
+  *ngIf="po"
+  [type]="'marketing'"
+  [data]="marketingService.enquiry"
+  (returnData)="poReturnData($event)"
+></app-new-purchase-order-received>

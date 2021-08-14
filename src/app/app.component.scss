@@ -11,9 +11,9 @@
 }
 app-loading-screen {
   position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(257,257,257,.8);
+  height: 100%;
+  width: 100%;
+  background-color: rgba(257, 257, 257, 0.8);
 }
 ::ng-deep app-auth {
   width: 100%;
@@ -22,4 +22,3 @@ app-loading-screen {
   width: 100%;
   padding-right: 180px;
 }
-

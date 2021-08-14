@@ -1,330 +1,326 @@
-
 .po-list-div {
-    padding-top: 8vh;
-    padding-left: 50px;
-    .po-list-head {
+  padding-top: 8vh;
+  padding-left: 50px;
+  .po-list-head {
     font-size: 24px;
-        font-weight: 600;
-        color: #163a9a;
-    }
-    .po-list-body {
-        width: 98%;
-        height: 85vh;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        padding: 5px;
-        padding-right: 15px;
-        .po-list-card {
-            width: 100%;
-            border-radius: 5px;
-            background-color: white;
-            box-shadow: 2px 2px 18px #888888;
-            margin: 15px 0px;
-            padding: 5px;
-            padding-right: 0;
-            border-top: solid 5px #163a9a;
-           .po-list-card-small {
-               cursor: pointer;
-            .po-list-card-head {
+    font-weight: 600;
+    color: #163a9a;
+  }
+  .po-list-body {
+    width: 98%;
+    height: 85vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 5px;
+    padding-right: 15px;
+    .po-list-card {
+      width: 100%;
+      border-radius: 5px;
+      background-color: white;
+      box-shadow: 2px 2px 18px #888888;
+      margin: 15px 0px;
+      padding: 5px;
+      padding-right: 0;
+      border-top: solid 5px #163a9a;
+      .po-list-card-small {
+        cursor: pointer;
+        .po-list-card-head {
+          display: flex;
+          justify-content: space-between;
+          color: #163a9a;
+          font-weight: 600;
+          height: 25px;
+          .item-div {
+            display: flex;
+          }
+        }
+        .po-number-items {
+          display: flex;
+          justify-content: space-between;
+          text-align: center;
+          margin-top: 10px;
+          margin-bottom: 15px;
+          .po-number {
+            width: 50%;
+          }
+          .e-po-number {
+            width: 50%;
+          }
+        }
+        .po-list-card-body {
+          display: flex;
+          height: 25px;
+          .items {
             display: flex;
             justify-content: space-between;
-            color: #163a9a;
-            font-weight: 600;
-            height: 25px;
-            .item-div {
-                display: flex;
+            width: 90%;
+            .po-number {
+              min-width: 150px;
+              text-align: right;
+              .po-status {
+                font-weight: 500;
+                font-size: 13px;
+                margin-right: 5px;
+                font-weight: 600;
+              }
             }
+          }
+          .down-arrow {
+            width: 100px;
+            font-size: 14px;
+            text-align: right;
+            color: #727272;
+            cursor: pointer;
+            span {
+              position: relative;
+              top: -8px;
             }
-            .po-number-items {
-                display: flex;
-                justify-content: space-between;
-                text-align: center;
-                margin-top: 10px;
-                margin-bottom: 15px;
-                .po-number {
-                    width: 50%;
-                }
-                .e-po-number {
-                    width: 50%;
-                }
-            }
-            .po-list-card-body {
-                display: flex;
-                height: 25px;
-                .items{
-                    display: flex;
-                    justify-content: space-between;
-                    width: 90%;
-                .po-number {
-                    min-width: 150px;
-                    text-align: right;
-                    .po-status {
-                        font-weight: 500;
-                        font-size: 13px;
-                        margin-right: 5px;
-        font-weight: 600;
-                    }
-                }
-            }
-            .down-arrow {
-                width: 100px;
-                font-size: 14px;
-        text-align: right;
-                color: #727272;
-                cursor: pointer;
-                span {
-                    position: relative;
-                    top: -8px;
-                }
-            }
-            .down-arrow:hover {
-                color: #C2C2C2;
-            }
-            }
+          }
+          .down-arrow:hover {
+            color: #c2c2c2;
+          }
         }
-        .po-list-card-large {
-            .po-list-card-head {
+      }
+      .po-list-card-large {
+        .po-list-card-head {
+          display: flex;
+          justify-content: space-between;
+          color: #163a9a;
+          font-weight: 600;
+        }
+        .po-list-card-sub-head {
+          color: #163a9a;
+          font-weight: 600;
+          text-align: center;
+          font-size: 18px;
+        }
+        .po-list-card-body {
+          .date-items {
+            display: flex;
+            justify-content: space-between;
+          }
+          .po-number-items {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            margin-bottom: 10px;
+            .po-number {
+              width: 50%;
+            }
+            .e-po-number {
+              width: 50%;
+            }
+          }
+          .items-doc-body {
+            display: flex;
+            .items-div {
+              width: 49%;
+              border-right: solid 2px #163a9a;
+              .item {
+                font-size: 13px;
+                border: solid 1px #163a9a;
+                border-radius: 5px;
+                padding: 5px;
+                margin-right: 5px;
+                margin-bottom: 5px;
+                .item-info {
+                  display: flex;
+                  justify-content: space-between;
+                }
+                .item-discription {
+                  font-size: 13px;
+                }
+                .item-destination {
+                  display: flex;
+                  justify-content: space-between;
+                }
+              }
+            }
+            .doc-div {
+              font-size: 13px;
+              width: 49%;
+              .po-documents {
                 display: flex;
-                justify-content: space-between;
+                flex-wrap: wrap;
+                border: solid 1px #163a9a;
+                border-radius: 5px;
+                margin: 5px;
+                margin-top: 0;
+                padding: 5px;
+                .document-files {
+                  display: flex;
+                  padding: 0px 5px;
+                  cursor: pointer;
+                  .pdf-icon {
+                    height: 10px;
+                    width: 10px;
+                    color: #163a9a;
+                  }
+                  .file-name {
+                    height: 15px;
+                    max-width: 150px;
+                    word-break: break-all;
+                    overflow: hidden;
+                  }
+                }
+                .document-files:hover {
+                  .file-name {
+                    max-width: 100%;
+                    color: #163a9a;
+                    text-decoration: underline;
+                  }
+                }
+              }
+              .po-total-price {
+                font-size: 15px;
                 color: #163a9a;
                 font-weight: 600;
-                }
-                .po-list-card-sub-head {
-                    color: #163a9a;
-                    font-weight: 600;
-                    text-align: center;
-                    font-size:18px;
-                }
-                .po-list-card-body {
-                    .date-items{
-                        display: flex;
-                        justify-content: space-between;
-                }
-                .po-number-items {
-                    display: flex;
-                    justify-content: space-between;
-                    text-align: center;
-                    margin-bottom: 10px;
-                    .po-number {
-                        width: 50%;
-                    }
-                    .e-po-number {
-                        width: 50%;
-                    }
-                }
-                .items-doc-body {
-                    display: flex;
-                    .items-div {
-                        width: 49%;
-                        border-right: solid 2px #163a9a;
-                        .item {
-                            font-size: 13px;
-                            border: solid 1px #163a9a;
-                            border-radius: 5px;
-                            padding: 5px;
-                            margin-right: 5px;
-                            margin-bottom: 5px;
-                            .item-info {
-                                display: flex;
-                                justify-content: space-between;
-                            }
-                            .item-discription {
-                                font-size: 13px;
-                            }
-                            .item-destination {
-                                display: flex;
-                                justify-content: space-between;
-                            }
-                        }
-                    }
-                    .doc-div {
-                        font-size: 13px;
-                        width: 49%;
-                        .po-documents {
-                            display: flex;
-                             flex-wrap: wrap;
-                            border: solid 1px #163a9a;
-                            border-radius: 5px;
-                            margin: 5px;
-                        margin-top: 0;
-                        padding: 5px;
-                        .document-files {
-                            display: flex;
-                            padding: 0px 5px;
-                            cursor: pointer;
-                            .pdf-icon {
-                                height: 10px;
-                                width: 10px;
-                                color: #163a9a;
-                            }
-                            .file-name {
-                                height: 15px;
-                                max-width: 150px;
-                                word-break: break-all;
-                                overflow: hidden;
-                            }
-                        } 
-                        .document-files:hover {
-                            .file-name { 
-                            max-width: 100%;
-                            color: #163a9a;
-                            text-decoration: underline;
-                            }
-                        }
-                        }
-                        .po-total-price {
-                            font-size: 15px;
-                            color: #163a9a;
-                            font-weight: 600;
-                            display: flex;
-                    justify-content: space-around;
-                        }
-                    }
-                }
-                .fee-items {
-                    display: flex;
-                    justify-content: space-between;
-                    font-size: 12px;
-                    padding-left:5px;
-                    padding-right: 30px;
-                    padding-bottom: 10px;
-                    padding-top: 10px;
-                }
-                .final-content {
-                    display: flex;
-                    .edit-div {
-                        width: 10%;
-                        font-size: 14px;
-                                color: #727272;
-                                cursor: pointer;
-                                span {
-                                    position: relative;
-                                    top: -8px;
-                                }
-                    }
-                    .approval-div {
-                        width: 80%;
-                        display: flex;
-                        justify-content: space-around;
-                        color: #F2F2F2;
-                        .div {
-                        display: flex;
-                        .approval {
-                            margin-right: 5px;
-                            padding: 5px;
-                            background: darkgreen;
-                            border-radius: 5px;
-                            cursor: pointer;
-                        }
-                        .approval:hover {
-                            
-                            background: green;
-                        }
-    
-                        .decline {
-                            padding: 5px;
-                            background: darkred;
-                            border-radius: 5px;
-                            cursor: pointer;
-                        }
-                        .decline:hover {
-                            
-                            background: red;
-                        }
-                        .document-prepare {
-                                background-color: #163a9a;
-                                padding: 5px;
-                                border-radius: 5px;
-                                
-                            border: solid 1px #163a9a;
-                                cursor: pointer;
-                        }
-                        .document-prepare:hover {
-                            background-color: #003cd9;
-                            color: white;
-                    }
-                    }
-                    }
-                .down-arrow {
-                    width: 100px;
-                    font-size: 14px;
-            text-align: right;
-                    color: #727272;
-                    cursor: pointer;
-                    span {
-                        position: relative;
-                        top: -8px;
-                    }
-                }
-                .down-arrow:hover {
-                    color: #C2C2C2;
-                }
+                display: flex;
+                justify-content: space-around;
+              }
             }
+          }
+          .fee-items {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            padding-left: 5px;
+            padding-right: 30px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+          }
+          .final-content {
+            display: flex;
+            .edit-div {
+              width: 10%;
+              font-size: 14px;
+              color: #727272;
+              cursor: pointer;
+              span {
+                position: relative;
+                top: -8px;
+              }
+            }
+            .approval-div {
+              width: 80%;
+              display: flex;
+              justify-content: space-around;
+              color: #f2f2f2;
+              .div {
+                display: flex;
+                .approval {
+                  margin-right: 5px;
+                  padding: 5px;
+                  background: darkgreen;
+                  border-radius: 5px;
+                  cursor: pointer;
                 }
+                .approval:hover {
+                  background: green;
+                }
+
+                .decline {
+                  padding: 5px;
+                  background: darkred;
+                  border-radius: 5px;
+                  cursor: pointer;
+                }
+                .decline:hover {
+                  background: red;
+                }
+                .document-prepare {
+                  background-color: #163a9a;
+                  padding: 5px;
+                  border-radius: 5px;
+
+                  border: solid 1px #163a9a;
+                  cursor: pointer;
+                }
+                .document-prepare:hover {
+                  background-color: #003cd9;
+                  color: white;
+                }
+              }
+            }
+            .down-arrow {
+              width: 100px;
+              font-size: 14px;
+              text-align: right;
+              color: #727272;
+              cursor: pointer;
+              span {
+                position: relative;
+                top: -8px;
+              }
+            }
+            .down-arrow:hover {
+              color: #c2c2c2;
+            }
+          }
         }
-        }
-    }
-    }
-    
-    
-    // scroll bar css
-    /* width */
-    ::-webkit-scrollbar {
-        width: 10px;
       }
-      
-      /* Track */
-      ::-webkit-scrollbar-track {
-        // box-shadow: inset 0 0 5px grey;
-        border-radius: 10px;
-      }
-      
-      /* Handle */
-      ::-webkit-scrollbar-thumb {
-        background: #C2C2C2;
-        border-radius: 10px;
-      }
-      
-      /* Handle on hover */
-      ::-webkit-scrollbar-thumb:hover {
-        background: #525252;
-      }
-      //end of scroll bar css
-      //colors
-      .grey {
-          color: #525252;
-      }
-      .blue-bold {
-        color:#163a9a;
-        font-weight: 600;
     }
-      .blue {
-          color:#163a9a;
-      }
-      .light-blue-color {
-        color: #3068b0 !important;
-    }
-      .red {
-          color: red;
-      }
-      .green {
-        color: green;
-    }
-      .orange {
-          color: orange;
-      }
-    
-      // border-color
-    
-      .light-blue-border-color {
-        border-top: solid 5px #3068b0 !important;
-    }
-    .red-border-color {
-        border-top: solid 5px red !important;
-    }
-    .green-border-color {
-        border-top: solid 5px green !important;
-    }
-    .orange-border-color {
-        border-top: solid 5px orange !important;
-    }
+  }
+}
+
+// scroll bar css
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  // box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c2c2c2;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #525252;
+}
+//end of scroll bar css
+//colors
+.grey {
+  color: #525252;
+}
+.blue-bold {
+  color: #163a9a;
+  font-weight: 600;
+}
+.blue {
+  color: #163a9a;
+}
+.light-blue-color {
+  color: #3068b0 !important;
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+.orange {
+  color: orange;
+}
+
+// border-color
+
+.light-blue-border-color {
+  border-top: solid 5px #3068b0 !important;
+}
+.red-border-color {
+  border-top: solid 5px red !important;
+}
+.green-border-color {
+  border-top: solid 5px green !important;
+}
+.orange-border-color {
+  border-top: solid 5px orange !important;
+}

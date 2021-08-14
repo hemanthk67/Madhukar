@@ -1,12 +1,18 @@
-
 <div class="container">
   <div class="header-div">
-  <div class="header" (click)="backToTenderList()">
-    {{ tenderService.tender.organization }} - {{ tenderService.tender.number }}
+    <div class="header" (click)="backToTenderList()">
+      {{ tenderService.tender.organization }} -
+      {{ tenderService.tender.number }}
+    </div>
   </div>
-  </div>
-  <app-upload-documents class="app-upload-documents" *ngIf="routingService.rightTabs[0].flag"></app-upload-documents>
-  <app-complete-tender class="app-complete-tender" *ngIf="routingService.rightTabs[1].flag"></app-complete-tender>
+  <app-upload-documents
+    class="app-upload-documents"
+    *ngIf="routingService.rightTabs[0].flag"
+  ></app-upload-documents>
+  <app-complete-tender
+    class="app-complete-tender"
+    *ngIf="routingService.rightTabs[1].flag"
+  ></app-complete-tender>
   <!-- <app-covering-letter *ngIf="routingService.rightTabs[2].sub[0].flag"></app-covering-letter> -->
   <!-- <app-pdf-view
     class="pdf-view"

@@ -1,299 +1,299 @@
 .results {
-width: 100%;
-overflow-y: scroll;
-flex-grow: 1;
-margin-top: 50px;
-padding-left: 10px;
-.result-cards-div {
+  width: 100%;
+  overflow-y: scroll;
+  flex-grow: 1;
+  margin-top: 50px;
+  padding-left: 10px;
+  .result-cards-div {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     .result-cards {
-        width: 150px;
-        height: 75px;
-        margin: 5px;
-        padding: 7px;
-        color: white;
-        border-radius: 10px;
-        cursor: pointer;
-        .card-message {
-            font-size: 12px;
-    margin-top: 5px;
-        }
-    }
-}
-.results-remark-div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  .result-remark-question-div {
-    font-size: 14px;
-    color: #163a9a;
-    font-weight: 600;
-    display: flex;
-    width: 90%;
-    .result-remark-question {
-flex-grow: 1;
-text-align: center;
-    }
-    .result-remark-rejected {
-      margin: 10px;
-      .result-remark-rejected-select-reason {
-        height: 25px;
-    font-size: 18px;
-    border: solid 1px;
-    border-radius: 5px;
+      width: 150px;
+      height: 75px;
+      margin: 5px;
+      padding: 7px;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      .card-message {
+        font-size: 12px;
+        margin-top: 5px;
       }
     }
-    .results-back {
+  }
+  .results-remark-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .result-remark-question-div {
       font-size: 14px;
-      border: solid 1px;
-      padding: 2px 5px;
-      border-radius: 5px;
-      background-color: #163a9a;
-      color: white;
-      cursor: pointer;
-      height: fit-content;
+      color: #163a9a;
+      font-weight: 600;
+      display: flex;
+      width: 90%;
+      .result-remark-question {
+        flex-grow: 1;
+        text-align: center;
+      }
+      .result-remark-rejected {
+        margin: 10px;
+        .result-remark-rejected-select-reason {
+          height: 25px;
+          font-size: 18px;
+          border: solid 1px;
+          border-radius: 5px;
+        }
+      }
+      .results-back {
+        font-size: 14px;
+        border: solid 1px;
+        padding: 2px 5px;
+        border-radius: 5px;
+        background-color: #163a9a;
+        color: white;
+        cursor: pointer;
+        height: fit-content;
+      }
+    }
+    .result-remark-text-area {
+      width: 90%;
     }
   }
-  .result-remark-text-area {
-width: 90%;
+  .add-competitor-price {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    .add-competitor-price-select {
+      height: 25px;
+      font-size: 18px;
+      border: solid 1px;
+      border-radius: 5px;
+    }
+    .add-competitor-price-button {
+      width: fit-content;
+      margin-left: 25px;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: #163a9a;
+      color: #fff;
+      cursor: pointer;
+    }
+    .add-competitor-details {
+      font-size: 12px;
+      color: #163a9a;
+      margin-left: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .add-competitor-details:hover {
+      text-decoration: underline;
+    }
   }
-}
-.add-competitor-price {
-  display: flex;
-  justify-content: center;
-  margin:10px;
-  .add-competitor-price-select {
-    height: 25px;
-    font-size: 18px;
-    border: solid 1px;
-    border-radius: 5px;
-  }
-.add-competitor-price-button {
-  width: fit-content;
-  margin-left: 25px;
-  padding: 5px;
-    border-radius: 5px;
-    background-color: #163a9a;
-    color: #fff;
-    cursor: pointer;
-}
-.add-competitor-details {
-  font-size: 12px;
-  color: #163a9a;
-  margin-left: 10px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-.add-competitor-details:hover {
-  text-decoration: underline;
-}
-}
-.item-prices-div {
+  .item-prices-div {
     .item-prices-table {
       padding: 5px;
       padding-left: 15px;
-      background-color: #F2F2F2;
+      background-color: #f2f2f2;
       margin-top: 10px;
-  border-radius: 10px;
-  .item-price-organization-name-div {
-    display: flex;
-    margin: 5px;
-    .item-price-organization-name-only-div {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-    .item-price-organization-name {
-    font-size: 16px;
-    width: fit-content;
-    border: 1px solid #163a9a;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: #163a9a;
-    color: #fff;
-    }
-  }
-  .item-price-organization-name-cross {
-    width: fit-content;
-    padding: 6px;
-    border-radius: 5px;
-    font-size: 14px;
-    border: solid 1px #163a9a;
-    cursor: pointer;
-    color: white;
-    background-color: #163a9a;
-  }
-  .item-price-organization-name-cross:hover {
-    background-color: #003cd9;
-  }
-  }
-  .item-price-head {
-    display: flex;
-    color: #163a9a;
-    font-weight: 600;
-  font-size: 14px;
-    .item-total-text {
-font-size: 18px;
-      width: 775px;
-      text-align: right;
-    }
-    .item-discription {
-      width: 225px;
-      text-align: center;
-    }
-    .item-price {
-      width: 144px;
-      text-align: center;
-    }
-    .item-frieght-charges {
-      width: 144px;
-      text-align: center;
-    }
-    .item-other-charges {
-      width: 144px;
-      text-align: center;
-    }
-    .gst {
-      width: 59px;
-      text-align: center;
-    }
-    .qty {
-      width: 59px;
-      text-align: center;
-    }
-    .total {
-      width: 140px;
-      text-align: center;
-      padding-left: 5px;
-      .total-input {      
-        text-align: center;
-        border-radius: 5px;
-        height: 22px;
-    outline: none;
-    width: 135px;
+      border-radius: 10px;
+      .item-price-organization-name-div {
+        display: flex;
+        margin: 5px;
+        .item-price-organization-name-only-div {
+          flex-grow: 1;
+          display: flex;
+          justify-content: center;
+          .item-price-organization-name {
+            font-size: 16px;
+            width: fit-content;
+            border: 1px solid #163a9a;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #163a9a;
+            color: #fff;
+          }
         }
-    }
-    .total-with-gst {
-      width: 140px;
-      text-align: center;
-      padding-left: 5px;
-      .total-with-gst-input {      
-        text-align: center;
-        border-radius: 5px;
-        height: 22px;
-    outline: none;
-    width: 135px;
+        .item-price-organization-name-cross {
+          width: fit-content;
+          padding: 6px;
+          border-radius: 5px;
+          font-size: 14px;
+          border: solid 1px #163a9a;
+          cursor: pointer;
+          color: white;
+          background-color: #163a9a;
         }
-    }
-  }
-  .item-price-div {
-    display: flex;
-margin-top: 10px;
-    .item-discription {
-      font-size: 12px;
-      width: 225px;
-      background: white;
-      border-radius: 5px;
-    word-break: break-all;
-    }
-    .item-price {
-      padding-left: 5px;
-      display: flex;
-    justify-content: center;
-    align-items: center;
-      .item-price-input {
-        text-align: center;
-        border: none;
-        border-radius: 5px;
-        height: 25px;
-  outline: none;
-  width: 135px;
+        .item-price-organization-name-cross:hover {
+          background-color: #003cd9;
+        }
       }
-    }
-    .item-frieght-charges {
-      padding-left: 5px;
-      display: flex;
-    justify-content: center;
-    align-items: center;
-    .frieght-charges-input {
-      text-align: center;
-      border: none;
-      border-radius: 5px;
-      height: 25px;
-outline: none;
-width: 135px;
-    }
-  }
-  .item-other-charges {
-    padding-left: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  .item-other-charges-input {
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    height: 25px;
-outline: none;
-width: 135px;
-  }
-}
-.gst {
-  padding-left: 5px;
-  display: flex;
-    justify-content: center;
-    align-items: center;
-  .gst-input {
-  text-align: center;
-    border: none;
-    border-radius: 5px;
-    height: 25px;
-outline: none;
-width: 50px;
-  }
-}
-.qty {
-  padding-left: 5px;
-  display: flex;
-    justify-content: center;
-    align-items: center;
-  .qty-input {      
-  text-align: center;
-  border: none;
-  border-radius: 5px;
-  height: 25px;
-outline: none;
-width: 50px;
-  }
-}
-.total {
-  padding-left: 5px;
-  display: flex;
-    justify-content: center;
-    align-items: center;
-  .total-input {      
-  text-align: center;
-  border-radius: 5px;
-  height: 22px;
-outline: none;
-width: 135px;
-  }
-}
-.total-with-gst {
-  padding-left: 5px;
-  display: flex;
-    justify-content: center;
-    align-items: center;
-  .total-with-gst-input {      
-  text-align: center;
-  border-radius: 5px;
-  height: 22px;
-outline: none;
-width: 135px;
-  }
-}
-  }
+      .item-price-head {
+        display: flex;
+        color: #163a9a;
+        font-weight: 600;
+        font-size: 14px;
+        .item-total-text {
+          font-size: 18px;
+          width: 775px;
+          text-align: right;
+        }
+        .item-discription {
+          width: 225px;
+          text-align: center;
+        }
+        .item-price {
+          width: 144px;
+          text-align: center;
+        }
+        .item-frieght-charges {
+          width: 144px;
+          text-align: center;
+        }
+        .item-other-charges {
+          width: 144px;
+          text-align: center;
+        }
+        .gst {
+          width: 59px;
+          text-align: center;
+        }
+        .qty {
+          width: 59px;
+          text-align: center;
+        }
+        .total {
+          width: 140px;
+          text-align: center;
+          padding-left: 5px;
+          .total-input {
+            text-align: center;
+            border-radius: 5px;
+            height: 22px;
+            outline: none;
+            width: 135px;
+          }
+        }
+        .total-with-gst {
+          width: 140px;
+          text-align: center;
+          padding-left: 5px;
+          .total-with-gst-input {
+            text-align: center;
+            border-radius: 5px;
+            height: 22px;
+            outline: none;
+            width: 135px;
+          }
+        }
+      }
+      .item-price-div {
+        display: flex;
+        margin-top: 10px;
+        .item-discription {
+          font-size: 12px;
+          width: 225px;
+          background: white;
+          border-radius: 5px;
+          word-break: break-all;
+        }
+        .item-price {
+          padding-left: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .item-price-input {
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            height: 25px;
+            outline: none;
+            width: 135px;
+          }
+        }
+        .item-frieght-charges {
+          padding-left: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .frieght-charges-input {
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            height: 25px;
+            outline: none;
+            width: 135px;
+          }
+        }
+        .item-other-charges {
+          padding-left: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .item-other-charges-input {
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            height: 25px;
+            outline: none;
+            width: 135px;
+          }
+        }
+        .gst {
+          padding-left: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .gst-input {
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            height: 25px;
+            outline: none;
+            width: 50px;
+          }
+        }
+        .qty {
+          padding-left: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .qty-input {
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            height: 25px;
+            outline: none;
+            width: 50px;
+          }
+        }
+        .total {
+          padding-left: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .total-input {
+            text-align: center;
+            border-radius: 5px;
+            height: 22px;
+            outline: none;
+            width: 135px;
+          }
+        }
+        .total-with-gst {
+          padding-left: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .total-with-gst-input {
+            text-align: center;
+            border-radius: 5px;
+            height: 22px;
+            outline: none;
+            width: 135px;
+          }
+        }
+      }
     }
   }
   .competitor-price-submission-div {
@@ -304,15 +304,15 @@ width: 135px;
     .competitor-price-submission-button {
       color: white;
       background-color: #163a9a;
-    padding: 5px;
-    border-radius: 5px;
-    border: solid 1px #163a9a;
-    width: fit-content;
-    cursor: pointer;
+      padding: 5px;
+      border-radius: 5px;
+      border: solid 1px #163a9a;
+      width: fit-content;
+      cursor: pointer;
     }
   }
-}   
-      
+}
+
 .add-competitor {
   height: 100vh;
   width: 100%;
@@ -355,170 +355,170 @@ width: 135px;
         padding: 6px;
         border-radius: 5px;
         font-size: 14px;
-        
+
         border: solid 1px #163a9a;
-float: right;
-cursor: pointer;
-color: white;
-background-color: #163a9a;
+        float: right;
+        cursor: pointer;
+        color: white;
+        background-color: #163a9a;
       }
       .cross:hover {
         background-color: #003cd9;
       }
-      .cross:active {     
-color: #163a9a;
-background-color: white;
+      .cross:active {
+        color: #163a9a;
+        background-color: white;
       }
     }
-    .add-competitor-body {     
+    .add-competitor-body {
       margin: 10px;
       margin-top: 20px;
       padding: 0px 40px;
-    .add-competitor-head {
-      color: #163a9a;
-      font-size: 20px;
-    height: 35px;
-      font-weight: 600;
-    }
-    .add-competitor-inputs {
-      display: flex;
-      .full-name-div {
-width: 60%;
-      }
-      .add-competitor-dash {
-        width: 15px;
-        text-align: center;
-    align-self: center;
-    color: #163a9a;
-    padding-top: 10px;
-    margin-left: 5px;
-      }
-      .lables {
+      .add-competitor-head {
         color: #163a9a;
+        font-size: 20px;
+        height: 35px;
         font-weight: 600;
       }
-      .name-input {
-        height: 25px;
-        width: 100%;
-        border: solid 1px #163a9a;
-        border-radius: 5px;
-      }
-    }
-    .add-brand-link {
-    padding-top: 30px;
-    font-size: 10px;
-    padding-left: 10px;
-    color: #163a9a;
-    cursor: pointer;
-    }
-    .add-brand-link:hover {
-      text-decoration: underline;
-    }
-    .add-make {
-      .select-make {
-        margin-top: 10px;
+      .add-competitor-inputs {
+        display: flex;
+        .full-name-div {
+          width: 60%;
+        }
+        .add-competitor-dash {
+          width: 15px;
+          text-align: center;
+          align-self: center;
+          color: #163a9a;
+          padding-top: 10px;
+          margin-left: 5px;
+        }
         .lables {
           color: #163a9a;
           font-weight: 600;
         }
         .name-input {
           height: 25px;
-          width: fit-content;
+          width: 100%;
           border: solid 1px #163a9a;
           border-radius: 5px;
         }
       }
-      .input-make {
-      display: flex;
-      .full-name-div {
-width: 60%;
-      }
-      .add-competitor-dash {
-        width: 15px;
-        text-align: center;
-    align-self: center;
-    color: #163a9a;
-    padding-top: 10px;
-    margin-left: 5px;
-      }
-      .lables {
+      .add-brand-link {
+        padding-top: 30px;
+        font-size: 10px;
+        padding-left: 10px;
         color: #163a9a;
-        font-weight: 600;
+        cursor: pointer;
       }
-      .name-input {
-        height: 25px;
-        width: 100%;
-        border: solid 1px #163a9a;
-        border-radius: 5px;
+      .add-brand-link:hover {
+        text-decoration: underline;
       }
-    }
-    }
-    .add-competitor-submit {
-      .add-competitor-submit-button {
-        width: fit-content;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            color: white;
-            background-color: #163a9a;
-            border: solid 1px #163a9a;
-            cursor: pointer;
-            float: right;
-    margin-right: 12%;
-          }
-          .add-competitor-submit-button:hover {
-            background-color: #003cd9;
-          }
-          .add-competitor-submit-button:active {
+      .add-make {
+        .select-make {
+          margin-top: 10px;
+          .lables {
             color: #163a9a;
-            background-color: white;
+            font-weight: 600;
+          }
+          .name-input {
+            height: 25px;
+            width: fit-content;
+            border: solid 1px #163a9a;
+            border-radius: 5px;
           }
         }
+        .input-make {
+          display: flex;
+          .full-name-div {
+            width: 60%;
+          }
+          .add-competitor-dash {
+            width: 15px;
+            text-align: center;
+            align-self: center;
+            color: #163a9a;
+            padding-top: 10px;
+            margin-left: 5px;
+          }
+          .lables {
+            color: #163a9a;
+            font-weight: 600;
+          }
+          .name-input {
+            height: 25px;
+            width: 100%;
+            border: solid 1px #163a9a;
+            border-radius: 5px;
+          }
+        }
+      }
+      .add-competitor-submit {
+        .add-competitor-submit-button {
+          width: fit-content;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          color: white;
+          background-color: #163a9a;
+          border: solid 1px #163a9a;
+          cursor: pointer;
+          float: right;
+          margin-right: 12%;
+        }
+        .add-competitor-submit-button:hover {
+          background-color: #003cd9;
+        }
+        .add-competitor-submit-button:active {
+          color: #163a9a;
+          background-color: white;
+        }
+      }
     }
   }
 }
 .background-color-red {
-    background-color: darkred;
+  background-color: darkred;
 }
 .background-color-red:hover {
-    background-color: red;
+  background-color: red;
 }
 .background-color-green {
-    background-color: darkgreen;
+  background-color: darkgreen;
 }
 .background-color-green:hover {
-    background-color: green;
+  background-color: green;
 }
 .background-color-blue {
-    background-color: #163a9a;
+  background-color: #163a9a;
 }
 .background-color-blue:hover {
-    background-color: #003cd9;
+  background-color: #003cd9;
 }
 
 .page-sub-header {
-    font-size: 18px;
-    font-weight: 600;
-    color: #163a9a;
-    width: 100%;
-    border-bottom: solid 1px #163a9a;
-  }
-  .flex {
-    display: flex;
-  }
-  .space-between {
-    justify-content: space-between;
-  }
-  input:disabled {
-    background-color: slategrey;
-    border: none !important;
-    color: white;
-  }
+  font-size: 18px;
+  font-weight: 600;
+  color: #163a9a;
+  width: 100%;
+  border-bottom: solid 1px #163a9a;
+}
+.flex {
+  display: flex;
+}
+.space-between {
+  justify-content: space-between;
+}
+input:disabled {
+  background-color: slategrey;
+  border: none !important;
+  color: white;
+}
 
-  .red-border {
-    border-color: red !important;
-  }
-  .red-color {
-    color: red !important;
-  }
+.red-border {
+  border-color: red !important;
+}
+.red-color {
+  color: red !important;
+}

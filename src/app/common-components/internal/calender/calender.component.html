@@ -1,31 +1,55 @@
 <div class="calender">
   <div class="calander-header">
     <div class="back-button" (click)="back()">
-      <mat-icon class="back-button-calander" svgIcon="back-button-calander"></mat-icon>
+      <mat-icon
+        class="back-button-calander"
+        svgIcon="back-button-calander"
+      ></mat-icon>
     </div>
-    <div  *ngIf="dateInput.month" class="calander-month">{{ dateInput.month }}</div>
+    <div *ngIf="dateInput.month" class="calander-month">
+      {{ dateInput.month }}
+    </div>
     <div class="calander-year">{{ dateInput.year }}</div>
   </div>
   <div class="calander-body-div">
-    <div  class="calander-body" *ngIf="!dateInput.years">
-      <div  class="calander-month" *ngFor="let year of years; let i = index;" (click)="dateselected(year.value,i)">
+    <div class="calander-body" *ngIf="!dateInput.years">
+      <div
+        class="calander-month"
+        *ngFor="let year of years; let i = index"
+        (click)="dateselected(year.value, i)"
+      >
         {{ year.name }}
       </div>
-      </div>
-    <div  class="calander-body" *ngIf="!dateInput.year && dateInput.years">
-      <div  class="calander-month" *ngFor="let item of arrayOne(9); let i = index;" (click)="dateselected(dateInputNumber.year + 4 - i,i)">
+    </div>
+    <div class="calander-body" *ngIf="!dateInput.year && dateInput.years">
+      <div
+        class="calander-month"
+        *ngFor="let item of arrayOne(9); let i = index"
+        (click)="dateselected(dateInputNumber.year + 4 - i, i)"
+      >
         {{ dateInputNumber.year + 4 - i }}
       </div>
-      </div>
-    <div  class="calander-body" *ngIf="!dateInput.month && dateInput.year">
-    <div  class="calander-month" *ngFor="let date of dates; let i = index;" (click)="dateselected(date.month,i)">
-      {{ date.month }}
     </div>
+    <div class="calander-body" *ngIf="!dateInput.month && dateInput.year">
+      <div
+        class="calander-month"
+        *ngFor="let date of dates; let i = index"
+        (click)="dateselected(date.month, i)"
+      >
+        {{ date.month }}
+      </div>
     </div>
     <div class="calander-body" *ngIf="dateInput.month">
-    <div class="calander-date" *ngFor="let item of arrayOne(this.dates[dateInputNumber.month - 1].date); let i = index;" (click)="dateselected(i+1,i)">
-      {{ i+1 }}
-    </div>
+      <div
+        class="calander-date"
+        *ngFor="
+          let item of arrayOne(this.dates[dateInputNumber.month - 1].date);
+          let i = index
+        "
+        (click)="dateselected(i + 1, i)"
+      >
+        {{ i + 1 }}
+      </div>
     </div>
   </div>
 </div>

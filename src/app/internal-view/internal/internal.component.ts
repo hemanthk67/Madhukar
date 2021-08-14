@@ -4,12 +4,12 @@ import { InfoService } from "../../services/internal/info.service";
 @Component({
   selector: "app-internal",
   templateUrl: "./internal.component.html",
-  styleUrls: ["./internal.component.scss"]
+  styleUrls: ["./internal.component.scss"],
 })
 export class InternalComponent implements OnInit {
-  constructor(public infoService:InfoService) {}
+  constructor(public infoService: InfoService) {}
 
   ngOnInit() {
-    document.getElementById('internal-active').style.display = 'inherit';
+    document.getElementById("internal-active").style.display = "inherit";
   }
 }

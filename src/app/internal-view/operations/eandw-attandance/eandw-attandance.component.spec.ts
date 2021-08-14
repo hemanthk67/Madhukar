@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EandwAttandanceComponent } from './eandw-attandance.component';
+import { EandwAttandanceComponent } from "./eandw-attandance.component";
 
-describe('EandwAttandanceComponent', () => {
+describe("EandwAttandanceComponent", () => {
   let component: EandwAttandanceComponent;
   let fixture: ComponentFixture<EandwAttandanceComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EandwAttandanceComponent ]
-    })
-    .compileComponents();
+      declarations: [EandwAttandanceComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('EandwAttandanceComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

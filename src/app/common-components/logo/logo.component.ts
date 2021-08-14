@@ -6,7 +6,7 @@ import * as d3 from "d3";
 @Component({
   selector: "app-logo",
   templateUrl: "./logo.component.html",
-  styleUrls: ["./logo.component.scss"]
+  styleUrls: ["./logo.component.scss"],
 })
 export class LogoComponent implements OnInit, AfterViewInit {
   @Input() type;
@@ -27,7 +27,7 @@ export class LogoComponent implements OnInit, AfterViewInit {
 
   logoAnimation() {
     setTimeout(
-      function() {
+      function () {
         if (this.type == "internal-page") {
           d3.select(".icon-logo")
             .style("width", "150px")

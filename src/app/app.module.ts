@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
 // import { AngularFirestoreModule } from 'angularfire2/firestore';
 // import { AngularFireModule } from 'angularfire2';
@@ -24,9 +24,9 @@ import { CommonComponentsModule } from "./common-components/common-components.mo
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    CommonComponentsModule
+    CommonComponentsModule,
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
-  bootstrap: [AppComponent]
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

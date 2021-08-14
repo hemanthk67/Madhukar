@@ -1,159 +1,487 @@
-
 <div class="employees-attandance-div">
-    <div class="employees-attandance-head"> Attandance</div>
-    <div class="employees-attandance-body">
-
-        <div class="head" *ngIf="operations.attandanceInfo">
-           <select class="attandance-date" *ngIf="!newMonthSelectedFlag"  [(ngModel)]="operations.presentAttandanceDate" (change)="attandanceDateChange()">
-               <option></option>
-               <option *ngFor="let info of operations.attandanceInfo"> {{ info.name }}</option>
-           </select>
-           <div class="new-month" (click)="newMonthSelected()" [ngClass]="{'new-month-selected': newMonthSelectedFlag}" *ngIf="presentMonth() && presentMonthFlag">{{ newMonthText }}</div> 
-        </div>
-        <div *ngFor="let type of types; let p = index">
-        <div class="employee-attandance-worker" *ngIf="operations.employeeData && (operations.presentAttandanceData || newAttandanceFlag)">
-            <div class="employee-sub-header" *ngIf="start()">
-                {{ type }}:
-            </div>
-            <div class="employee-attandance-table-header flex">
-                <div class="employee-content"></div>
-                <span *ngFor="let week of weeks; let i = index">
-                <div class="employee-table-sub-header" [ngClass]="{'employee-table-sub-header-selected': week.flag}">
-                    <div class="employee-week-div" [ngClass]="{'employee-week-div-selected': week.flag}" (click)="selectWeek(i)">
-                    <div class="employee-week">{{ week.name }}</div>
-                    </div>
-                    <div class="employee-table-date-header-div flex" *ngIf="week.flag" >
-                        <span *ngFor="let day of week.days;let j = index">
-                        <div class="employee-table-date-header" *ngIf="days[day]">
-                            <div class="employee-table-date-header-date" >{{ week.dates[j] }}</div>
-                            <div class="employee-table-date-header-day">{{ days[day] }}</div>
-                            <div class="employee-table-date-header-category flex space-evenly">
-                                <div class="employee-table-date-header-category-holiday" [ngClass]="{'holiday-active': this.newAttandance[0].dates[getAttandanceArrayIndex(week.dates[j],  week.number)].holiday}" (click)="weekRole('H',getAttandanceArrayIndex(week.dates[j],  week.number),  week.number)"> H</div>
-                                <div class="employee-table-date-header-category-compensation-holiday" [ngClass]="{'compensation-holiday-active': this.newAttandance[0].dates[getAttandanceArrayIndex(week.dates[j],  week.number)].compensationHoliday}" (click)="weekRole('CH',getAttandanceArrayIndex(week.dates[j],  week.number),  week.number)">CH</div>
-                                <div class="employee-table-date-header-category-week-off" [ngClass]="{'week-off-active': this.newAttandance[0].dates[getAttandanceArrayIndex(week.dates[j],  week.number)].weekOff}" (click)="weekRole('WO',getAttandanceArrayIndex(week.dates[j],  week.number),  week.number)">WO</div>
-                            </div>
-                        </div>
-                    </span>
-                    <div class="employee-week-hrs flex" *ngIf="week.number !== 6">
-                        <div class="employee-attandance-hrs">
-                            <div class="employee-hrs-input"> Week <br> Hrs</div>
-                        </div>
-                        <div class="employee-ot-hrs">
-                            <div class="employee-hrs-input"> OT <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> CH <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> H <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> WO <br> Hrs</div>
-                        </div>
-                    </div>
-                    <div class="employee-week-hrs flex" *ngIf="week.number == 6">
-                        <div class="employee-attandance-hrs">
-                            <div class="employee-hrs-input"> Week <br> Hrs</div>
-                        </div>
-                        <div class="employee-ot-hrs">
-                            <div class="employee-hrs-input"> OT <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> CH <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> H <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> WO <br> Hrs</div>
-                        </div>
-                        <div class="employee-ot-hrs">
-                            <div class="employee-hrs-input"> Total <br> Hrs</div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </span>
-            </div>
-            <div class="employee-attandance-table-body-employee flex" *ngFor="let employee of employeeData; let i = index">
-                <div class="flex" *ngIf=" type.slice(0, -1) == employee.type">
-                <div class="employee-content"> 
-                    <div class="employee-name"> {{ employee.name }} </div> 
-                    <div class="employee-designation"> {{ employee.designation }} </div>
-                    </div>
-                <span *ngFor="let week of weeks; let j = index">
-                <div class="employee-table">
-                    <div class="employee-table-date-header-div flex" *ngIf="week.flag" >
-                        <span *ngFor="let day of week.days;let k = index">
-                        <div class="employee-table-date-header" *ngIf="days[day]">
-                            <div class="employee-table-date-header-time-in" >
-                                In: <br>
-                            <select [(ngModel)]="newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].timeIn" 
-                            (change)="getTimeDifference(i, week.number)">
-                                    <option *ngFor="let hr of hrs"> {{ hr }}</option>
-                        </select>
-                            </div>
-                            <div class="employee-table-date-header-time-out">
-                                Out: <br>
-                               <select [(ngModel)]="newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].timeOut" (change)="getTimeDifference(i, week.number)">
-                                        <option *ngFor="let hr of hrs"> {{ hr }}</option>
-                            </select>
-                            </div>
-                            <div class="employee-table-date-header-category flex space-evenly" *ngIf ="daywidth()">
-                                <div class="employee-table-date-header-category-leave"  [ngClass]="{'leave-active': newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].leave }" (click)="dayRole(i, 'L',getAttandanceArrayIndex(week.dates[k],  week.number),  week.number)"> L</div>
-                                <div class="employee-table-date-header-category-absent"  [ngClass]="{'absent-active': newAttandance[i+1].dates[getAttandanceArrayIndex(week.dates[k], week.number)].absent }" (click)="dayRole(i, 'A',getAttandanceArrayIndex(week.dates[k],  week.number),  week.number)">A</div>
-                            </div>
-                        </div>
-                    </span>
-                    <div class="employee-week-hrs flex" *ngIf="week.number !== 6">
-                        <div class="employee-attandance-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[week.number -1].weekHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                        <div class="employee-ot-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[week.number -1].otHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[week.number -1].compensationHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[week.number -1].holidayHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[week.number -1].weekOffHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                    </div>
-                    <div class="employee-week-hrs flex" *ngIf="week.number == 6">
-                        <div class="employee-attandance-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].weekHrs + newAttandance[i+1].weeks[1].weekHrs  + newAttandance[i+1].weeks[2].weekHrs + newAttandance[i+1].weeks[3].weekHrs + newAttandance[i+1].weeks[4].weekHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                        <div class="employee-ot-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].otHrs + newAttandance[i+1].weeks[1].otHrs  + newAttandance[i+1].weeks[2].otHrs + newAttandance[i+1].weeks[3].otHrs + newAttandance[i+1].weeks[4].otHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].compensationHrs + newAttandance[i+1].weeks[1].compensationHrs  + newAttandance[i+1].weeks[2].compensationHrs + newAttandance[i+1].weeks[3].compensationHrs + newAttandance[i+1].weeks[4].compensationHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].holidayHrs + newAttandance[i+1].weeks[1].holidayHrs  + newAttandance[i+1].weeks[2].holidayHrs + newAttandance[i+1].weeks[3].holidayHrs + newAttandance[i+1].weeks[4].holidayHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                        <div class="employee-division-ot-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].weekOffHrs + newAttandance[i+1].weeks[1].weekOffHrs  + newAttandance[i+1].weeks[2].weekOffHrs + newAttandance[i+1].weeks[3].weekOffHrs + newAttandance[i+1].weeks[4].weekOffHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                        <div class="employee-ot-hrs">
-                            <div class="employee-hrs-input"> {{ (newAttandance[i+1].weeks[0].weekHrs + newAttandance[i+1].weeks[1].weekHrs  + newAttandance[i+1].weeks[2].weekHrs + newAttandance[i+1].weeks[3].weekHrs + newAttandance[i+1].weeks[4].weekHrs + newAttandance[i+1].weeks[0].otHrs + newAttandance[i+1].weeks[1].otHrs  + newAttandance[i+1].weeks[2].otHrs + newAttandance[i+1].weeks[3].otHrs + newAttandance[i+1].weeks[4].otHrs).toFixed(0) }} <br> Hrs</div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </span>
-                </div>
-            </div>
-        </div>
-        </div>
-        <div class="submit" *ngIf="submitFlag && !newAttandance[0].finalFlag">
-            <div class="submit-button" (click)="submit('submit')">Submit</div>
-        </div>
-        <div class="submit" *ngIf="submitFlag && !newAttandance[0].finalFlag">
-            <div class="submit-button" (click)="submit('final')">Finalized</div>
-        </div>
+  <div class="employees-attandance-head">Attandance</div>
+  <div class="employees-attandance-body">
+    <div class="head" *ngIf="operations.attandanceInfo">
+      <select
+        class="attandance-date"
+        *ngIf="!newMonthSelectedFlag"
+        [(ngModel)]="operations.presentAttandanceDate"
+        (change)="attandanceDateChange()"
+      >
+        <option></option>
+        <option *ngFor="let info of operations.attandanceInfo">
+          {{ info.name }}
+        </option>
+      </select>
+      <div
+        class="new-month"
+        (click)="newMonthSelected()"
+        [ngClass]="{ 'new-month-selected': newMonthSelectedFlag }"
+        *ngIf="presentMonth() && presentMonthFlag"
+      >
+        {{ newMonthText }}
+      </div>
     </div>
+    <div *ngFor="let type of types; let p = index">
+      <div
+        class="employee-attandance-worker"
+        *ngIf="
+          operations.employeeData &&
+          (operations.presentAttandanceData || newAttandanceFlag)
+        "
+      >
+        <div class="employee-sub-header" *ngIf="start()">{{ type }}:</div>
+        <div class="employee-attandance-table-header flex">
+          <div class="employee-content"></div>
+          <span *ngFor="let week of weeks; let i = index">
+            <div
+              class="employee-table-sub-header"
+              [ngClass]="{ 'employee-table-sub-header-selected': week.flag }"
+            >
+              <div
+                class="employee-week-div"
+                [ngClass]="{ 'employee-week-div-selected': week.flag }"
+                (click)="selectWeek(i)"
+              >
+                <div class="employee-week">{{ week.name }}</div>
+              </div>
+              <div
+                class="employee-table-date-header-div flex"
+                *ngIf="week.flag"
+              >
+                <span *ngFor="let day of week.days; let j = index">
+                  <div class="employee-table-date-header" *ngIf="days[day]">
+                    <div class="employee-table-date-header-date">
+                      {{ week.dates[j] }}
+                    </div>
+                    <div class="employee-table-date-header-day">
+                      {{ days[day] }}
+                    </div>
+                    <div
+                      class="
+                        employee-table-date-header-category
+                        flex
+                        space-evenly
+                      "
+                    >
+                      <div
+                        class="employee-table-date-header-category-holiday"
+                        [ngClass]="{
+                          'holiday-active':
+                            this.newAttandance[0].dates[
+                              getAttandanceArrayIndex(
+                                week.dates[j],
+                                week.number
+                              )
+                            ].holiday
+                        }"
+                        (click)="
+                          weekRole(
+                            'H',
+                            getAttandanceArrayIndex(week.dates[j], week.number),
+                            week.number
+                          )
+                        "
+                      >
+                        H
+                      </div>
+                      <div
+                        class="
+                          employee-table-date-header-category-compensation-holiday
+                        "
+                        [ngClass]="{
+                          'compensation-holiday-active':
+                            this.newAttandance[0].dates[
+                              getAttandanceArrayIndex(
+                                week.dates[j],
+                                week.number
+                              )
+                            ].compensationHoliday
+                        }"
+                        (click)="
+                          weekRole(
+                            'CH',
+                            getAttandanceArrayIndex(week.dates[j], week.number),
+                            week.number
+                          )
+                        "
+                      >
+                        CH
+                      </div>
+                      <div
+                        class="employee-table-date-header-category-week-off"
+                        [ngClass]="{
+                          'week-off-active':
+                            this.newAttandance[0].dates[
+                              getAttandanceArrayIndex(
+                                week.dates[j],
+                                week.number
+                              )
+                            ].weekOff
+                        }"
+                        (click)="
+                          weekRole(
+                            'WO',
+                            getAttandanceArrayIndex(week.dates[j], week.number),
+                            week.number
+                          )
+                        "
+                      >
+                        WO
+                      </div>
+                    </div>
+                  </div>
+                </span>
+                <div class="employee-week-hrs flex" *ngIf="week.number !== 6">
+                  <div class="employee-attandance-hrs">
+                    <div class="employee-hrs-input">
+                      Week <br />
+                      Hrs
+                    </div>
+                  </div>
+                  <div class="employee-ot-hrs">
+                    <div class="employee-hrs-input">
+                      OT <br />
+                      Hrs
+                    </div>
+                  </div>
+                  <div class="employee-division-ot-hrs">
+                    <div class="employee-hrs-input">
+                      CH <br />
+                      Hrs
+                    </div>
+                  </div>
+                  <div class="employee-division-ot-hrs">
+                    <div class="employee-hrs-input">
+                      H <br />
+                      Hrs
+                    </div>
+                  </div>
+                  <div class="employee-division-ot-hrs">
+                    <div class="employee-hrs-input">
+                      WO <br />
+                      Hrs
+                    </div>
+                  </div>
+                </div>
+                <div class="employee-week-hrs flex" *ngIf="week.number == 6">
+                  <div class="employee-attandance-hrs">
+                    <div class="employee-hrs-input">
+                      Week <br />
+                      Hrs
+                    </div>
+                  </div>
+                  <div class="employee-ot-hrs">
+                    <div class="employee-hrs-input">
+                      OT <br />
+                      Hrs
+                    </div>
+                  </div>
+                  <div class="employee-division-ot-hrs">
+                    <div class="employee-hrs-input">
+                      CH <br />
+                      Hrs
+                    </div>
+                  </div>
+                  <div class="employee-division-ot-hrs">
+                    <div class="employee-hrs-input">
+                      H <br />
+                      Hrs
+                    </div>
+                  </div>
+                  <div class="employee-division-ot-hrs">
+                    <div class="employee-hrs-input">
+                      WO <br />
+                      Hrs
+                    </div>
+                  </div>
+                  <div class="employee-ot-hrs">
+                    <div class="employee-hrs-input">
+                      Total <br />
+                      Hrs
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+        <div
+          class="employee-attandance-table-body-employee flex"
+          *ngFor="let employee of employeeData; let i = index"
+        >
+          <div class="flex" *ngIf="type.slice(0, -1) == employee.type">
+            <div class="employee-content">
+              <div class="employee-name">{{ employee.name }}</div>
+              <div class="employee-designation">{{ employee.designation }}</div>
+            </div>
+            <span *ngFor="let week of weeks; let j = index">
+              <div class="employee-table">
+                <div
+                  class="employee-table-date-header-div flex"
+                  *ngIf="week.flag"
+                >
+                  <span *ngFor="let day of week.days; let k = index">
+                    <div class="employee-table-date-header" *ngIf="days[day]">
+                      <div class="employee-table-date-header-time-in">
+                        In: <br />
+                        <select
+                          [(ngModel)]="
+                            newAttandance[i + 1].dates[
+                              getAttandanceArrayIndex(
+                                week.dates[k],
+                                week.number
+                              )
+                            ].timeIn
+                          "
+                          (change)="getTimeDifference(i, week.number)"
+                        >
+                          <option *ngFor="let hr of hrs">{{ hr }}</option>
+                        </select>
+                      </div>
+                      <div class="employee-table-date-header-time-out">
+                        Out: <br />
+                        <select
+                          [(ngModel)]="
+                            newAttandance[i + 1].dates[
+                              getAttandanceArrayIndex(
+                                week.dates[k],
+                                week.number
+                              )
+                            ].timeOut
+                          "
+                          (change)="getTimeDifference(i, week.number)"
+                        >
+                          <option *ngFor="let hr of hrs">{{ hr }}</option>
+                        </select>
+                      </div>
+                      <div
+                        class="
+                          employee-table-date-header-category
+                          flex
+                          space-evenly
+                        "
+                        *ngIf="daywidth()"
+                      >
+                        <div
+                          class="employee-table-date-header-category-leave"
+                          [ngClass]="{
+                            'leave-active':
+                              newAttandance[i + 1].dates[
+                                getAttandanceArrayIndex(
+                                  week.dates[k],
+                                  week.number
+                                )
+                              ].leave
+                          }"
+                          (click)="
+                            dayRole(
+                              i,
+                              'L',
+                              getAttandanceArrayIndex(
+                                week.dates[k],
+                                week.number
+                              ),
+                              week.number
+                            )
+                          "
+                        >
+                          L
+                        </div>
+                        <div
+                          class="employee-table-date-header-category-absent"
+                          [ngClass]="{
+                            'absent-active':
+                              newAttandance[i + 1].dates[
+                                getAttandanceArrayIndex(
+                                  week.dates[k],
+                                  week.number
+                                )
+                              ].absent
+                          }"
+                          (click)="
+                            dayRole(
+                              i,
+                              'A',
+                              getAttandanceArrayIndex(
+                                week.dates[k],
+                                week.number
+                              ),
+                              week.number
+                            )
+                          "
+                        >
+                          A
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                  <div class="employee-week-hrs flex" *ngIf="week.number !== 6">
+                    <div class="employee-attandance-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          newAttandance[i + 1].weeks[
+                            week.number - 1
+                          ].weekHrs.toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                    <div class="employee-ot-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          newAttandance[i + 1].weeks[
+                            week.number - 1
+                          ].otHrs.toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                    <div class="employee-division-ot-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          newAttandance[i + 1].weeks[
+                            week.number - 1
+                          ].compensationHrs.toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                    <div class="employee-division-ot-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          newAttandance[i + 1].weeks[
+                            week.number - 1
+                          ].holidayHrs.toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                    <div class="employee-division-ot-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          newAttandance[i + 1].weeks[
+                            week.number - 1
+                          ].weekOffHrs.toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                  </div>
+                  <div class="employee-week-hrs flex" *ngIf="week.number == 6">
+                    <div class="employee-attandance-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          (
+                            newAttandance[i + 1].weeks[0].weekHrs +
+                            newAttandance[i + 1].weeks[1].weekHrs +
+                            newAttandance[i + 1].weeks[2].weekHrs +
+                            newAttandance[i + 1].weeks[3].weekHrs +
+                            newAttandance[i + 1].weeks[4].weekHrs
+                          ).toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                    <div class="employee-ot-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          (
+                            newAttandance[i + 1].weeks[0].otHrs +
+                            newAttandance[i + 1].weeks[1].otHrs +
+                            newAttandance[i + 1].weeks[2].otHrs +
+                            newAttandance[i + 1].weeks[3].otHrs +
+                            newAttandance[i + 1].weeks[4].otHrs
+                          ).toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                    <div class="employee-division-ot-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          (
+                            newAttandance[i + 1].weeks[0].compensationHrs +
+                            newAttandance[i + 1].weeks[1].compensationHrs +
+                            newAttandance[i + 1].weeks[2].compensationHrs +
+                            newAttandance[i + 1].weeks[3].compensationHrs +
+                            newAttandance[i + 1].weeks[4].compensationHrs
+                          ).toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                    <div class="employee-division-ot-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          (
+                            newAttandance[i + 1].weeks[0].holidayHrs +
+                            newAttandance[i + 1].weeks[1].holidayHrs +
+                            newAttandance[i + 1].weeks[2].holidayHrs +
+                            newAttandance[i + 1].weeks[3].holidayHrs +
+                            newAttandance[i + 1].weeks[4].holidayHrs
+                          ).toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                    <div class="employee-division-ot-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          (
+                            newAttandance[i + 1].weeks[0].weekOffHrs +
+                            newAttandance[i + 1].weeks[1].weekOffHrs +
+                            newAttandance[i + 1].weeks[2].weekOffHrs +
+                            newAttandance[i + 1].weeks[3].weekOffHrs +
+                            newAttandance[i + 1].weeks[4].weekOffHrs
+                          ).toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                    <div class="employee-ot-hrs">
+                      <div class="employee-hrs-input">
+                        {{
+                          (
+                            newAttandance[i + 1].weeks[0].weekHrs +
+                            newAttandance[i + 1].weeks[1].weekHrs +
+                            newAttandance[i + 1].weeks[2].weekHrs +
+                            newAttandance[i + 1].weeks[3].weekHrs +
+                            newAttandance[i + 1].weeks[4].weekHrs +
+                            newAttandance[i + 1].weeks[0].otHrs +
+                            newAttandance[i + 1].weeks[1].otHrs +
+                            newAttandance[i + 1].weeks[2].otHrs +
+                            newAttandance[i + 1].weeks[3].otHrs +
+                            newAttandance[i + 1].weeks[4].otHrs
+                          ).toFixed(0)
+                        }}
+                        <br />
+                        Hrs
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="submit" *ngIf="submitFlag && !newAttandance[0].finalFlag">
+      <div class="submit-button" (click)="submit('submit')">Submit</div>
+    </div>
+    <div class="submit" *ngIf="submitFlag && !newAttandance[0].finalFlag">
+      <div class="submit-button" (click)="submit('final')">Finalized</div>
+    </div>
+  </div>
 </div>

@@ -3,7 +3,7 @@ import * as d3 from "d3";
 @Component({
   selector: "app-pdf-view",
   templateUrl: "./pdf-view.component.html",
-  styleUrls: ["./pdf-view.component.scss"]
+  styleUrls: ["./pdf-view.component.scss"],
 })
 export class PdfViewComponent implements OnInit {
   constructor() {}

@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PdfViewComponent } from './pdf-view.component';
+import { PdfViewComponent } from "./pdf-view.component";
 
-describe('PdfViewComponent', () => {
+describe("PdfViewComponent", () => {
   let component: PdfViewComponent;
   let fixture: ComponentFixture<PdfViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PdfViewComponent ]
-    })
-    .compileComponents();
+      declarations: [PdfViewComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('PdfViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
