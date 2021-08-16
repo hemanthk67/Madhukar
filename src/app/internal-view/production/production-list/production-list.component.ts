@@ -34,7 +34,7 @@ export class ProductionListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.RightTab();
+    this.RightTab(false);
     setTimeout(
       function () {
         this.routingService.loadingFlag = false;
@@ -43,40 +43,44 @@ export class ProductionListComponent implements OnInit {
     );
   }
 
-  RightTab() {
-    this.routingService.rightTabs = [
-      {
-        name: "Production List",
-        message: "View production list",
-        flag: true,
-      },
-      {
-        name: "Testing",
-        message: "Create and update testing values",
-        flag: false,
-      },
-      {
-        name: "Dispatch",
-        message: "Dispatch instructions and related documents",
-        flag: false,
-      },
-      //  ,{name:'Create Documents',
-      //  sub:[
-      //    {name:'Covering Letter', smallName:'CL',
-      //    flag: false},
-      //  {name:'No-Ban Declaration', smallName:'NBD',
-      //  flag: false},
-      //  {name:'No Deviation', smallName:'ND',
-      //  flag: false} ],
-      //  flag: false,
-      //  message: 'Create documents in given formates'
-      // }
-    ];
+  RightTab(flag: boolean) {
+    if (flag) {
+      this.routingService.rightTabs = [
+        {
+          name: "Production List",
+          message: "View production list",
+          flag: true,
+        },
+        {
+          name: "Testing",
+          message: "Create and update testing values",
+          flag: false,
+        },
+        {
+          name: "Dispatch",
+          message: "Dispatch instructions and related documents",
+          flag: false,
+        },
+      ];
+    } else {
+      this.routingService.rightTabs = [
+        {
+          name: "Production List",
+          message: "View production list",
+          flag: true,
+        },
+      ];
+    }
   }
 
   read(index) {
     this.productionService.workOrdersData[index].flag =
       !this.productionService.workOrdersData[index].flag;
+    if (!this.productionService.workOrdersData[index].flag) {
+      this.RightTab(true);
+    } else {
+      this.RightTab(false);
+    }
     for (let i = 0; i < this.productionService.workOrdersData.length; i++) {
       if (index != i) {
         this.productionService.workOrdersData[i].flag = true;

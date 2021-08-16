@@ -1,4 +1,7 @@
-<div class="work-order-list-div" *ngIf="routingService.rightTabs[0].flag">
+<div
+  class="work-order-list-div"
+  *ngIf="routingService.rightTabs[0] && routingService.rightTabs[0].flag"
+>
   <div class="work-order-list-head">Production-list</div>
   <div class="work-order-list-body">
     <span *ngIf="productionService.workOrdersData">
