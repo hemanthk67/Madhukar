@@ -15,7 +15,7 @@ export class ProductionListComponent implements OnInit {
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    private productionService: ProductionService,
+    public productionService: ProductionService,
     public routingService: RoutingService
   ) {
     iconRegistry.addSvgIcon(

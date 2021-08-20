@@ -36,10 +36,10 @@ export class ProductionService {
   workOrders: any;
   private pathBase = environment.productionPath;
   public productionInfo: any;
-  workOrderNumber = 0;
-  nextworkOrderNumber = 0;
-  originalWorkOrdersData = [];
-  workOrdersData = [];
+  public workOrderNumber = 0;
+  public nextworkOrderNumber = 0;
+  public originalWorkOrdersData = [];
+  public workOrdersData = [];
   constructor(private afs: AngularFirestore) {
     this.getProductionInfo();
   }
