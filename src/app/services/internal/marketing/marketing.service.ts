@@ -66,6 +66,10 @@ export class MarketingService {
   public currentEnquiryNo = 0;
   private pathBase = environment.marketingPath; // change to enquiry once done with testing and ready for production
   nextEnquiryNo = 0;
+  searchByCustomerData = [];
+  searchByCustomerOriginalData = [];
+  searchByCustomerDataFlag = false;
+  limitToGetMarketingData = 20;
   // private pathBase = 'Marketing';
   // private pathBase = 'testMarketing';
   constructor(
@@ -78,7 +82,7 @@ export class MarketingService {
       // this.data = data.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
       // if( this.nextEnquiryNo == 0) {
       this.data = data;
-      this.nextEnquiryNo = data[0].number - 20;
+      this.nextEnquiryNo = data[0].number - this.limitToGetMarketingData;
       // } else {
       //   this.data.concat(data);
       // }
@@ -108,7 +112,7 @@ export class MarketingService {
       if (this.nextEnquiryNo == 0) {
         markers = await this.afs
           .collection(this.pathBase, (query) =>
-            query.orderBy("number", "desc").limit(20)
+            query.orderBy("number", "desc").limit(this.limitToGetMarketingData)
           )
           .valueChanges()
           .pipe(take(1))
@@ -119,7 +123,7 @@ export class MarketingService {
             query
               .orderBy("number", "desc")
               .startAt(this.nextEnquiryNo)
-              .limit(20)
+              .limit(this.limitToGetMarketingData)
           )
           .valueChanges()
           .pipe(take(1))
@@ -137,8 +141,32 @@ export class MarketingService {
       this.originalData = this.originalData.concat(
         JSON.parse(JSON.stringify(markers))
       );
-      this.nextEnquiryNo = markers[0].number - 20;
+      this.nextEnquiryNo = markers[0].number - this.limitToGetMarketingData;
     }
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].issueDateFormatted = this.dateFormatting(markers[i].issueDate);
+      markers[i].flag = true;
+    }
+    return markers;
+  }
+  async searchByCustomerGetData(customerSearch) {
+    var markers = [];
+    try {
+      markers = await this.afs
+        .collection(this.pathBase, (query) =>
+          query
+            .orderBy("number", "desc")
+            .where("customer", "==", customerSearch)
+        )
+        .valueChanges()
+        .pipe(take(1))
+        .toPromise();
+    } catch (error) {
+      console.error(
+        "There was a problem fetching purchase orders ! : " + error
+      );
+    }
+    this.searchByCustomerOriginalData = JSON.parse(JSON.stringify(markers));
     for (let i = 0; i < markers.length; i++) {
       markers[i].issueDateFormatted = this.dateFormatting(markers[i].issueDate);
       markers[i].flag = true;
@@ -155,14 +183,17 @@ export class MarketingService {
         editFlag
       );
       this.setEnquiryData(enquiryData);
-      for (let j = 0; j < this.originalData.length; j++) {
-        if (this.originalData[j].number == enquiryData.number) {
-          this.originalData[j] = { ...enquiryData };
-          enquiryData.issueDateFormatted = this.dateFormatting(
-            enquiryData.issueDate
-          );
-          enquiryData.flag = true;
-          this.data[j] = { ...enquiryData };
+      // adding data back to the original data and normal data
+      if (!this.searchByCustomerDataFlag) {
+        for (let j = 0; j < this.originalData.length; j++) {
+          if (this.originalData[j].number == enquiryData.number) {
+            this.originalData[j] = { ...enquiryData };
+            enquiryData.issueDateFormatted = this.dateFormatting(
+              enquiryData.issueDate
+            );
+            enquiryData.flag = true;
+            this.data[j] = { ...enquiryData };
+          }
         }
       }
     } else {
@@ -175,7 +206,7 @@ export class MarketingService {
       );
       this.setEnquiryData(enquiryData);
       this.currentEnquiryNo = enquiryData.number;
-      this.originalData.splice(0, 0, { ...enquiryData });
+      this.originalData.splice(0, 0, JSON.parse(JSON.stringify(enquiryData))); //
       enquiryData.issueDateFormatted = this.dateFormatting(
         enquiryData.issueDate
       );
@@ -212,15 +243,18 @@ export class MarketingService {
   }
   //set offer data
   setOfferData() {
-    for (let i = 0; i < this.data.length; i++) {
-      if (this.data[i].number == this.enquiry.number) {
-        this.data[i] = { ...this.enquiry };
-        this.data[i].issueDateFormatted = this.dateFormatting(
-          this.data[i].issueDate
-        );
-      }
-      if (this.originalData[i].number == this.enquiry.number) {
-        this.originalData[i] = { ...this.enquiry };
+    // adding data back to the original data and normal data
+    if (!this.searchByCustomerDataFlag) {
+      for (let i = 0; i < this.data.length; i++) {
+        if (this.data[i].number == this.enquiry.number) {
+          this.data[i] = JSON.parse(JSON.stringify(this.enquiry));
+          this.data[i].issueDateFormatted = this.dateFormatting(
+            this.data[i].issueDate
+          );
+        }
+        if (this.originalData[i].number == this.enquiry.number) {
+          this.originalData[i] = JSON.parse(JSON.stringify(this.enquiry));
+        }
       }
     }
     this.setEnquiryData(this.enquiry);
@@ -228,14 +262,17 @@ export class MarketingService {
 
   enquiryResultSubmission(data) {
     this.setEnquiryData(data);
-    for (let i = 0; i < this.originalData.length; i++) {
-      if (this.originalData[i].number == data.number) {
-        this.data[i].status = this.originalData[i].status = data.status;
-        this.data[i].rejectedReason = this.originalData[i].rejectedReason =
-          data.rejectedReason;
-        this.data[i].statusRemark = this.originalData[i].statusRemark =
-          data.statusRemark;
-        break;
+    // adding data back to the original data and normal data
+    if (!this.searchByCustomerDataFlag) {
+      for (let i = 0; i < this.originalData.length; i++) {
+        if (this.originalData[i].number == data.number) {
+          this.data[i].status = this.originalData[i].status = data.status;
+          this.data[i].rejectedReason = this.originalData[i].rejectedReason =
+            data.rejectedReason;
+          this.data[i].statusRemark = this.originalData[i].statusRemark =
+            data.statusRemark;
+          break;
+        }
       }
     }
     this.routingService.enquiryList();
@@ -246,6 +283,7 @@ export class MarketingService {
       `${this.pathBase}/${data.number}`
     );
     newUserRef.set(data, { merge: true });
+    this.searchByCustomerDataFlag = false;
   }
 
   //Date Formating got the teder list page

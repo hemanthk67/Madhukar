@@ -68,11 +68,11 @@ export class RoutingService {
           path: "Marketing/EnquiryList",
           flag: false,
         },
-        {
-          title: "New Enquiry",
-          path: "Marketing/NewEnquiry",
-          flag: false,
-        },
+        // {
+        //   title: "New Enquiry",
+        //   path: "Marketing/NewEnquiry",
+        //   flag: false,
+        // },
       ],
     },
     operations: {

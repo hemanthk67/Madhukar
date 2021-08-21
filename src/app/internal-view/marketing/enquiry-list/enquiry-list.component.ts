@@ -18,6 +18,8 @@ export class EnquiryListComponent implements OnInit {
   pdfPreviewFlag: boolean;
   documentName: any;
   pdfType: any;
+  customerSearch = "";
+  searchByCustomerFlag: boolean;
   constructor(
     private pdf: pdfFileService,
     iconRegistry: MatIconRegistry,
@@ -39,90 +41,234 @@ export class EnquiryListComponent implements OnInit {
       "edit-icon",
       sanitizer.bypassSecurityTrustResourceUrl("assets/icons/edit-icon.svg")
     );
+    iconRegistry.addSvgIcon(
+      "search-icon",
+      sanitizer.bypassSecurityTrustResourceUrl("assets/icons/search-icon.svg")
+    );
+    iconRegistry.addSvgIcon(
+      "back-button-calander",
+      sanitizer.bypassSecurityTrustResourceUrl(
+        "assets/icons/back-button-calander.svg"
+      )
+    );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.RightTab();
+    this.searchByCustomerFlag = false;
+  }
+  RightTab() {
+    this.routingService.rightTabs = [
+      {
+        name: "New Enquiry",
+        message: "Create New Enquiries for marketing",
+        flag: false,
+      },
+    ];
+  }
+  newEnquiryRout() {
+    this.routingService.newEnquiry();
+    return true;
+  }
   read(index) {
-    this.marketingService.data[index].flag =
-      !this.marketingService.data[index].flag;
-    for (let i = 0; i < this.marketingService.data.length; i++) {
-      if (index != i) {
-        this.marketingService.data[i].flag = true;
+    if (!this.searchByCustomerFlag) {
+      this.marketingService.data[index].flag =
+        !this.marketingService.data[index].flag;
+      for (let i = 0; i < this.marketingService.data.length; i++) {
+        if (index != i) {
+          this.marketingService.data[i].flag = true;
+        }
+      }
+    } else {
+      this.marketingService.searchByCustomerData[index].flag =
+        !this.marketingService.searchByCustomerData[index].flag;
+      for (
+        let i = 0;
+        i < this.marketingService.searchByCustomerData.length;
+        i++
+      ) {
+        if (index != i) {
+          this.marketingService.searchByCustomerData[i].flag = true;
+        }
       }
     }
   }
   downloadFile(path) {
     this.pdf.downloadPdf(path);
   }
-  approval(value, index) {
-    this.marketingService.originalData[index].status = value;
-    this.marketingService.setEnquiryData(
-      this.marketingService.originalData[index]
-    );
-    this.marketingService.data[index].status = value;
+  // approval(value, index) {
+  //   this.marketingService.originalData[index].status = value;
+  //   this.marketingService.setEnquiryData(
+  //     this.marketingService.originalData[index]
+  //   );
+  //   this.marketingService.data[index].status = value;
+  // }
+
+  async searchFiltertoOriginalData(internalIndex, index) {
+    try {
+      if (internalIndex == this.marketingService.originalData.length - 1) {
+        return null;
+      }
+      for (
+        let i = internalIndex;
+        i < this.marketingService.originalData.length;
+        i++
+      ) {
+        if (i > 100) {
+          this.marketingService.searchByCustomerDataFlag = true;
+          return this.marketingService.searchByCustomerOriginalData[index];
+        }
+        if (
+          this.marketingService.originalData[i].number ==
+          this.marketingService.searchByCustomerData[index].number
+        ) {
+          return this.marketingService.originalData[i];
+        }
+        if (this.marketingService.originalData.length - 1 == i) {
+          await this.marketingService.getMarkers().then((data) => {
+            this.marketingService.data =
+              this.marketingService.data.concat(data);
+            return this.searchFiltertoOriginalData(i + 1, index);
+          });
+        }
+      }
+    } catch (error) {
+      alert("fucked" + error);
+    }
   }
   prepareOffer(index) {
-    this.marketingService.enquiry = this.marketingService.originalData[index];
-    this.documentName =
-      this.marketingService.enquiry.customer +
-      " OFFER P - " +
-      this.marketingService.enquiry.number;
-    this.routingService.prepareOffer();
+    var data: any;
+    if (!this.searchByCustomerFlag) {
+      data = this.marketingService.originalData[index];
+      this.marketingService.enquiry = data;
+      this.documentName =
+        this.marketingService.enquiry.customer +
+        " OFFER P - " +
+        this.marketingService.enquiry.number;
+      this.routingService.prepareOffer();
+    } else {
+      this.searchFiltertoOriginalData(0, index).then((documentData) => {
+        data = documentData;
+        this.marketingService.enquiry = data;
+        this.documentName =
+          this.marketingService.enquiry.customer +
+          " OFFER P - " +
+          this.marketingService.enquiry.number;
+        this.routingService.prepareOffer();
+      });
+    }
   }
-  n;
   enquiryResults(index) {
-    this.marketingService.enquiry = this.marketingService.originalData[index];
-    this.routingService.marketingEnquiryResults();
+    var data: any;
+    if (!this.searchByCustomerFlag) {
+      data = this.marketingService.originalData[index];
+      this.marketingService.enquiry = data;
+      this.routingService.marketingEnquiryResults();
+    } else {
+      this.searchFiltertoOriginalData(0, index).then((documentData) => {
+        data = documentData;
+        this.marketingService.enquiry = data;
+        this.routingService.marketingEnquiryResults();
+      });
+    }
   }
   edit(index) {
-    this.marketingService.enquiry = this.marketingService.originalData[index];
-    this.marketingService.editFlag = true;
-    this.routingService.newEnquiry();
+    var data: any;
+    if (!this.searchByCustomerFlag) {
+      data = this.marketingService.originalData[index];
+      this.marketingService.enquiry = data;
+      this.marketingService.editFlag = true;
+      this.routingService.newEnquiry();
+    } else {
+      this.searchFiltertoOriginalData(0, index).then((documentData) => {
+        data = documentData;
+        this.marketingService.enquiry = data;
+        this.marketingService.editFlag = true;
+        this.routingService.newEnquiry();
+      });
+    }
   }
   editoffer(index) {
-    this.marketingService.enquiry = this.marketingService.originalData[index];
-    this.marketingService.editOfferFlag = true;
-    this.routingService.prepareOffer();
+    var data: any;
+    if (!this.searchByCustomerFlag) {
+      data = this.marketingService.originalData[index];
+      this.marketingService.enquiry = data;
+      this.marketingService.editOfferFlag = true;
+      this.routingService.prepareOffer();
+    } else {
+      this.searchFiltertoOriginalData(0, index).then((documentData) => {
+        data = documentData;
+        this.marketingService.enquiry = data;
+        this.marketingService.editOfferFlag = true;
+        this.routingService.prepareOffer();
+      });
+    }
   }
 
   //pdf for prepare offer
   prepareOfferPdf(index) {
-    for (let i = 0; i < this.infoService.pvtCustomerData.length; i++) {
-      if (
-        this.infoService.pvtCustomerData[i].fullName ==
-        this.marketingService.originalData[index].customer
-      ) {
-        var customerReference = this.infoService.pvtCustomerData[i];
+    // if (!this.searchByCustomerFlag) {
+    var data: any;
+    if (!this.searchByCustomerFlag) {
+      data = this.marketingService.originalData[index];
+
+      for (let i = 0; i < this.infoService.pvtCustomerData.length; i++) {
+        if (this.infoService.pvtCustomerData[i].fullName == data.customer) {
+          var customerReference = this.infoService.pvtCustomerData[i];
+        }
       }
-    }
-    this.documentName =
-      this.marketingService.originalData[index].customer +
-      " OFFER P - " +
-      this.marketingService.originalData[index].number;
-    var subTotalPriceWords =
-      this.convertNumberToWords(
-        this.marketingService.originalData[index].offer.totalPrice
-      ) + "Only";
-    this.pdfPreviewFlag = true; // for the pdfPreview
-    if (this.marketingService.originalData[index].firm) {
-      if (
-        this.marketingService.originalData[index].firm ==
-        "THOTA COLDCEL PVT LTD"
-      ) {
-        this.pdfType = "coldcel";
+      this.documentName = data.customer + " OFFER P - " + data.number;
+      var subTotalPriceWords =
+        this.convertNumberToWords(data.offer.totalPrice) + "Only";
+      this.pdfPreviewFlag = true; // for the pdfPreview
+      if (data.firm) {
+        if (data.firm == "THOTA COLDCEL PVT LTD") {
+          this.pdfType = "coldcel";
+        } else {
+          this.pdfType = "thota";
+        }
       } else {
         this.pdfType = "thota";
       }
+      this.documentsService.enquiryOffer(
+        data,
+        customerReference,
+        data.offer,
+        subTotalPriceWords,
+        data.offer.totalPrice
+      );
     } else {
-      this.pdfType = "thota";
+      this.searchFiltertoOriginalData(0, index).then((documentData) => {
+        data = documentData;
+
+        for (let i = 0; i < this.infoService.pvtCustomerData.length; i++) {
+          if (this.infoService.pvtCustomerData[i].fullName == data.customer) {
+            var customerReference = this.infoService.pvtCustomerData[i];
+          }
+        }
+        this.documentName = data.customer + " OFFER P - " + data.number;
+        var subTotalPriceWords =
+          this.convertNumberToWords(data.offer.totalPrice) + "Only";
+        this.pdfPreviewFlag = true; // for the pdfPreview
+        if (data.firm) {
+          if (data.firm == "THOTA COLDCEL PVT LTD") {
+            this.pdfType = "coldcel";
+          } else {
+            this.pdfType = "thota";
+          }
+        } else {
+          this.pdfType = "thota";
+        }
+        this.documentsService.enquiryOffer(
+          data,
+          customerReference,
+          data.offer,
+          subTotalPriceWords,
+          data.offer.totalPrice
+        );
+      });
     }
-    this.documentsService.enquiryOffer(
-      this.marketingService.originalData[index],
-      customerReference,
-      this.marketingService.originalData[index].offer,
-      subTotalPriceWords,
-      this.marketingService.originalData[index].offer.totalPrice
-    );
+    // }
   }
 
   pdfPreviewHandler($event: any) {
@@ -235,14 +381,42 @@ export class EnquiryListComponent implements OnInit {
   needMore() {
     console.log("aku");
     this.marketingService.getMarkers().then((data) => {
-      // this.data = data.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
-      //   if( this.marketingService.nextEnquiryNo == 0) {
-      //   this.marketingService.data = data;
-      // this.marketingService.nextEnquiryNo = data[0].number - 20;
-      //   } else {
       this.marketingService.data = this.marketingService.data.concat(data);
-      // }
-      // this.originalData = this.originalData.sort((a,b) => (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0));
     });
+  }
+  // search by customer
+  searchByCustomer() {
+    this.searchByCustomerFlag = true;
+    for (let i = 0; i < this.infoService.pvtCustomerData.length; i++) {
+      if (this.infoService.pvtCustomerData[i].fullName == this.customerSearch) {
+        this.marketingService
+          .searchByCustomerGetData(this.customerSearch)
+          .then((data) => {
+            console.log("akhitha");
+            console.log(data);
+            this.marketingService.searchByCustomerData = JSON.parse(
+              JSON.stringify(data)
+            );
+          });
+        break;
+      }
+      if (i == this.infoService.pvtCustomerData.length - 1) {
+        alert("enter a valid customer");
+      }
+    }
+  }
+  returnFromSearchFilter() {
+    this.searchByCustomerFlag = false;
+    this.customerSearch = "";
+  }
+  // data to be displayed in the page
+  displayData() {
+    // console.log("nandu");
+    if (this.searchByCustomerFlag) {
+      // console.log(this.marketingService.searchByCustomerData);
+      return this.marketingService.searchByCustomerData;
+    } else {
+      return this.marketingService.data;
+    }
   }
 }

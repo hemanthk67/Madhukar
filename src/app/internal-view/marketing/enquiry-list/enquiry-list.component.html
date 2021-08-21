@@ -1,10 +1,43 @@
 <div class="enquiry-list-div">
-  <div class="enquiry-list-head">Enquiry-List</div>
+  <div class="enquiry-list-head">
+    <div class="enquiry-list-text">Enquiry-List</div>
+    <div class="enquiry-list-search-div">
+      <input
+        class="org-name"
+        list="browsers"
+        name="browser"
+        id="browser"
+        [(ngModel)]="customerSearch"
+      />
+      <datalist id="browsers" name="orgName">
+        <option
+          *ngFor="let org of infoService.pvtCustomerData.slice().reverse()"
+          [value]="org.fullName"
+        >
+          {{ org.fullName }}
+        </option>
+      </datalist>
+      <div class="search-icon-div" *ngIf="customerSearch !== ''">
+        <mat-icon
+          class="search-icon"
+          svgIcon="search-icon"
+          (click)="searchByCustomer()"
+        ></mat-icon>
+      </div>
+      <div class="search-icon-div" *ngIf="searchByCustomerFlag">
+        <mat-icon
+          class="back-button-calander"
+          svgIcon="back-button-calander"
+          (click)="returnFromSearchFilter()"
+        ></mat-icon>
+      </div>
+    </div>
+  </div>
   <div class="enquiry-list-body">
     <span class="flex flex-wrap" *ngIf="marketingService.data">
       <div
         class="enquiry-list-card"
-        *ngFor="let enquiry of marketingService.data; let i = index"
+        *ngFor="let enquiry of displayData(); let i = index"
         [ngClass]="{
           'width-30': enquiry.flag,
           'width-100': !enquiry.flag,
@@ -262,11 +295,7 @@
       </div>
     </span>
     <div class="div-more">
-      <div
-        class="more"
-        (click)="needMore()"
-        *ngIf="marketingService.nextEnquiryNo > 1001"
-      >
+      <div class="more" (click)="needMore()" *ngIf="!searchByCustomerFlag">
         More
       </div>
     </div>
@@ -280,3 +309,6 @@
   [documentName]="documentName"
   [type]="pdfType"
 ></app-pdf-preview>
+<div *ngIf="this.routingService.rightTabs[0].flag">
+  <span *ngIf="newEnquiryRout()"></span>
+</div>

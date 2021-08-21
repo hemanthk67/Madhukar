@@ -91,7 +91,9 @@ export class NewEnquiryComponent implements OnInit {
         this.enquiry.firm = "TCC ENERGY SOLUTIONS";
       }
     } else {
-      this.enquiry = { ...this.marketingService.newEnquiry };
+      this.enquiry = JSON.parse(
+        JSON.stringify(this.marketingService.newEnquiry)
+      );
       this.enquiry.issueDate = this.presentDate();
       // this.enquiry.firm = 'THOTA COLDCEL PVT LTD';
     }

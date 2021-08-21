@@ -5,6 +5,35 @@
     font-size: 24px;
     font-weight: 600;
     color: #163a9a;
+    display: flex;
+    justify-content: space-between;
+    .org-name {
+      min-width: 500px;
+      height: 25px;
+      font-size: 18px;
+      border: solid 1px;
+      border-radius: 5px;
+      margin-top: 8px;
+    }
+    .enquiry-list-search-div {
+      display: flex;
+      padding-right: 40px;
+      .search-icon {
+        width: 35px;
+        height: 35px;
+        margin: 10px;
+        margin-top: 0;
+        background-color: #163a9a;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 3px;
+      }
+      .back-button-calander {
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
+      }
+    }
   }
   .enquiry-list-body {
     width: 98%;
