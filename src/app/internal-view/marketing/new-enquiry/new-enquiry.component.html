@@ -86,7 +86,7 @@
           <div class="employee-label sub-header">Employee :</div>
           <select class="name-input" [(ngModel)]="enquiry.employee">
             <option
-              *ngFor="let employee of infoService.employeeData"
+              *ngFor="let employee of filterEmployee(infoService.employeeData)"
               [value]="employee.name"
             >
               {{ employee.name }}

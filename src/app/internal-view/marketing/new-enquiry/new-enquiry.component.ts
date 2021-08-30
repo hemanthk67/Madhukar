@@ -317,4 +317,10 @@ export class NewEnquiryComponent implements OnInit {
 
     return dd + "/" + mm + "/" + yyyy;
   }
+
+  // function for filtering the employees by flag
+  filterEmployee(value) {
+    value = value.filter((word) => word.flag);
+    return value;
+  }
 }

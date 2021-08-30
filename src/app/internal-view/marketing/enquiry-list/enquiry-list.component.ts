@@ -25,7 +25,7 @@ export class EnquiryListComponent implements OnInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public marketingService: MarketingService,
-    private routingService: RoutingService,
+    public routingService: RoutingService,
     public infoService: InfoService,
     public documentsService: DocumentsService
   ) {
