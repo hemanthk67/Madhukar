@@ -298,10 +298,10 @@ export class OperationsService {
           this.presentAttandanceData[i].otHrs =
             this.presentAttandanceData[i].otHrs -
             this.presentAttandanceData[i].compensationHrs;
-          this.presentAttandanceData[i].compensationHrs = 0;
           if (this.presentAttandanceData[i].otHrs < 0) {
-            this.presentAttandanceData[i].compensationHrs =
-              -this.presentAttandanceData[i].otHrs;
+            this.presentAttandanceData[i].weekHrs =
+              this.presentAttandanceData[i].weekHrs +
+              this.presentAttandanceData[i].otHrs;
             this.presentAttandanceData[i].otHrs = 0;
           }
           for (let k = 0; k < this.employeeData.length; k++) {
